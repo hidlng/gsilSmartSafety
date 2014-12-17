@@ -1,0 +1,5 @@
+package com.smart.safety.domain;
+
+public class ToolVO {
+
+}

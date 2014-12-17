@@ -1,0 +1,46 @@
+.formError {
+	color:red;
+	font-size:15px;
+}
+
+.duplCheckOk {
+	
+	color:green;
+	font-size:15px;
+}
+
+/* 
+a.signupBtn {
+	display:block;
+	height:40px;
+	margin-top:7px;
+	background: url('../images/btn_signup.png') no-repeat center; 
+}
+
+
+a:hover.signupBtn {		
+	background: url('../images/btn_signup_over.png') no-repeat center; 
+}
+ 
+a.infoBtn {
+	display:block;
+	height:33px;
+	width:90px;
+	background: url('../images/btn_info.png') no-repeat center; 
+}
+
+
+a:hover.infoBtn {
+	background: url('../images/btn_info_over.png') no-repeat center; 
+}
+*/
+
+.selectBox{padding:5px;background-color:#1d2b43;color: #fff; font-size:18px; line-height:24px;border:1px dotted #8c97a9; text-align:center;}
+.selectBox option{margin-bottom:5px; text-align:center;}
+
+.siteSelectBox{width: 80%; padding:5px;background-color:#1d2b43;color: #fff; font-size:18px; line-height:24px;border:1px dotted #8c97a9; text-align:center;}
+.siteSelectBox option{margin-bottom:5px; text-align:center;}
+
+.chargeWorkTR {
+	border: 2px solid red;
+}
