@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.risk.persistence.WorkMapper">
+
+
+	<select id="getWorkByWorkCode" parameterType="string" resultType="WorkVO">
+		SELECT WORKCODE,GUIDE,EQUIP,MEASURE,NAME AS WORKNAME
+		FROM WORK_LIST WORK 
+		JOIN CODE_LIST CODE
+		ON WORK.WORKCODE = CODE.CODE
+		WHERE WORKCODE = #{workCode}
+		ORDER BY WORKCODE		
+	</select>
+
+	<delete id="deleteWorkVOByCode" parameterType="String">
+		DELETE FROM
+		WORK_List WHERE WORKCODE=#{workCode}
+	</delete>
+
+
+	<insert id="insertWorkVO" parameterType="WorkVO">
+		INSERT INTO WORK_LIST(WORKCODE, GUIDE, EQUIP, MEASURE)
+		VALUES
+		(#{workCode}, #{guide},  #{equip},   #{measure} )
+	</insert>
+
+	<update id="updateWorkVO" parameterType="WorkVO">
+		UPDATE WORK_LIST
+		SET
+		guide=#{guide}
+		,equip=#{equip}
+		,measure=#{measure}		
+		WHERE
+		workcode=#{workCode}
+	</update>
+
+</mapper>

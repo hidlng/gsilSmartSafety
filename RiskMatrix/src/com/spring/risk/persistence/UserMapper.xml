@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.risk.persistence.UserMapper">
+
+	<select id="getUserbyId" parameterType="string" resultType="UserVO">
+		SELECT ID,PASSWORD,ETC FROM USER_LIST
+		WHERE ID = #{id} 
+	</select>
+</mapper>

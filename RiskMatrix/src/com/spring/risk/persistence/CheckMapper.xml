@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.risk.persistence.CheckMapper">
+
+	<select id="getCheckListByCode" parameterType="string" resultType="CheckVO">
+		SELECT CHECK_IDX, TOOLCODE, IMAGE, CHECKLIST
+		FROM CHECK_LIST
+		WHERE TOOLCODE = #{toolCode} 
+	</select>
+
+	<insert id="insertCheckVO" parameterType="CheckVO">
+		INSERT INTO CHECK_LIST(TOOLCODE, IMAGE, CHECKLIST)
+		VALUES
+		(#{toolCode},#{image},#{checklist})
+	</insert>
+	
+	<delete id="deleteCheckVOByCode" parameterType="String">
+		DELETE FROM CHECK_LIST WHERE TOOLCODE=#{toolCode}	
+	</delete>
+
+	<update id="updateCheckVOByIdx" parameterType="CheckVO">
+		UPDATE CHECK_LIST
+		SET		
+		IMAGE = #{image}
+		,CHECKLIST = #{checklist}
+		WHERE
+		CHECK_IDX = #{check_idx}
+	</update>
+
+</mapper>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.risk.persistence.CategoryMapper">
+
+
+  <select id="getRootCategory" resultType="CategoryVO">
+  	SELECT IDX, NAME 
+  	FROM TREE_ROOT_VIEW
+  </select>
+  
+  <select id="getChildCategory" parameterType="int" resultType="CategoryVO">
+	SELECT IDX, NAME
+	FROM CATEGORY C JOIN TREE_PATH T 
+	ON C.IDX= T.DESCENDANT
+	WHERE T.ANCESTOR = #{idx} AND LEN =1
+	ORDER BY LEN
+  </select>
+  
+  <select id="getAncestorCategory" parameterType="int" resultType="CategoryVO">
+  SELECT IDX,NAME FROM CATEGORY C
+	JOIN TREE_PATH AS T ON C.IDX= T.ANCESTOR
+	WHERE T.DESCENDANT = #{idx}
+	ORDER BY LEN DESC
+  
+  </select>
+  
+  <select id="getSiblingCategory" parameterType="int" resultType="CategoryVO">
+	SELECT IDX,NAME 
+	FROM CATEGORY C JOIN TREE_PATH T 
+	ON C.IDX= T.DESCENDANT
+	WHERE ANCESTOR = (
+	SELECT ANCESTOR FROM TREE_PATH 
+	WHERE DESCENDANT=#{idx} and LEN =1)
+	AND LEN = 1
+  </select>
+  
+  <!--select id="getDescendantCodes" parameterType="int" resultType="CodeVO" >
+  	SELECT CODE.*
+  	FROM CATEGORY C
+	JOIN TREE_PATH AS T ON C.IDX= T.DESCENDANT
+	JOIN CODE_LIST_VIEW AS CODE ON C.IDX = CODE.CATEGORY
+	WHERE T.ANCESTOR = #{idx}
+	ORDER BY LEN;
+  </select-->
+  
+   <select id="getDescendantCodeVOList" parameterType="String" resultType="CodeVO">
+  	SELECT CODE,CODE.* FROM CATEGORY C
+	JOIN TREE_PATH AS T ON C.IDX= T.DESCENDANT
+	JOIN CODE_LIST_VIEW CODE ON C.IDX = CODE.CATEGORY
+	WHERE T.ANCESTOR = #{category}
+	AND (CODE.CODE like #{code}
+	OR CODE.NAME like #{name})
+	ORDER BY IDX, CODE
+	LIMIT #{start}, #{size};
+  </select>
+  
+  <select id="getCountByCode"  parameterType="String" resultType="Integer">
+   	SELECT COUNT(1) FROM CATEGORY C 
+	JOIN TREE_PATH AS T ON C.IDX= T.DESCENDANT
+	JOIN CODE_LIST_VIEW CODE ON C.IDX = CODE.CATEGORY
+	WHERE T.ANCESTOR = #{category}
+	AND (CODE.CODE like #{code}
+	OR CODE.NAME like #{name})
+  </select>
+  
+  <select id="getCodeVO" parameterType="String" resultType="CodeVO">
+  	SELECT CODE, NAME, CATEGORY, REGISTERED , PATH
+	FROM CODE_LIST_VIEW
+	WHERE CODE=#{code}
+  </select>
+  	
+
+
+
+  <select id="getMaxCategoryIdx" resultType="Integer">
+	  SELECT MAX(IDX) 
+	FROM CATEGORY
+  </select>
+  
+   <select id="getCodeListByCategory"  parameterType="int"  resultType="CodeVO">
+  	SELECT CODE, NAME, CATEGORY, REGISTERED , PATH
+	FROM CODE_LIST_VIEW
+	WHERE CATEGORY = #{idx}
+  </select>
+  
+   <select id="getAccList"  resultType="CodeVO">
+		SELECT CODE, NAME ,CATEGORY
+		FROM CODE_LIST
+		WHERE category = 4
+	</select>
+<!-- 	
+  <select id="getCategoryByCode" parameterType="string" resultType="Category">
+ 	 SELECT CODE,WORKTYPE,TYPE,NAME,DETAIL FROM CATEGORY_CODE WHERE CODE = #{code}
+ 	 ORDER BY CODE
+  </select>
+  
+   <select id="getCountByVO" parameterType="Category" resultType="Integer">
+ 	 	 SELECT COUNT(1)
+ 	 FROM CATEGORY_CODE
+ 	 WHERE
+ 	 	CODE like #{code}
+ 	 	OR WORKTYPE like #{workType}
+ 	 	OR TYPE like #{type}
+ 	 	OR NAME like #{name}
+ 	 	OR DETAIL like #{detail}
+
+  </select>
+ 
+   <select id="getCategoryListByVO" parameterType="Category" resultType="Category">
+ 	 SELECT CODE,WORKTYPE,TYPE,NAME,DETAIL 
+ 	 FROM CATEGORY_CODE
+ 	 WHERE
+ 	 	CODE like #{code}
+ 	 	OR WORKTYPE like #{workType}
+ 	 	OR TYPE like #{type}
+ 	 	OR NAME like #{name}
+ 	 	OR DETAIL like #{detail}
+ 	 ORDER BY CODE
+ 	 	LIMIT #{start}, #{size}
+  </select>
+   -->
+   
+ <insert id="insertCode" parameterType="CodeVO">
+	INSERT INTO CODE_LIST (CODE, NAME, CATEGORY)
+	VALUES
+	(#{code}, #{name},#{category})
+</insert>
+
+ <update id="updateCodeName" parameterType="CodeVO">
+	UPDATE CODE_LIST
+	SET
+	NAME = #{name}
+	WHERE
+	CODE = #{code}
+</update>
+
+ <insert id="deleteCode" parameterType="string">
+	DELETE FROM CODE_LIST WHERE CODE = #{code}
+</insert>
+
+
+
+<insert id="insertCategory" parameterType="CategoryVO">
+	INSERT INTO CATEGORY 
+	VALUES
+	(#{idx}, #{name})
+</insert>
+
+
+<update id="updateCategory" parameterType="CategoryVO">
+	UPDATE CATEGORY_CODE
+	SET 
+	CODE = #{code}
+	,WORKTYPE = #{workType}
+	,TYPE = #{type}
+	,NAME = #{name}
+	,DETAIL = #{detail}
+	WHERE
+	CODE = #{code}	
+</update>
+
+
+<delete id="deleteCategoryInTree" parameterType="String">
+	DELETE FROM TREE_PATH
+	WHERE DESCENDANT IN (SELECT * FROM (SELECT DESCENDANT
+	FROM TREE_PATH B
+	WHERE B.ANCESTOR = #{idx}) AS DESCS)	
+</delete>
+<delete id="deleteCategoryInCode" parameterType="String">
+DELETE From CODE_LIST WHERE CATEGORY = #{idx}
+</delete>
+
+<delete id="deleteCategoryInCategory" parameterType="String">
+	DELETE FROM CATEGORY WHERE IDX = #{idx}
+</delete>
+
+<insert id="insertTreePath" parameterType="CategoryVO">
+	INSERT INTO TREE_PATH (ancestor, descendant, len)
+	SELECT T.ANCESTOR, #{idx}, len + 1
+	FROM TREE_PATH AS T
+	WHERE T.DESCENDANT = #{parent}
+	UNION ALL
+	SELECT #{idx}, #{idx}, 0
+</insert>
+
+
+</mapper>

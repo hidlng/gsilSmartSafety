@@ -1,0 +1,374 @@
+html {
+	height: 100%;
+}
+
+html {
+	display: table;
+}
+
+body {
+	vertical-align: middle;
+	width: 85%;
+	margin: auto;
+}
+
+body, input, textarea, select, table {
+	font-family: 'µ∏øÚ', Dotum, AppleGothic, sans-serif;
+	font-size: 12px;
+	font-color : #4f5964;
+}
+
+p {
+	font-family: helvetica, tahoma, arial, verdana, sans-serif;
+	margin: 0ex 0ex 0ex 0ex;
+	padding: 2ex;
+}
+
+img {
+	border: 0;
+}
+
+dl, ul, ol, menu, li {
+list-style: none;
+}
+
+li .cur_category {
+	float: left;
+	width: 145px;
+	padding-right: 10px;
+	padding-bottom: 8px;
+	position: relative;	
+}
+
+/** TABLE **/
+table {
+	width: 100%;
+	border-collapse: collapse;
+	border: 0;
+	line-height: 25px;
+	table-layout: fixed;
+	text-align: center;
+	
+	border-bottom: 1px solid #7d91a0;
+	border-top: 2px solid #4f5964;
+
+	
+}
+
+#totalList table{
+	width:100%;
+	border: 1px gray; 
+}
+
+
+
+#totalList td {	
+	
+}
+
+#totalInsert table {
+	white-space: normal;
+	
+}
+
+
+tr.one {
+	background: white;
+}
+
+.odd { background: #f8f8f8;}
+
+.even { background: white;}
+
+th {
+	border: 1px solid #668db6;
+	/*	background-color: #336799;*/
+	/*color: #322929;*/
+	background-color: #336799;
+	color: white;
+	
+	font-weight: bold;
+	border-right: 1px solid white;	
+}
+
+td {
+	border-bottom: 1px solid #fff;
+	border-right: 1px solid white;
+}
+
+
+
+table .pathCol{
+	width : 320px;	
+}
+
+table .codeCol{
+	width : 150px;
+}
+
+table .typeCol{
+	width : 160px;
+}
+
+table .contentCol{
+	width : 250px;
+}
+
+table .buttonCol{
+	width : 60px;	
+}
+
+table .detailHeader {
+	width : 20%;
+}
+
+a, a:visited, a:link{
+	text-decoration: none;
+	color:blue;
+}
+
+/**class**/
+/* .select{ position:relative; line-height:normal; display:inline-block; *display:inline; vertical-align:middle; background:#fff; *zoom:1;}
+.select *{ margin:0; padding:0; cursor:pointer; font-size:12px; font-family:Tahoma, Sans-serif;}
+.select .myValue{ position:relative; z-index:2; left:0; top:0; border:1px solid #bababa; color:#666; line-height:19px; _line-height:normal; text-align:left; overflow:visible; background:transparent;}
+.select .myValue.selected{ font-weight:bold;}
+.select.open .myValue,
+.select .myValue.outLine{ border:1px solid #999;}
+.select button.myValue{ height:21px; width:100%; text-indent:5px; *text-indent:0; *padding-left:5px;}
+.select div.myValue{ height:19px; text-indent:8px;}
+.select .ctrl{ position:absolute; top:0; right:0; width:18px; height:19px; border:1px solid #bababa; border-left:1px solid #eaeaea; background:#fff;}
+.select .arrow{ position:absolute; width:0; height:0; top:9px; right:6px; line-height:0; font-size:0; border-top:3px solid #999; border-left:3px solid #fff; border-right:3px solid #fff;}
+.select ul{ top:20px; left:0; width:100%; list-style:none; border:0; border-top:1px solid #bababa; border-bottom:1px solid #bababa; background:#fff; overflow:hidden;}
+.select ul.aList{ display:none;}
+.select.open ul.aList{ display:block;}
+.select ul.iList{ left:-2000%;}
+.select.open ul.iList{ left:0;}
+.select li{ position:relative; overflow:hidden; white-space:nowrap; height:18px; border-left:1px solid #bababa; border-right:1px solid #bababa;}
+.select li input.option{ position:absolute; width:100%; height:20px; line-height:20px;}
+.select li label{ position:absolute; left:0; top:0; width:100%; text-indent:8px; *text-indent:6px; height:18px; line-height:18px; color:#767676; background:#fff;}
+.select li { display:block; text-indent:8px; *text-indent:6px; height:18px; line-height:18px; color:#767676; background:#fff; text-decoration:none;}
+.select li:hover { background:#999; color:#fff;}	
+ */
+
+
+/* just maintain some attributes like display & position, and everything is changeable */
+.bgCover { background:#000; position:absolute; left:0; top:0; display:none; overflow:hidden }
+.overlayBox {
+	border: 5px solid #09F;
+	position: absolute;
+	display: none;
+	background: #fff;
+	width: 70%;
+	padding:2px;
+	
+	
+}
+
+
+.overlayContent {
+	width:100%;
+/* height: expression( this.scrollHeight > 59% ? "60%" : "auto" );*/	
+	max-height:400px;
+ 	overflow-y: auto;
+}
+
+.closeLink {
+	float:right;	
+}
+
+div .button, p .button ,td .button{
+	background-color: #336799;
+	color: white;
+	border:solid 1px gray;
+}
+
+.wordBreak {
+	/* ¡ŸπŸ≤ﬁ*/
+	word-break:break-all;
+	white-space: pre-line;
+}
+
+.naviSelect {
+   border: 1px solid #AAA;
+   color: #555;
+   font-size: inherit;
+   overflow: hidden;
+   background:#fff;
+    *zoom:1;
+   cursor:pointer; 
+   font-size:15px
+}
+
+.updateBtnDiv {
+	text-align:center;	
+}
+
+.updateBtnDiv a:link{	
+	font-size: 15px;
+	padding: 1px 6px;
+}
+
+.checkListDiv {
+	text-align: left;
+	padding-left:10px;
+}
+.checkListImage {
+	width: 50px;
+  	height: 50px;  	
+  	
+}
+
+
+.checkListBtn {
+	width:25px;
+	height:25px;
+	margin:auto;	
+	display:inline-block;
+	text-align:center;
+}
+
+
+
+/**id**/
+#checklistTD {
+	
+}
+
+#Header {
+	position: relative;
+	border-color: #4d6c8b;
+	color: white;
+	font-weight: bold;
+	border-style: solid;
+	text-align: center;
+	vertical-align: baseline;
+}
+
+#logout {
+	margin:3px;
+	/*border:1px solid black;*/
+	padding:3px;
+	float:right;
+}
+#Title {
+	height: 60px;
+	width: 100%;
+	background-color: #4d6c8b;
+	padding: 0ex 0ex 0ex 0ex;
+	font-size:30px;	
+	size: 5ex;
+}
+
+#Menu {
+	width: 100%;
+	line-height: 30px;
+	background-color: #3498db;
+}
+
+#Menu, #Menu a, #Menu a:link, #Menu a:visited {
+	color: white;
+	text-decoration: none;
+	margin-right: 5ex;
+}
+
+
+#categoryNavigator {
+	width:100%;
+	
+	/*border:1px solid red;*/
+}
+
+#categoryChildWrap {
+	border: 1px solid #757577;
+}
+
+#categoryChildWrap h1 {
+	font-size:inherit;
+	color: #333;
+	font-weight: bold;
+	margin-left : 3px;
+}
+
+#paging {
+	text-align: center;
+}
+#paging a{
+	text-decoration: none;
+	color: black;
+	font-size: 14px;
+}
+
+#closeViewBtn {
+	float:right;	
+	background-color: white;
+	color: #336799;
+	text-decoration:underline;
+}
+
+#viewContent {
+  
+}
+
+
+ul.childWrapUL {
+	overflow: auto;
+}
+li.childWrap {
+	 float: left;
+	 margin-right:15px;
+	 
+}
+
+li.childWrap:hover{
+ 	cursor:pointer;
+	text-decoration: underline;
+
+}
+
+
+#insertCategoryDiv {	
+	/*border:1px solid red;*/
+	width:50%;
+	margin-top:15px;
+	/*vertical-align: middle;
+	margin: auto;*/
+	
+}
+
+#CategoyListTitle {
+	float:left;
+	
+}
+
+
+
+#searchCode  {
+	font: 3ex;
+	font-weight: bold;
+	float: right;
+	vertical-align: middle;
+	padding: 3px;
+	margin-top:15px;
+	
+}
+
+
+
+#totalInsert input[readonly="readonly"] {
+	background-color:  #c0c0c0;
+	color: white;
+}
+
+#totalInsert input[type="text"] {
+	width:90%;
+}
+
+
+#totalInsert textarea {
+	width:90%;
+	height: 8em;
+}
+
+#toolInsertTable td{
+	text-align:left;
+}

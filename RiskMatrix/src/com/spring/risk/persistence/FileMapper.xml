@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.risk.persistence.FileMapper">
+
+	<select id="getFilesByCode" parameterType="string" resultType="FileVO">
+		SELECT CODE, FILENAME, FILETYPE 
+		FROM FILE_LIST
+		WHERE CODE = #{code} 
+	</select>
+	
+	<select id="getFileList" parameterType="string" resultType="FileVO">
+		SELECT CODE, FILENAME, FILETYPE 
+		FROM FILE_LIST
+	</select>
+	
+	<select id="getFileType" parameterType="string" resultType="FileVO">
+		SELECT CODE, FILENAME, FILETYPE 
+		FROM FILE_LIST
+		WHERE CODE = #{code}  AND FILENAME = #{fileName}
+	</select>
+	
+
+	<insert id="insertFileVO" parameterType="FileVO">
+		INSERT INTO FILE_LIST(CODE, FILENAME, FILETYPE )
+		VALUES
+		(#{code},#{fileName},#{fileType})
+	</insert>
+	
+	<delete id="deleteFileVOByCode" parameterType="String">
+		DELETE FROM FILE_LIST WHERE CODE=#{code}	
+	</delete>
+	<delete id="deleteFileVOByVO" parameterType="String">
+		DELETE FROM FILE_LIST WHERE CODE=#{code} AND FILENAME=#{fileName}
+	</delete>
+	
+	<update id="updateFileVO" parameterType="FileVO">
+		UPDATE FILE_LIST
+		SET		
+		FILENAME = #{fileName}
+		,FILETYPE = #{fileType}
+		WHERE
+		CODE = #{code}
+	</update>
+
+</mapper>

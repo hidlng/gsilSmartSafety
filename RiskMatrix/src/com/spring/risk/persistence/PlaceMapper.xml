@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.risk.persistence.PlaceMapper">
+
+
+	<select id="getPlaceList" parameterType="string" resultType="PlaceVO">
+		SELECT PLACECODE, PLACENAME, MAINRISK, GUIDE, EQUIP
+		FROM PLACELIST_VIEW
+	</select>
+
+
+	<!--select id="getNotRegisteredCodeList" parameterType="string"
+		resultType="PlaceVO">
+		SELECT A.CODE AS PLACECODE, A.NAME AS PLACENAME
+		FROM
+		CATEGORY_CODE A LEFT JOIN PLACE_LIST B
+		ON A.CODE = B.PLACECODE
+		WHERE
+		A.TYPE='작업장소'
+		AND B.PLACECODE IS NULL
+		ORDER BY A.CODE
+	</select-->
+
+	<select id="getPlaceByCode" parameterType="string" resultType="PlaceVO">
+		SELECT PLACECODE, PLACENAME, MAINRISK, GUIDE, EQUIP
+		FROM PLACELIST_VIEW
+		WHERE PLACECODE = #{placeCode}
+	</select>
+
+	<delete id="deletePlaceVOByCode" parameterType="PlaceVO">
+		DELETE FROM PLACE_LIST WHERE PLACECODE=#{placeCode}
+	</delete>
+
+
+	<insert id="insertPlaceVO" parameterType="PlaceVO">
+		INSERT INTO PLACE_LIST(PLACECODE,MAINRISK,GUIDE,EQUIP)
+		VALUES
+		(#{placeCode},#{mainRisk},#{guide},#{equip})
+	</insert>
+
+	<update id="updatePlaceVO" parameterType="PlaceVO">
+		UPDATE PLACE_LIST
+		SET
+		mainrisk=#{mainRisk},
+		guide=#{guide},
+		equip=#{equip}		
+		WHERE
+		placecode=#{placeCode}
+	</update>
+
+</mapper>

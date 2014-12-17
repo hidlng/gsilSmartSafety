@@ -1,0 +1,183 @@
+html {
+	height: 100%;
+}
+
+html {
+	display: table;
+}
+
+body {
+	vertical-align: middle;
+	width: 85%;
+	margin: auto;
+}
+
+body, input, textarea, select, table {
+	font-family: '돋움', Dotum, AppleGothic, sans-serif;
+	font-size: 12px;
+}
+
+p {
+	font-family: helvetica, tahoma, arial, verdana, sans-serif;
+	margin: 0ex 0ex 0ex 0ex;
+	padding: 2ex;
+}
+
+img {
+	border: 0;
+}
+
+dl, ul, ol, menu, li {
+list-style: none;
+}
+
+li .cur_category {
+	float: left;
+	width: 145px;
+	padding-right: 10px;
+	padding-bottom: 8px;
+	position: relative;	
+}
+
+/** TABLE **/
+table {
+	width: 100%;
+	border-collapse: collapse;
+	border: 0;
+	line-height: 25px;
+	table-layout: fixed;
+	text-align: center;
+	border-color: gray;
+	/* 줄바꿈*/
+	word-break:break-all;
+	white-space: pre-line;
+	
+}
+
+#totalList table{
+	white-space: normal;
+	
+}
+#totalInsert table {
+	white-space: normal;
+}
+
+tr {
+	border: 0;
+}
+
+tr.one {
+	background: white;
+}
+
+tr.odd td {	
+	background: #f8f8f8;
+}
+
+tr.even td {
+	background: white;
+}
+
+th {
+	border: 1px solid #668db6;
+	background-color: #336799;
+	color: white;
+	font-weight: bold;
+	border-right: 1px solid white;	
+}
+
+td {
+	border-bottom: 1px solid #fff;
+	border-right: 1px solid white;
+}
+
+table .pathCol{
+	width : 320px;	
+}
+
+table .codeCol{
+	width : 150px;
+}
+
+table .typeCol{
+	width : 160px;
+}
+
+table .contentCol{
+	width : 250px;
+}
+
+table .buttonCol{
+	width : 60px;	
+}
+
+/**class**/
+div .button, p .button td .button{
+	background-color: #336799;
+	color: white;
+}
+
+
+
+/**id**/
+#Header {
+	position: relative;
+	border-color: #4d6c8b;
+	color: white;
+	font-weight: bold;
+	border-style: solid;
+	text-align: center;
+	vertical-align: baseline;
+}
+
+#Title {
+	height: 60px;
+	width: 100%;
+	background-color: #4d6c8b;
+	padding: 0ex 0ex 0ex 0ex;
+	font-size:30px;	
+	size: 5ex;
+}
+
+#Menu {
+	width: 100%;
+	line-height: 30px;
+	background-color: #3498db;
+}
+
+#Menu, #Menu a, #Menu a:link, #Menu a:visited {
+	color: white;
+	text-decoration: none;
+	margin-right: 5ex;
+}
+
+div #categoryNavigator {
+	width:100%;
+	float:left;
+	border:1px solid red;
+}
+
+
+div #insertCategoryDiv {
+	width:40%;
+	border:1px solid red;
+}
+
+div #searchCode  {
+	font: 3ex;
+	font-weight: bold;
+	float: right;
+	vertical-align: middle;
+	padding: 3px;
+	border:1px solid red;
+}
+
+
+input[type='submit'] {
+	
+}
+
+input[readonly="readonly"] {
+	background-color:  #c0c0c0;
+	color: white;
+}

@@ -1,0 +1,64 @@
+@charset "utf-8";
+
+@import url(.css);
+@import url(.css);
+@import url(.css);
+
+
+/* Reset CSS */
+/* html5 reset add */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {margin: 0; padding: 0; border: 0; outline: 0}
+table{border-collapse:collapse;/*border-spacing:0;*/}
+fieldset,img{border:0}
+address,caption,cite,code,dfn,var,em{font-style:normal;font-weight:normal}
+ol,ul,dl{list-style:none}
+caption {text-align:left}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+q:before,q:after{content:''}
+abbr,acronym{border:0;font-variant:normal}
+sup{vertical-align:text-top}
+sub{vertical-align:text-bottom}
+input,textarea,select{*font-size:100%;color:#555}
+.blind{font-size:1px;height:1px;left:-9999px;line-height:0;position:absolute;width:1px}
+.blind-area{position:absolute;display:inline-block;font-size:0;height:0;line-height:0;visibility:hidden;width:0;text-indent:-9999em}
+legend{/*visibility:hidden;overflow:hidden;position:absolute;top:0;left:0;width:0px;height:0px;*/font-size:0px; line-height:0}
+
+/* Base CSS */
+html, body {width:100%; font-family:dotum,"돋음","돋음체"; color:#666}
+body {font-size:12px;line-height:18px}
+img{vertical-align:middle}
+button{cursor:pointer}
+table caption {display:none}
+em {font-style:normal}
+h1,h2,h3,h4,h5,h6,strong {font-weight:bold}
+hr {display:none}
+hr.blkie8 {display:block;;border:none} /* ie8 block display */
+a {color:#444;text-decoration:none; cursor:pointer}
+a:hover, a:active, a:focus {color:#444444; text-decoration:none; cursor:pointer}
+select {display:none}
+
+/* a-style */
+a{color:#333;text-decoration:none;}
+a:hover, a:active{color:#666;text-decoration:underline;}
+
+/* layout */
+ body{width:100%;background:url("../images/bg001.png") repeat-x 0 0 #000; color:#333;}
+ #wrap{width:100%;min-height:2000px;background:url("../images/bg002.png") no-repeat 0 0;}
+ .back_bg{width:100%;min-height:2000px;background:url("../images/bg003.png") no-repeat right 500px; padding-top:250px;}
+/* login page */
+ .logBox{overflow:hidden;width:385px;height:223px;margin:0 auto;background:url("../images/log_box.png") no-repeat 0 0;padding:115px 29px 0 29px; }
+ .logBox .inputLog{float:left; width:297px; padding-top:2px; margin-right:5px;}
+ .logBox .inputLog input{margin:3px 0;width:286px;height:29px;border-radius:5px;moz-border-radius:5px;webkit-border-radius:5px;padding:0 5px; background-color:#e5edfa; font-size:16px; line-height:29px;}
+ .logBox p{float:left;display:block;width:82px;cursor:pointer;}
+ 
+ #loginButton {cursor:hand;}

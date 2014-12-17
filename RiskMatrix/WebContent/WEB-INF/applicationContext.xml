@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd        
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"      
+          >
+
+	
+	
+	<!-- MyBatis -->
+  	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	    <beans:property name="driverClass" value="com.mysql.jdbc.Driver"/>
+	    <!--property name="url" value="jdbc:mysql://localhost:3306/RISKADMIN"/>
+	    <beans:property name="username" value="test"/>
+	    <beans:property name="password" value="test"/-->
+	    <beans:property name="url" value="jdbc:mysql://riskadmin.cazbtra2oqnv.ap-northeast-1.rds.amazonaws.com:3306/risk"/>
+	    <beans:property name="username" value="root"/>
+	    <beans:property name="password" value="tpqmfld11!"/>
+	</beans:bean>
+	
+	
+	<!-- log4j for Query -->
+	<beans:bean id="logDataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<beans:constructor-arg ref="dataSource" />
+		<beans:property name="logFormatter">
+			<beans:bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<beans:property name="loggingType" value="MULTI_LINE" />
+				<beans:property name="sqlPrefix" value="SQL:::" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+	
+    <!-- transaction manager, use JtaTransactionManager for global tx -->
+    <beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <beans:property name="dataSource" ref="dataSource" />
+    </beans:bean>
+
+    <!-- enable component scanning (beware that this does not enable mapper scanning!) -->    
+    <context:component-scan base-package="com.spring.risk.service" />
+
+    <!-- enable autowire -->
+    <context:annotation-config />
+
+    <!-- enable transaction demarcation with annotations -->
+    <tx:annotation-driven />
+
+    <interceptors>
+    <beans:bean id="webContentInterceptor" 
+          class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+        <beans:property name="cacheSeconds" value="0"/>
+        <beans:property name="useExpiresHeader" value="true"/>
+        <beans:property name="useCacheControlHeader" value="true"/>
+        <beans:property name="useCacheControlNoStore" value="true"/>
+    </beans:bean>
+	</interceptors>
+
+    
+    <!-- define the SqlSessionFactory -->
+    <beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <beans:property name="dataSource" ref="dataSource" />
+        <beans:property name="typeAliasesPackage" value="com.spring.risk.domain" />
+    </beans:bean>
+
+    <!-- scan for mappers and let them be autowired -->
+    <beans:bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <beans:property name="basePackage" value="com.spring.risk.persistence" />
+    </beans:bean>
+    
+    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	 <beans:property name="contentType" value="text/html; charset=UTF-8"/>
+	</beans:bean>
+	
+    	
+   
+ 
+ </beans:beans>
+ 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.risk.persistence.AccDetailMapper">
+
+
+	<select id="getAccListByWorkcode" parameterType="string" resultType="AccDetailVO">
+		SELECT WORKCODE, ACCCODE, ACCPOSS, ACCSERIOUS , CODE.NAME ACCNAME 
+		FROM ACC_DETAIL ACC JOIN CODE_LIST CODE
+		ON ACC.ACCCODE = CODE.CODE
+		WHERE WORKCODE = #{workCode}
+	</select>
+	
+
+	<insert id="insertAccVO" parameterType="AccDetailVO">
+		INSERT INTO ACC_DETAIL(WORKCODE,ACCCODE,ACCPOSS,ACCSERIOUS)
+		VALUES
+		(#{workCode},#{accCode},#{accPoss},#{accSerious})
+	</insert>
+	
+	<delete id="deleteAccVOByWorkCode" parameterType="String">
+		DELETE FROM ACC_DETAIL WHERE WORKCODE=#{workCode}	
+	</delete>
+	
+	<update id="updateAccVO" parameterType="AccDetailVO">
+		UPDATE ACC_DETAIL
+		SET		
+		ACCPOSS = #{accPoss}
+		,ACCSERIOUS = #{accSerious}
+		WHERE
+		WORKCODE = #{workCode}
+		AND ACCCODE = #{accCode}
+	</update>
+
+</mapper>
