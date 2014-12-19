@@ -52,8 +52,8 @@ body{width:100%;background:url("../images/bg001.png") repeat-x 0 0 #000; color:#
 .back_bg{width:100%;min-width:1400px;min-height:2000px;background:url("../images/bg003.png") no-repeat right 500px; padding:250px 0 100px;}
 .back_bg.sub{ width:100%;min-width:1400px;background:none;padding:25px 0 100px; min-height:1500px;}
 .back_bg.workCh{width:100%;min-width:1400px;min-height:2000px;background:url("../images/bg003.png") no-repeat right 500px; padding:150px 0 100px;}
-h1{padding:50px;}
-h1 img{width:150px;}
+h1{padding:50px 0 0 50px;}
+h1 img{width:120px;}
 
 /* login page */
 .logBox{overflow:hidden;width:385px;height:223px;margin:0 auto;background:url("../images/log_box.png") no-repeat 0 0;padding:115px 29px 0 29px; }
@@ -69,7 +69,7 @@ h1 img{width:150px;}
 .aside_list li{color:#98b4e0; font-size:22px; line-height:40px; font-weight:bold;}
 .aside_list li.on{color:#d70e0a;}
 .aside_ident {position:absolute; left:35px; bottom:55px; width:200px;  }
-.aside_ident li{color:#efefef; font-size:16px; line-height:40px; font-weight:600; border-bottom:1px dotted #8c97a9; margin-bottom:10px;}
+.aside_ident li{color:#efefef; font-size:14px; line-height:30px; border-bottom:1px dotted #8c97a9; margin-bottom:10px;}
 .aside_ident li.last{ border-bottom:0px; text-align:center;}
 .aside_ident li span.identTitle{width:50px;}
 .aside_ident li span input{width:150px; padding:5px 15px; background:none; border:0; font-size:18px; color:#fff;}

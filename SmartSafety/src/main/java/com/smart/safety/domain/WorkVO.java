@@ -17,12 +17,17 @@ public class WorkVO implements Serializable{
 	@NotEmpty(message="입력 필요")
 	String ischarge = "N"; //돌관작업 여부
 	
+	@NotEmpty(message="선택 필요")
 	String worktype;
+	@NotEmpty(message="선택 필요")
 	String category1;
-	String category2;
+	@NotEmpty(message="선택 필요")
+	String category2;	
 	String category3;
-	String category4;
+	
+	@NotEmpty(message="선택 필요")
 	String workcode;
+	@NotEmpty(message="선택 필요")
 	String workname;
 	String worktitle;
 	
@@ -101,18 +106,7 @@ public class WorkVO implements Serializable{
 	public void setCategory3(String category3) {
 		this.category3 = category3;
 	}
-	public String getCategory4() {
-		return category4;
-	}
-	public void setCategory4(String category4) {
-		this.category4 = category4;
-	}
-	public String getWorkcode() {
-		return workcode;
-	}
-	public void setWorkcode(String workcode) {
-		this.workcode = workcode;
-	}
+	
 	public String getWorkname() {
 		return workname;
 	}
@@ -269,6 +263,12 @@ public class WorkVO implements Serializable{
 	}
 	public void setIscharge(String ischarge) {
 		this.ischarge = ischarge;
+	}
+	public String getWorkcode() {
+		return workcode;
+	}
+	public void setWorkcode(String workcode) {
+		this.workcode = workcode;
 	}
 	
 	

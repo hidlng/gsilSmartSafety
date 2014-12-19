@@ -31,7 +31,7 @@ public class WorkService{
 	
 	@Transactional
 	public void updateWork(WorkVO workVO) {
-			workMapper.update(workVO);
+		workMapper.update(workVO);
 	}
 	
 	@Transactional

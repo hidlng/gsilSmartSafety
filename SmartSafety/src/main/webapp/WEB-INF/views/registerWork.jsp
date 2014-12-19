@@ -5,8 +5,6 @@
 
 <script>
 
- 
- var idNotDuplicate = false;
  $(document).ready(function() {	
 	
 	 if(${updateMode} == true) {	
@@ -17,13 +15,127 @@
 		 $('#workForm').attr('action', 'insertWork');
 	 }
 	
-
+	
+	// setChildCategoryOf(1, 'worktypeSelect');
+	
  });
  
+function goPopup(){
+	var pop = window.open("workPopup","pop","width=700,height=250, scrollbars=yes, resizable=no, modal=yes"); 
+}
+ 
+function workCallBack(worktype, category1 ,category2 , workcode, workname) {
+	alert(worktype + " 1" + category1 + " " + category2 + " " + workcode + " " + workname);	 
+	$('#worktype').val(worktype);
+	$('#category1').val(category1);
+	$('#category2').val(category2);
+	$('#workcode').val(workcode);
+	$('#workname').val(workname);
+}
+ 
+ /** set Child Category Of Idx (add option to target Selectbox) **/
+function setChildCategoryOf(idx, targetId) {
+	 //alert(idx +"target : " + targetId);
+	$.ajax({
+  		type : "POST",
+  		url : "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getCategoryByJSON=",
+  		data : {ancIdx : idx},
+  		dataType : "jsonp",
+  	    jsonp : "callback",
+  		cache : false,
+  		success : function(json) {
+  			$('#' + targetId).empty();
+  			var catList = json.catList;
+  			$('#' + targetId).append('<option id="" value="">-----------선택----------</option>');
+  			for(var i = 0 ; i < Object.keys(catList).length; i ++) {
+  				$('#' + targetId).append('<option id="' + catList[i].idx + '" value="' + catList[i].name + '">' + catList[i].name  + '</option>');
+  			} 
+			
+  		},
+  		error : onError
+	});
+}
+ 
+ function setCateogry(objId, targetId) {
+	var idx = $("#" + objId + " option:selected" ).attr('id');
+	setChildCategoryOf(idx , targetId);
+ }
+ 
+ 
+ function setCode(objId, targetId) {
+	 var idx = $("#" + objId + " option:selected" ).attr('id');
+	 
+	 
+	 $.ajax({
+	  		type : "POST",
+	  		url : "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getCodeByJSON=",
+	  		data : {lastIdx : idx},
+	  		dataType : "jsonp",
+	  	    jsonp : "callback",
+	  		cache : false,
+	  		success : function(json) {
+	  			$('#' + targetId).empty();
+	  			var codeList = json.codeList;
+	  			$('#' + targetId).append('<option id="" value="">-----------선택----------</option>');
+	  			for(var i = 0 ; i < Object.keys(codeList).length; i ++) {
+	  				//$('#' + targetId).append('<option id="CODE_' + codeList[i].code + '" value="' + codeList[i].name + '">' + codeList[i].name  + '</option>');
+	  				$('#' + targetId).append('<option value="' + codeList[i].name + '">' + codeList[i].name  + '</option>');
+	  				$('#workcode').val(codeList[i].code);
+	  			} 
+				
+	  		},
+	  		error : onError
+		});
+ }
+ 
+
+ 
+/*  function getCodeDetail(codeNum, typeNum) {
+	 alert(codeNum +" " + typeNum);
+	 $.ajax({
+	  		type : "POST",
+	  		url : "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getDetailByJSON=",
+	  		data : {code : codeNum, type : typeNum },
+	  		dataType : "jsonp",
+	  	    jsonp : "callback",
+	  		cache : false,
+	  		success : function(json) {
+	  			alert(json.workVO.guide);
+	  		},
+	  		error : onError
+		});
+ }
+ 
+ function setWorkDetail(objId) {
+	 var idx = $("#" + objId + " option:selected" ).attr('id');
+	 getCodeDetail(idx, 1);
+ }
+ */
  
   function submitWork() {	
-		$('#workForm').submit();
-  }
+	 var input;
+		if(${updateMode} == true) {
+			input = confirm('수정하시겠습니까?');
+		}else {
+			input = confirm('등록하시겠습니까?');
+		}
+		
+		if(input) { //yes
+			$('#workForm').submit();
+		}else
+			reutrn;
+  } 
+  
+function onError(data, status) {
+	alert(this.url);
+	alert("error : " + status +"data:"+ data);
+	
+}
+	
+  
+  
+  
+
 
  
  </script>
@@ -35,7 +147,10 @@
 	<input type="hidden" name="site_idx" value="${workVO.site_idx}" />
 	<input type="hidden" name="work_idx" value="${workVO.work_idx}" />
 	<input type="hidden" name="write_user_idx" value="${workVO.write_user_idx}" />
+	<input type="hidden" name="workcode" value="${workVO.workcode}" id="workcode" />
 	
+	
+	<div id="test" onclick="goPopup()">test</div>
 	
 	<table class="user_signup">
 		<colgroup>
@@ -48,27 +163,36 @@
 			<td colspan="2"><form:input path="cont_name"  readonly="true" />
 			</td>
 		</tr>
+		<!-- work start -->
 		<tr>
-			<th>			
-			<select id="author_typ" name="worktype">
-					<option value="" selected="selected">공종</option>
-					<option value="">1</option>
-					<option value="">2</option>
-					<option value="">3</option>
-			</select></th>
-			<th><select id="author_typ" name="author_typ">
-					<option value="" selected="selected">하부작업</option>
-					<option value="">1</option>
-					<option value="">2</option>
-					<option value="">3</option>
-			</select></th>
-			<th>
-				<form:select path="workcode" class="siteSelectBox">
-					<form:option value="TESTCODE01">TESTCODE01</form:option>
-				</form:select> 
+			<th>						
+				공종
+			</th>
+			<th>				
+				대분류
+			<th>				
+				소분류
 			</th>
 		</tr>
-
+		<tr>
+			<td  onclick="goPopup()">						
+				<form:input id="worktype" path="worktype"  readonly="true" />
+			</td>
+			<td  onclick="goPopup()">				
+				<form:input id="category1"  path="category1"  readonly="true" />
+			<td  onclick="goPopup()">				
+				<form:input id="category2" path="category2"  readonly="true" />
+			</td>
+		</tr>
+		<tr>
+			<th>작업명</th>
+			<td colspan="2"  onclick="goPopup()">			
+				<form:input id="workname"  path="workname"  readonly="true" />
+			</td>
+		</tr>			
+		
+		
+		
 		<tr>
 			<th>작업타이틀</th>
 			<td colspan="2"><form:input path="worktitle" 	maxlength="30" />
@@ -99,8 +223,9 @@
 		</tr>
 
 	</table>
-	<!--  //user_signup -->
+	
 
+	<!--  start -->
 	<p class="red">장비선택</p>
 	<ul class="equipment_typ">
 		<li><span class="iconImg"><img
@@ -119,9 +244,9 @@
 		<tr>
 			<th>장비</th>
 			<td><input type="text" name="" value="">톤
-			</th>
+			</td>
 			<td><input type="text" name="" value="">모델
-			</th>
+			</td>
 		</tr>
 		<tr>
 			<th>굴삭기</th>
@@ -158,7 +283,7 @@
 			<td><input type="text" name="" value=""></td>
 		</tr>
 	</table>
-	<!--  //user_signup -->
+	<!-- end  -->
 
 	<p class="red">작업장소등록</p>
 	<table class="user_signup">
@@ -168,6 +293,8 @@
 			<col style="width: 25%">
 			<col>
 		</colgroup>
+		
+		<!-- start -->
 		<tr>
 			<th>장소유형</th>
 			<td colspan="3">
@@ -176,6 +303,8 @@
 				<form:option value="PLACECODE02">PLACECODE01</form:option>
 			</form:select></td>
 		</tr>
+		<!--  end -->
+		
 		<tr>
 			<th>세부장소</th>
 			<td colspan="3">

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.safety.domain.ContractorVO;
+import com.smart.safety.domain.SiteVO;
 import com.smart.safety.services.ContractorService;
 import com.smart.safety.services.LoginService;
 import com.smart.safety.util.Paging;
@@ -49,6 +50,11 @@ public class ContractorController {
 			contractorVO.setRep_name(keyword);
 			contractorVO.setCont_work(keyword);
 			contractorVO.setRep_phone(keyword);
+			
+			//현장관리자 -> 자신의 현장의 업체만 출력. 
+			//SS 관리자 - > 전부 출력
+			String site_idx = ((SiteVO)session.getAttribute("siteVO")).getSite_idx();
+			contractorVO.setSite_idx(site_idx);
 			
 			//Paging처리			
 			int rowCnt = contractorService.getRowCount(contractorVO);

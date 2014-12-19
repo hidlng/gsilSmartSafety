@@ -53,7 +53,7 @@ function goPage(val) {
 			<c:if test='${work.ischarge.equals("Y")}'><tr class="chargeWorkTR"></c:if> <!--  돌관작업 -->
 			<c:if test='${!work.ischarge.equals("Y")}'><tr></c:if>
 			
-				<td>${idx.index+1}</td>
+				<td>${((paging.pageNo - 1) * paging.pageSize) + (idx.index + 1) }</td>
 				<td>${work.worktype}</td>
 				<td>${work.worktitle}</td>
 				<td>${work.startdate} ~<p> ${work.enddate}</td>

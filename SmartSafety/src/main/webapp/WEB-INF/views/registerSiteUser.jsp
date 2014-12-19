@@ -37,11 +37,21 @@
  
  
  function submitSiteUser(val) {
-	  if(idNotDuplicate){
-		$('#siteUserForm').submit();
-	  }else {
-		  alert('ID중복체크를 해주시기 바랍니다(ID Check)');
-	  }  
+	 var input;
+		if(${updateMode} == true) {
+			input = confirm('수정하시겠습니까?');
+		}else {
+			input = confirm('등록하시겠습니까?');
+		}
+		
+		if(input) { //yes
+			  if(idNotDuplicate){
+				$('#siteUserForm').submit();
+			  }else {
+				  alert('ID중복체크를 해주시기 바랍니다(ID Check)');
+			  }  
+		}else
+			return;
  }
   
  </script>
@@ -54,6 +64,8 @@
 	<input type="hidden" name="user_idx" value="${managerVO.user_idx}" />
 	<input type="hidden" id="isPWChanged" name="isPWChanged" value="false" />
 	<input type="hidden" name="level" value="3">
+	
+	<!-- null값 방지 위함 -->
 	<input type="hidden" name="grade" value="_">
 	<input type="hidden" name="position" value="_">
 

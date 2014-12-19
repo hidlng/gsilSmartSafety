@@ -52,11 +52,21 @@
  
  
   function submitManager() {
+	var input;
+	if(${updateMode} == true) {
+		input = confirm('수정하시겠습니까?');
+	}else {
+		input = confirm('등록하시겠습니까?');
+	}
+	
+	if(input) { //yes
 	  if(idNotDuplicate){
-		$('#managerForm').submit();
-	  }else {
+			$('#managerForm').submit();
+	 }else {
 		  alert('ID중복체크를 해주시기 바랍니다(ID Check)');
-	  }  
+		  }  
+	}else
+		return;
   }
   
   
@@ -117,7 +127,7 @@
 		<td><form:input path="name" maxlength="45"/><p/><form:errors cssClass="formError" path="name" />
 		</td>
 		<th>생년월일</th>
-		<td><form:input id="birthInput" path="birth" maxlength="10" /><p/><form:errors cssClass="formError" path="birth" /></span></td>
+		<td><form:input id="birthInput" path="birth" maxlength="10" /><p/><form:errors cssClass="formError" path="birth" /></td>
 	</tr>
 	<tr>
 		<th>연락처<p/><span style="font-size:17px">(010-1234-5678)</span></th>

@@ -28,16 +28,27 @@
  
 
   function submitContractor() {
-			
-	  if(idNotDuplicate){
-		$('#contractorForm').submit();
-	  }else {
-		  //$('#idError').text('중복 체크');
-		  alert('ID중복체크를 해주시기 바랍니다(ID Check)');
-	  }
+	var input;
+	if(${updateMode} == true) {
+		input = confirm('수정하시겠습니까?');
+	}else {
+		input = confirm('등록하시겠습니까?');
+	}
+	
+	if(input) { //yes
+		  if(idNotDuplicate){
+				$('#contractorForm').submit();
+		  }else {
+			  //$('#idError').text('중복 체크');
+			  alert('ID중복체크를 해주시기 바랍니다(ID Check)');
+		  }
+	}else
+		return;
 
 	  
   }
+  
+
 	 
  </script>
 
@@ -47,7 +58,7 @@
 	<input type="hidden" name="user_idx" value="${contractorVO.user_idx}"/>
 	<input type="hidden" id="isPWChanged" name="isPWChanged" value="false" />
 	<input type="hidden" name="level" value="4" />
-	<!-- siteIDx 관리  -->
+	<!-- 다른 site_idx 가진 유저가 접근하여 수정시 해당 유저의 site_idx로 수정되는 경우 방지 -->
 	<c:if test="${!updateMode}">
 		<input type="hidden" name="site_idx" value="${sessionScope.siteVO.site_idx}">
 	</c:if>

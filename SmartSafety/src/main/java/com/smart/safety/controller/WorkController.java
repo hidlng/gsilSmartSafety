@@ -166,4 +166,11 @@ public class WorkController {
 		}
 		
 	}
+	
+	
+	@RequestMapping("workPopup")
+	public void workPopup(HttpSession session) {
+		
+	}
+	
 }

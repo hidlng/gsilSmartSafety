@@ -19,7 +19,17 @@
  
  
   function submitSite() {	
-		$('#siteForm').submit();
+	  var input;
+		if(${updateMode} == true) {
+			input = confirm('수정하시겠습니까?');
+		}else {
+			input = confirm('등록하시겠습니까?');
+		}
+		
+		if(input) { //yes
+			$('#siteForm').submit();
+		}else
+			return;
   }
 
   
@@ -53,7 +63,7 @@
 
 <form:form id="siteForm" method="POST" modelAttribute="siteVO"
 	autocomplete="off">
-	<input type="hidden" name="site_idx" value="${siteVO.site_idx}" />
+	<form:input type="hidden" path="site_idx" value="${siteVO.site_idx}" />
 
 	<!-- //srchbox -->
 	<table class="user_signup">

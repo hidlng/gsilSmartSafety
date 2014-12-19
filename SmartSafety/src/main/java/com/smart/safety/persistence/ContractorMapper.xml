@@ -19,6 +19,7 @@
 		OR C.CONT_WORK like #{cont_work}
 		OR C.REP_PHONE like #{rep_phone}
 		)
+		AND SITE_IDX like #{site_idx}
 	ORDER BY C.CONT_IDX
 	LIMIT #{start}, #{size}
   </select>
@@ -58,6 +59,7 @@
 			OR C.CONT_WORK like #{cont_work}
 			OR C.REP_PHONE like #{rep_phone}
 			)
+			AND SITE_IDX like #{site_idx}
   </select>
        
   <insert id="insert" parameterType="ManagerVO">
