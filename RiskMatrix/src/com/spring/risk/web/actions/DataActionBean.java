@@ -11,9 +11,16 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 
+import com.spring.risk.domain.AccDetailVO;
+import com.spring.risk.domain.CategoryType;
 import com.spring.risk.domain.CategoryVO;
+import com.spring.risk.domain.CheckVO;
 import com.spring.risk.domain.CodeVO;
+import com.spring.risk.domain.FileVO;
+import com.spring.risk.domain.PlaceVO;
+import com.spring.risk.domain.ToolVO;
 import com.spring.risk.domain.UserVO;
+import com.spring.risk.domain.WorkVO;
 import com.spring.risk.service.CategoryService;
 import com.spring.risk.service.FileListService;
 import com.spring.risk.service.PlaceListService;
@@ -44,6 +51,8 @@ public class DataActionBean extends AbstractActionBean {
 	private JSONObject jsonObj;
 	private int lastIdx;
 	private int ancIdx; //ancestor idx of treepath
+	private String code;//code
+	private int type;//work,tool,place
 	
 	@SpringBean
 	private transient UserService userService;
@@ -75,6 +84,47 @@ public class DataActionBean extends AbstractActionBean {
 		
 		return new ForwardResolution(DATAPAGE);
 	}
+	
+	/** code & type에 맞는 상세정보 반환**/
+	public Resolution getDetailByJSON() {
+		//List<CodeVO> codeList = categoryService.getCodeListByCategory(code);
+		
+		jsonObj = new JSONObject();
+		/*jsonObj.put("codeList", codeList);
+		System.out.println(jsonObj.toString());
+		*/
+		
+		List<FileVO> fileList = fileListService.getFileListByCode(code);
+		//TODO : 통합할부분 통합 할 것 (기획 확정전까지는 분리된상태로 보류)
+		
+		switch(type) {
+		case 1 : //WORK
+				WorkVO workVO = workListService.getWorkByWorkCode(code);
+				List<AccDetailVO> inputAccList = workListService.getAccListByWorkcode(code);
+				jsonObj.put("workVO", workVO);
+				jsonObj.put("inputAccList", inputAccList);
+				break;
+		case 2 : //TOOL
+				ToolVO toolVO = toolListService.getToolByCode(code);					
+				List<CheckVO> checkList = toolVO.getCheckList();//141209 
+				jsonObj.put("toolVO", toolVO);
+				jsonObj.put("checkList", checkList);
+				break;
+		case 3 : //PLACE
+				PlaceVO placeVO = placeListService.getPlaceByCode(code);
+				jsonObj.put("placeVO", placeVO);
+				break;
+		//case 4 ://ACC			
+				//break;
+		}
+		
+		jsonObj.put("fileList", fileList);
+		
+		System.out.println(jsonObj.toString());
+		
+		return new ForwardResolution(DATAPAGE);
+	}
+
 
 
 	public JSONObject getJsonObj() {
@@ -104,6 +154,26 @@ public class DataActionBean extends AbstractActionBean {
 
 	public void setAncIdx(int ancIdx) {
 		this.ancIdx = ancIdx;
+	}
+
+
+	public String getCode() {
+		return code;
+	}
+
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+
+	public int getType() {
+		return type;
+	}
+
+
+	public void setType(int type) {
+		this.type = type;
 	}
 
 
