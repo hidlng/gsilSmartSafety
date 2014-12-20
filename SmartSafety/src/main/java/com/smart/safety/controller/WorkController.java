@@ -57,7 +57,7 @@ public class WorkController {
 			WorkVO workVO = new WorkVO();
 			workVO.setWorktype(keyword);
 			workVO.setWorktitle(keyword);
-			workVO.setWrite_user_idx(keyword);
+			workVO.setUsername(keyword);
 			
 			//Paging처리			
 			int rowCnt = workService.getRowCount(workVO);

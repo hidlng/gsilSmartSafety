@@ -64,6 +64,8 @@ public class WorkVO implements Serializable{
 	String updatetime;
 	String delyn;
 	
+	/**additional**/
+	String username;
 	
 	/**paging**/
 	private int start=0;
@@ -269,6 +271,12 @@ public class WorkVO implements Serializable{
 	}
 	public void setWorkcode(String workcode) {
 		this.workcode = workcode;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

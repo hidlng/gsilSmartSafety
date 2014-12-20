@@ -21,7 +21,7 @@
  });
  
 function goPopup(){
-	var pop = window.open("workPopup","pop","width=700,height=250, scrollbars=yes, resizable=no, modal=yes"); 
+	var pop = window.open("workPopup","pop","width=1000,height=250, scrollbars=yes, resizable=no, modal=yes"); 
 }
  
 function workCallBack(worktype, category1 ,category2 , workcode, workname) {
@@ -150,8 +150,6 @@ function onError(data, status) {
 	<input type="hidden" name="workcode" value="${workVO.workcode}" id="workcode" />
 	
 	
-	<div id="test" onclick="goPopup()">test</div>
-	
 	<table class="user_signup">
 		<colgroup>
 			<col>
@@ -177,17 +175,21 @@ function onError(data, status) {
 		<tr>
 			<td  onclick="goPopup()">						
 				<form:input id="worktype" path="worktype"  readonly="true" />
+				<form:errors path="worktype" cssClass="formError"/>
 			</td>
 			<td  onclick="goPopup()">				
 				<form:input id="category1"  path="category1"  readonly="true" />
+				<form:errors path="category1" cssClass="formError"/>
 			<td  onclick="goPopup()">				
 				<form:input id="category2" path="category2"  readonly="true" />
+				<form:errors path="category2" cssClass="formError"/>
 			</td>
 		</tr>
 		<tr>
 			<th>작업명</th>
 			<td colspan="2"  onclick="goPopup()">			
 				<form:input id="workname"  path="workname"  readonly="true" />
+				<form:errors path="workname" cssClass="formError"/>
 			</td>
 		</tr>			
 		

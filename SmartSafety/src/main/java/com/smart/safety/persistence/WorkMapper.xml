@@ -7,7 +7,7 @@
 	
   <select id="getWorkListByVO" resultType="WorkVO" parameterType="WorkVO">
 	SELECT *
-	FROM WORK_LIST W  
+	FROM WORK_LIST_WITH_NAME W  
 	JOIN SITE_LIST S
 	ON W.SITE_IDX = S.SITE_IDX
 	WHERE W.DELYN='N'
@@ -15,10 +15,25 @@
 	AND (
 	W.WORKTYPE like #{worktype}
 	OR W.WORKTITLE like #{worktitle}
-	-- OR W.WRITE_USER_IDX like '%'
+	OR W.USERNAME like #{username}
 	)
 	ORDER BY W.WORK_IDX
 	LIMIT #{start}, #{size}
+  </select>
+  
+  <select id="getRowCount" resultType="Integer" parameterType="WorkVO">
+        SELECT COUNT(*) 
+		FROM WORK_LIST_WITH_NAME W
+		JOIN SITE_LIST S
+		ON W.SITE_IDX = S.SITE_IDX
+		WHERE 
+			W.DELYN='N' 
+			AND S.DELYN='N' 
+			AND (
+			W.WORKTYPE like #{worktype}
+			OR W.WORKTITLE like #{worktitle}
+			OR W.USERNAME like #{username}
+			)
   </select>
   
   <select id="getWorkByIdx" resultType="WorkVO" parameterType="String">
@@ -30,21 +45,6 @@
 		W.DELYN='N'
 		AND S.DELYN='N'
 		AND W.WORK_IDX = #{work_idx}
-  </select>
-  
-  <select id="getRowCount" resultType="Integer" parameterType="WorkVO">
-        SELECT COUNT(*) 
-		FROM WORK_LIST W
-		JOIN SITE_LIST S
-		ON W.SITE_IDX = S.SITE_IDX
-		WHERE 
-			W.DELYN='N' 
-			AND S.DELYN='N' 
-			AND (
-			W.WORKTYPE like #{worktype}
-			OR W.WORKTITLE like #{worktitle}
-			-- OR W.WRITE_USER_IDX like '%'
-			)
   </select>
        
   <insert id="insert" parameterType="WorkVO">

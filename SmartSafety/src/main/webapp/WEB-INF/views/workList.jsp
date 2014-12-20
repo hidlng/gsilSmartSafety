@@ -57,13 +57,18 @@ function goPage(val) {
 				<td>${work.worktype}</td>
 				<td>${work.worktitle}</td>
 				<td>${work.startdate} ~<p> ${work.enddate}</td>
-				<td>${work.write_user_idx}</td>
-				<td><input id="updateIdx_${idx.index}" type="hidden"
+				<td>${work.username}</td>
+				<td>
+				
+				<c:if test="${sessionScope.userLoginInfo.user_idx  == work.write_user_idx }">
+				<input id="updateIdx_${idx.index}" type="hidden"
 					value="${work.work_idx}" /> <img src="images/btn_info.png"
 					onclick="updateSubmit('${idx.index}')" alt="정보수정하기"
 					style="cursor: pointer"
 					onmouseover="this.src='images/btn_info_over.png'"
-					onmouseout="this.src='images/btn_info.png'"></td>
+					onmouseout="this.src='images/btn_info.png'">
+				</c:if>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
