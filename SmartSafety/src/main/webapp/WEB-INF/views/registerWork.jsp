@@ -18,6 +18,12 @@
 	
 	// setChildCategoryOf(1, 'worktypeSelect');
 	
+	setCode(57, 'cons_tool');//건설장비 지정
+	setCode(58, 'trans_tool');//운반장비 지정
+	setCode(59, 'etc_tool');//기타장비 지정
+	
+	setCode(3, 'placecode');//작업 형태 지정
+	
  });
  
 function goPopup(){
@@ -25,92 +31,15 @@ function goPopup(){
 }
  
 function workCallBack(worktype, category1 ,category2 , workcode, workname) {
-	alert(worktype + " 1" + category1 + " " + category2 + " " + workcode + " " + workname);	 
+	//alert(worktype + " 1" + category1 + " " + category2 + " " + workcode + " " + workname);	 
 	$('#worktype').val(worktype);
 	$('#category1').val(category1);
 	$('#category2').val(category2);
 	$('#workcode').val(workcode);
 	$('#workname').val(workname);
 }
- 
- /** set Child Category Of Idx (add option to target Selectbox) **/
-function setChildCategoryOf(idx, targetId) {
-	 //alert(idx +"target : " + targetId);
-	$.ajax({
-  		type : "POST",
-  		url : "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getCategoryByJSON=",
-  		data : {ancIdx : idx},
-  		dataType : "jsonp",
-  	    jsonp : "callback",
-  		cache : false,
-  		success : function(json) {
-  			$('#' + targetId).empty();
-  			var catList = json.catList;
-  			$('#' + targetId).append('<option id="" value="">-----------선택----------</option>');
-  			for(var i = 0 ; i < Object.keys(catList).length; i ++) {
-  				$('#' + targetId).append('<option id="' + catList[i].idx + '" value="' + catList[i].name + '">' + catList[i].name  + '</option>');
-  			} 
-			
-  		},
-  		error : onError
-	});
-}
- 
- function setCateogry(objId, targetId) {
-	var idx = $("#" + objId + " option:selected" ).attr('id');
-	setChildCategoryOf(idx , targetId);
- }
- 
- 
- function setCode(objId, targetId) {
-	 var idx = $("#" + objId + " option:selected" ).attr('id');
-	 
-	 
-	 $.ajax({
-	  		type : "POST",
-	  		url : "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getCodeByJSON=",
-	  		data : {lastIdx : idx},
-	  		dataType : "jsonp",
-	  	    jsonp : "callback",
-	  		cache : false,
-	  		success : function(json) {
-	  			$('#' + targetId).empty();
-	  			var codeList = json.codeList;
-	  			$('#' + targetId).append('<option id="" value="">-----------선택----------</option>');
-	  			for(var i = 0 ; i < Object.keys(codeList).length; i ++) {
-	  				//$('#' + targetId).append('<option id="CODE_' + codeList[i].code + '" value="' + codeList[i].name + '">' + codeList[i].name  + '</option>');
-	  				$('#' + targetId).append('<option value="' + codeList[i].name + '">' + codeList[i].name  + '</option>');
-	  				$('#workcode').val(codeList[i].code);
-	  			} 
-				
-	  		},
-	  		error : onError
-		});
- }
- 
 
- 
-/*  function getCodeDetail(codeNum, typeNum) {
-	 alert(codeNum +" " + typeNum);
-	 $.ajax({
-	  		type : "POST",
-	  		url : "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getDetailByJSON=",
-	  		data : {code : codeNum, type : typeNum },
-	  		dataType : "jsonp",
-	  	    jsonp : "callback",
-	  		cache : false,
-	  		success : function(json) {
-	  			alert(json.workVO.guide);
-	  		},
-	  		error : onError
-		});
- }
- 
- function setWorkDetail(objId) {
-	 var idx = $("#" + objId + " option:selected" ).attr('id');
-	 getCodeDetail(idx, 1);
- }
- */
+
  
   function submitWork() {	
 	 var input;
@@ -126,18 +55,7 @@ function setChildCategoryOf(idx, targetId) {
 			reutrn;
   } 
   
-function onError(data, status) {
-	alert(this.url);
-	alert("error : " + status +"data:"+ data);
-	
-}
-	
-  
-  
-  
 
-
- 
  </script>
 
 
@@ -244,20 +162,22 @@ function onError(data, status) {
 			<col>
 		</colgroup>
 		<tr>
-			<th>장비</th>
-			<td><input type="text" name="" value="">톤
+			<td>
+				<select id="cons_tool" class="siteSelectBox">
+					<option value="" selected="selected" >소분류</option>					
+				</select>
 			</td>
-			<td><input type="text" name="" value="">모델
+			<td>
+				<select id="trans_tool" class="siteSelectBox">
+					<option value="" selected="selected" >소분류</option>					
+				</select>
 			</td>
-		</tr>
-		<tr>
-			<th>굴삭기</th>
-			<td colspan="2"><input type="text" name="" value=""></td>
-		</tr>
-		<tr>
-			<th>지게차</th>
-			<td colspan="2"><input type="text" name="" value=""></td>
-		</tr>
+			<td>
+				<select id="etc_tool" class="siteSelectBox">
+					<option value="" selected="selected" >소분류</option>					
+				</select>
+			</td>
+		</tr>		
 	</table>
 	<!--  //user_signup -->
 
@@ -279,11 +199,27 @@ function onError(data, status) {
 			<th>기타</th>
 		</tr>
 		<tr>
-			<td><input type="text" name="" value=""></td>
-			<td><input type="text" name="" value=""></td>
-			<td><input type="text" name="" value=""></td>
-			<td><input type="text" name="" value=""></td>
-		</tr>
+			<td>
+				<select id="cons_tool" class="siteSelectBox">
+					<option value="" selected="selected" >소분류</option>					
+				</select>
+			</td>
+			<td>
+				<select id="trans_tool" class="siteSelectBox">
+					<option value="" selected="selected" >소분류</option>					
+				</select>
+			</td>
+			<td>
+				<select id="etc_tool" class="siteSelectBox">
+					<option value="" selected="selected" >소분류</option>					
+				</select>
+			</td>
+			<td>
+				<select id="etc_tool" class="siteSelectBox">
+					<option value="" selected="selected" >소분류</option>					
+				</select>
+			</td>
+		</tr>		
 	</table>
 	<!-- end  -->
 
@@ -300,9 +236,8 @@ function onError(data, status) {
 		<tr>
 			<th>장소유형</th>
 			<td colspan="3">
-			<form:select path="placecode" class="siteSelectBox">
-				<form:option value="PLACECODE01">PLACECODE01</form:option>
-				<form:option value="PLACECODE02">PLACECODE01</form:option>
+			<form:select path="placecode" class="siteSelectBox" id="placecode">
+				<form:option value="">:::선택:::</form:option>
 			</form:select></td>
 		</tr>
 		<!--  end -->

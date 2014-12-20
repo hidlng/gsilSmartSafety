@@ -11,7 +11,7 @@
 <script type="text/javascript" src="js/jquery.plugin.js"></script> 
  <script type="text/javascript" src="js/smart.safety.js"></script>
 <script>
-
+/* 
 function init() {			
 	 setChildCategoryOf(1, 'worktype');
 	
@@ -31,7 +31,7 @@ function confirmCode(){
 	self.close();
 	
 }
-
+ */
 
 </script>
 </head>

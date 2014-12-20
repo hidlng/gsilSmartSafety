@@ -1,4 +1,94 @@
+/**작업등록 **/
+/** set Child Category Of Idx (add option to target Selectbox) **/
+function setChildCategoryOf(idx, targetId) {
+	
+	$.ajax({
+ 		type : "POST",
+ 		url : "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getCategoryByJSON=",
+ 		data : {ancIdx : idx},
+ 		dataType : "jsonp",
+ 	    jsonp : "callback",
+ 		cache : false,
+ 		success : function(json) {
+ 			$('#' + targetId).empty();
+ 			var catList = json.catList;
+ 		
+ 			$('#' + targetId).append('<option id="" value="">-----------선택----------</option>');
+ 			for(var i = 0 ; i < Object.keys(catList).length; i ++) {
+ 				$('#' + targetId).append('<option id="' + catList[i].idx + '" value="' + catList[i].name + '">' + catList[i].name  + '</option>');
+ 			} 
+			
+ 		},
+ 		error : onError
+	});
+}
 
+function setCateogry(objId, targetId) {
+	var idx = $("#" + objId + " option:selected" ).attr('id');
+	setChildCategoryOf(idx , targetId);
+}
+
+function setCodeBySelect(optId, targetId) {
+	 var idx = $("#" + optId + " option:selected" ).attr('id');
+	
+	 setCode(idx, targetId);
+
+}
+
+function setCode(categoryIdx , targetId) {
+	 $.ajax({
+	  		type : "POST",
+	  		url : "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getCodeByJSON=",
+	  		data : {lastIdx : categoryIdx},
+	  		dataType : "jsonp",
+	  	    jsonp : "callback",
+	  		cache : false,
+	  		success : function(json) {
+	  			$('#' + targetId).empty();
+	  			var codeList = json.codeList;
+	  			$('#' + targetId).append('<option id="" value="">-----------선택----------</option>');
+	  			for(var i = 0 ; i < Object.keys(codeList).length; i ++) {
+	  				//$('#' + targetId).append('<option id="CODE_' + codeList[i].code + '" value="' + codeList[i].name + '">' + codeList[i].name  + '</option>');
+	  				$('#' + targetId).append('<option value="' + codeList[i].name + '">' + codeList[i].name  + '</option>');
+	  				$('#workcode').val(codeList[i].code);
+	  			} 
+				
+	  		},
+	  		error : onError
+		});
+}
+
+
+function onError(data, status) {
+	alert(this.url);
+	alert("error : " + status +"data:"+ data);
+	
+}
+	
+
+function getCodeDetail(codeNum, typeNum) {
+	// alert(codeNum +" " + typeNum);
+	 $.ajax({
+	  		type : "POST",
+	  		url : "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getDetailByJSON=",
+	  		data : {code : codeNum, type : typeNum },
+	  		dataType : "jsonp",
+	  	    jsonp : "callback",
+	  		cache : false,
+	  		success : function(json) {
+	  			alert(json.workVO.guide);
+	  		},
+	  		error : onError
+		});
+}
+
+function setWorkDetail(objId) {
+	 var idx = $("#" + objId + " option:selected" ).attr('id');
+	 getCodeDetail(idx, 1);
+}
+
+
+/**작업등록 END **/
 
  function duplicateIdCheck() {
 	  var id = $('#input_id').val();
