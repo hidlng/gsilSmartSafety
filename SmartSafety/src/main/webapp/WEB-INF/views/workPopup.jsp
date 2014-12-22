@@ -24,12 +24,12 @@ function confirmCode(){
 	var workname = $('#workname option:selected').val();
 	var workcode = $('#workcode').val();
 	
-	
+	alert(1);
 	var str  = "'" + worktype + "','" + category1 + "','" + category2 + "','" + workcode + "','" + workname + "'";
 	$(opener.location).attr("href", "javascript:workCallBack(" + str +")" );
 
-	self.close();
-	
+	window.close();
+	alert(2);
 }
 
 

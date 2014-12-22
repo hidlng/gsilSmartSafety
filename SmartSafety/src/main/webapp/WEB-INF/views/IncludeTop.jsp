@@ -23,6 +23,7 @@
   <script type="text/javascript" src="js/jquery.datepick-ko.js"></script>
   <!-- http://timepicker.co/ -->
  <script type="text/javascript" src="js/jquery.timepicker.js"></script>
+  <script type="text/javascript" src="js/simple_overlay.js"></script>
  <script type="text/javascript" src="js/smart.safety.js"></script>
  <script>
 	$(document).ready(function() {

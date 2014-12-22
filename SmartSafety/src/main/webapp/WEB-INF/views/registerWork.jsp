@@ -27,9 +27,15 @@
  });
  
 function goPopup(){
-	var pop = window.open("workPopup","pop","width=1000,height=250, scrollbars=yes, resizable=no, modal=yes"); 
+	//var pop = window.open("workPopup","pop","width=1000,height=250, scrollbars=no, resizable=no, modal=yes");
+		var popOptions = "dialogWidth: 1000px; dialogHeight: 250px; center: yes; resizable: no; status: no; scroll: no;modal: yes";
+		var vReturn = window.showModalDialog('workPopup', window,  popOptions ); 
+		if (vReturn == 'ok'){
+		// (모달창에서 버튼 이벤트 실행 또는 닫기 후)모달창이 닫혔을 때 부모창에서 실행 할 함수
+		//	location.reload();  
+		}
 }
- 
+
 function workCallBack(worktype, category1 ,category2 , workcode, workname) {
 	//alert(worktype + " 1" + category1 + " " + category2 + " " + workcode + " " + workname);	 
 	$('#worktype').val(worktype);
@@ -238,6 +244,7 @@ function workCallBack(worktype, category1 ,category2 , workcode, workname) {
 			<td colspan="3">
 			<form:select path="placecode" class="siteSelectBox" id="placecode">
 				<form:option value="">:::선택:::</form:option>
+				<form:option value="" selected="true">2</form:option>
 			</form:select></td>
 		</tr>
 		<!--  end -->
