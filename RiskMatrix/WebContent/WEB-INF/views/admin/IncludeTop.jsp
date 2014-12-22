@@ -14,10 +14,8 @@
 <link rel="StyleSheet" href="../css/riskadmin.css" type="text/css"
 	media="screen" />
 <script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script src="../js/jquery.modal.js" type="text/javascript"></script>
-<script src="../js/site.js" type="text/javascript"></script>
-<script type="text/javascript" src="../js/select.js"></script>
-<script type="text/javascript" src="../js/simple_overlay.js"></script>
+<script src="../js/select.js" type="text/javascript"></script>
+<script src="../js/simple_overlay.js" type="text/javascript" ></script>
 
 <meta name="generator"
 	content="HTML Tidy for Linux/x86 (vers 1st November 2002), see www.w3.org" />
