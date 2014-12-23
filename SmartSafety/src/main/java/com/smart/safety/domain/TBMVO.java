@@ -1,5 +1,7 @@
 package com.smart.safety.domain;
 
-public class TBMVO {
+import java.io.*;
+
+public class TBMVO implements Serializable{
 
 }

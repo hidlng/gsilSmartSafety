@@ -1,32 +1,20 @@
 package com.smart.safety.controller;
 
-import java.util.List;
+import java.util.*;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
+import javax.annotation.*;
+import javax.servlet.http.*;
+import javax.validation.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.slf4j.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.validation.*;
+import org.springframework.web.bind.annotation.*;
 
-import com.smart.safety.domain.ContractorVO;
-import com.smart.safety.domain.ManagerVO;
-import com.smart.safety.domain.SiteVO;
-import com.smart.safety.domain.UserVO;
-import com.smart.safety.domain.WorkVO;
-import com.smart.safety.domain.WorkVO;
-import com.smart.safety.services.ContractorService;
-import com.smart.safety.services.ManagerService;
-import com.smart.safety.services.WorkService;
-import com.smart.safety.util.Paging;
+import com.smart.safety.domain.*;
+import com.smart.safety.services.*;
+import com.smart.safety.util.*;
 
 
 @Controller(value="WorkController")
@@ -35,7 +23,7 @@ public class WorkController {
 	
 	@Resource(name="WorkService")
 	WorkService workService;
-	
+		
 	
 	@Resource(name="ManagerService")
 	private ManagerService managerSerivce;
@@ -92,6 +80,7 @@ public class WorkController {
 			SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");		
 		
 			WorkVO workVO = new WorkVO();
+			workVO.setToollist(new ArrayList<ToolVO>());
 			
 			if(userVO == null || siteVO == null) {
 				//error 처리
@@ -130,6 +119,8 @@ public class WorkController {
 	@RequestMapping(value = "insertWork", method = RequestMethod.POST)
 	public String insertWork(HttpSession session, @ModelAttribute @Valid WorkVO workVO, BindingResult bindingResult, Model model) {
 		model.addAttribute("updateMode", false);
+		model.addAttribute("workVO", workVO);
+		
 		if(bindingResult.hasErrors())
 			return "registerWork";
 		
@@ -150,6 +141,8 @@ public class WorkController {
 	public String updateWork(HttpSession session, @ModelAttribute @Valid WorkVO workVO, BindingResult bindingResult, Model model) {
 		
 		model.addAttribute("updateMode", true);
+		model.addAttribute("workVO", workVO);
+		
 		if(bindingResult.hasErrors())
 			return "registerWork";
 		

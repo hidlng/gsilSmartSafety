@@ -1,10 +1,16 @@
 package com.smart.safety.domain;
 
 import java.io.Serializable;
+import java.util.*;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class WorkVO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	String work_idx;//자동부여
 	
@@ -19,6 +25,8 @@ public class WorkVO implements Serializable{
 	
 	@NotEmpty(message="선택 필요")
 	String worktype;
+	String workstatus;
+	
 	@NotEmpty(message="선택 필요")
 	String category1;
 	@NotEmpty(message="선택 필요")
@@ -64,6 +72,15 @@ public class WorkVO implements Serializable{
 	String updatetime;
 	String delyn;
 	
+	/**Tool**/
+	private List<ToolVO> toollist;
+	
+	public List<ToolVO> getToollist() {
+		return toollist;
+	}
+	public void setToollist(List<ToolVO> toollist) {
+		this.toollist = toollist;
+	}
 	/**additional**/
 	String username;
 	
@@ -278,6 +295,12 @@ public class WorkVO implements Serializable{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+	public String getWorkstatus() {
+		return workstatus;
+	}
+	public void setWorkstatus(String workstatus) {
+		this.workstatus = workstatus;
+	}
+
 	
 }

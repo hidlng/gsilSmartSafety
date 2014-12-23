@@ -1,69 +1,208 @@
 <%@ include file="IncludeTop.jsp"%>
 <%@ page pageEncoding="utf-8"%>
-
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script>
-
  $(document).ready(function() {	
-	
+	 /**updatemode**/
 	 if(${updateMode} == true) {	
-		 $('#workForm').attr('action', 'updateWork');
+		$('#workForm').attr('action', 'updateWork');
+
+		
+	}else {/**insertmode**/		
+		$('#workForm').attr('action', 'insertWork');
+
 	 }
-	 /**insertmode**/
-	 else{		
-		 $('#workForm').attr('action', 'insertWork');
-	 }
+	 
+	 //size가 0이아니면	 
+	 //for
+	 //정보가 온전한것들에대해서
+	 //type별로 지정
+	 //addTool
+	 //option:select val 지정
+	 //hidden값 지정해줄필욘없을듯?
+	
+				 
+	var toolSize = ${workVO.toollist.size()};
 	
 	
-	// setChildCategoryOf(1, 'worktypeSelect');
+	if(toolSize > 0) {
+		<c:set var="idx" value="0" />
+		for (var i = 0; i <toolSize ; i++) {		
+		//정보가 온전한것들에대해서
+				
+		var type = '${workVO.toollist[idx].tooltype}';
+		var code = '${workVO.toollist[idx].toolcode}';
+		var name = '${workVO.toollist[idx].toolname}';
+		
+		if(type == 0)
+			addToolText('cons_tool');
+		else if(type == 1)
+			addToolText('trans_tool');
+		else if(type == 2)
+			addToolText('etc_tool');
+		
+		//$('#toolSelect_' + i + ' > option[value=[' + code + ']').attr('selected', 'true'); //i = equipIdx */
+		
+		//alert($('#toolSelect_' + i).val());
+		
+		//$('#toolSelect_0').val(code);
+		
+		$('#toolSelect_' + i).val(name);
+		$('#toolcode_' + i).val(code);
+		$('#tooltype_' + i).val(type);
+		
+		//$('#toolSelect_' + i + 'option:selected').val(code);
+		//alert($("#toolSelect_0 option:selected").val());
+		
+		} 
+	}else {
+		addTool('cons_tool'); //건설장비
+		addTool('trans_tool');//운반장비
+		addTool('etc_tool');//기타 장비
+	}
+		
+
+	setCode(3, 'placecode', 'placecode');//작업 형태 지정
 	
-	setCode(57, 'cons_tool');//건설장비 지정
-	setCode(58, 'trans_tool');//운반장비 지정
-	setCode(59, 'etc_tool');//기타장비 지정
+
 	
-	setCode(3, 'placecode');//작업 형태 지정
 	
  });
  
 function goPopup(){
-	//var pop = window.open("workPopup","pop","width=1000,height=250, scrollbars=no, resizable=no, modal=yes");
-		var popOptions = "dialogWidth: 1000px; dialogHeight: 250px; center: yes; resizable: no; status: no; scroll: no;modal: yes";
-		var vReturn = window.showModalDialog('workPopup', window,  popOptions ); 
-		if (vReturn == 'ok'){
-		// (모달창에서 버튼 이벤트 실행 또는 닫기 후)모달창이 닫혔을 때 부모창에서 실행 할 함수
-		//	location.reload();  
-		}
+	$.ajax({
+		type : "POST",
+		url : "workPopup",
+		cache : false,
+		success : function(json){
+			$('#viewContent').html(json);
+			setChildCategoryOf(1, 'worktype_pop');//init
+			doOverlayOpen();	
+		},
+		error : onError
+	});
 }
 
-function workCallBack(worktype, category1 ,category2 , workcode, workname) {
+
+function confirmCode() {
 	//alert(worktype + " 1" + category1 + " " + category2 + " " + workcode + " " + workname);	 
+	var worktype = $('#worktype_pop option:selected').val();
+	var category1 = $('#category1_pop option:selected').val();
+	var category2 = $('#category2_pop option:selected').val();
+	var workname = $('#workname_pop option:selected').val();
+	var workcode = $('#workcode_pop').val();
+	
 	$('#worktype').val(worktype);
 	$('#category1').val(category1);
 	$('#category2').val(category2);
 	$('#workcode').val(workcode);
 	$('#workname').val(workname);
+	
+	$('#viewContent').html('');
+	doOverlayClose();	
 }
 
+ function submitWork() {	
+ var input;
+	if(${updateMode} == true) {
+		input = confirm('수정하시겠습니까?');
+	}else {
+		input = confirm('등록하시겠습니까?');
+	}
+	
+	if(input) { //yes
+		$('#workForm').submit();
+	}else
+		reutrn;
+ } 
 
- 
-  function submitWork() {	
-	 var input;
-		if(${updateMode} == true) {
-			input = confirm('수정하시겠습니까?');
-		}else {
-			input = confirm('등록하시겠습니까?');
-		}
-		
-		if(input) { //yes
-			$('#workForm').submit();
-		}else
-			reutrn;
-  } 
-  
+/**장비관련**/
+var equipIdx = 0;
+
+/**option 선택시 새로 추가될 selectbox형태 설정
+ * tarId : select박스를 추가할 TD
+ */
+function getTool(tarId) {
+	return "<select id='toolSelect_" + equipIdx + "' name='toollist["
+	+ equipIdx + "].toolname' class='siteSelectBox' onchange='alert(this.id);selectTool("
+	+ equipIdx + ", \""	+ tarId + "\")'>"
+//	+ "<option>:::선택:::</option>"
+	+ "</select>"
+	+ "<div  onclick='delTool(" 
+   	+ equipIdx + ")' class='button checkListBtn'>제거</div>"
+   	+ "<input  type='hidden' name='toollist[" + equipIdx + "].toolcode' id='toolcode_" + equipIdx + "' />" 
+ 	+ "<input  type='hidden' name='toollist[" + equipIdx + "].tooltype' id='tooltype_" + equipIdx + "' />" 
+   	;
+}
+
+function getToolText(tarId) {
+	return "<input type='text' id='toolSelect_" + equipIdx + "' name='toollist["
+	+ equipIdx + "].toolname' />"
+	+ "<div  onclick='delTool(" 
+   	+ equipIdx + ")' class='button checkListBtn'>제거</div>"
+   	+ "<input  type='hidden' name='toollist[" + equipIdx + "].toolcode' id='toolcode_" + equipIdx + "' />" 
+ 	+ "<input  type='hidden' name='toollist[" + equipIdx + "].tooltype' id='tooltype_" + equipIdx + "' />" 
+   	;
+}
+
+function addToolText(tarId) {	
+	var str = getToolText(tarId);
+	
+	/**span 추가**/
+	var addedSpan = document.createElement("span");
+	addedSpan.id = "toolSpan_" + equipIdx;
+	addedSpan.innerHTML = str;
+	$("#" + tarId).append(addedSpan);
+	
+	equipIdx++;
+//	$("#checkCount").val(checkCount);//전달시 checklistArray에서 제거된 checkvo가 계속남아있으므로 이를 지정된 갯수만큼 잘라주기 위함	
+}
+
+/* selectbox 추가
+ * tarId : select박스를 추가할 TD
+ */
+function addTool(tarId) {	
+	var str = getTool(tarId);
+	
+	/**span 추가**/
+	var addedSpan = document.createElement("span");
+	addedSpan.id = "toolSpan_" + equipIdx;
+	addedSpan.innerHTML = str;
+	$("#" + tarId).append(addedSpan);
+	
+	
+	/**추가된 span 내 select에 항목 추가**/	
+	setCode(57, 'toolSelect_' + equipIdx);
+	
+	equipIdx++;
+//	$("#checkCount").val(checkCount);//전달시 checklistArray에서 제거된 checkvo가 계속남아있으므로 이를 지정된 갯수만큼 잘라주기 위함	
+}
+
+//넘겨받은 selectbox의 id값은 code값과 같음
+//선택 시 해당하는 값을 지정해주고 새로운 박스를 생성
+function selectTool(equipIdx, tarId) {
+	var code = $('#toolSelect_' + equipIdx + ' option:selected').attr('id'); //선택된 option의 id값이 code값임.(val은 name)
+	
+	$('#toolcode_' + equipIdx).val(code);
+	$('#tooltype_' + equipIdx).val(0); //TODO : type에 따라 구분할것
+	
+	addTool(tarId);
+}
+
+function delTool(equipIdx) {
+	
+}
 
  </script>
-
+ 
+<input type="button" onclick ="alert('${workVO.toollist[0].toolname}');">
+<div class="bgCover">&nbsp;</div>
+<!-- overlay box -->
+<div class="overlayBox">
+<a href=# class="closeLink" ><img src="images/x-button.png" onclick="doOverlayClose()" style="cursor:hand"/></a>
+<div class="overlayContent"><div id="viewContent"></div></div>
+</div>
 
 <form:form id="workForm" method="POST" modelAttribute="workVO"
 	autocomplete="off">
@@ -72,6 +211,12 @@ function workCallBack(worktype, category1 ,category2 , workcode, workname) {
 	<input type="hidden" name="work_idx" value="${workVO.work_idx}" />
 	<input type="hidden" name="write_user_idx" value="${workVO.write_user_idx}" />
 	<input type="hidden" name="workcode" value="${workVO.workcode}" id="workcode" />
+	
+	<input type="hidden" name="placecode" value="${workVO.placecode}" id="placecode" />
+	<!-- <input type="hidden" name="toollist[0].tooltype" value="1" />
+	<input type="hidden" name="toollist[0].toolcode" value="1" />
+	<input type="hidden" name="toollist[0].toolname" value="1" /> -->
+	
 	
 	
 	<table class="user_signup">
@@ -168,20 +313,11 @@ function workCallBack(worktype, category1 ,category2 , workcode, workname) {
 			<col>
 		</colgroup>
 		<tr>
-			<td>
-				<select id="cons_tool" class="siteSelectBox">
-					<option value="" selected="selected" >소분류</option>					
-				</select>
+			<td id="cons_tool">
 			</td>
-			<td>
-				<select id="trans_tool" class="siteSelectBox">
-					<option value="" selected="selected" >소분류</option>					
-				</select>
+			<td id="trans_tool">				
 			</td>
-			<td>
-				<select id="etc_tool" class="siteSelectBox">
-					<option value="" selected="selected" >소분류</option>					
-				</select>
+			<td id="etc_tool">				
 			</td>
 		</tr>		
 	</table>

@@ -13,8 +13,15 @@ function setChildCategoryOf(idx, targetId) {
  			$('#' + targetId).empty();
  			var catList = json.catList;
  		
+ 			var length = 0;
+ 			for(var prop in catList){
+ 			    if(catList.hasOwnProperty(prop))
+ 			        length++;
+ 			}
+ 			
+ 			
  			$('#' + targetId).append('<option id="" value="">-----------선택----------</option>');
- 			for(var i = 0 ; i < Object.keys(catList).length; i ++) {
+ 			for(var i = 0 ; i < length; i ++) {
  				$('#' + targetId).append('<option id="' + catList[i].idx + '" value="' + catList[i].name + '">' + catList[i].name  + '</option>');
  			} 
 			
@@ -35,6 +42,11 @@ function setCodeBySelect(optId, targetId) {
 
 }
 
+/**
+ * 
+ * @param categoryIdx  해당 category의 code list 출력
+ * @param targetId	대상 select box (name속성)
+ */
 function setCode(categoryIdx , targetId) {
 	 $.ajax({
 	  		type : "POST",
@@ -46,11 +58,19 @@ function setCode(categoryIdx , targetId) {
 	  		success : function(json) {
 	  			$('#' + targetId).empty();
 	  			var codeList = json.codeList;
-	  			$('#' + targetId).append('<option id="" value="">-----------선택----------</option>');
-	  			for(var i = 0 ; i < Object.keys(codeList).length; i ++) {
+	  			$('#' + targetId).append('<option val="test">-----------선택----------</option>');
+	  			
+	  			var length = 0;
+	  			for(var prop in codeList){
+	 			    if(codeList.hasOwnProperty(prop))
+	 			        length++;
+	 			}
+	 			
+	  			for(var i = 0 ; i < length; i ++) {
 	  				//$('#' + targetId).append('<option id="CODE_' + codeList[i].code + '" value="' + codeList[i].name + '">' + codeList[i].name  + '</option>');
-	  				$('#' + targetId).append('<option value="' + codeList[i].name + '">' + codeList[i].name  + '</option>');
-	  				$('#workcode').val(codeList[i].code);
+	  				$('#' + targetId).append('<option id="'+ codeList[i].code + '" value="' + codeList[i].name + '">' + codeList[i].name  + '</option>');
+	  				//$('#' + codeId +"_" + i).val(codeList[i].code);
+	  				
 	  			} 
 				
 	  		},
@@ -143,7 +163,6 @@ function newPassword() {
 
 
 $(function() {
-	
 	   //작업일자
 	   $( "#startDateInput" ).datepick({
 	    	yearRange: '-1:+5',

@@ -1,14 +1,34 @@
+/* just maintain some attributes like display & position, and everything is changeable */
+.bgCover {
+	background: #000;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+	overflow: hidden
+}
 
+.overlayBox {
+	background-color:#1d2b43;
+	border: 5px solid #09F;
+	position: absolute;
+	display: none;
+	padding: 2px;
+}
+
+.overlayContent {
+	max-height: 400px;
+	overflow-y: auto;
+}
 
 .formError {
-	color:red;
-	font-size:15px;
+	color: red;
+	font-size: 15px;
 }
 
 .duplCheckOk {
-	
-	color:green;
-	font-size:15px;
+	color: green;
+	font-size: 15px;
 }
 
 /* 
@@ -36,12 +56,36 @@ a:hover.infoBtn {
 	background: url('../images/btn_info_over.png') no-repeat center; 
 }
 */
+.selectBox {
+	padding: 5px;
+	background-color: #1d2b43;
+	color: #fff;
+	font-size: 18px;
+	line-height: 24px;
+	border: 1px dotted #8c97a9;
+	text-align: center;
+}
 
-.selectBox{padding:5px;background-color:#1d2b43;color: #fff; font-size:18px; line-height:24px;border:1px dotted #8c97a9; text-align:center;}
-.selectBox option{margin-bottom:5px; text-align:center;}
+.selectBox option {
+	margin-bottom: 5px;
+	text-align: center;
+}
 
-.siteSelectBox{width: 80%; padding:5px;background-color:#1d2b43;color: #fff; font-size:18px; line-height:24px;border:1px dotted #8c97a9; text-align:center;}
-.siteSelectBox option{margin-bottom:5px; text-align:center;}
+.siteSelectBox {
+	width: 80%;
+	padding: 5px;
+	background-color: #1d2b43;
+	color: #fff;
+	font-size: 18px;
+	line-height: 24px;
+	border: 1px dotted #8c97a9;
+	text-align: center;
+}
+
+.siteSelectBox option {
+	margin-bottom: 5px;
+	text-align: center;
+}
 
 .chargeWorkTR {
 	border: 2px solid red;

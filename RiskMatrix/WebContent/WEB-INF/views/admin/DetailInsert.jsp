@@ -69,11 +69,11 @@
 		}
 		 */
 		$("input:text[name^='checkList']").each(function(index,item){
-			$(item).attr(name).val("checkList["+ indexx+ "].checklist");
+			$(item).attr(name).val("checkList["+ index+ "].checklist");
 		});
 		 
 		$("input:text[name^='checkList']").each(function(index,item){
-			$(item).attr(name).val("checkList["+ indexx+ "].checklist");
+			$(item).attr(name).val("checkList["+ index+ "].checklist");
 		});
 	}
 	/* function delCheckList() {

@@ -36,6 +36,11 @@
 			)
   </select>
   
+   <select id="getRowCntForInsert" resultType="Integer">
+        SELECT COUNT(*) 
+		FROM WORK_LIST;
+  </select>
+  
   <select id="getWorkByIdx" resultType="WorkVO" parameterType="String">
    	SELECT *
 	FROM WORK_LIST W
@@ -49,12 +54,12 @@
        
   <insert id="insert" parameterType="WorkVO">
     INSERT INTO
-	WORK_LIST(WORK_IDX,	SITE_IDX, WRITE_USER_IDX, CONT_NAME, ISCHARGE, WORKTYPE,	CATEGORY1,	CATEGORY2,	CATEGORY3,	WORKCODE,	WORKNAME,	WORKTITLE,
+	WORK_LIST(WORK_IDX,	SITE_IDX, WRITE_USER_IDX, CONT_NAME, ISCHARGE, WORKTYPE, WORKSTATUS,	CATEGORY1,	CATEGORY2,	CATEGORY3,	WORKCODE,	WORKNAME,	WORKTITLE,
 	STARTDATE,	STARTTIME,	ENDDATE,	ENDTIME,	PLACECODE,	PLACENAME,	ADDR_DETAIL,	INDOOR,	PIC_NAME,	PIC_BIRTH	,PIC_PHONE,	
 	PIC_POSITION,	PIC_NUM_WORKER,	WORKLEVEL,	REMARK,	WRITETIME, UPDATETIME, DELYN )
 	SELECT
-		GROUP_CONCAT('W',(SELECT COUNT(*) FROM WORK_LIST), SYSDATE()) AS	WORK_IDX,
-		#{site_idx},		#{write_user_idx},		#{cont_name},		#{ischarge},		#{worktype},		#{category1},
+		#{work_idx},
+		#{site_idx},		#{write_user_idx},		#{cont_name},		#{ischarge},		#{worktype},	#{workstatus},	#{category1},
 		#{category2},		#{category3},		#{workcode},	#{workname},		#{worktitle},
 		#{startdate},		#{starttime},		#{enddate},		#{endtime},		#{placecode},		#{placename},		#{addr_detail},		#{indoor},
 		#{pic_name},		#{pic_birth},		#{pic_phone},		#{pic_position},		#{pic_num_worker},		#{worklevel},		#{remark},
@@ -66,7 +71,8 @@
      	WORK_LIST
      SET
 		ISCHARGE = #{ischarge}
-		,WORKTYPE = #{worktype}
+		,WORKTYPE = #{workstatus}
+		,WORKSTATUS = #{worktype}
 		,CATEGORY1 = #{category1}
 		,CATEGORY2 = #{category2}
 		,CATEGORY3 = #{category3}	

@@ -12,7 +12,7 @@ public interface WorkMapper {
 	public List<WorkVO> getWorkListByVO(WorkVO workVO);
 	public int getRowCount(WorkVO workVO);
 	public WorkVO getWorkByIdx(String work_idx);
-	
+	public int getRowCntForInsert();
 	public void insert(WorkVO workVO);
 	public void update(WorkVO workVO);
 	public void delete(String work_idx);
