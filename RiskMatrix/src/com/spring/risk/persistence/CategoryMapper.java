@@ -33,7 +33,7 @@ public interface CategoryMapper {
   void deleteCode(String code);
   
   void insertCategory(CategoryVO categoryVO);  
-  void updateCategory(CategoryVO categoryVO);  
+    
   void deleteCategoryInTree(int idx);
   void deleteCategoryInCode(int idx);
   void deleteCategoryInCategory(int idx);

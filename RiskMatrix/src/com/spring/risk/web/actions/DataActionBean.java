@@ -126,6 +126,19 @@ public class DataActionBean extends AbstractActionBean {
 	}
 
 
+	
+	public Resolution getRiskData() {
+		//codeList를 JSON으로 넘겨받음
+		//조합
+		//grade 반환
+		
+		jsonObj = new JSONObject();
+		
+		
+		
+		
+		return new ForwardResolution(DATAPAGE);
+	}
 
 	public JSONObject getJsonObj() {
 		return jsonObj;

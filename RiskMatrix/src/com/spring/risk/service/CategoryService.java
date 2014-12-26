@@ -111,10 +111,10 @@ public class CategoryService {
 		categoryMapper.insertTreePath(categoryVO);
 	}
 
-	@Transactional
-	public void updateCategory(CategoryVO categoryVO) {
-		categoryMapper.updateCategory(categoryVO);
-	}
+//	@Transactional
+//	public void updateCategory(CategoryVO categoryVO) {
+//		categoryMapper.updateCategory(categoryVO);
+//	}
 
 	/**category 및 하위 category와 code를 제거**/
 	@Transactional

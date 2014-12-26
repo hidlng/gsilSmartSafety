@@ -149,17 +149,6 @@
 </insert>
 
 
-<update id="updateCategory" parameterType="CategoryVO">
-	UPDATE CATEGORY_CODE
-	SET 
-	CODE = #{code}
-	,WORKTYPE = #{workType}
-	,TYPE = #{type}
-	,NAME = #{name}
-	,DETAIL = #{detail}
-	WHERE
-	CODE = #{code}	
-</update>
 
 
 <delete id="deleteCategoryInTree" parameterType="String">
