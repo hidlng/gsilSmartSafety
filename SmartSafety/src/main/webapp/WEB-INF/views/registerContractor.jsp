@@ -85,14 +85,14 @@
 		<th>업체명</th>
 		<td><form:input path="cont_name" maxlength="45"/><p/><form:errors cssClass="formError" path="cont_name" /></td>
 		<th>업체 연락처<p><span style="font-size:17px">(010-1234-5678)</span></th>
-		<td><form:input path="cont_phone" maxlength="13"/><p/><form:errors cssClass="formError" path="cont_phone" /></td>
+		<td><form:input path="cont_phone" maxlength="13" onblur="checkPhone(this, this.value)"/><p/><form:errors cssClass="formError" path="cont_phone" /></td>
 	</tr>
 	<tr>
 		<th>대표관리자</th>
 		<td><form:input path="rep_name" maxlength="45"/><p/><form:errors cssClass="formError" path="rep_name" />
 		</td>
 		<th>연락처<p><span style="font-size:17px">(010-1234-5678)</span></th>
-		<td><form:input path="rep_phone" maxlength="13"/><p/><form:errors cssClass="formError" path="rep_phone" />
+		<td><form:input path="rep_phone" maxlength="13" onblur="checkPhone(this, this.value)"/><p/><form:errors cssClass="formError" path="rep_phone" />
 		</tr>
 	<tr>
 		<th>해당작업</th>

@@ -1,18 +1,27 @@
 package com.smart.safety.controller;
 
+import java.io.*;
 import java.util.*;
 
 import javax.annotation.*;
 import javax.servlet.http.*;
 import javax.validation.*;
 
+import org.json.*;
 import org.slf4j.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.*;
+import org.springframework.web.servlet.mvc.support.*;
+import org.springframework.web.servlet.support.*;
 
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.*;
 import com.smart.safety.domain.*;
+import com.smart.safety.persistence.*;
 import com.smart.safety.services.*;
 import com.smart.safety.util.*;
 
@@ -28,12 +37,17 @@ public class WorkController {
 	@Resource(name="ManagerService")
 	private ManagerService managerSerivce;
 	
+	@Resource(name="SiteService")
+	private SiteService siteService;
+	
 	@Resource(name="ContractorService")
 	private ContractorService contractorService;
 
 	
 	public static final int MAX_ROW_NUM=5;
 	public static final int MAX_PAGE_NUM=5;
+
+	
 	
 	
 	@RequestMapping(value = "workList")
@@ -68,6 +82,8 @@ public class WorkController {
 	
 	@RequestMapping(value = "registerWork")
 	public void registerWork(@RequestParam(value="updateIdx",required=false)String updateIdx, HttpServletRequest request, Model model, HttpSession session) {
+		model.addAttribute("isNotValid", false);
+		
 		if(updateIdx != null && !updateIdx.equals("")) {
 			WorkVO workVO = workService.getWorkByIdx(updateIdx);
 			model.addAttribute("updateMode", true);
@@ -94,7 +110,6 @@ public class WorkController {
 				if(userVO.getLevel() == 3) {//현장사용자
 					ManagerVO managerVO = (ManagerVO)session.getAttribute("managerVO");
 					workVO.setCont_name(managerVO.getCont_name());
-					
 				}else if(userVO.getLevel() == 4) {//업체
 					ContractorVO contractorVO = (ContractorVO)session.getAttribute("contractorVO");
 					//workVO.setCont_idx(contractorVO.getCont_idx());
@@ -108,54 +123,116 @@ public class WorkController {
 			}
 			model.addAttribute("updateMode", false);
 			model.addAttribute("workVO", workVO);
-			
-			
-			
-		}
+		}//else
 		
 	}
 	
 	
 	@RequestMapping(value = "insertWork", method = RequestMethod.POST)
-	public String insertWork(HttpSession session, @ModelAttribute @Valid WorkVO workVO, BindingResult bindingResult, Model model) {
+	public String insertWork(HttpSession session, @ModelAttribute @Valid WorkVO workVO
+			, BindingResult bindingResult, Model model, RedirectAttributes redirectAttr) {
+		String work_idx;
+		
 		model.addAttribute("updateMode", false);
+		if(workVO.getToollist() != null) arrayFilter(workVO.getToollist()); //빈공간 제거		
 		model.addAttribute("workVO", workVO);
 		
-		if(bindingResult.hasErrors())
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("isNotValid", true);
 			return "registerWork";
+		}
 		
 		else {
 			try{
-				workService.insertWork(workVO);
+				//setRiskData(workVO);
+				work_idx = workService.insertWork(workVO);
+				
 			}catch(Exception e) {
 				e.printStackTrace();
+				model.addAttribute("isNotValid", true);
 				return "registerWork";
 			}
 			
-			return "redirect:workList";
+			//return "redirect:workList";
+			
+			redirectAttr.addFlashAttribute("work_idx", work_idx);
+			return "redirect:printList";
 		}
 		
 	}
 	
+	public String getRiskData(List<String> list) {
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getRiskData=&codelist=";
+		String result = restTemplate.getForObject(url, String.class);
+		String json_result = result.substring(result.indexOf('(') + 1, result.length() - 1);
+		return json_result;
+				
+	}
+	
+	private void setRiskData(WorkVO workVO) {
+		
+		//ArrayList<String> list = new ArrayList<String>();
+		StringBuffer buf = new StringBuffer();
+		
+		buf.append('#');
+		buf.append(workVO.getWorkcode());
+		
+		Iterator<ToolVO> it = workVO.getToollist().iterator();
+		buf.append('#');
+		
+		
+		
+		while(it.hasNext()) {
+			ToolVO vo = it.next();
+			//list.add(vo.getToolcode());
+			buf.append(vo.getToolcode());
+		}
+		
+		list.add(workVO.getPlacecode());
+		
+		getRiskData(list);
+		
+		workVO.setRisk_grade("");//RiskGrade 
+		workVO.setRisk_warn("");//RiskWarn
+		workVO.setWorkpermit("");//WorkPermit
+		
+	}
+
+	private void arrayFilter(List<ToolVO> toollist) {
+		Iterator<ToolVO> it = toollist.iterator();
+		while (it.hasNext()) {
+			ToolVO vo = it.next();
+			if(vo.getToolcode() == null || vo.getToolname() == null)
+				it.remove();
+		}
+	}
+
 	@RequestMapping(value = "updateWork", method = RequestMethod.POST)
-	public String updateWork(HttpSession session, @ModelAttribute @Valid WorkVO workVO, BindingResult bindingResult, Model model) {
+	public String updateWork(HttpSession session, @ModelAttribute @Valid WorkVO workVO, BindingResult bindingResult,
+		Model model, RedirectAttributes redirectAttr) {
 		
 		model.addAttribute("updateMode", true);
+		arrayFilter(workVO.getToollist()); //빈공간 제거
 		model.addAttribute("workVO", workVO);
 		
-		if(bindingResult.hasErrors())
+		if(bindingResult.hasErrors()) { 
+			model.addAttribute("isNotValid", true);
 			return "registerWork";
+		}
 		
 		else {
 			try{
 				workService.updateWork(workVO);
 			}catch(Exception e) {
 				e.printStackTrace();
+				model.addAttribute("isNotValid", true);
 				return "registerWork";
 			}
 			
-			
-			return "redirect:workList";
+			redirectAttr.addFlashAttribute("work_idx",workVO.getWork_idx());
+			//return "redirect:workList";
+			return "redirect:printList";
 		}
 		
 	}
@@ -165,5 +242,7 @@ public class WorkController {
 	public void workPopup(HttpSession session) {
 		
 	}
+
+	
 	
 }

@@ -25,7 +25,7 @@ public class WorkVO implements Serializable{
 	
 	@NotEmpty(message="선택 필요")
 	String worktype;
-	String workstatus;
+	int workstatus;
 	
 	@NotEmpty(message="선택 필요")
 	String category1;
@@ -68,6 +68,10 @@ public class WorkVO implements Serializable{
 	@NotEmpty(message="입력 필요")
 	String worklevel;
 	String remark;
+	
+	String risk_grade;
+	String risk_warn;
+	String workpermit;
 	String writetime;
 	String updatetime;
 	String delyn;
@@ -75,18 +79,15 @@ public class WorkVO implements Serializable{
 	/**Tool**/
 	private List<ToolVO> toollist;
 	
-	public List<ToolVO> getToollist() {
-		return toollist;
-	}
-	public void setToollist(List<ToolVO> toollist) {
-		this.toollist = toollist;
-	}
+
 	/**additional**/
 	String username;
 	
 	/**paging**/
 	private int start=0;
 	private int size=10;
+	
+	
 	public String getWork_idx() {
 		return work_idx;
 	}
@@ -99,7 +100,12 @@ public class WorkVO implements Serializable{
 	public void setSite_idx(String site_idx) {
 		this.site_idx = site_idx;
 	}
-
+	public List<ToolVO> getToollist() {
+		return toollist;
+	}
+	public void setToollist(List<ToolVO> toollist) {
+		this.toollist = toollist;
+	}
 
 	public String getWorktype() {
 		return worktype;
@@ -295,12 +301,30 @@ public class WorkVO implements Serializable{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getWorkstatus() {
+	public int getWorkstatus() {
 		return workstatus;
 	}
-	public void setWorkstatus(String workstatus) {
+	public void setWorkstatus(int workstatus) {
 		this.workstatus = workstatus;
 	}
 
+	public String getRisk_grade() {
+		return risk_grade;
+	}
+	public void setRisk_grade(String risk_grade) {
+		this.risk_grade = risk_grade;
+	}
+	public String getRisk_warn() {
+		return risk_warn;
+	}
+	public void setRisk_warn(String risk_warn) {
+		this.risk_warn = risk_warn;
+	}
+	public String getWorkpermit() {
+		return workpermit;
+	}
+	public void setWorkpermit(String workpermit) {
+		this.workpermit = workpermit;
+	}
 	
 }

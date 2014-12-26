@@ -95,7 +95,7 @@
 				<p />
 				<span style="font-size: 17px">(010-1234-5678)</span>
 			</th>
-			<td><form:input path="rep_phone" maxlength="13" />
+			<td><form:input path="rep_phone" maxlength="13" onblur="checkPhone(this, this.value)"/>
 				<p />
 				<form:errors class="formError" path="rep_phone" /></td>
 		</tr>

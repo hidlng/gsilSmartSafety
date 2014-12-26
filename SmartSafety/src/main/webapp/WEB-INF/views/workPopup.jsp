@@ -1,22 +1,18 @@
 <%@ page pageEncoding="utf-8" contentType="text/html;charset=UTF-8"	language="java"%>
-	<input type="hidden" id="workcode" name="workcode" value=""/>
 	<table>
 			<tr>
 			<th>
 			<div>공종</div>			
-			<select id="worktype_pop"  class="siteSelectBox" onchange="setCateogry(this.id, 'category1_pop')">
-					<option selected="selected" >공종</option>					
+			<select id="worktype_pop"  class="siteSelectBox" onchange="setCateogry(this.id, 'category1_pop')">						
 			</select>
 			</th>
 			<th>
 			<div>중분류</div>
-			<select id="category1_pop"  class="siteSelectBox" onchange="setCateogry(this.id, 'category2_pop')">
-					<option selected="selected" >중분류</option>					
+			<select id="category1_pop"  class="siteSelectBox" onchange="setCateogry(this.id, 'category2_pop')">							
 			</select></th>
 			<th>
 			<div>소분류</div>
-			<select id="category2_pop" class="siteSelectBox" onchange="setCodeBySelect (this.id, 'workname_pop')">
-					<option selected="selected" >소분류</option>					
+			<select id="category2_pop" class="siteSelectBox" onchange="setCodeBySelect (this.id, 'workname_pop')">				
 			</select>
 			</th>
 		</tr>

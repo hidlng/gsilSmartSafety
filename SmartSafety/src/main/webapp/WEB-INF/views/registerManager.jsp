@@ -131,7 +131,7 @@
 	</tr>
 	<tr>
 		<th>연락처<p/><span style="font-size:17px">(010-1234-5678)</span></th>
-		<td><form:input path="phone" maxlength="13"/><p/><form:errors cssClass="formError" path="phone" /></td>
+		<td><form:input path="phone" maxlength="13" onblur="checkPhone(this, this.value)"/><p/><form:errors cssClass="formError" path="phone" /></td>
 		<th>소속</th>
 		<td><form:input path="position" maxlength="45"/><p/><form:errors cssClass="formError" path="position" /></td>
 	</tr>

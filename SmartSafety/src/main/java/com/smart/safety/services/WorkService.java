@@ -42,7 +42,7 @@ public class WorkService{
 
 	
 	@Transactional
-	public synchronized void insertWork(WorkVO workVO) {
+	public synchronized String insertWork(WorkVO workVO) {
 		int count = getRowCntForInsert();
 		
 		//work 및 tool 동시삽입위해 여기서 key생성
@@ -56,6 +56,8 @@ public class WorkService{
 			toolVO.setWork_idx(work_idx);
 			toolMapper.insert(toolVO);
 		}
+		
+		return work_idx;
 		
 	}
 	

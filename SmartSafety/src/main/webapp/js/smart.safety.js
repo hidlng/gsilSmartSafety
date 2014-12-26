@@ -87,7 +87,10 @@ function onError(data, status) {
 	
 
 function getCodeDetail(codeNum, typeNum) {
-	// alert(codeNum +" " + typeNum);
+	//1 work 2 tool 3 place
+	
+	var result;
+	
 	 $.ajax({
 	  		type : "POST",
 	  		url : "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getDetailByJSON=",
@@ -96,16 +99,26 @@ function getCodeDetail(codeNum, typeNum) {
 	  	    jsonp : "callback",
 	  		cache : false,
 	  		success : function(json) {
-	  			alert(json.workVO.guide);
+	  			//alert(json.workVO.guide);
+	  			//result = eval(json);
+	  		
+	  		//	alert(json.toolVO.checkList[0].check_idx);
+	  			//alert(s.toolVO.checkList[0].check_idx);
+	  			//alert("r" + json);
+	  		
 	  		},
 	  		error : onError
 		});
+	 
+	
 }
 
 function setWorkDetail(objId) {
 	 var idx = $("#" + objId + " option:selected" ).attr('id');
 	 getCodeDetail(idx, 1);
 }
+
+
 
 
 /**작업등록 END **/
@@ -211,4 +224,16 @@ $(function() {
 		
 	});
 
-
+/**핸드폰번호 체크**/
+function checkPhone(obj, strValue) {
+	 
+	 var rgEx = /(01[016789])[-](\d{4}|\d{3})[-]\d{4}$/g;  
+	 //  var strValue = f.hphone1.value+"-"+f.hphone2.value+"-"+f.hphone3.value;
+	   var chkFlg = rgEx.test(strValue);   
+	   if(!chkFlg){
+	    alert("올바른 휴대폰번호가 아닙니다.");
+	    obj.focus();
+	    return false; 
+	   }
+};
+ 

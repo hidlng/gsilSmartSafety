@@ -32,10 +32,12 @@
 		
 	});
 	
-	   $(document).on("click", "#siteUserList", function(e) { $('#siteUserList_form').submit(); });
+   $(document).on("click", "#siteUserList", function(e) { $('#siteUserList_form').submit(); });
    $(document).on("click", "#managerList", function(e) { $('#managerList_form').submit(); } );
 
    $(document).on("click", "#workList", function(e) { $('#workList_form').submit(); });
+   $(document).on("click", "#homeLogo", function(e) { $('#workList_form').submit(); });
+   
    $(document).on("click", "#contractorList", function(e) { $('#contractorList_form').submit(); });
    $(document).on("click", "#siteList", function(e) { $('#siteList_form').submit(); });
    $(document).on("click", "#logout", function(e) { $('#logout_form').submit(); });
@@ -67,7 +69,7 @@
 </div>
 
 <div id="wrap" class="sub"><!-- //1202 수정 -->
-	<h1><img src="images/logo_ds.png" alt="두산그룹로고" /></h1><!-- //1204 추가 -->
+	<h1><img id="homeLogo" src="images/logo_ds.png" alt="두산그룹로고"   style="cursor:pointer"/></h1><!-- //1204 추가 -->
 	<div class="back_bg sub"><!-- //1202 수정 -->
 		<div class="wrapBox">
 

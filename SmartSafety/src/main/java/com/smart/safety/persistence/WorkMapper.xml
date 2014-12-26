@@ -17,7 +17,7 @@
 	OR W.WORKTITLE like #{worktitle}
 	OR W.USERNAME like #{username}
 	)
-	ORDER BY W.WORK_IDX
+	ORDER BY W.STARTDATE, W.STARTTIME
 	LIMIT #{start}, #{size}
   </select>
   
@@ -56,14 +56,14 @@
     INSERT INTO
 	WORK_LIST(WORK_IDX,	SITE_IDX, WRITE_USER_IDX, CONT_NAME, ISCHARGE, WORKTYPE, WORKSTATUS,	CATEGORY1,	CATEGORY2,	CATEGORY3,	WORKCODE,	WORKNAME,	WORKTITLE,
 	STARTDATE,	STARTTIME,	ENDDATE,	ENDTIME,	PLACECODE,	PLACENAME,	ADDR_DETAIL,	INDOOR,	PIC_NAME,	PIC_BIRTH	,PIC_PHONE,	
-	PIC_POSITION,	PIC_NUM_WORKER,	WORKLEVEL,	REMARK,	WRITETIME, UPDATETIME, DELYN )
+	PIC_POSITION,	PIC_NUM_WORKER,	WORKLEVEL,	REMARK, RISK_GRADE,	RISK_WARN, WORKPERMIT, WRITETIME, UPDATETIME, DELYN )
 	SELECT
 		#{work_idx},
 		#{site_idx},		#{write_user_idx},		#{cont_name},		#{ischarge},		#{worktype},	#{workstatus},	#{category1},
 		#{category2},		#{category3},		#{workcode},	#{workname},		#{worktitle},
 		#{startdate},		#{starttime},		#{enddate},		#{endtime},		#{placecode},		#{placename},		#{addr_detail},		#{indoor},
-		#{pic_name},		#{pic_birth},		#{pic_phone},		#{pic_position},		#{pic_num_worker},		#{worklevel},		#{remark},
-		sysdate(),	sysdate(),	'N'		
+		#{pic_name},		#{pic_birth},		#{pic_phone},	#{pic_position},		#{pic_num_worker},		#{worklevel},		#{remark},
+		#{risk_grade}, 		#{risk_warn},		#{workpermit},	sysdate(),	sysdate(),	'N'		
 	FROM DUAL
   </insert>
   <update id="update" parameterType="ManagerVO">
@@ -71,12 +71,12 @@
      	WORK_LIST
      SET
 		ISCHARGE = #{ischarge}
-		,WORKTYPE = #{workstatus}
-		,WORKSTATUS = #{worktype}
+		,WORKTYPE = #{worktype}
+		,WORKSTATUS = #{workstatus}
 		,CATEGORY1 = #{category1}
 		,CATEGORY2 = #{category2}
 		,CATEGORY3 = #{category3}	
-		,WORKCODe = #{workcode}	
+		,WORKCODE = #{workcode}	
 		,WORKNAME = #{workname}
 		,WORKTITLE = #{worktitle}
 			
@@ -95,6 +95,9 @@
 		,PIC_POSITION = #{pic_position}
 		,PIC_NUM_WORKER = #{pic_num_worker}
 		,WORKLEVEL = #{worklevel}
+		,RISK_GRADE = #{risk_grade}, 	
+		,RISK_WARN = #{risk_warn},
+		,WORKPERMIT = #{workpermit},
 		,REMARK = #{remark}
 		,UPDATETIME = sysdate()
 	WHERE

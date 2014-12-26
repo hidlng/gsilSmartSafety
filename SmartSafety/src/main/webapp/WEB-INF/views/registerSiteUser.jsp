@@ -116,7 +116,7 @@
 				<p />
 				<span style="font-size: 17px">(010-1234-5678)</span>
 			</th>
-			<td colspan="3"><form:input path="phone" maxlength="13" />
+			<td colspan="3"><form:input path="phone" maxlength="13" onblur="checkPhone(this, this.value)"/>
 				<p />
 				<form:errors cssClass="formError" path="phone" /></td>
 		</tr>
