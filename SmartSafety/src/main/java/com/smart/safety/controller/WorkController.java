@@ -144,7 +144,7 @@ public class WorkController {
 		
 		else {
 			try{
-				//setRiskData(workVO);
+				setRiskData(workVO);
 				work_idx = workService.insertWork(workVO);
 				
 			}catch(Exception e) {
@@ -161,39 +161,42 @@ public class WorkController {
 		
 	}
 	
-	public String getRiskData(List<String> list) {
+	public String getRiskData(String list) {
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getRiskData=&codelist=";
+		String url = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getRiskData=&codelist=" + list;
 		String result = restTemplate.getForObject(url, String.class);
 		String json_result = result.substring(result.indexOf('(') + 1, result.length() - 1);
 		return json_result;
 				
 	}
 	
-	private void setRiskData(WorkVO workVO) {
-		
-		//ArrayList<String> list = new ArrayList<String>();
+	
+	/**작업코드(심각성,위험도) + 작업자수 + 난이도(소장판단) 전달 
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException **/ 
+	private void setRiskData(WorkVO workVO) throws JsonParseException, JsonMappingException, IOException {
+
 		StringBuffer buf = new StringBuffer();
 		
-		buf.append('#');
 		buf.append(workVO.getWorkcode());
+		buf.append('!');
+		buf.append(workVO.getPic_num_worker());
+		buf.append('!');
+		buf.append(workVO.getWorklevel());
+		buf.append('!');
+
+		String json_result = getRiskData(buf.toString());
+		System.out.println(json_result);
 		
-		Iterator<ToolVO> it = workVO.getToollist().iterator();
-		buf.append('#');
-		
-		
-		
-		while(it.hasNext()) {
-			ToolVO vo = it.next();
-			//list.add(vo.getToolcode());
-			buf.append(vo.getToolcode());
+		ObjectMapper objectMapper = new ObjectMapper();
+		if(json_result != null) {
+			Map<String, Object> jsonMap = null;
+			jsonMap = objectMapper.readValue(json_result, Map.class);
+			String riskGrade = (String) jsonMap.get("riskLevel");
+			workVO.setRisk_grade(riskGrade);//RiskGrade 
 		}
-		
-		list.add(workVO.getPlacecode());
-		
-		getRiskData(list);
-		
-		workVO.setRisk_grade("");//RiskGrade 
+	
 		workVO.setRisk_warn("");//RiskWarn
 		workVO.setWorkpermit("");//WorkPermit
 		
@@ -223,6 +226,7 @@ public class WorkController {
 		
 		else {
 			try{
+				setRiskData(workVO);
 				workService.updateWork(workVO);
 			}catch(Exception e) {
 				e.printStackTrace();

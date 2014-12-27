@@ -15,7 +15,7 @@ function openTBM(){
    var url    ="tbm";
    var title  = "tbmView";
    var status = "toolbar=no,directories=no,scrollbars=no,resizable=no,status=no,menubar=no,width=700, height=500, top=0,left=20"; 
-   window.open("tbm?tbm_idx="+$('#tbm_idx').val(), title,status);       
+   window.open("tbm", title,status);       
    
 }
 
@@ -23,10 +23,7 @@ function openTBM(){
 
 <form id="printForm" method="POST"	autocomplete="off">
 	<form:input type="hidden" path="work_idx" value="${work_idx}" />
-	<form:input type="hidden" id="tbm_idx" path="tbm_idx" value="${tbm_idx}" />
-	<form:input type="hidden" id="ptw_idx" path="ptw_idx" value="${ptw_idx}" />
-	<form:input type="hidden" id="pui_idx" path="pui_idx" value="${pui_idx}" />
-	<input type="button" name="button1" value="전 송" onclick="openTBM(this.form);">
+	<!--<input type="button" name="button1" value="전 송" onclick="openTBM(this.form);">-->
 </form>
 
 <div id="print">

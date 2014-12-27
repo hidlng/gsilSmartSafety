@@ -43,16 +43,20 @@
    $(document).on("click", "#logout", function(e) { $('#logout_form').submit(); });
 	
   
+   window.history.forward(0);
 
+   history.navigationMode = 'compatible'; // 오페라, 사파리 뒤로가기 막기
+   function _no_Back(){window.history.forward(0);}
   </script>
-   <meta http-equiv="Cache-Control" content="max-age=0" />
+<meta http-equiv="Cache-Control" content="max-age=0" />
 <meta http-equiv="Cache-Control" content="no-cache" />
 <meta http-equiv="expires" content="0" />
 <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 <meta http-equiv="Pragma" content="no-cache" />
+
 </head>
 
-<body> 
+<body  onload="_no_Back();" onpageshow="if(event.persisted)_no_Back();"> 
 
 <!-- 현장/안전 구분위해 -->
 <div id="menuForm" style="display:none">
