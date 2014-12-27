@@ -83,6 +83,12 @@ public class WorkController {
 	@RequestMapping(value = "registerWork")
 	public void registerWork(@RequestParam(value="updateIdx",required=false)String updateIdx, HttpServletRequest request, Model model, HttpSession session) {
 		model.addAttribute("isNotValid", false);
+		UserVO userVO = (UserVO)session.getAttribute("userLoginInfo");
+		SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");	
+		
+		//업체리스트 호출 , 작업책임자 소속에서 사용		
+		List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
+		model.addAttribute("contList", contList);
 		
 		if(updateIdx != null && !updateIdx.equals("")) {
 			WorkVO workVO = workService.getWorkByIdx(updateIdx);
@@ -92,8 +98,7 @@ public class WorkController {
 		else {//insertMode
 			//입력시점에 최신데이터를 가져옴
 			//작업등록자의 현장정보, 업체정보, 유저정보 필요
-			UserVO userVO = (UserVO)session.getAttribute("userLoginInfo");
-			SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");		
+			
 		
 			WorkVO workVO = new WorkVO();
 			workVO.setToollist(new ArrayList<ToolVO>());
@@ -138,6 +143,10 @@ public class WorkController {
 		model.addAttribute("workVO", workVO);
 		
 		if(bindingResult.hasErrors()) {
+			SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");
+			//업체리스트 호출 , 작업책임자 소속에서 사용		
+			List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
+			model.addAttribute("contList", contList);
 			model.addAttribute("isNotValid", true);
 			return "registerWork";
 		}
@@ -147,15 +156,47 @@ public class WorkController {
 				setRiskData(workVO);
 				work_idx = workService.insertWork(workVO);
 				
-			}catch(Exception e) {
+			}catch(Exception e) {//초기화
 				e.printStackTrace();
-				model.addAttribute("isNotValid", true);
-				return "registerWork";
+				return "redirect:registerWork";
 			}
 			
 			//return "redirect:workList";
 			
 			redirectAttr.addFlashAttribute("work_idx", work_idx);
+			return "redirect:printList";
+		}
+		
+	}
+	
+	@RequestMapping(value = "updateWork", method = RequestMethod.POST)
+	public String updateWork(HttpSession session, @ModelAttribute @Valid WorkVO workVO, BindingResult bindingResult,
+		Model model, RedirectAttributes redirectAttr) {
+		
+		model.addAttribute("updateMode", true);
+		arrayFilter(workVO.getToollist()); //빈공간 제거
+		model.addAttribute("workVO", workVO);
+		
+		if(bindingResult.hasErrors()) { 
+			SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");			
+			//업체리스트 호출 , 작업책임자 소속에서 사용		
+			List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
+			model.addAttribute("contList", contList);
+			model.addAttribute("isNotValid", true);
+			return "registerWork";
+		}
+		
+		else {
+			try{
+				setRiskData(workVO);
+				workService.updateWork(workVO);
+			}catch(Exception e) {//초기
+				e.printStackTrace();
+				return "redirect:registerWork";
+			}
+			
+			redirectAttr.addFlashAttribute("work_idx",workVO.getWork_idx());
+			//return "redirect:workList";
 			return "redirect:printList";
 		}
 		
@@ -197,8 +238,8 @@ public class WorkController {
 			workVO.setRisk_grade(riskGrade);//RiskGrade 
 		}
 	
-		workVO.setRisk_warn("");//RiskWarn
-		workVO.setWorkpermit("");//WorkPermit
+		workVO.setRisk_warn("1");//RiskWarn
+		workVO.setWorkpermit("1");//WorkPermit
 		
 	}
 
@@ -211,35 +252,7 @@ public class WorkController {
 		}
 	}
 
-	@RequestMapping(value = "updateWork", method = RequestMethod.POST)
-	public String updateWork(HttpSession session, @ModelAttribute @Valid WorkVO workVO, BindingResult bindingResult,
-		Model model, RedirectAttributes redirectAttr) {
-		
-		model.addAttribute("updateMode", true);
-		arrayFilter(workVO.getToollist()); //빈공간 제거
-		model.addAttribute("workVO", workVO);
-		
-		if(bindingResult.hasErrors()) { 
-			model.addAttribute("isNotValid", true);
-			return "registerWork";
-		}
-		
-		else {
-			try{
-				setRiskData(workVO);
-				workService.updateWork(workVO);
-			}catch(Exception e) {
-				e.printStackTrace();
-				model.addAttribute("isNotValid", true);
-				return "registerWork";
-			}
-			
-			redirectAttr.addFlashAttribute("work_idx",workVO.getWork_idx());
-			//return "redirect:workList";
-			return "redirect:printList";
-		}
-		
-	}
+	
 	
 	
 	@RequestMapping("workPopup")

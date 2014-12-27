@@ -14,7 +14,11 @@
 	 else{		
 		 $('#siteForm').attr('action', 'insertSite');
 	 }
-		 
+	
+	 //worktype
+	 setChildCategoryOf(1, 'worktype' , '${siteVO.worktype}');
+	// $("#worktype").val("철골작업");
+	
  });
  
  
@@ -116,7 +120,9 @@
 				<p />
 				<form:errors cssClass="formError" path="contractor" />
 			<th>공종</th>
-			<td><form:input path="worktype" maxlength="45" />
+			<td>
+
+			<form:select id="worktype"  path="worktype"  class="siteSelectBox"></form:select>
 				<p />
 				<form:errors cssClass="formError" path="worktype" />
 		</tr>
@@ -125,19 +131,12 @@
 	<div class="paging">
 		<!--  insert -->
 		<c:if test="${!updateMode}">
-			<span class="signup"><img src="images/btn_signup.png"
-				class="signupImg" alt="등록하기" onclick="submitSite()"
-				onmouseover="this.src='images/btn_signup_over.png'"
-				onmouseout="this.src='images/btn_signup.png'"
-				style="cursor: pointer"></span>
+			<span id="popupOKBtn" class="btn_typ02"  onclick="submitSite()">등록 </span>
 		</c:if>
 
 		<!-- update -->
 		<c:if test="${updateMode}">
-			<span class="signup"><img src="images/btn_info.png"
-				alt="수정하기" onclick="submitSite()" style="cursor: pointer"
-				onmouseover="this.src='images/btn_info_over.png'"
-				onmouseout="this.src='images/btn_info.png'"></span>
+			<span id="popupOKBtn" class="btn_typ02"  onclick="submitSite()">수정 </span>
 		</c:if>
 
 

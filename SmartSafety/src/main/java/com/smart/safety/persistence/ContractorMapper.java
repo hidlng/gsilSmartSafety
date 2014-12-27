@@ -10,6 +10,7 @@ import com.smart.safety.domain.ManagerVO;
 @Repository(value="ContractorMapper")
 public interface ContractorMapper {
 	public List<ContractorVO> getContractorListByVO(ContractorVO contractorVO);
+	public List<ContractorVO> getContractorListBySiteIdx(String site_idx);
 	
 	public ContractorVO getContractorByIdx(String idx);
 	public ContractorVO getContractorByID(String id);

@@ -1,4 +1,8 @@
 /* just maintain some attributes like display & position, and everything is changeable */
+.closeLink {
+	display:block;
+	text-align:right;
+}
 .bgCover {
 	background: #000;
 	position: absolute;
@@ -64,6 +68,7 @@ a:hover.infoBtn {
 	line-height: 24px;
 	border: 1px dotted #8c97a9;
 	text-align: center;
+	
 }
 
 .selectBox option {

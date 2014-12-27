@@ -95,10 +95,10 @@
 		,PIC_POSITION = #{pic_position}
 		,PIC_NUM_WORKER = #{pic_num_worker}
 		,WORKLEVEL = #{worklevel}
-		,RISK_GRADE = #{risk_grade}, 	
-		,RISK_WARN = #{risk_warn},
-		,WORKPERMIT = #{workpermit},
-		,REMARK = #{remark}
+		,RISK_GRADE = #{risk_grade}		
+		,RISK_WARN = #{risk_warn}	
+		,WORKPERMIT = #{workpermit}		
+		,REMARK = #{remark}		
 		,UPDATETIME = sysdate()
 	WHERE
 		WORK_IDX = #{work_idx}

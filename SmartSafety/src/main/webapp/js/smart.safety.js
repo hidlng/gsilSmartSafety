@@ -1,6 +1,18 @@
 /**작업등록 **/
 /** set Child Category Of Idx (add option to target Selectbox) **/
+function clearSelect() {
+	
+	for(var i in arguments) {
+		$('#' + arguments[i]).empty();
+		$('#popupOKBtn').hide();
+	}
+	
+}
+
 function setChildCategoryOf(idx, targetId) {
+	setChildCategoryOf(idx,targetId,"")
+}
+function setChildCategoryOf(idx, targetId, selectName) {
 	
 	$.ajax({
  		type : "POST",
@@ -22,7 +34,11 @@ function setChildCategoryOf(idx, targetId) {
  			
  			$('#' + targetId).append('<option id="" value="">-----------선택----------</option>');
  			for(var i = 0 ; i < length; i ++) {
- 				$('#' + targetId).append('<option id="' + catList[i].idx + '" value="' + catList[i].name + '">' + catList[i].name  + '</option>');
+ 				//alert(selectName +" : "+catList[i].name );
+ 				if(selectName == catList[i].name )
+ 					$('#' + targetId).append('<option selected="selected" id="' + catList[i].idx + '" value="' + catList[i].name + '">' + catList[i].name  + '</option>');
+ 				else 
+ 					$('#' + targetId).append('<option id="' + catList[i].idx + '" value="' + catList[i].name + '">' + catList[i].name  + '</option>');
  			} 
 			
  		},
@@ -76,6 +92,8 @@ function setCode(categoryIdx , targetId) {
 	  		},
 	  		error : onError
 		});
+	 
+	 	
 }
 
 

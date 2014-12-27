@@ -4,7 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.smart.safety.persistence.ContractorMapper">
-	
+	<select id="getContractorListBySiteIdx" resultType="ContractorVO"	parameterType="String">
+		SELECT
+		*
+		FROM CONTRACTOR_LIST
+		WHERE 
+		DELYN='N'
+		AND SITE_IDX = #{site_idx}
+		ORDER BY CONT_NAME
+	</select>
   <select id="getContractorListByVO" resultType="ContractorVO" parameterType="ContractorVO">
 	SELECT
 		*

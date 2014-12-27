@@ -91,8 +91,7 @@ function goPage(val) {
     <a href="javascript:goPage(${paging.finalPageNo})" class="last"><span> &gt;&gt; </span></a>
     
     	<c:if test ="${sessionScope.userLoginInfo.level >= 3}"> <!-- 현장사용자/업체만 등록가능 -->
-	    	<span class="signup"><a	href="#"><img src="images/btn_signup.png" onmouseover="this.src='images/btn_signup_over.png'"	
-	    	onmouseout="this.src='images/btn_signup.png'" alt="등록하기" onclick="registerSubmit()"></a></span>
+	    	<span class="signup"><span class="btn_typ02"  onclick="registerSubmit()">등록 ></span></span>
 	    </c:if>
 </div>
 

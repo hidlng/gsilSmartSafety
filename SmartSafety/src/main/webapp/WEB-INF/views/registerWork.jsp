@@ -177,6 +177,7 @@ function goPopup(){
 		cache : false,
 		success : function(json){
 			$('#viewContent').html(json);
+			$('#popupOKBtn').hide();
 			setChildCategoryOf(1, 'worktype_pop');//init
 			doOverlayOpen();	
 		},
@@ -219,14 +220,13 @@ function confirmCode() {
 		reutrn;
  } 
 
-
  </script>
  
 
 <div class="bgCover">&nbsp;</div>
 <!-- overlay box -->
 <div class="overlayBox">
-<a href=# class="closeLink" ><img src="images/x-button.png" onclick="doOverlayClose()" style="cursor:hand"/></a>
+<div class="closeLink" style="cursor:hand"><img src="images/x-button.png" onclick="doOverlayClose()" /></div>
 <div class="overlayContent"><div id="viewContent"></div></div>
 </div>
 
@@ -280,7 +280,7 @@ function confirmCode() {
 			</td>
 		</tr>
 		<tr>
-			<th>작업명</th>
+			<th>작업종류</th>
 			<td colspan="2"  onclick="goPopup()">			
 				<form:input id="workname"  path="workname"  readonly="true" />
 				<form:errors path="workname" cssClass="formError"/>
@@ -322,21 +322,18 @@ function confirmCode() {
 	
 
 	<!--  start -->
-	<p class="red">장비선택</p>
-	<ul class="equipment_typ">
-		<li><span class="iconImg"><img
-				src="images/icon_equipment01.png" alt="건설장비"><br />&nbsp;&nbsp;건설장비</span></li>
-		<li class="on"><span class="iconImg"><img
-				src="images/icon_equipment02.png" alt="운반장비"><br />&nbsp;운반장비</span></li>
-		<li><span class="iconImg"><img
-				src="images/icon_equipment03.png" alt="기타장비"><br />&nbsp;기타장비</span></li>
-	</ul>
-	<table class="user_signup equipment">
-		<colgroup>
-			<col style="width: 33.3%">
-			<col style="width: 33.3%">
-			<col>
+		<p class="red">장비선택</p>				
+		<table class="user_signup">		
+		<colgroup>	
+			<col style="width:33%">
+			<col style="width:33%">
+			<col style="width:33%">						
 		</colgroup>
+		<tr>
+			<th><span class="iconImg"><img src="images/icon_equipment02.png" alt="건설장비"><br/>건설장비</span></th>
+			<th><span class="iconImg"><img src="images/icon_equipment01.png" alt="운반장비"><br/>운반장비</span></th>
+			<th><span class="iconImg"><img src="images/icon_equipment03.png" alt="기타장비"><br/>기타장비</span></th>
+		</tr>
 		<tr>
 			<td id="cons_machine">
 				<input type="button" onclick="addTool('cons_machine', true);" value="추가">
@@ -421,7 +418,26 @@ function confirmCode() {
 		</tr>
 	</table>
 	<!--  //user_signup -->
-
+	<p class="red">작업장소등록</p>
+				<table class="user_signup">				
+					<colgroup>
+						<col style="width:25%">
+						<col style="width:25%">
+						<col style="width:25%">
+						<col>
+					</colgroup>
+					<tr>
+						<th>세부장소</th>
+						<td colspan="3"><input type="text" name="" value="" ></td>
+					</tr>
+					<tr>
+						<th>실내/외 여부</th>
+						<td colspan="3">
+							<span class="side"><label for="inside">실내</label><input type="radio" id="inside" class="radi" name="" value="" ></span>
+							<span class="side"><label for="outside">실외</label><input type="radio" id="outside" class="radi" name="" value="" ></span>
+						</td>
+					</tr>	
+				</table><!--  //user_signup -->
 	<div class="work_cap">
 		<p class="red">작업책임자</p>
 		<table class="work_cap">
@@ -445,13 +461,17 @@ function confirmCode() {
 				<td><form:input class="phone" path="pic_phone" 	maxlength="13" onblur="checkPhone(this, this.value)"/>
 				<p /> <form:errors path="pic_phone" cssClass="formError"  /></td>
 				<th>소속</th>
-				<td><form:input path="pic_position" 	maxlength="45" />
-				<p /> <form:errors path="pic_position" cssClass="formError"  /></td>
+				<td>
+				<form:select path="pic_position" class="siteSelectBox" >
+					<c:forEach var="cont" items="${contList}" >
+						<form:option value="${cont.cont_name}">${cont.cont_name}</form:option>
+					</c:forEach>
+				</form:select></td>	
 			</tr>
 			<tr>
 				<th>작업자 수</th>
 				<td colspan="3">
-					<form:select path="pic_num_worker" class="selectBox" >
+					<form:select id="test" path="pic_num_worker" class="selectBox" >
 					<c:forEach begin="1" end="50" varStatus="idx">
 							<form:option value="${idx.count}">${idx.count}</form:option>
 					</c:forEach>
@@ -463,18 +483,19 @@ function confirmCode() {
 				</th>
 				<td colspan="3">
 				<form:select path="worklevel" class="selectBox" >
-					<c:forEach begin="1" end="4" varStatus="idx">
-							<form:option value="${idx.count}">${idx.count}</form:option>
+					<c:forEach begin="0" end="2" varStatus="idx">
+							<form:option value="${idx.count}">난이도 ${idx.count}</form:option>
 					</c:forEach>
 				</form:select>
 				</td>
 			</tr>
 
 			<tr>
-			<td colspan="3">
-			난이도 1 : ㅇㄹㅇㄹㅇㄹ<p>
-			난이도 2: ㄴㅇㄹㅇㄹㅇㄹ<p>
-			난이도 3: ㅇㄹㅇㄹ
+			<td colspan="3"><span class="explain">
+			<b style="color:red">0점</b> : 평범 평상 시 작업과 유사한 조건으로 작업 상 애로사항이 없음.<p>
+			<b style="color:red">1점</b> : 어려운 상황 혹서기, 혹한기, 일기(비, 눈, 바람 등)등에 의해 작업상 어려움이 있어 관리가 필요한 상황<p>
+			<b style="color:red">2점</b> : 매우어려운상황 작업이 매우 어려운 상황이지만 불가하게 작업을 진행해야 하는 경우, 특별관리가 필요한 상황<p>
+		</span>
 			</td>
 			</tr>
 
@@ -492,19 +513,12 @@ function confirmCode() {
 	<div class="paging">
 			<!--  insert -->
 		<c:if test="${!updateMode}">
-			<span class="signup"><img src="images/btn_signup.png"
-				class="signupImg" alt="등록하기" onclick="submitWork()"
-				onmouseover="this.src='images/btn_signup_over.png'"
-				onmouseout="this.src='images/btn_signup.png'"
-				style="cursor: pointer"></span>
+			<span class="signup"><span class="btn_typ02"  onclick="submitWork()">등록 ></span>	</span>
 		</c:if>
 
 		<!-- update -->
 		<c:if test="${updateMode}">
-			<span class="signup"><img src="images/btn_info.png"
-				alt="수정하기" onclick="submitWork()" style="cursor: pointer"
-				onmouseover="this.src='images/btn_info_over.png'"
-				onmouseout="this.src='images/btn_info.png'"></span>
+			<span class="signup"><span class="btn_typ02"  onclick="submitWork()">수정 ></span></span>
 		</c:if>
 	</div>
 	<p class="goTop">

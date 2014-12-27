@@ -42,9 +42,8 @@
    $(document).on("click", "#siteList", function(e) { $('#siteList_form').submit(); });
    $(document).on("click", "#logout", function(e) { $('#logout_form').submit(); });
 	
-  
+  //뒤로가기 방지
    window.history.forward(0);
-
    history.navigationMode = 'compatible'; // 오페라, 사파리 뒤로가기 막기
    function _no_Back(){window.history.forward(0);}
   </script>

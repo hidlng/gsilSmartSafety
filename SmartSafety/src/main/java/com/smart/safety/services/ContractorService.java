@@ -89,6 +89,9 @@ public class ContractorService{
 	public List<ContractorVO> getContractorListByVO(ContractorVO contractorVO) {
 		return contractorMapper.getContractorListByVO(contractorVO);
 	}
+	public List<ContractorVO> getContractorListBySiteIdx(String site_idx) {
+		return contractorMapper.getContractorListBySiteIdx(site_idx);
+	}
 
 	
 	
