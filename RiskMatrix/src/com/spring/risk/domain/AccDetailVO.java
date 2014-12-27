@@ -10,8 +10,8 @@ public class AccDetailVO implements Serializable{
 	String workCode;
 	String accCode;
 	private String accName;
-	String accPoss;
-	String accSerious;
+	private int accPoss;
+	private int accSerious;
 	
 	public String getWorkCode() {
 		return workCode;
@@ -25,23 +25,24 @@ public class AccDetailVO implements Serializable{
 	public void setAccCode(String accCode) {
 		this.accCode = accCode;
 	}
-	public String getAccPoss() {
-		return accPoss;
-	}
-	public void setAccPoss(String accPoss) {
-		this.accPoss = accPoss;
-	}
-	public String getAccSerious() {
-		return accSerious;
-	}
-	public void setAccSerious(String accSerious) {
-		this.accSerious = accSerious;
-	}
+	
 	public String getAccName() {
 		return accName;
 	}
 	public void setAccName(String accName) {
 		this.accName = accName;
+	}
+	public int getAccPoss() {
+		return accPoss;
+	}
+	public void setAccPoss(int accPoss) {
+		this.accPoss = accPoss;
+	}
+	public int getAccSerious() {
+		return accSerious;
+	}
+	public void setAccSerious(int accSerious) {
+		this.accSerious = accSerious;
 	}
 	
 

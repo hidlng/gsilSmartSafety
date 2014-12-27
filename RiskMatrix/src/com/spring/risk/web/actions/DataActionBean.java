@@ -1,6 +1,6 @@
 package com.spring.risk.web.actions;
 
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -53,6 +53,8 @@ public class DataActionBean extends AbstractActionBean {
 	private int ancIdx; //ancestor idx of treepath
 	private String code;//code
 	private int type;//work,tool,place
+	private String codelist;
+	
 	
 	@SpringBean
 	private transient UserService userService;
@@ -126,16 +128,60 @@ public class DataActionBean extends AbstractActionBean {
 	}
 
 
-	
+	/**workcode!num_worker!worklevel 로 전달받음 */
 	public Resolution getRiskData() {
-		//codeList를 JSON으로 넘겨받음
+		//c를 JSON으로 넘겨받음
 		//조합
 		//grade 반환
 		
+		int riskPoint = 0;
+		
+		StringTokenizer token = new StringTokenizer(codelist, "!");
+		if(token.hasMoreElements())  {//WORKCODE
+			String code = (String) token.nextElement();
+			
+			//TODO: 1~2쿼리로동작하게 수정
+			List<AccDetailVO> list = workListService.getAccDetailListByCode(code);
+			
+			Iterator<AccDetailVO> it = list.iterator();
+			
+			
+			while(it.hasNext()) {
+				AccDetailVO vo = (AccDetailVO)it.next();
+				riskPoint += vo.getAccPoss();
+				riskPoint += vo.getAccSerious();
+				
+			}
+			
+		}
+		
+		try{
+			if(token.hasMoreElements())  {// num _worker
+				int num_worker = Integer.valueOf((String)token.nextElement());
+				System.out.println(num_worker);
+				
+				if(num_worker <= 3 ) riskPoint += 1;
+				else if(num_worker <= 10) riskPoint += 2;
+				else riskPoint += 3;	
+			}
+			
+			if(token.hasMoreElements())  {//level
+				int worklevel = Integer.valueOf((String)token.nextElement());
+				System.out.println(worklevel);
+				riskPoint += worklevel;
+			}
+		}catch(NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		String riskLevel = "";
+		//등급결정
+		if(riskPoint < 3) riskLevel = "C";
+		else if(riskPoint < 6) riskLevel = "B";
+		else riskLevel = "A";
+		
 		jsonObj = new JSONObject();
-		
-		
-		
+		jsonObj.put("riskLevel", riskLevel);
 		
 		return new ForwardResolution(DATAPAGE);
 	}
@@ -187,6 +233,16 @@ public class DataActionBean extends AbstractActionBean {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+
+	public String getCodelist() {
+		return codelist;
+	}
+
+
+	public void setCodelist(String codelist) {
+		this.codelist = codelist;
 	}
 
 
