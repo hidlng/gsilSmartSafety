@@ -336,13 +336,13 @@ function confirmCode() {
 		</tr>
 		<tr>
 			<td id="cons_machine">
-				<input type="button" onclick="addTool('cons_machine', true);" value="추가">
+				<span class="btn_typ01"  onclick="addTool('cons_machine', true);">추가</span>
 			</td>
 			<td id="trans_machine">
-			<input type="button" onclick="addTool('trans_machine', true);" value="추가">				
+				<span class="btn_typ01"  onclick="addTool('trans_machine', true);">추가</span>
 			</td>
-			<td id="etc_machine">				
-			<input type="button" onclick="addTool('etc_machine', true);" value="추가">
+			<td id="etc_machine">
+				<span class="btn_typ01"  onclick="addTool('etc_machine', true);">추가</span>
 			</td>
 		</tr>		
 	</table>
@@ -363,20 +363,20 @@ function confirmCode() {
 					src="images/icon_tool02.png" alt="전동도구"></span><br />전동도구</th>
 			<th><span class="iconImg"><img
 					src="images/icon_tool03.png" alt="비전동도구"></span><br />비전동도구</th>
-			<th>기타</th>
+			<th>기타도구</th>
 		</tr>
 		<tr>
 			<td id="weld_tool">
-				<input type="button" onclick="addTool('weld_tool', true);" value="추가">
+				<span class="btn_typ01"  onclick="addTool('weld_tool', true);">추가</span>
 			</td>
 			<td id="elec_tool">
-				<input type="button" onclick="addTool('elec_tool', true);" value="추가">
+				<span class="btn_typ01"  onclick="addTool('elec_tool', true);">추가</span>
 			</td>
 			<td id="nelec_tool">
-				<input type="button" onclick="addTool('nelec_tool', true);" value="추가">
+				<span class="btn_typ01"  onclick="addTool('nelec_tool', true);">추가</span>				
 			</td>
 			<td id="etc_tool">
-				<input type="button" onclick="addTool('etc_tool', true);" value="추가">
+				<span class="btn_typ01"  onclick="addTool('etc_tool', true);">추가</span>
 			</td>
 		</tr>		
 	</table>
@@ -417,27 +417,7 @@ function confirmCode() {
 			</td>
 		</tr>
 	</table>
-	<!--  //user_signup -->
-	<p class="red">작업장소등록</p>
-				<table class="user_signup">				
-					<colgroup>
-						<col style="width:25%">
-						<col style="width:25%">
-						<col style="width:25%">
-						<col>
-					</colgroup>
-					<tr>
-						<th>세부장소</th>
-						<td colspan="3"><input type="text" name="" value="" ></td>
-					</tr>
-					<tr>
-						<th>실내/외 여부</th>
-						<td colspan="3">
-							<span class="side"><label for="inside">실내</label><input type="radio" id="inside" class="radi" name="" value="" ></span>
-							<span class="side"><label for="outside">실외</label><input type="radio" id="outside" class="radi" name="" value="" ></span>
-						</td>
-					</tr>	
-				</table><!--  //user_signup -->
+	
 	<div class="work_cap">
 		<p class="red">작업책임자</p>
 		<table class="work_cap">
@@ -464,7 +444,7 @@ function confirmCode() {
 				<td>
 				<form:select path="pic_position" class="siteSelectBox" >
 					<c:forEach var="cont" items="${contList}" >
-						<form:option value="${cont.cont_name}">${cont.cont_name}</form:option>
+						<form:option value="${cont.cont_idx}">${cont.cont_name}</form:option>
 					</c:forEach>
 				</form:select></td>	
 			</tr>
@@ -473,7 +453,7 @@ function confirmCode() {
 				<td colspan="3">
 					<form:select id="test" path="pic_num_worker" class="selectBox" >
 					<c:forEach begin="1" end="50" varStatus="idx">
-							<form:option value="${idx.count}">${idx.count}</form:option>
+							<form:option value="${idx.index}">${idx.index}</form:option>
 					</c:forEach>
 					</form:select>
 				</td>
@@ -483,8 +463,8 @@ function confirmCode() {
 				</th>
 				<td colspan="3">
 				<form:select path="worklevel" class="selectBox" >
-					<c:forEach begin="0" end="2" varStatus="idx">
-							<form:option value="${idx.count}">난이도 ${idx.count}</form:option>
+					<c:forEach begin="0" end="2" varStatus="count">
+							<form:option value="${count.index}">난이도 ${count.index}</form:option>
 					</c:forEach>
 				</form:select>
 				</td>
@@ -492,9 +472,9 @@ function confirmCode() {
 
 			<tr>
 			<td colspan="3"><span class="explain">
-			<b style="color:red">0점</b> : 평범 평상 시 작업과 유사한 조건으로 작업 상 애로사항이 없음.<p>
-			<b style="color:red">1점</b> : 어려운 상황 혹서기, 혹한기, 일기(비, 눈, 바람 등)등에 의해 작업상 어려움이 있어 관리가 필요한 상황<p>
-			<b style="color:red">2점</b> : 매우어려운상황 작업이 매우 어려운 상황이지만 불가하게 작업을 진행해야 하는 경우, 특별관리가 필요한 상황<p>
+			<b style="color:red">0점</b> : 평범 평상 시 작업과 유사한 조건으로 작업 상 애로사항이 없음.<br>
+			<b style="color:red">1점</b> : 어려운 상황 혹서기, 혹한기, 일기(비, 눈, 바람 등)등에 의해 작업상 어려움이 있어 관리가 필요한 상황<br>
+			<b style="color:red">2점</b> : 매우어려운상황 작업이 매우 어려운 상황이지만 불가하게 작업을 진행해야 하는 경우, 특별관리가 필요한 상황<br>
 		</span>
 			</td>
 			</tr>

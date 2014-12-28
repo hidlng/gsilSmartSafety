@@ -81,11 +81,8 @@
 		</c:forEach>
 	</span> <a href="javascript:goPage(${paging.nextPageNo})" class="next"><span>
 			&gt; </span></a> <a href="javascript:goPage(${paging.finalPageNo})" class="last"><span>
-			&gt;&gt; </span></a> <span class="signup"><a href="#"><img
-			src="images/btn_signup.png"
-			onmouseover="this.src='images/btn_signup_over.png'"
-			onmouseout="this.src='images/btn_signup.png'" alt="등록하기"
-			onclick="registerSubmit()" style="display: cursor"></a></span>
+			&gt;&gt; </span></a>
+			<span class="signup"><span class="btn_typ02"  onclick="registerSubmit()">등록 ></span></span>
 </div>
 
 

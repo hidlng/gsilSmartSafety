@@ -44,7 +44,7 @@ public class WorkController {
 	private ContractorService contractorService;
 
 	
-	public static final int MAX_ROW_NUM=5;
+	public static final int MAX_ROW_NUM=10;
 	public static final int MAX_PAGE_NUM=5;
 
 	
@@ -253,7 +253,15 @@ public class WorkController {
 	}
 
 	
-	
+
+	@RequestMapping(value = "viewWork")
+	public void viewWork(@RequestParam(value="viewIdx",required=false)String viewIdx, HttpServletRequest request, Model model, HttpSession session) {
+		if(viewIdx != null && !viewIdx.equals("")) {
+			WorkVO workVO = workService.getWorkByIdx(viewIdx);
+			model.addAttribute("updateMode", true);
+			model.addAttribute("workVO", workVO);
+		}
+	}
 	
 	@RequestMapping("workPopup")
 	public void workPopup(HttpSession session) {

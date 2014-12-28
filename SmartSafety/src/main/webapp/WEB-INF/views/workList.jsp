@@ -7,6 +7,13 @@ function updateSubmit(val) {
 	$('#updateForm').submit();
 }
 
+function viewSubmit(val) {
+	var idx = $("#updateIdx_"+val).val();
+	$("#viewIdx").val(idx);
+	$('#viewForm').submit();
+	
+}
+
 function registerSubmit() {
 	$('#registerForm').submit();
 }
@@ -59,14 +66,12 @@ function goPage(val) {
 				<td>${work.startdate} ~<p> ${work.enddate}</td>
 				<td>${work.username}</td>
 				<td>
-				
+				<input id="updateIdx_${idx.index}" type="hidden" value="${work.work_idx}" />
 				<c:if test="${sessionScope.userLoginInfo.user_idx  == work.write_user_idx }">
-				<input id="updateIdx_${idx.index}" type="hidden"
-					value="${work.work_idx}" /> <img src="images/btn_info.png"
-					onclick="updateSubmit('${idx.index}')" alt="정보수정하기"
-					style="cursor: pointer"
-					onmouseover="this.src='images/btn_info_over.png'"
-					onmouseout="this.src='images/btn_info.png'">
+					<span class="signup"><span class="btn_typ01"  onclick="updateSubmit('${idx.index}')">수정</span></span>
+				</c:if>
+				<c:if test="${sessionScope.userLoginInfo.user_idx  != work.write_user_idx }">
+					<span class="signup"><span class="btn_typ01"  onclick="viewSubmit('${idx.index}')">보기</span></span>
 				</c:if>
 				</td>
 			</tr>
@@ -103,9 +108,11 @@ function goPage(val) {
 	</form>
 	<form id="updateForm" action="registerWork" method="POST" >
 		<input id="updateIdx" type="hidden" name="updateIdx"/>
-	</form>
-	
+	</form>	
 	<form id="registerForm" action="registerWork" action="POST" >
+	</form>
+	<form id="viewForm" action="viewWork" action="POST" >
+		<input id="viewIdx" type="hidden" name="viewIdx"/>
 	</form>
 </div>
 

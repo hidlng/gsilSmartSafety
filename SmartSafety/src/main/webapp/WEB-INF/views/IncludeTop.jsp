@@ -115,8 +115,7 @@
 					<c:if test ="${sessionScope.userLoginInfo.level >= 2}"> 
 						<li><span class="identTitle">소속 현장 : ${sessionScope.siteVO.sitename}</span></li>
 					</c:if>
-					<li  class="last"><img  id="logout" style="cursor:pointer" src="images/btn_logout.png"  alt="로그아웃" 
-					onmouseover="this.src='images/btn_logout_over.png'"   onmouseout="this.src='images/btn_logout.png'"/></li><!-- //1204 추가 -->
+					<li  class="last"><span id="logout" class="btn_typ01">로그아웃&nbsp;></span></li>
 				</ul><!-- //aside_ident -->
 			
 			</div><!-- //aside -->

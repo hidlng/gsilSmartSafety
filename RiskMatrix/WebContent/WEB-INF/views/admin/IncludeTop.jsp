@@ -28,10 +28,15 @@
 <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 <meta http-equiv="Pragma" content="no-cache" />
 
- 
+ <script>
+//뒤로가기 방지
+ window.history.forward(0);
+ history.navigationMode = 'compatible'; // 오페라, 사파리 뒤로가기 막기
+ function _no_Back(){window.history.forward(0);}
+ </script>
 </head>
 
-<body>
+<body   onload="_no_Back();" onpageshow="if(event.persisted)_no_Back();">
 ${actionBean.isAuthenticated()}
 	<div id="Header">
 		<div id="Title">RiskMatrix Admin</div>
@@ -46,7 +51,7 @@ ${actionBean.isAuthenticated()}
 			
 		</div>
 		<stripes:link id="logout" beanclass="com.spring.risk.web.actions.LoginActionBean" event="logout">
-						로그아웃
+						Logout
 		</stripes:link>
 	</div>
 

@@ -132,7 +132,7 @@ table.user_signup.equipment{border:2px dashed #8c97a9;}
 span.explain{display:block;width:90%;font-weight:normal;font-size:14px;line-height:18px;text-align:left; padding:10px;}
 
 /* button style */
-.btn_typ01{display:block;width:70px; padding:2px; margin:0 auto;background-color:#475B7C;border:1px solid #222;border-radius:3px;font-size:13px; line-height:22px;color:#fff;text-decoration:none;}
+.btn_typ01{display:block;width:100px; padding:2px; margin:0 auto;background-color:#475B7C;border:1px solid #222;border-radius:3px;font-size:18px; line-height:22px;color:#fff;text-decoration:none;}
 .btn_typ01:hover{background-color:transparent;color:#ffffff;border:1px solid #ffffff; cursor:pointer;}
 .btn_typ02{display:block; width:86px; padding:4px !important; margin:0 auto;background-color:#d70e0a; border:1px solid #d70e0a;border-radius:3px;font-size:18px !important; line-height:26px;color:white;text-decoration:none;}
 .btn_typ02:hover{background-color:transparent; color:#d70e0a; border:1px solid #d70e0a;cursor:pointer;}

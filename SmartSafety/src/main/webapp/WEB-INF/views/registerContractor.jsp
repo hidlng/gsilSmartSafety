@@ -106,7 +106,7 @@
 			<form:input id="input_id" path="id" maxlength="45" />
 				<p/><form:errors id="idError" cssClass="formError" path="id" />
 			</td>
-			<td><input type="button" class="duplCheck" value="중복체크" onclick="duplicateIdCheck()">
+			<td><span class="btn_typ01 duplCheck"  onclick="duplicateIdCheck()">중복체크</span>
 				<span class="duplCheckOk" style="display:none">사용 가능</span>
 			</td>
 		</c:if>
@@ -124,7 +124,7 @@
 		<th>PW</th>
 		<td colspan="3">					
 			<form:password id="input_password" path="password" maxlength="45"/><p/><form:errors cssClass="formError" path="password" />
-			<input id="btnNewPasswd" type="button" value="신규 비밀번호 발급" onclick="newPassword()" style="cursor:pointer">							
+			<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01" style="width:170px">신규 비밀번호 발급</div> 						
 		</td>
 	</tr>
 		
@@ -134,14 +134,12 @@
 <div class="paging">
 <!--  insert -->
 <c:if test="${!updateMode}">
-<span class="signup" ><img src="images/btn_signup.png" class="signupImg"  alt="등록하기" onclick="submitContractor()" 
-onmouseover="this.src='images/btn_signup_over.png'"   onmouseout="this.src='images/btn_signup.png'" style="cursor:pointer" ></span>
+<span class="signup"><span class="btn_typ02"  onclick="submitContractor()">등록</span></span>
 </c:if>
 
 <!-- update -->
 <c:if test="${updateMode}">
-	<span class="signup" ><img src="images/btn_info.png" alt="수정하기" onclick="submitContractor()" style="cursor:pointer" 
-	onmouseover="this.src='images/btn_info_over.png'"   onmouseout="this.src='images/btn_info.png'"></span>
+	<span class="signup"><span class="btn_typ02"  onclick="submitContractor()">수정</span></span>
 </c:if>
 
 	
