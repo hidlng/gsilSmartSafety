@@ -112,7 +112,7 @@ public class WorkController {
 				//통일 성을 위해 둘다 이름값만 입력함(cont_idx 사용 X)
 				if(userVO.getLevel() == 3) {//현장사용자
 					ManagerVO managerVO = (ManagerVO)session.getAttribute("managerVO");
-					workVO.setCont_name(managerVO.getCont_name());
+					//workVO.setCont_name(managerVO.getCont_name());
 				}else if(userVO.getLevel() == 4) {//업체
 					ContractorVO contractorVO = (ContractorVO)session.getAttribute("contractorVO");
 					//workVO.setCont_idx(contractorVO.getCont_idx());
@@ -137,9 +137,10 @@ public class WorkController {
 			, BindingResult bindingResult, Model model, RedirectAttributes redirectAttr) {
 		String work_idx;
 		
-		model.addAttribute("updateMode", false);
+		/**error발생시 이전 form으로 되돌아갈때 사용하기 위함**/
 		if(workVO.getToollist() != null) arrayFilter(workVO.getToollist()); //빈공간 제거		
 		model.addAttribute("workVO", workVO);
+		model.addAttribute("updateMode", false);
 		
 		if(bindingResult.hasErrors()) {
 			SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");
@@ -162,11 +163,17 @@ public class WorkController {
 			
 			//return "redirect:workList";
 			
-			//push알림
+			//현장의 소장에 push알림
 			try {
-				UserVO userVO = (UserVO) session.getAttribute("userLoginInfo");
-				if(userVO.getPid() != null & !userVO.getPid().equals(""))
-					sendMessage(userVO.getPid());
+				//UserVO userVO = (UserVO) session.getAttribute("userLoginInfo");
+				//SiteVO siteVO = siteService.getSiteByIdx(workVO.getCont_name());
+				//siteVO.getre
+//				
+//				if(userVO.getPid() != null & !userVO.getPid().equals("")){
+//					
+//					sendMessage(userVO.getPid());	
+//				}
+					
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -177,6 +184,7 @@ public class WorkController {
 		
 	}
 	
+	/**push**/
 	public void sendMessage(String regId) throws IOException {
 		Sender sender = new Sender("AIzaSyBQNLUyd80UKgvloLjeUg3FUYRHNCRKtjU");
 		//String regId = "APA91bHKzAacDO86UqeCntFzUck6bf8RcVyiDDJo4uvcYSJzErpGkLWNBKAZLArm3G0lpLllxp1mHfK4__SKytzqLtXh9sRkH66tmI9Fs5h1JO_eIP8qaVryYsSeCY3TRdleBgbSn9G06_625NAiDdVrDKbkVU_HEaSkyca01lSUt3ts4dz_Dwg";

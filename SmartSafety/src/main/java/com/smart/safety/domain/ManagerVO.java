@@ -37,12 +37,8 @@ public class ManagerVO implements Serializable {
 	@NotEmpty(message="입력 필요")
 	String position; 
 		
-	
-	/**현장 사용자**/
-	@NotEmpty(message="입력 필요")
-	String cont_name;
-	@NotEmpty(message="입력 필요")
-	String cont_work;
+	/**관리자/사용자 구분**/
+	private int ismanager;
 	
 	/**User Data**/
 	@NotEmpty(message="입력 필요")
@@ -50,7 +46,10 @@ public class ManagerVO implements Serializable {
 	@NotEmpty(message="비밀번호 등록시 빈 값이 아니어야 합니다.")
 	private String password;
 	private String isPWChanged;	
-	private int level;	
+	private String level;//int값이지만like구문 위해 String으론	
+	
+	/**Site Data**/
+	private String sitename;
 	
 	/**paging**/
 	private int start=0;
@@ -101,18 +100,7 @@ public class ManagerVO implements Serializable {
 	public void setPosition(String position) {
 		this.position = position;
 	}
-	public String getCont_name() {
-		return cont_name;
-	}
-	public void setCont_name(String cont_name) {
-		this.cont_name = cont_name;
-	}
-	public String getCont_work() {
-		return cont_work;
-	}
-	public void setCont_work(String cont_work) {
-		this.cont_work = cont_work;
-	}
+	
 	public String getWritetime() {
 		return writetime;
 	}
@@ -138,12 +126,7 @@ public class ManagerVO implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getLevel() {
-		return level;
-	}
-	public void setLevel(int level) {
-		this.level = level;
-	}
+
 	public int getStart() {
 		return start;
 	}
@@ -167,5 +150,24 @@ public class ManagerVO implements Serializable {
 	}
 	public void setSite_idx(String site_idx) {
 		this.site_idx = site_idx;
+	}
+	public String getSitename() {
+		return sitename;
+	}
+	public void setSitename(String sitename) {
+		this.sitename = sitename;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
+	}
+	public int getIsmanager() {
+		return ismanager;
+	}
+	public void setIsmanager(int ismanager) {
+		this.ismanager = ismanager;
 	}
 }

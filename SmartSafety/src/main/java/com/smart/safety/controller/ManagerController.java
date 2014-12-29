@@ -61,7 +61,11 @@ public class ManagerController {
 		managerVO.setGrade(keyword);
 		
 		//Level 지정 : 본사 or 현장  
-		managerVO.setLevel(listLevel);
+		managerVO.setLevel(listLevel+"");
+		
+		//안전관리자/현장사용자 구분
+		managerVO.setIsmanager(1);
+
 		managerVO.setSite_idx("%");
 		
 		
@@ -96,11 +100,12 @@ public class ManagerController {
 		managerVO.setId(keyword);
 		managerVO.setName(keyword);
 		managerVO.setPhone(keyword);
-		managerVO.setCont_name(keyword);
+		//managerVO.setCont_name(keyword);
 		//managerVO.setCont_work(keyword);
 		
-		 //현장사용자 : level 3
-		managerVO.setLevel(3);
+		//안전관리자/현장사용자 구분
+		managerVO.setLevel("%");
+		managerVO.setIsmanager(0);
 		
 		
 		//현장관리자 -> 자신의 현장의 사용자만 출력. 

@@ -52,10 +52,10 @@
 	<insert id="insert" parameterType="SiteVO">		
      INSERT INTO
 	 SITE_LIST( SITE_IDX, SITENAME, ADDR_DETAIL, REP_NAME, REP_PHONE,STARTTIME,ENDTIME,
-	 	CONTRACTOR, WORKTYPE, WRITETIME, DELYN)
+	 	WRITETIME, DELYN)
 	 SELECT
 		GROUP_CONCAT('S',(SELECT COUNT(*) FROM SITE_LIST), SYSDATE()) AS SITE_IDX,
-		#{sitename}, #{addr_detail},#{rep_name},#{rep_phone},#{starttime} , #{endtime},#{contractor},#{worktype},
+		#{sitename}, #{addr_detail},#{rep_name},#{rep_phone},#{starttime} , #{endtime},
 		sysdate() , 'N'
 	FROM DUAL
 	</insert>
@@ -63,7 +63,7 @@
  	<update id="update" parameterType="SiteVO">
  	    UPDATE SITE_LIST
 		SET SITENAME=#{sitename}, ADDR_DETAIL=#{addr_detail} , REP_NAME=#{rep_name}, REP_PHONE=#{rep_phone}
-		,STARTTIME=#{starttime}, ENDTIME=#{endtime}, CONTRACTOR=#{contractor}, WORKTYPE=#{worktype}
+		,STARTTIME=#{starttime}, ENDTIME=#{endtime}
 		WHERE SITE_IDX=#{site_idx}
     </update>
 	

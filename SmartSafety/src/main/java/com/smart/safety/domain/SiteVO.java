@@ -21,10 +21,6 @@ public class SiteVO implements Serializable{
 	String starttime;
 	@NotEmpty(message="입력 필요")
 	String endtime;
-	@NotEmpty(message="입력 필요")
-	String contractor;
-	@NotEmpty(message="입력 필요")
-	String worktype;
 	String writetime;
 	String delyn;
 	
@@ -65,18 +61,7 @@ public class SiteVO implements Serializable{
 		this.rep_phone = rep_phone;
 	}
 	
-	public String getContractor() {
-		return contractor;
-	}
-	public void setContractor(String contractor) {
-		this.contractor = contractor;
-	}
-	public String getWorktype() {
-		return worktype;
-	}
-	public void setWorktype(String worktype) {
-		this.worktype = worktype;
-	}
+
 	public String getWritetime() {
 		return writetime;
 	}

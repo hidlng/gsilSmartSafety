@@ -31,16 +31,16 @@
 <!-- //srchbox -->
 <table>
 	<colgroup>
-		<col style="width: 15%">
-		<col style="width: 15%">
 		<col style="width: 30%">
+		<col style="width: 15%">		
+		<col style="width: 20%">
 		<col style="width: 15%">
 		<col>
 	</colgroup>
 	<thead>
 		<tr>
-			<th scope="col">이름</th>
-			<th scope="col">업체</th>
+			<th scope="col">권한</th>
+			<th scope="col">이름</th>			
 			<th scope="col">연락처</th>
 			<th scope="col">ID</th>
 			<th scope="col">정보수정</th>
@@ -50,8 +50,12 @@
 	<tbody>
 		<c:forEach var="manager" items="${managerList}" varStatus="idx">
 			<tr>
-				<td>${manager.name}</td>
-				<td>${manager.cont_name}</td>
+				<td>
+					<c:if test ="${manager.level == 4}">소장</c:if>
+					<c:if test ="${manager.level == 5}">작업팀장</c:if>
+					<c:if test ="${manager.level == 6}">일반 작업자</c:if>
+				</td>
+				<td>${manager.name}</td>				
 				<td>${manager.phone}</td>
 				<td>${manager.id}</td>
 				<td><input id="updateIdx_${idx.index}" type="hidden"	value="${manager.manager_idx}" />

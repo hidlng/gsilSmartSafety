@@ -90,8 +90,8 @@
  		+ equipIdx + "].toolname' />";
  	}
  	
- 	str += "<input type='button' id='toolDelete_" + equipIdx + "' style='width:30px' onclick='removeTool(" 
-    	+ equipIdx + ")' value='X'></input>"
+ 	str += "<input type='button' id='toolDelete_" + equipIdx + "' style='width:30px;cursor:pointer' onclick='removeTool(" 
+    	+ equipIdx + ")' value='X' ></input>"
     	+ "<input  type='hidden' name='toollist[" + equipIdx + "].toolcode' id='toolcode_" + equipIdx + "' />" 
   	+ "<input  type='hidden' name='toollist[" + equipIdx + "].tooltype' id='tooltype_" + equipIdx + "' />" 
     	;

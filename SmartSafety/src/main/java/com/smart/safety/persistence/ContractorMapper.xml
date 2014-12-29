@@ -11,7 +11,7 @@
 		WHERE 
 		DELYN='N'
 		AND SITE_IDX = #{site_idx}
-		ORDER BY CONT_NAME
+		ORDER BY WRITETIME
 	</select>
   <select id="getContractorListByVO" resultType="ContractorVO" parameterType="ContractorVO">
 	SELECT
@@ -23,15 +23,31 @@
 		C.DELYN='N'
 		AND U.DELYN='N'
 		AND (C.CONT_NAME like #{cont_name}
+		OR C.CONT_PHONE like #{cont_phone}
 		OR C.REP_NAME like #{rep_name}
-		OR C.CONT_WORK like #{cont_work}
-		OR C.REP_PHONE like #{rep_phone}
+		OR U.ID like #{id}
 		)
-		AND SITE_IDX like #{site_idx}
-	ORDER BY C.CONT_IDX
+		AND C.SITE_IDX like #{site_idx}
+	ORDER BY C.WRITETIME
 	LIMIT #{start}, #{size}
   </select>
-  
+   <select id="getRowCount" resultType="Integer" parameterType="ContractorVO">
+        SELECT COUNT(*) 
+		FROM CONTRACTOR_LIST C
+		JOIN USER_LIST U
+		ON C.USER_IDX = U.USER_IDX
+		WHERE 
+			C.DELYN='N'
+			AND U.DELYN='N'  
+			AND (C.CONT_NAME like #{cont_name}
+			OR C.CONT_PHONE like #{cont_phone}
+			OR C.REP_NAME like #{rep_name}
+			OR U.ID like #{id}
+			)
+			AND C.SITE_IDX like #{site_idx}
+  </select>
+       
+       
   <select id="getContractorByIdx" resultType="ContractorVO" parameterType="String">
    	SELECT
 		*
@@ -40,6 +56,7 @@
 	ON C.USER_IDX = U.USER_IDX
 	WHERE
 		C.DELYN='N'
+		AND U.DELYN='N'
 		AND U.DELYN='N'
 		AND C.CONT_IDX = #{idx}
   </select>
@@ -57,31 +74,19 @@
   </select>
   
   
-  <select id="getRowCount" resultType="Integer" parameterType="ContractorVO">
-        SELECT COUNT(*) 
-		FROM CONTRACTOR_LIST C
-		WHERE 
-			DELYN='N'  
-			AND (C.CONT_NAME like #{cont_name}
-			OR C.REP_NAME like #{rep_name}
-			OR C.CONT_WORK like #{cont_work}
-			OR C.REP_PHONE like #{rep_phone}
-			)
-			AND SITE_IDX like #{site_idx}
-  </select>
-       
-  <insert id="insert" parameterType="ManagerVO">
+ 
+  <insert id="insert" parameterType="ContractorVO">
     INSERT INTO
-	CONTRACTOR_LIST(CONT_IDX, USER_IDX, SITE_IDX,  CONT_NAME, CONT_WORK,CONT_PHONE, REP_NAME, REP_PHONE,WRITETIME, DELYN)
+	CONTRACTOR_LIST(CONT_IDX, USER_IDX, SITE_IDX,  CONT_NAME, CONT_PHONE, REP_NAME, REP_PHONE,WRITETIME, DELYN)
 	SELECT
 		GROUP_CONCAT('C',(SELECT COUNT(*) FROM CONTRACTOR_LIST), SYSDATE()) AS	CONT_IDX,
 		(SELECT USER_IDX FROM USER_LIST WHERE ID=#{id}) AS	USER_IDX,
-		#{site_idx},  #{cont_name},#{cont_work},#{cont_phone}, #{rep_name},#{rep_phone} , sysdate() , 'N'
+		#{site_idx},  #{cont_name},#{cont_phone}, #{rep_name},#{rep_phone} , sysdate() , 'N'
 	FROM DUAL
   </insert>
-  <update id="update" parameterType="ManagerVO">
+  <update id="update" parameterType="ContractorVO">
       UPDATE CONTRACTOR_LIST
-		SET CONT_NAME=#{cont_name}, CONT_WORK=#{cont_work} , CONT_PHONE=#{cont_phone}, REP_NAME=#{rep_name}, REP_PHONE=#{rep_phone}
+		SET CONT_NAME=#{cont_name}, CONT_PHONE=#{cont_phone}, REP_NAME=#{rep_name}, REP_PHONE=#{rep_phone}
 		WHERE CONT_IDX=#{cont_idx}
   </update>
   <update id="delete" parameterType="String">

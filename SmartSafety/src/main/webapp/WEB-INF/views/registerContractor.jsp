@@ -57,7 +57,7 @@
 	<input type="hidden" name="cont_idx" value="${contractorVO.cont_idx}" />
 	<input type="hidden" name="user_idx" value="${contractorVO.user_idx}"/>
 	<input type="hidden" id="isPWChanged" name="isPWChanged" value="false" />
-	<input type="hidden" name="level" value="4" />
+	<input type="hidden" name="level" value="7" /><!-- 업체 level = 7 -->
 	<!-- 다른 site_idx 가진 유저가 접근하여 수정시 해당 유저의 site_idx로 수정되는 경우 방지 -->
 	<c:if test="${!updateMode}">
 		<input type="hidden" name="site_idx" value="${sessionScope.siteVO.site_idx}">
@@ -93,11 +93,8 @@
 		</td>
 		<th>연락처<p><span style="font-size:17px">(010-1234-5678)</span></th>
 		<td><form:input path="rep_phone" maxlength="13" onblur="checkPhone(this, this.value)"/><p/><form:errors cssClass="formError" path="rep_phone" />
-		</tr>
-	<tr>
-		<th>해당작업</th>
-		<td colspan="3"><form:input path="cont_work" maxlength="45"/><p/><form:errors cssClass="formError" path="cont_work" /></td>
 	</tr>
+	
 	<tr>
 		<th>ID</th>
 		<!-- insert -->

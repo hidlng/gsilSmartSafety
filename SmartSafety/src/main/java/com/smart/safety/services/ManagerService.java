@@ -40,7 +40,7 @@ public class ManagerService{
 		UserVO userVO = new UserVO();
 		userVO.setId(managerVO.getId());
 		userVO.setPassword(passwordEncoder.encode(managerVO.getPassword()));
-		userVO.setLevel(managerVO.getLevel());
+		userVO.setLevel(Integer.valueOf(managerVO.getLevel()));
 		//userVO.setUser_idx(managerVO.getUser_idx());
 		
 		userMapper.insertUser(userVO);
@@ -58,7 +58,7 @@ public class ManagerService{
 		UserVO userVO = new UserVO();
 		userVO.setId(managerVO.getId());
 		userVO.setPassword(passwordEncoder.encode(managerVO.getPassword()));
-		userVO.setLevel(managerVO.getLevel());
+		userVO.setLevel(Integer.valueOf(managerVO.getLevel()));
 		userVO.setUser_idx(managerVO.getUser_idx());
 		
 		

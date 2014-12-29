@@ -17,8 +17,7 @@ public class ContractorVO implements Serializable{
 	
 	@NotEmpty(message="입력 필요")
 	String cont_name;
-	@NotEmpty(message="입력 필요")
-	String cont_work;	
+	
 	@NotEmpty(message="입력 필요")
 	String cont_phone;	
 	
@@ -56,12 +55,7 @@ public class ContractorVO implements Serializable{
 	public void setCont_name(String cont_name) {
 		this.cont_name = cont_name;
 	}
-	public String getCont_work() {
-		return cont_work;
-	}
-	public void setCont_work(String cont_work) {
-		this.cont_work = cont_work;
-	}
+	
 	public String getRep_name() {
 		return rep_name;
 	}

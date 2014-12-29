@@ -15,7 +15,7 @@ function openTBM(){
    var url    ="tbm";
    var title  = "tbmView";
    var status = "toolbar=no,directories=no,scrollbars=no,resizable=no,status=no,menubar=no,width=700, height=500, top=0,left=20"; 
-   window.open("tbm", title,status);       
+   window.open("tbm", title,status);  //프로그램처럽보일떈 파업 X?     
    
 }
 

@@ -62,14 +62,16 @@
 	<input type="hidden" name="manager_idx"
 		value="${managerVO.manager_idx}" />
 	<input type="hidden" name="user_idx" value="${managerVO.user_idx}" />
+	<input type="hidden" name="ismanager" value="0" />
 	<input type="hidden" id="isPWChanged" name="isPWChanged" value="false" />
-	<input type="hidden" name="level" value="3">
+	
+	
 	
 	<!-- null값 방지 위함 -->
 	<input type="hidden" name="grade" value="_">
 	<input type="hidden" name="position" value="_">
 
-	<!-- siteIDx 관리  -->
+	<!-- siteIdx 관리  -->
 	<c:if test="${!updateMode}">
 		<input type="hidden" name="site_idx"
 			value="${sessionScope.siteVO.site_idx}">
@@ -86,17 +88,9 @@
 			<col style="width: 25%">
 			<col>
 		</colgroup>
-		<c:if test="${!updateMode}">
-			<tr>
-				<th>현장</th>
-				<td colspan="3">${sessionScope.siteVO.sitename}</td>
-			</tr>
-		</c:if>
 		<tr>
-			<th>업체명</th>
-			<td colspan="3"><form:input path="cont_name" maxlength="45" />
-				<p />
-				<form:errors cssClass="formError" path="cont_name" /></td>
+			<th>소속현장</th>
+			<td colspan="3">${sessionScope.siteVO.sitename}</td>
 		</tr>
 		<tr>
 			<th>성명</th>
@@ -116,16 +110,20 @@
 				<p />
 				<span style="font-size: 17px">(010-1234-5678)</span>
 			</th>
-			<td colspan="3"><form:input path="phone" maxlength="13" onblur="checkPhone(this, this.value)"/>
+			<td><form:input path="phone" maxlength="13" onblur="checkPhone(this, this.value)"/>
 				<p />
-				<form:errors cssClass="formError" path="phone" /></td>
+				<form:errors cssClass="formError" path="phone" />
+			</td>
+			<th>권한	</th>
+			<td>
+				<form:select class="selectBox"  path="level">
+						<form:option value="4" selected="selected">소장</form:option>
+						<form:option value="5">작업 팀장</form:option>
+						<form:option value="6">일반 작업자</form:option>
+				</form:select>
+			</td>
 		</tr>
-		<tr>
-			<th>해당작업</th>
-			<td colspan="3"><form:input path="cont_work" maxlength="45" />
-				<p />
-				<form:errors cssClass="formError" path="cont_work" /></td>
-		</tr>
+		
 		<tr>
 			<th>ID</th>
 			<!-- insert -->

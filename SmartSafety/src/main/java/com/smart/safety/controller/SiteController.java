@@ -122,4 +122,11 @@ public class SiteController {
 		
 	}
 	
+	@RequestMapping(value = "deleteSite", method = RequestMethod.POST)
+	public String updateSite(HttpSession session, @ModelAttribute @Valid SiteVO siteVO,  Model model) {
+		siteService.deleteSite(siteVO.getSite_idx());
+		return "redirect:siteList";
+	}
+	
+	
 }

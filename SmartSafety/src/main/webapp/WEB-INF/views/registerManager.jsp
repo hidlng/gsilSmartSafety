@@ -6,7 +6,7 @@
  <script>
  var idNotDuplicate = false;
  $(document).ready(function() {
-	 var level = ${managerVO.level};
+	 var level = '${managerVO.level}';
 	 if( level <= 0 )//default val
 		 level = 1
 	 chgMLevel(level);
@@ -81,9 +81,9 @@
 	<form:form id="managerForm"  method="POST" modelAttribute="managerVO" autocomplete="off">
 		<input type="hidden" name="manager_idx" value="${managerVO.manager_idx}" />
 		<input type="hidden" name="user_idx" value="${managerVO.user_idx}"/>
+		<input type="hidden" name="ismanager" value="1" />
 		<input type="hidden" id="isPWChanged" name="isPWChanged" value="false" />
-		<input type="hidden" name="cont_name" value="_">
-		<input type="hidden" name="cont_work" value="_">
+		
 <!-- //srchbox -->
 <table class="user_signup">
 	<colgroup>
@@ -103,7 +103,13 @@
 				</form:select>
 			</c:if>
 			<c:if test="${updateMode}">
-				<form:input path="level" readonly="true"/>
+				<input type="hidden" name="level" value="${managerVO.level}"/>
+				<c:if test="${managerVO.level == 1}">
+					본사 관리자(EHS팀)
+				</c:if>
+				<c:if test="${managerVO.level == 2}">
+					현장 안전관리자
+				</c:if>
 			</c:if>
 		</td>
 		<th>직급</th>

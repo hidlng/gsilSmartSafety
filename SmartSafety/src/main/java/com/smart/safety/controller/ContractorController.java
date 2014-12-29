@@ -46,10 +46,11 @@ public class ContractorController {
 			//keyword 생성
 			String keyword = "%" + searchWord + "%";
 			ContractorVO contractorVO = new ContractorVO();
-			contractorVO.setCont_name(keyword);
+			contractorVO.setCont_name(keyword);			
+			contractorVO.setCont_phone(keyword);
 			contractorVO.setRep_name(keyword);
-			contractorVO.setCont_work(keyword);
-			contractorVO.setRep_phone(keyword);
+			contractorVO.setId(keyword);
+			
 			
 			//현장관리자 -> 자신의 현장의 업체만 출력. 
 			//SS 관리자 - > 전부 출력
@@ -69,8 +70,7 @@ public class ContractorController {
 		     
 			List<ContractorVO> list = contractorService.getContractorListByVO(contractorVO);
 			
-//			model.addAttribute("startPage", startPage);
-//			model.addAttribute("endPage", endPage);
+
 			model.addAttribute("contractorList", list);
 			session.setAttribute("contentView", "contractorList");
 		}

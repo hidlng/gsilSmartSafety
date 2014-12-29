@@ -14,13 +14,16 @@
 	 else{		
 		 $('#siteForm').attr('action', 'insertSite');
 	 }
-	
-	 //worktype
-	 setChildCategoryOf(1, 'worktype' , '${siteVO.worktype}');
-	// $("#worktype").val("철골작업");
+
 	
  });
- 
+/*  function deleteSite() {	
+	input = confirm('삭제하시겠습니까?');
+	if(input){
+		$('#siteForm').attr('action', 'deleteSite');
+		$('#siteForm').submit();
+	}
+ } */
  
   function submitSite() {	
 	  var input;
@@ -45,20 +48,7 @@
 
 
 	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn){
-			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-			//document.form.addr_detail.value = roadFullAddr;
-			$('#addr_detail').val(roadFullAddr);
-			
-			/* document.form.roadFullAddr.value = roadFullAddr;
-			document.form.roadAddrPart1.value = roadAddrPart1;
-			document.form.roadAddrPart2.value = roadAddrPart2;
-			document.form.addrDetail.value = addrDetail;
-			document.form.engAddr.value = engAddr;
-			document.form.jibunAddr.value = jibunAddr;
-			document.form.zipNo.value = zipNo;
-			document.form.admCd.value = admCd;
-			document.form.rnMgtSn.value = rnMgtSn;
-			document.form.bdMgtSn.value = bdMgtSn; */
+			$('#addr_detail').val(roadFullAddr);		
 	}
 
  
@@ -114,18 +104,6 @@
 				<p />
 				<form:errors cssClass="formError" path="endtime" /></td>
 		</tr>
-		<tr>
-			<th>관련업체</th>
-			<td><form:input path="contractor" maxlength="45" />
-				<p />
-				<form:errors cssClass="formError" path="contractor" />
-			<th>공종</th>
-			<td>
-
-			<form:select id="worktype"  path="worktype"  class="siteSelectBox"></form:select>
-				<p />
-				<form:errors cssClass="formError" path="worktype" />
-		</tr>
 	</table>
 
 	<div class="paging">
@@ -137,6 +115,7 @@
 		<!-- update -->
 		<c:if test="${updateMode}">
 			<span id="popupOKBtn" class="btn_typ02"  onclick="submitSite()">수정 </span>
+			<!--span id="popupOKBtn" class="btn_typ02"  onclick="deleteSite()">삭제 </span-->
 		</c:if>
 
 
