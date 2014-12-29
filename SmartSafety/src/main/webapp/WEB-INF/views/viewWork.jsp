@@ -3,7 +3,115 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script>
+$(document).ready(function() {	
+	var toolSize;
+	
+	<c:if test="${workVO.toollist== null}">
+		toolSize = 0 ;
+	</c:if>
+	<c:if test="${workVO.toollist != null}">
+		toolSize = ${workVO.toollist.size()};
+	</c:if>
+	
+	if(toolSize > 0) {
+	var i=0;
+		<c:forEach var="tool" items="${workVO.toollist}" varStatus="idx">
+	
+		var type = '${tool.tooltype}';
+		var code = '${tool.toolcode}';
+		var name = '${tool.toolname}';
+		
+		if(type == 0)
+			addTool('cons_machine' , false);
+		else if(type == 1)
+			addTool('trans_machine' , false);
+		else if(type == 2)
+			addTool('etc_machine' , false);
+		else if(type == 3)
+			addTool('weld_tool' , false);
+		else if(type == 4)
+			addTool('elec_tool' , false);
+		else if(type == 5)
+			addTool('nelec_tool' , false);
+		else if(type == 6)
+			addTool('etc_tool' , false);
+		
+		
+		i++;
+		</c:forEach>
+		
+	}else {
+		/* addTool('cons_machine' , true); //건설장비 selectbox
+		addTool('trans_machine' , true);//운반장비
+		addTool('etc_machine' , true);//기타 장비 */
+	}
+
+	//setCode(3, 'placename', 'placename');//작업 형태 지정
+	
+
+	
+	
+ });
  
+
+/**장비관련**/
+var equipIdx = 0;
+
+/**option 선택시 새로 추가될 selectbox형태 설정
+ * tarId : select박스를 추가할 TD
+ * isSelect : Seletbox/Text 결정
+ */
+function getTool(tarId, isSelect) {
+	var str;
+	if(isSelect){
+		str = "<select id='toolSelect_" + equipIdx + "' name='toollist["
+		+ equipIdx + "].toolname' class='siteSelectBox' onchange='selectTool("
+		+ equipIdx + ", \""	+ tarId + "\")'>"
+	//	+ "<option>:::선택:::</option>"
+		+ "</select>";
+	}else {
+		str =  "<input type='text' id='toolSelect_" + equipIdx + "' name='toollist["
+		+ equipIdx + "].toolname' />";
+	}
+	
+	str += "<input type='button' id='toolDelete_" + equipIdx + "' style='width:30px' onclick='removeTool(" 
+   	+ equipIdx + ")' value='X'></input>"
+   	+ "<input  type='hidden' name='toollist[" + equipIdx + "].toolcode' id='toolcode_" + equipIdx + "' />" 
+ 	+ "<input  type='hidden' name='toollist[" + equipIdx + "].tooltype' id='tooltype_" + equipIdx + "' />" 
+   	;
+ 	
+ 	return str;
+}
+
+
+/* selectbox 추가
+ * tarId : select박스를 추가할 TD
+ */
+function addTool(tarId, isSelect) {	
+	var str = getTool(tarId , isSelect);
+	
+	/**span 추가**/
+	var addedSpan = document.createElement("span");
+	addedSpan.id = "toolSpan_" + equipIdx;
+	addedSpan.innerHTML = str;
+	$("#" + tarId).append(addedSpan);
+	
+	if(isSelect){
+		if(tarId == 'cons_machine') setCode(57, 'toolSelect_' + equipIdx);
+		else if(tarId == 'trans_machine') setCode(58, 'toolSelect_' + equipIdx);
+		else if(tarId == 'etc_machine') setCode(59, 'toolSelect_' + equipIdx);
+		else if(tarId == 'weld_tool') setCode(61, 'toolSelect_' + equipIdx);
+		else if(tarId == 'elec_tool') setCode(62, 'toolSelect_' + equipIdx);
+		else if(tarId == 'nelec_tool') setCode(63, 'toolSelect_' + equipIdx);
+		else if(tarId == 'etc_tool') setCode(64, 'toolSelect_' + equipIdx);
+
+	}
+	equipIdx++;
+//	$("#checkCount").val(checkCount);//전달시 checklistArray에서 제거된 checkvo가 계속남아있으므로 이를 지정된 갯수만큼 잘라주기 위함	
+}
+
+
+
  function submitWork() {	
 	$('#workForm').submit();
 
@@ -102,13 +210,13 @@
 		</tr>
 		<tr>
 			<td id="cons_machine">
-				<span class="btn_typ01"  onclick="addTool('cons_machine', true);">추가</span>
+				
 			</td>
 			<td id="trans_machine">
-				<span class="btn_typ01"  onclick="addTool('trans_machine', true);">추가</span>
+				
 			</td>
 			<td id="etc_machine">
-				<span class="btn_typ01"  onclick="addTool('etc_machine', true);">추가</span>
+				
 			</td>
 		</tr>		
 	</table>
@@ -133,16 +241,16 @@
 		</tr>
 		<tr>
 			<td id="weld_tool">
-				<span class="btn_typ01"  onclick="addTool('weld_tool', true);">추가</span>
+				
 			</td>
 			<td id="elec_tool">
-				<span class="btn_typ01"  onclick="addTool('elec_tool', true);">추가</span>
+				
 			</td>
 			<td id="nelec_tool">
-				<span class="btn_typ01"  onclick="addTool('nelec_tool', true);">추가</span>				
+								
 			</td>
 			<td id="etc_tool">
-				<span class="btn_typ01"  onclick="addTool('etc_tool', true);">추가</span>
+				
 			</td>
 		</tr>		
 	</table>
@@ -230,7 +338,7 @@
 	</table>
 
 	<div class="paging">
-		<span class="signup"><span class="btn_typ02"  onclick="submitWork()">목록으로 ></span>	</span>
+		<span class="signup"><span class="btn_typ02 toHomePage">목록</span>	</span>
 	</div>
 	<p class="goTop">
 		<a href="#"><img src="images/icon_top.png" alt="top으로 가기">&nbsp;</a>

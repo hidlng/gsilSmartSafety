@@ -32,5 +32,8 @@ public class LoginService {
 		this.userMapper = loginMapper;
 	}
 	
+	public void updateUserPID(UserVO userVO){
+		userMapper.updateUserPID(userVO);
+	}
 
 }

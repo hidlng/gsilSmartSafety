@@ -37,6 +37,7 @@
 
    $(document).on("click", "#workList", function(e) { $('#workList_form').submit(); });
    $(document).on("click", "#homeLogo", function(e) { $('#workList_form').submit(); });
+   $(document).on("click", ".toHomePage", function(e) { $('#workList_form').submit(); });
    
    $(document).on("click", "#contractorList", function(e) { $('#contractorList_form').submit(); });
    $(document).on("click", "#siteList", function(e) { $('#siteList_form').submit(); });

@@ -7,7 +7,6 @@ import javax.annotation.*;
 import javax.servlet.http.*;
 import javax.validation.*;
 
-import org.json.*;
 import org.slf4j.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -15,15 +14,14 @@ import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.*;
 import org.springframework.web.servlet.mvc.support.*;
-import org.springframework.web.servlet.support.*;
 
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.*;
+import com.google.android.gcm.server.*;
 import com.smart.safety.domain.*;
-import com.smart.safety.persistence.*;
 import com.smart.safety.services.*;
 import com.smart.safety.util.*;
+
 
 
 @Controller(value="WorkController")
@@ -133,6 +131,7 @@ public class WorkController {
 	}
 	
 	
+	
 	@RequestMapping(value = "insertWork", method = RequestMethod.POST)
 	public String insertWork(HttpSession session, @ModelAttribute @Valid WorkVO workVO
 			, BindingResult bindingResult, Model model, RedirectAttributes redirectAttr) {
@@ -163,11 +162,37 @@ public class WorkController {
 			
 			//return "redirect:workList";
 			
+			//push알림
+			try {
+				UserVO userVO = (UserVO) session.getAttribute("userLoginInfo");
+				if(userVO.getPid() != null & !userVO.getPid().equals(""))
+					sendMessage(userVO.getPid());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			redirectAttr.addFlashAttribute("work_idx", work_idx);
 			return "redirect:printList";
 		}
 		
 	}
+	
+	public void sendMessage(String regId) throws IOException {
+		Sender sender = new Sender("AIzaSyBQNLUyd80UKgvloLjeUg3FUYRHNCRKtjU");
+		//String regId = "APA91bHKzAacDO86UqeCntFzUck6bf8RcVyiDDJo4uvcYSJzErpGkLWNBKAZLArm3G0lpLllxp1mHfK4__SKytzqLtXh9sRkH66tmI9Fs5h1JO_eIP8qaVryYsSeCY3TRdleBgbSn9G06_625NAiDdVrDKbkVU_HEaSkyca01lSUt3ts4dz_Dwg";
+		Message message = new Message.Builder().addData("msg", "push notify").build();
+		List<String> list = new ArrayList<String>();
+		list.add(regId);
+		
+		MulticastResult multiResult = sender.send(message, list, 5);
+		if (multiResult != null) {
+			List<Result> resultList = multiResult.getResults();
+			for (Result result : resultList) {
+				System.out.println(result.getMessageId());
+			}
+		}
+	}
+	
 	
 	@RequestMapping(value = "updateWork", method = RequestMethod.POST)
 	public String updateWork(HttpSession session, @ModelAttribute @Valid WorkVO workVO, BindingResult bindingResult,

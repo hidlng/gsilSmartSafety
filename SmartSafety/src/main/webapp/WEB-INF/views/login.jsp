@@ -13,6 +13,10 @@
   function login() {
 	$('#loginForm').submit();  
   }
+  
+  function setPData(pid) {
+	  $('#pid').val(pid);
+  }
   </script>
 </head>
 
@@ -20,6 +24,7 @@
 
 <div id="wrap">
 <form id="loginForm" name="form" method="post" action="loginProcess">		 
+<input type="hidden" id="pid" name="pid" value="">
 	<div class="back_bg">
 		<div class="logBox">
 			<div class="inputLog" >

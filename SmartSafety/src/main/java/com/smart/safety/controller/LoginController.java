@@ -4,14 +4,12 @@ import java.io.IOException;
 import java.security.Principal;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import com.smart.safety.domain.ContractorVO;
 import com.smart.safety.domain.ManagerVO;
@@ -76,6 +74,12 @@ public class LoginController {
 		session.invalidate();
 	}
 	
+	@RequestMapping(value="loginProcess", method = RequestMethod.POST)
+	public void loginProcess(HttpSession session, HttpServletRequest request) {
+		String pid = request.getParameter("pid");
+		
+	}
+	
 	@RequestMapping(value = "/duplicateIdCheck")
 	public void duplicateIdCheck(String id,  HttpServletResponse response) {
 		UserVO userVO = loginService.getLoginUserById(id);
@@ -90,9 +94,18 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value ="main", method = RequestMethod.GET)
-	public String main(HttpSession session  , Principal principal) {
+	public String main(HttpSession session  , Principal principal, HttpServletRequest request, @RequestParam(value="pid")String pid) {
+		
 		String id = principal.getName();
 		UserVO userVO = loginService.getLoginUserById(id);	
+		
+		//pid가 존재할 경우 모바일 접속이므로 해당정보를 업데이트해줌
+		//pid 존재하지 않을경우 pass
+		if(pid != null & !pid.equals("")) {
+			userVO.setPid(pid);
+			loginService.updateUserPID(userVO);
+		}
+		
 		
 		SiteVO siteVO = new SiteVO();
 		

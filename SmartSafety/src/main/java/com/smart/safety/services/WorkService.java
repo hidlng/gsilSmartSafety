@@ -51,10 +51,12 @@ public class WorkService{
 		workVO.setWork_idx(work_idx);
 		workMapper.insert(workVO);
 		
-		List<ToolVO> toollist = workVO.getToollist();		
-		for(ToolVO toolVO : toollist){
-			toolVO.setWork_idx(work_idx);
-			toolMapper.insert(toolVO);
+		List<ToolVO> toollist = workVO.getToollist();	
+		if(toollist != null) {
+			for(ToolVO toolVO : toollist){
+				toolVO.setWork_idx(work_idx);
+				toolMapper.insert(toolVO);
+			}
 		}
 		
 		return work_idx;

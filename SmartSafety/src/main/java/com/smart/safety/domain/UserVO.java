@@ -15,6 +15,13 @@ public class UserVO implements Serializable {
 	private String password;
 	private String authority;
 	private int level;
+	String pid;
+	public String getPid() {
+		return pid;
+	}
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
 	String writetime;
 	String delyn;
 	

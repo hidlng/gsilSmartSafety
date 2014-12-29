@@ -12,6 +12,7 @@ public interface UserMapper {
 	public void insertUser(UserVO userVO);
 	public void updateUser(UserVO userVO);
 	public void updateUserWithoutPW(UserVO userVO);
+	public void updateUserPID(UserVO userVO);
 	public void deleteUserByIdx(String user_idx);
 	
 

@@ -54,12 +54,9 @@
 				<td>${manager.cont_name}</td>
 				<td>${manager.phone}</td>
 				<td>${manager.id}</td>
-				<td><input id="updateIdx_${idx.index}" type="hidden"
-					value="${manager.manager_idx}" /> <img src="images/btn_info.png"
-					onclick="updateSubmit('${idx.index}')" alt="정보수정하기"
-					style="cursor: pointer"
-					onmouseover="this.src='images/btn_info_over.png'"
-					onmouseout="this.src='images/btn_info.png'"></td>
+				<td><input id="updateIdx_${idx.index}" type="hidden"	value="${manager.manager_idx}" />
+					<span class="signup"><span class="btn_typ01"  onclick="updateSubmit('${idx.index}')">수정</span></span>	
+				 </td>
 			</tr>
 		</c:forEach>
 	</tbody>

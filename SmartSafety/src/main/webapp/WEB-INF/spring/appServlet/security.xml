@@ -38,12 +38,12 @@
         
         <form-login login-page="/login"
                     username-parameter="id"
-                    password-parameter="password"    
-                    login-processing-url="/loginProcess"
+                    password-parameter="password"
                     default-target-url="/main"
+                    authentication-success-handler-ref="loginSuccessHandler"
                     authentication-failure-url="/login_fail"
                     always-use-default-target='true'
-                    
+                    login-processing-url="/loginProcess"
                     
                     />
          <logout logout-url="/logout"  logout-success-url="/logout_success" />
@@ -52,6 +52,8 @@
             <!--concurrency-control max-sessions="1" expired-url="/login_duplicate"/-->
         </session-management>
     </http>
+    
+ <beans:bean id="loginSuccessHandler" class="com.smart.safety.util.LoginSuccessHandler"/>
 
  <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 

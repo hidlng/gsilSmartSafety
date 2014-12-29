@@ -28,20 +28,25 @@
 	
     
 	
-      <update id="updateUser" parameterType="UserVO">
-          UPDATE USER_LIST
-          SET PASSWORD=#{password}, LEVEL=#{level}
-          WHERE USER_IDX=#{user_idx}
-      </update>
-      
-       <update id="updateUserWithoutPW" parameterType="UserVO">
-          UPDATE USER_LIST
-          SET LEVEL=#{level}
-          WHERE USER_IDX=#{user_idx}
-      </update>
-      
-	
-   	 <delete id="deleteUserByIdx" parameterType="String">
+     <update id="updateUser" parameterType="UserVO">
+         UPDATE USER_LIST
+         SET PASSWORD=#{password}, LEVEL=#{level}
+         WHERE USER_IDX=#{user_idx}
+     </update>
+     
+      <update id="updateUserWithoutPW" parameterType="UserVO">
+         UPDATE USER_LIST
+         SET LEVEL=#{level}
+         WHERE USER_IDX=#{user_idx}
+     </update>
+      <update id="updateUserPID" parameterType="UserVO">
+         UPDATE USER_LIST
+         SET PID=#{pid}
+         WHERE USER_IDX=#{user_idx}
+     </update>
+     
+
+  	<delete id="deleteUserByIdx" parameterType="String">
 		UPDATE USER_LIST SET DELYN='Y' WHERE USER_IDX=#{user_idx} 
 	</delete>
 	
