@@ -22,6 +22,10 @@ public class ContractorVO implements Serializable{
 	String cont_phone;	
 	
 	@NotEmpty(message="입력 필요")
+	String cont_emg_phone;	
+	
+	
+	@NotEmpty(message="입력 필요")
 	String rep_name;
 	@NotEmpty(message="입력 필요")
 	String rep_phone;
@@ -135,6 +139,12 @@ public class ContractorVO implements Serializable{
 	}
 	public void setCont_phone(String cont_phone) {
 		this.cont_phone = cont_phone;
+	}
+	public String getCont_emg_phone() {
+		return cont_emg_phone;
+	}
+	public void setCont_emg_phone(String cont_emg_phone) {
+		this.cont_emg_phone = cont_emg_phone;
 	}
 
 	

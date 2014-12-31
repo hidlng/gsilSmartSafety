@@ -53,7 +53,7 @@
 			<th>작업명 : </th>
 			<td>${tbmVO.worktitle}</td>
 			<th>공사감독자 : </th>
-			<td>----(000-0000-0000)</td>
+			<td>${tbmVO.inspector}(${tbmVO.inspector_phone})</td>
 		 </tr>
 		 <tr>
 			<th>작업책임자 : </th>
@@ -72,34 +72,23 @@
 		<caption>사용안전점검여부</caption>
 		<colgroup>
 			<col style="/">
-			<col style="width: 16%">
-			<col style="width: 16%">
-			<col style="width: 16%">
-			<col style="width: 16%">
-			<col style="width: 16%">			
+			<col style="width: 12%">
+			<col style="width: 12%">
+			<col style="width: 12%">
+			<col style="width: 18%">
+			<col style="width: 20%">			
 		</colgroup>
 		 <tr>
-			<th rowspan="2">사용장비/<br/>사용안전점검여부</td>
-			<th>장비명</td>
-			<td>망치</td>
-			<td>장비1</td>
-			<td>장비2</td>
-			<td>장비3</td>
+			<th colspan="6">사용장비 /사용안전점검여부</th>			
 		 </tr>
 		 <tr>	
-			<th>점검여부</th>
-			<td>Y</td>
-			<td>Y</td>
-			<td>Y</td>
-			<td>N</td>
+			<td colspan="6"> ${tbmVO.toollist}</td>
 		 </tr>
 		 <tr>
 			<th>주요 위험정보</th>
-			<td colspan="5">${tbmVO.mainrisk}</td>		
-		 </tr>
-		 <tr>
+			<td colspan="3">${tbmVO.mainrisk}</td>	
 			<th>작업장소</th>
-			<td colspan="5">${tbmVO.workname}</td>
+			<td colspan="2">${tbmVO.workname}</td>	
 		 </tr>
 		 <tr>
 			<th>위험등급</th>
@@ -154,9 +143,9 @@
 		</colgroup>
 		 <tr>
 			<th>두산건설<br/>공사담당자</th>
-			<td>${tbmVO.site_rep_name}</td>
+			<td>${tbmVO.site_rep_name}<br>(${tbmVO.site_rep_phone})</td>
 			<th>긴급연락처</th>
-			<td>${tbmVO.cont_phone}</td>
+			<td>${tbmVO.cont_phone}(${tbmVO.cont_emg_phone})</td>
 		 </tr>
 	 </table><!-- //table -->
  

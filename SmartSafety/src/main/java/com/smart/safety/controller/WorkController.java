@@ -44,7 +44,7 @@ public class WorkController {
 	
 	public static final int MAX_ROW_NUM=10;
 	public static final int MAX_PAGE_NUM=5;
-
+	
 	
 	
 	
@@ -178,8 +178,9 @@ public class WorkController {
 				e.printStackTrace();
 			}
 			
-			redirectAttr.addFlashAttribute("work_idx", work_idx);
-			return "redirect:printList";
+			//redirectAttr.addFlashAttribute("work_idx", work_idx);
+			//return "redirect:printList";
+			return "redirect:printList?work_idx=" + workVO.getWork_idx();
 		}
 		
 	}
@@ -228,16 +229,16 @@ public class WorkController {
 				return "redirect:registerWork";
 			}
 			
-			redirectAttr.addFlashAttribute("work_idx",workVO.getWork_idx());
+			//redirectAttr.addFlashAttribute("work_idx",workVO.getWork_idx());
 			//return "redirect:workList";
-			return "redirect:printList";
+			return "redirect:printList?work_idx=" + workVO.getWork_idx();
 		}
 		
 	}
 	
 	public String getRiskData(String list) {
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getRiskData=&codelist=" + list;
+		String url = PrintController.RISK_DATA_URL + list;
 		String result = restTemplate.getForObject(url, String.class);
 		String json_result = result.substring(result.indexOf('(') + 1, result.length() - 1);
 		return json_result;

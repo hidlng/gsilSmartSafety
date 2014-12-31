@@ -29,7 +29,7 @@
 	$(document).ready(function() {
 		var contentView = '#' +'${sessionScope.contentView}';
 		$(contentView).addClass('on');
-		
+		document.body.style.zoom =1.4;
 	});
 	
    $(document).on("click", "#siteUserList", function(e) { $('#siteUserList_form').submit(); });
@@ -47,6 +47,18 @@
    window.history.forward(0);
    history.navigationMode = 'compatible'; // 오페라, 사파리 뒤로가기 막기
    function _no_Back(){window.history.forward(0);}
+   
+   function addZoom(){
+	   var zoom = document.body.style.zoom; 
+	   alert(zoom);
+	   document.body.style.zoom = zoom + 0.5;
+	   
+   }
+   
+   function minusZoom(){
+	   document.body.style.zoom -=0.1;
+   }
+   
   </script>
 <meta http-equiv="Cache-Control" content="max-age=0" />
 <meta http-equiv="Cache-Control" content="no-cache" />
@@ -122,7 +134,8 @@
 					</c:if>
 					<li  class="last"><span id="logout" class="btn_typ01">로그아웃&nbsp;></span></li>
 				</ul><!-- //aside_ident -->
-			
+			<input type="button" onclick="addZoom()" value="+++"/>
+			<input type="button" onclick="minusZoom()" value="---"/>
 			</div><!-- //aside -->
 			
 			<div class="content work">

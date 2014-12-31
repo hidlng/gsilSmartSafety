@@ -34,19 +34,23 @@
 		var name = '${tool.toolname}';
 		
 		if(type == 0)
-			addTool('cons_machine' , false);
+			addTool('cons_machine' , 1);
 		else if(type == 1)
-			addTool('trans_machine' , false);
+			addTool('trans_machine' , 1);
 		else if(type == 2)
-			addTool('etc_machine' , false);
+			addTool('etc_machine' , 1);
 		else if(type == 3)
-			addTool('weld_tool' , false);
+			addTool('weld_tool' , 1);
 		else if(type == 4)
-			addTool('elec_tool' , false);
+			addTool('elec_tool' , 1);
 		else if(type == 5)
-			addTool('nelec_tool' , false);
+			addTool('nelec_tool' , 1);
 		else if(type == 6)
-			addTool('etc_tool' , false);
+			addTool('etc_tool' , 1);
+		else if(type == 98) //장비 수기
+			addTool('etc_machine' , 1);
+		else if(type == 99)//공도구 수기
+			addTool('etc_tool' , 1);
 		
 		$('#toolSelect_' + i).val(name);
 		$('#toolcode_' + i).val(code);
@@ -77,17 +81,20 @@
   * tarId : select박스를 추가할 TD
   * isSelect : Seletbox/Text 결정
   */
- function getTool(tarId, isSelect) {
+ function getTool(tarId, inputType) {
  	var str;
- 	if(isSelect){
+ 	if(inputType == 0){//Select
  		str = "<select id='toolSelect_" + equipIdx + "' name='toollist["
  		+ equipIdx + "].toolname' class='siteSelectBox' onchange='selectTool("
  		+ equipIdx + ", \""	+ tarId + "\")'>"
  	//	+ "<option>:::선택:::</option>"
  		+ "</select>";
- 	}else {
+ 	}else if(inputType == 1) { //readonly text
  		str =  "<input type='text' id='toolSelect_" + equipIdx + "' name='toollist["
- 		+ equipIdx + "].toolname' />";
+ 		+ equipIdx + "].toolname' readonly='true'/>";
+ 	}else if(inputType == 2) {//수기입력 text
+ 		str =  "<input type='text' id='toolSelect_" + equipIdx + "' name='toollist["
+ 		+ equipIdx + "].toolname' value=''/>";
  	}
  	
  	str += "<input type='button' id='toolDelete_" + equipIdx + "' style='width:30px;cursor:pointer' onclick='removeTool(" 
@@ -103,8 +110,10 @@
  /* selectbox 추가
   * tarId : select박스를 추가할 TD
   */
- function addTool(tarId, isSelect) {	
- 	var str = getTool(tarId , isSelect);
+ function addTool(tarId, inputType) {	
+	var type;
+	
+ 	var str = getTool(tarId , inputType);
  	
  	/**span 추가**/
  	var addedSpan = document.createElement("span");
@@ -112,7 +121,7 @@
  	addedSpan.innerHTML = str;
  	$("#" + tarId).append(addedSpan);
  	
- 	if(isSelect){
+ 	if(inputType == 0){//selectbox 항목추가
  		if(tarId == 'cons_machine') setCode(57, 'toolSelect_' + equipIdx);
  		else if(tarId == 'trans_machine') setCode(58, 'toolSelect_' + equipIdx);
  		else if(tarId == 'etc_machine') setCode(59, 'toolSelect_' + equipIdx);
@@ -125,9 +134,28 @@
  	equipIdx++;
 // 	$("#checkCount").val(checkCount);//전달시 checklistArray에서 제거된 checkvo가 계속남아있으므로 이를 지정된 갯수만큼 잘라주기 위함	
  }
+ 
+ /**수기입력용 Textbox생성**/
+ function addToolText(tarId, isTool) {
+	 var str = getTool(tarId , 2);//text박스
+	 
+	 var addedSpan = document.createElement("span");
+	 	addedSpan.id = "toolSpan_" + equipIdx;
+	 	addedSpan.innerHTML = str;
+	 	$("#" + tarId).append(addedSpan);
+	 	
+		/**hidden값 code, type 값 부여**/
+	 	$('#toolcode_' + equipIdx).val('_');
+	 	if(isTool) //공도구면 99
+	 		$('#tooltype_' + equipIdx).val(99); //99: 수기입력
+	 	else//장비면 98
+	 		$('#tooltype_' + equipIdx).val(98); //98: 수기입력
+	 	
+	 equipIdx++;
+ }
 
  //넘겨받은 selectbox의 id값은 code값과 같음
- //선택 시 해당하는 값을 지정해주고 새로운 박스를 생성
+ //code 및 type hiddne값 지정용도
  function selectTool(eIdx, tarId) {
  	var code = $('#toolSelect_' + eIdx + ' option:selected').attr('id'); //선택된 option의 id값이 code값임.(val은 name)
  	var type;
@@ -336,13 +364,14 @@ function confirmCode() {
 		</tr>
 		<tr>
 			<td id="cons_machine">
-				<span class="btn_typ01"  onclick="addTool('cons_machine', true);">추가</span>
+				<span class="btn_typ01"  onclick="addTool('cons_machine', 0);">추가</span>
 			</td>
 			<td id="trans_machine">
-				<span class="btn_typ01"  onclick="addTool('trans_machine', true);">추가</span>
+				<span class="btn_typ01"  onclick="addTool('trans_machine', 0);">추가</span>
 			</td>
 			<td id="etc_machine">
-				<span class="btn_typ01"  onclick="addTool('etc_machine', true);">추가</span>
+				<span class="btn_typ01"  onclick="addTool('etc_machine', 0);">추가</span>
+				<span class="btn_typ01"  onclick="addToolText('etc_machine');">수기입력</span>
 			</td>
 		</tr>		
 	</table>
@@ -367,16 +396,16 @@ function confirmCode() {
 		</tr>
 		<tr>
 			<td id="weld_tool">
-				<span class="btn_typ01"  onclick="addTool('weld_tool', true);">추가</span>
+				<span class="btn_typ01"  onclick="addTool('weld_tool', 0);">추가</span>
 			</td>
 			<td id="elec_tool">
-				<span class="btn_typ01"  onclick="addTool('elec_tool', true);">추가</span>
+				<span class="btn_typ01"  onclick="addTool('elec_tool', 0);">추가</span>
 			</td>
 			<td id="nelec_tool">
-				<span class="btn_typ01"  onclick="addTool('nelec_tool', true);">추가</span>				
+				<span class="btn_typ01"  onclick="addTool('nelec_tool', 0);">추가</span>				
 			</td>
 			<td id="etc_tool">
-				<span class="btn_typ01"  onclick="addTool('etc_tool', true);">추가</span>
+				<span class="btn_typ01"  onclick="addTool('etc_tool', 0);">추가</span>
 			</td>
 		</tr>		
 	</table>
