@@ -11,10 +11,9 @@ public interface FileMapper {
 
   List<FileVO> getFilesByCode(String code);
   List<FileVO> getFileList();
-  FileVO getFileType(@Param("code") String code, @Param("fileName") String fileName);  
+  FileVO getFileVOByIdx(String file_idx);  
 
-  void insertFileVO(FileVO fileVO);  
-  void updateFileVO(FileVO fileVO);  
+  void insertFileVO(FileVO fileVO);
   void deleteFileVOByCode(String code);
   void deleteFileVOByVO(FileVO fileVO);
 

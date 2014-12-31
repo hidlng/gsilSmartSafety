@@ -59,8 +59,7 @@
 				<tr><th class="detailHeader">사고사례</th>					
 					<td colspan="${actionBean.inputAccList.size()}"><c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
 							<stripes:link	beanclass="com.spring.risk.web.actions.CategoryActionBean"	event="getFile">
-								<stripes:param name="fileCode" value="${file.code}" />
-								<stripes:param name="fileName" value="${file.fileName}" />
+								<stripes:param name="fileIdx" value="${file.file_idx}" />
 								${file.fileName}<br>
 							</stripes:link>
 						</c:forEach>
@@ -95,8 +94,7 @@
 						<stripes:link
 							beanclass="com.spring.risk.web.actions.CategoryActionBean"
 							event="getFile">
-							<stripes:param name="fileCode" value="${file.code}" />
-							<stripes:param name="fileName" value="${file.fileName}" />	
+							<stripes:param name="fileIdx" value="${file.file_idx}" />
 							${file.fileName}<br>						
 						</stripes:link>		
 					</c:forEach>
@@ -119,8 +117,7 @@
 					<stripes:link
 						beanclass="com.spring.risk.web.actions.CategoryActionBean"
 						event="getFile">
-						<stripes:param name="fileCode" value="${file.code}" />
-						<stripes:param name="fileName" value="${file.fileName}" />
+						<stripes:param name="fileIdx" value="${file.file_idx}" />
 					${file.fileName}
 				</stripes:link>
 				</c:forEach></td></tr>

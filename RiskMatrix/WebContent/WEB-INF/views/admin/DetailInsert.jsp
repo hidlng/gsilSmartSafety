@@ -161,8 +161,7 @@
 					<c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
 						${file.fileName} 		
 						<stripes:link class="detailLink" beanclass="com.spring.risk.web.actions.CategoryActionBean" event="deleteFile">
-						<stripes:param name="deleteFileCode">${file.code}</stripes:param>
-						<stripes:param name="deleteFileName">${file.fileName}</stripes:param>x</stripes:link>
+						<stripes:param name="deleteFileIdx">${file.file_idx}</stripes:param>x</stripes:link>
 					</c:forEach>
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
 						<stripes:file name="fileBeanList[${loop.index}]" />
@@ -217,9 +216,8 @@
 				<c:if test="${actionBean.isModify}">
 					<c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
 						${file.fileName} 		
-						<stripes:link class="detailLink" beanclass="com.spring.risk.web.actions.CategoryActionBean" event="deleteFile"  onclick="alert('지우시겠습니까')">
-						<stripes:param name="deleteFileCode">${file.code}</stripes:param>
-						<stripes:param name="deleteFileName">${file.fileName}</stripes:param>x</stripes:link>
+						<stripes:link class="detailLink" beanclass="com.spring.risk.web.actions.CategoryActionBean" event="deleteFile">
+						<stripes:param name="deleteFileIdx">${file.file_idx}</stripes:param>x</stripes:link>
 					</c:forEach>
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
 						<stripes:file name="fileBeanList[${loop.index}]" />
@@ -248,9 +246,8 @@
 				<c:if test="${actionBean.isModify}">
 					<c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
 						${file.fileName} 		
-						<stripes:link class="detailLink" beanclass="com.spring.risk.web.actions.CategoryActionBean" event="deleteFile"  onclick="alert('지우시겠습니까')">
-						<stripes:param name="deleteFileCode">${file.code}</stripes:param>
-						<stripes:param name="deleteFileName">${file.fileName}</stripes:param>x</stripes:link>
+						<stripes:link class="detailLink" beanclass="com.spring.risk.web.actions.CategoryActionBean" event="deleteFile">
+						<stripes:param name="deleteFileIdx">${file.file_idx}</stripes:param>x</stripes:link>				
 					</c:forEach>
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
 						<stripes:file name="fileBeanList[${loop.index}]" />

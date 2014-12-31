@@ -5,15 +5,15 @@
 <mapper namespace="com.spring.risk.persistence.CheckMapper">
 
 	<select id="getCheckListByCode" parameterType="string" resultType="CheckVO">
-		SELECT CHECK_IDX, TOOLCODE, IMAGE, CHECKLIST
+		SELECT *
 		FROM CHECK_LIST
 		WHERE TOOLCODE = #{toolCode} 
 	</select>
 
 	<insert id="insertCheckVO" parameterType="CheckVO">
-		INSERT INTO CHECK_LIST(TOOLCODE, IMAGE, CHECKLIST)
+		INSERT INTO CHECK_LIST(TOOLCODE, IMAGE, VIRTNAME,  CHECKLIST)
 		VALUES
-		(#{toolCode},#{image},#{checklist})
+		(#{toolCode},#{image},#{virtName},#{checklist})
 	</insert>
 	
 	<delete id="deleteCheckVOByCode" parameterType="String">
@@ -24,6 +24,7 @@
 		UPDATE CHECK_LIST
 		SET		
 		IMAGE = #{image}
+		,VIRTNAME = #{virtName}
 		,CHECKLIST = #{checklist}
 		WHERE
 		CHECK_IDX = #{check_idx}

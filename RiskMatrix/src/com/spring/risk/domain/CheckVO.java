@@ -12,6 +12,7 @@ public class CheckVO implements Serializable{
 	int check_idx;
 	String toolCode;
 	String image;
+	private String virtName;
 	String checklist;
 	private FileBean fileBean;
 	
@@ -46,6 +47,12 @@ public class CheckVO implements Serializable{
 	}
 	public void setFileBean(FileBean fileBean) {
 		this.fileBean = fileBean;
+	}
+	public String getVirtName() {
+		return virtName;
+	}
+	public void setVirtName(String virtName) {
+		this.virtName = virtName;
 	}
 	
 }

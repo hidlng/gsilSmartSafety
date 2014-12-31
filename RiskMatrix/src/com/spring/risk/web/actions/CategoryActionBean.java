@@ -1,14 +1,10 @@
 package com.spring.risk.web.actions;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 import net.sf.json.JSONObject;
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -21,7 +17,9 @@ import net.sourceforge.stripes.action.SessionScope;
 import net.sourceforge.stripes.action.StreamingResolution;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 
+import org.springframework.core.io.*;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.web.context.support.*;
 
 import com.spring.risk.domain.AccDetailVO;
 import com.spring.risk.domain.CategoryType;
@@ -82,7 +80,7 @@ public class CategoryActionBean extends AbstractActionBean {
 	private transient FileListService fileListService;
 	
 	
-	public static final String UPLOAD_PATH = "C:\\server\\upload\\checklist";
+	public static final String UPLOAD_PATH = "C:\\server\\upload";
 	public static final String CHEKCLIST_PATH = "C:\\server\\upload\\checklist";
 	
 	/** for view**/
@@ -137,15 +135,17 @@ public class CategoryActionBean extends AbstractActionBean {
 	
 	/**File Upload **/
 	private FileBean fileBean;
-	private String fileCode;
-	private String fileName;
+	private String fileIdx;
+	//private String fileCode;
+	//private String fileName;
 	private List<FileVO> fileList;//for get List
 	private List<FileBean> fileBeanList;//for insert
 	
 	private int uploadFileMaxIdx = 2;
 	//private int inputFileCurSize = 0;
-	private String deleteFileCode;
-	private String deleteFileName;
+	//private String deleteFileCode;
+	//private String deleteFileName;
+	private String deleteFileIdx;
 	
 	
 	/**search**/
@@ -359,19 +359,38 @@ public class CategoryActionBean extends AbstractActionBean {
 		
 	}
 
-	
-	
-	/**File Read**/
-	public Resolution getFile() { 
+	public FileSystemResource getTest(HttpServletResponse response){
+		System.out.println(response.getHeaderNames());
+
         InputStream is = null;		
-		FileVO vo = fileListService.getFileType(fileCode, fileName);		
-		String fileType = vo.getFileType();
+		FileVO fileVO = fileListService.getFileVOByIdx(fileIdx);		
+		String fileType = fileVO.getFileType();
         try { 
-            is = new FileInputStream(new File(UPLOAD_PATH + File.separator +  fileName));
+            is = new FileInputStream(new File(UPLOAD_PATH + File.separator +  fileVO.getVirtName()));
         } catch (FileNotFoundException ex) {
         	ex.printStackTrace();
         } 
-        return new StreamingResolution("application/download; utf-8", is).setFilename(fileName); 
+        
+		return new FileSystemResource(new File(UPLOAD_PATH + File.separator +  fileVO.getVirtName()));
+	}
+	
+	/**File Read**/
+	/**file load는 virtname으로 반환은 원 filename으로
+	 * @throws UnsupportedEncodingException **/
+	public Resolution getFile() throws UnsupportedEncodingException { 
+
+        InputStream is = null;		
+		FileVO fileVO = fileListService.getFileVOByIdx(fileIdx);		
+		String fileType = fileVO.getFileType();
+        try { 
+            is = new FileInputStream(new File(UPLOAD_PATH + File.separator +  fileVO.getVirtName()));
+        } catch (FileNotFoundException ex) {
+        	ex.printStackTrace();
+        } 
+
+        StreamingResolution resol = new StreamingResolution("application/download; charset=UTF-8", is).setFilename(URLEncoder.encode(fileVO.getFileName(), "UTF-8"));
+
+        return resol ;
     }  
 	
 	
@@ -479,23 +498,12 @@ public class CategoryActionBean extends AbstractActionBean {
 		modifyCheckList = new ArrayList<CheckVO>();
 		return new ForwardResolution(TOTALINSERT);
 	}
-	
-	public Resolution getChekcListImage() {
-	        InputStream is = null;
-	        
-	        try { 
-	            is = new FileInputStream(new File(CHEKCLIST_PATH + File.separator +  fileName)); 
-	        } catch (FileNotFoundException ex) {
-	        	ex.printStackTrace();
-	        } 
-	        return new StreamingResolution("image/png", is); 
-	}  
-	
+
 	
 	public Resolution updateDetail() {		
 		
 		CodeVO tmp_codeVO = new CodeVO();
-		
+		String fileCode="";
 		try {
 		switch(codeType) {
 		case WORK : 
@@ -531,7 +539,7 @@ public class CategoryActionBean extends AbstractActionBean {
 		
 		
 		/** input File **/
-		fileListService.insertFileListVO(fileCode, fileBeanList);
+		fileListService.updateFileListVO(fileCode, fileList, fileBeanList);
 		} catch (IOException e) {
 			e.printStackTrace();
 	
@@ -549,12 +557,22 @@ public class CategoryActionBean extends AbstractActionBean {
 	}
 	
 	public Resolution deleteFile() {
-		FileVO vo = new FileVO();
-		vo.setCode(deleteFileCode);
-		vo.setFileName(deleteFileName);
-		fileListService.deleteFileVOByVO(vo);
+//		FileVO vo = new FileVO();
+//		vo.setCode(deleteFileCode);
+//		vo.setFileName(deleteFileName);
+//		fileListService.deleteFileVOByVO(vo);
+		System.out.println(fileList.size());
+		Iterator<FileVO>it =  fileList.iterator();
+		while(it.hasNext()) {
+			FileVO vo = it.next();
+			if( deleteFileIdx.equals(vo.getFile_idx()) ) {
+				it.remove();
+			}
+		}
 		
-		fileList = fileListService.getFileListByCode(vo.getCode());
+		System.out.println(fileList.size());
+		
+		//fileList = fileListService.getFileListByCode(vo.getCode());
 				
 		return new ForwardResolution(TOTALINSERT);
 	}
@@ -918,13 +936,7 @@ public class CategoryActionBean extends AbstractActionBean {
 		this.fileBean = fileBean;
 	}
 
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
+	
 
 	public List<FileVO> getFileList() {
 		return fileList;
@@ -963,14 +975,7 @@ public class CategoryActionBean extends AbstractActionBean {
 	}
 
 
-	public String getFileCode() {
-		return fileCode;
-	}
-
-
-	public void setFileCode(String fileCode) {
-		this.fileCode = fileCode;
-	}
+	
 
 
 	public int getUploadFileMaxIdx() {
@@ -983,24 +988,6 @@ public class CategoryActionBean extends AbstractActionBean {
 	}
 
 
-	public String getDeleteFileCode() {
-		return deleteFileCode;
-	}
-
-
-	public void setDeleteFileCode(String deleteFileCode) {
-		this.deleteFileCode = deleteFileCode;
-	}
-
-
-	public String getDeleteFileName() {
-		return deleteFileName;
-	}
-
-
-	public void setDeleteFileName(String deleteFileName) {
-		this.deleteFileName = deleteFileName;
-	}
 
 
 	public String getSearchString() {
@@ -1062,6 +1049,22 @@ public class CategoryActionBean extends AbstractActionBean {
 
 	public void setModifyCheckList(List<CheckVO> modifyCheckList) {
 		this.modifyCheckList = modifyCheckList;
+	}
+
+	public String getDeleteFileIdx() {
+		return deleteFileIdx;
+	}
+
+	public void setDeleteFileIdx(String deleteFileIdx) {
+		this.deleteFileIdx = deleteFileIdx;
+	}
+
+	public String getFileIdx() {
+		return fileIdx;
+	}
+
+	public void setFileIdx(String fileIdx) {
+		this.fileIdx = fileIdx;
 	}
 
 

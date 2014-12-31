@@ -5,43 +5,36 @@
 <mapper namespace="com.spring.risk.persistence.FileMapper">
 
 	<select id="getFilesByCode" parameterType="string" resultType="FileVO">
-		SELECT CODE, FILENAME, FILETYPE 
+		SELECT *
 		FROM FILE_LIST
 		WHERE CODE = #{code} 
 	</select>
 	
 	<select id="getFileList" parameterType="string" resultType="FileVO">
-		SELECT CODE, FILENAME, FILETYPE 
+		SELECT *
 		FROM FILE_LIST
 	</select>
 	
-	<select id="getFileType" parameterType="string" resultType="FileVO">
-		SELECT CODE, FILENAME, FILETYPE 
+	<select id="getFileVOByIdx" parameterType="string" resultType="FileVO">
+		SELECT * 
 		FROM FILE_LIST
-		WHERE CODE = #{code}  AND FILENAME = #{fileName}
+		WHERE FILE_IDX = #{file_idx}
 	</select>
 	
 
 	<insert id="insertFileVO" parameterType="FileVO">
-		INSERT INTO FILE_LIST(CODE, FILENAME, FILETYPE )
+		INSERT INTO FILE_LIST(FILE_IDX, CODE, FILENAME, VIRTNAME, FILETYPE )
 		VALUES
-		(#{code},#{fileName},#{fileType})
+		(#{file_idx},#{code},#{fileName}, #{virtName}, #{fileType})
 	</insert>
 	
 	<delete id="deleteFileVOByCode" parameterType="String">
 		DELETE FROM FILE_LIST WHERE CODE=#{code}	
 	</delete>
 	<delete id="deleteFileVOByVO" parameterType="String">
-		DELETE FROM FILE_LIST WHERE CODE=#{code} AND FILENAME=#{fileName}
+		DELETE FROM FILE_LIST WHERE FILE_IDX=#{file_idx}
 	</delete>
 	
-	<update id="updateFileVO" parameterType="FileVO">
-		UPDATE FILE_LIST
-		SET		
-		FILENAME = #{fileName}
-		,FILETYPE = #{fileType}
-		WHERE
-		CODE = #{code}
-	</update>
+	
 
 </mapper>

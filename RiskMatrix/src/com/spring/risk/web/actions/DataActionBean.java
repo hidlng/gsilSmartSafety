@@ -1,14 +1,12 @@
 package com.spring.risk.web.actions;
 
+import java.io.*;
 import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
-import net.sourceforge.stripes.action.DefaultHandler;
-import net.sourceforge.stripes.action.ForwardResolution;
-import net.sourceforge.stripes.action.RedirectResolution;
-import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 
 import com.spring.risk.domain.AccDetailVO;
@@ -54,7 +52,7 @@ public class DataActionBean extends AbstractActionBean {
 	private String code;//code
 	private int type;//work,tool,place
 	private String codelist;
-	
+	private String filename;
 	
 	@SpringBean
 	private transient UserService userService;
@@ -99,22 +97,28 @@ public class DataActionBean extends AbstractActionBean {
 		List<FileVO> fileList = fileListService.getFileListByCode(code);
 		//TODO : 통합할부분 통합 할 것 (기획 확정전까지는 분리된상태로 보류)
 		
-		switch(type) {
+		switch(type) {//상세정보가 없는경우 아예 넣지 않음
 		case 1 : //WORK
 				WorkVO workVO = workListService.getWorkByWorkCode(code);
-				List<AccDetailVO> inputAccList = workListService.getAccListByWorkcode(code);
-				jsonObj.put("workVO", workVO);
-				jsonObj.put("inputAccList", inputAccList);
+				if(workVO != null){
+					List<AccDetailVO> inputAccList = workListService.getAccListByWorkcode(code);
+					jsonObj.put("workVO", workVO);
+					jsonObj.put("inputAccList", inputAccList);
+				}
 				break;
 		case 2 : //TOOL
-				ToolVO toolVO = toolListService.getToolByCode(code);					
-				List<CheckVO> checkList = toolVO.getCheckList();//141209 
-				jsonObj.put("toolVO", toolVO);
-				jsonObj.put("checkList", checkList);
+				ToolVO toolVO = toolListService.getToolByCode(code);	
+				List<CheckVO> checkList = null;
+				if(toolVO != null) {
+					checkList = toolVO.getCheckList();//141209 
+					jsonObj.put("toolVO", toolVO);
+					jsonObj.put("checkList", checkList);
+				}
 				break;
 		case 3 : //PLACE
 				PlaceVO placeVO = placeListService.getPlaceByCode(code);
-				jsonObj.put("placeVO", placeVO);
+				if(placeVO != null)
+					jsonObj.put("placeVO", placeVO);
 				break;
 		//case 4 ://ACC			
 				//break;
@@ -127,6 +131,18 @@ public class DataActionBean extends AbstractActionBean {
 		return new ForwardResolution(DATAPAGE);
 	}
 
+	
+	public Resolution getChekcListImage() {
+	        InputStream is = null;
+	        
+	        try { 
+	            is = new FileInputStream(new File(CategoryActionBean.CHEKCLIST_PATH + File.separator + filename)); 
+	        } catch (FileNotFoundException ex) {
+	        	ex.printStackTrace();
+	        } 
+	        return new StreamingResolution("image/png", is); 
+	}  
+	
 
 	/**workcode!num_worker!worklevel 로 전달받음 */
 	public Resolution getRiskData() {
@@ -243,6 +259,16 @@ public class DataActionBean extends AbstractActionBean {
 
 	public void setCodelist(String codelist) {
 		this.codelist = codelist;
+	}
+
+
+	public String getFilename() {
+		return filename;
+	}
+
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 
 

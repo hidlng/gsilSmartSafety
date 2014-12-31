@@ -27,7 +27,8 @@ public class ToolListService {
 	
 	public ToolVO getToolByCode(String toolCode){
 		ToolVO toolVO = toolMapper.getToolByCode(toolCode);
-		toolVO.setCheckList(checkMapper.getCheckListByCode(toolCode));
+		if(toolVO != null)
+			toolVO.setCheckList(checkMapper.getCheckListByCode(toolCode));
 		return toolVO;
 	}
 
