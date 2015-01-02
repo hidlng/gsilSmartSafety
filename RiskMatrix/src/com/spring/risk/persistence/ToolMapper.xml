@@ -17,9 +17,9 @@
 
 
 	<insert id="insertToolVO" parameterType="ToolVO">
-		INSERT INTO TOOL_LIST(TOOLCODE,MAINRISK,GUIDE,EQUIP)
+		INSERT INTO TOOL_LIST(TOOLCODE,MAINRISK,GUIDE,EQUIP, IMGNAME, IMGVIRTNAME, IMGTYPE)
 		VALUES
-		(#{toolCode},#{mainRisk},#{guide},#{equip})
+		(#{toolCode},#{mainRisk},#{guide},#{equip}, #{imgName}, #{imgVirtName}, #{imgType})
 	</insert>
 
 	<update id="updateToolVO" parameterType="ToolVO">
@@ -27,8 +27,10 @@
 		SET
 			mainrisk=#{mainRisk},
 			guide=#{guide},
-			equip=#{equip}
-				
+			equip=#{equip},
+			imgname = #{imgName}, 
+			imgvirtname = #{imgVirtName},
+			imgtype =  #{imgType}
 		WHERE
 			toolcode=#{toolCode}
 	</update>

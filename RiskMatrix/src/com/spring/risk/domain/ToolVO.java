@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sourceforge.stripes.action.*;
+
 public class ToolVO implements Serializable {
 	/**
 	 * 
@@ -16,8 +18,32 @@ public class ToolVO implements Serializable {
 	String mainRisk;
 	String guide;
 	String equip;
+
 	
+	FileBean imgFileBean;
+	String imgName;
+	String imgVirtName;
+	String imgType;
 	List<CheckVO> checkList = new ArrayList<CheckVO>();
+	
+	public String getImgName() {
+		return imgName;
+	}
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+	public String getImgVirtName() {
+		return imgVirtName;
+	}
+	public void setImgVirtName(String imgVirtName) {
+		this.imgVirtName = imgVirtName;
+	}
+	public String getImgType() {
+		return imgType;
+	}
+	public void setImgType(String imgType) {
+		this.imgType = imgType;
+	}
 	
 	public String getToolCode() {
 		return toolCode;
@@ -54,6 +80,12 @@ public class ToolVO implements Serializable {
 	}
 	public void setCheckList(List<CheckVO> checkList) {
 		this.checkList = checkList;
+	}
+	public FileBean getImgFileBean() {
+		return imgFileBean;
+	}
+	public void setImgFileBean(FileBean imgFileBean) {
+		this.imgFileBean = imgFileBean;
 	}
 
 

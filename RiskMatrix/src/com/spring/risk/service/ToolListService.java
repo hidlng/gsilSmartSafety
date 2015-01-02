@@ -2,6 +2,7 @@ package com.spring.risk.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.*;
 
 import net.sourceforge.stripes.action.FileBean;
 
@@ -38,14 +39,25 @@ public class ToolListService {
 		for(CheckVO checkVO : toolVO.getCheckList()) {
 			if(checkVO == null) continue;//입력창에서 중간에 제거되어 빠진경우
 			checkVO.setToolCode(toolVO.getToolCode());
-			if(checkVO.getFileBean() != null){
-				FileBean bean = checkVO.getFileBean();
-				bean.save(new File(CategoryActionBean.CHEKCLIST_PATH + File.separator + bean.getFileName()));
+			FileBean bean = checkVO.getFileBean();
+			if(bean != null){
 				checkVO.setImage(bean.getFileName());
-				
+				String virtName = UUID.randomUUID().toString() +"_" + toolVO.getToolCode() +"_";
+				checkVO.setVirtName(virtName);
+				bean.save(new File(CategoryActionBean.CHEKCLIST_PATH + File.separator + virtName));
 			}
-			//file이 없더라도 checklist는 삽입해야함 
+			//file이 없더라도 checklist 내용은 삽입해야함 
 			checkMapper.insertCheckVO(checkVO);
+		}
+		
+		/**장비이미지 insert **/
+		FileBean filebean = toolVO.getImgFileBean();
+		if(filebean != null) { 
+			toolVO.setImgName(filebean.getFileName());
+			toolVO.setImgType(filebean.getContentType());
+			String virtName = UUID.randomUUID().toString() +"_" + toolVO.getToolCode() +"_";
+			toolVO.setImgVirtName(virtName);
+			filebean.save(new File(CategoryActionBean.TOOLIMG_PATH + File.separator + toolVO.getImgVirtName()) );
 		}
 		
 		toolMapper.insertToolVO(toolVO);
@@ -59,16 +71,29 @@ public class ToolListService {
 		
 		//checklist정보로 다시 insert
 		for(CheckVO checkVO : toolVO.getCheckList()) {	
+			FileBean bean = checkVO.getFileBean();
 			if(checkVO == null) continue;//입력창에서 중간에 제거되어 빠진경우
 			checkVO.setToolCode(toolVO.getToolCode());
-			
-			if(checkVO.getFileBean() != null){
-				FileBean bean = checkVO.getFileBean();				
-				bean.save(new File(CategoryActionBean.CHEKCLIST_PATH + File.separator + bean.getFileName()));
+			if(bean != null){
+				checkVO.setToolCode(toolVO.getToolCode());
 				checkVO.setImage(bean.getFileName());
+				String virtName = UUID.randomUUID().toString() +"_" + toolVO.getToolCode() +"_";
+				checkVO.setVirtName(virtName);
+				bean.save(new File(CategoryActionBean.CHEKCLIST_PATH + File.separator + virtName));
 			}
 			
 			checkMapper.insertCheckVO(checkVO);			
+		}
+		
+		
+		/**장비이미지 업데이트 **/
+		FileBean filebean = toolVO.getImgFileBean();
+		if(filebean != null) { 
+			toolVO.setImgName(filebean.getFileName());
+			toolVO.setImgType(filebean.getContentType());
+			String virtName = UUID.randomUUID().toString() +"_" + toolVO.getToolCode() +"_";
+			toolVO.setImgVirtName(virtName);
+			filebean.save(new File(CategoryActionBean.TOOLIMG_PATH + File.separator + toolVO.getImgVirtName()) );
 		}
 		toolMapper.updateToolVO(toolVO);
 	}

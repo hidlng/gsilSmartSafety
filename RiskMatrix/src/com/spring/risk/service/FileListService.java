@@ -44,19 +44,37 @@ public class FileListService {
 	public void insertFileListVO(String code, List<FileBean> fileBeanList) throws IOException {
 		for(FileBean fileBean : fileBeanList){
 			if(fileBean != null){
-				FileVO fileVo = new FileVO();
-				fileVo.setCode(code);
-				fileVo.setFileName(fileBean.getFileName());
-				fileVo.setFileType(fileBean.getContentType());
-				String virtName = UUID.randomUUID().toString() +"_" + fileVo.getCode() + fileBean.getContentType();
-				fileVo.setVirtName(virtName);
-				
-				insertFileVO(fileVo);
-				
-				fileBean.save(new File(CategoryActionBean.UPLOAD_PATH + File.separator + fileVo.getVirtName()) );
-			
+				insertFileByBean(code, fileBean);
 			}
 		}
+	}
+	
+	/**
+	 *  filebean 이용하여 db 및 서버에 파일 정보 업로드
+	 * @param code
+	 * @param fileBean
+	 * @throws IOException
+	 */
+	@Transactional
+	public void insertFileByBean(String code, FileBean fileBean) throws IOException {
+		FileVO fileVo = new FileVO();
+		fileVo.setCode(code);
+		fileVo.setFileName(fileBean.getFileName());
+		fileVo.setFileType(fileBean.getContentType());
+		String virtName = UUID.randomUUID().toString() +"_" + fileVo.getCode() +"_";
+		fileVo.setVirtName(virtName);
+		insertFileVO(fileVo);
+	
+		fileBean.save(new File(CategoryActionBean.UPLOAD_PATH + File.separator + fileVo.getVirtName()) );
+	}
+	
+	/**
+	 * FileVo property 전부 세팅시 해당 함수 호출 
+	 * @param fileVo
+	 */
+	@Transactional
+	private void insertFileVO (FileVO fileVo) {
+		fileListMapper.insertFileVO(fileVo);
 	}
 	
 	/**
@@ -76,14 +94,12 @@ public class FileListService {
 		}
 		
 		//2. 새로추가된 list는 기존 insert와 동일
-		insertFileListVO(code, fileBeanList);
+		if(fileBeanList != null && fileBeanList.size() > 0)	
+			insertFileListVO(code, fileBeanList);
 	}
 	
 	
-	@Transactional
-	private void insertFileVO(FileVO fileVO) {		
-		fileListMapper.insertFileVO(fileVO);
-	}
+
 	
 	
 	/** code에 대한 row만 제거하고, 파일을 지우진 않음**/

@@ -22,10 +22,10 @@
 	function getCheckList(idx) {
 		return "<input name='modifyCheckList["
 			+ idx
-			+ "].checklist' style='width:60%' type='text' class='tf_checkList' /><input name='modifyCheckList[" 
+			+ "].checklist' style='width:50%' type='text' class='tf_checkList' onkeyup='checkSpeChar(2)''/><input name='modifyCheckList[" 
             + idx + "].fileBean' type='file' />"
             + "<div  onclick='delCheckList(" 
-        	+ idx + ")' class='button checkListBtn'>제거</div>";
+        	+ idx + ")' class='checkListBtn'>X</div>";
 	}
 	
 	function addCheckList() {
@@ -90,12 +90,26 @@
 		$("#checkCount").val(checkCount);
 	}  */
 	
+	
+	function checkSubmit(id){
+		var input;
+		if(id == 'insertDetailSubmit')
+			input = confirm('등록 하시겠습니까?' );
+		else 
+			input = confirm('수정 하시겠습니까?' );
+		if(input) {
+			$('#' + id).click();
+		}else {
+			
+		}
+		
+	}	
 	</script>
 
 
 <div id="viewDetailTitle"><img src="../images/blue_title.gif"/>세부사항 입력</div>
 <div id="totalInsert">
-<stripes:form id="insertTool" name="insertTool"
+<stripes:form id="insertDetail" name="insertDetail"
 	beanclass="com.spring.risk.web.actions.CategoryActionBean"
 	enctype="multipart-form/data"  method="POST">
 	
@@ -105,8 +119,8 @@
 <!--Work-->
 <c:if test = "${actionBean.codeType == 'WORK'}">
 <table >
-		<tr><th class="detailHeader">작업코드</th><td colspan="5"><stripes:text name="workVO.workCode" readonly="true" /></td></tr>
-		<tr><th class="detailHeader">작업명</th><td  colspan="5"><stripes:text name="workVO.workName"  /></td></tr>
+		<tr><th class="detailHeader">작업코드</th><td colspan="5"><stripes:text name="workVO.workCode" readonly="true" onkeypress="checkSpeChar(2)"/></td></tr>
+		<tr><th class="detailHeader">작업명</th><td  colspan="5"><stripes:text name="workVO.workName"  onkeyup="checkSpeChar(2)"/></td></tr>
 		<tr><th class="detailHeader">사고유형</th>
 			<c:forEach begin="0" end="4" step="1" varStatus="accIdx">	
 			<td>	
@@ -146,14 +160,14 @@
 			</td>
 			</c:forEach>
 		</tr>
-		<tr><th class="detailHeader">안전작업가이드</th><td  colspan="5"><stripes:textarea   name="workVO.guide" /></td>		</tr>
-		<tr><th class="detailHeader">보호구</th><td  colspan="5"><stripes:textarea  name="workVO.equip" /></td>		</tr>
-		<tr><th class="detailHeader">이상징후/비상시조치사항</th><td colspan="5"><stripes:textarea  name="workVO.measure"  /></td>		</tr>
+		<tr><th class="detailHeader">안전작업가이드</th><td  colspan="5"><stripes:textarea   name="workVO.guide" onkeyup="checkSpeChar(2)"/></td>		</tr>
+		<tr><th class="detailHeader">보호구</th><td  colspan="5"><stripes:textarea  name="workVO.equip" onkeyup="checkSpeChar(2)"/></td>		</tr>
+		<tr><th class="detailHeader">이상징후/비상시조치사항</th><td colspan="5"><stripes:textarea  name="workVO.measure" onkeyup="checkSpeChar(2)" /></td>		</tr>
 		<tr><th class="detailHeader">사고사례</th><td  colspan="5"><!--File Upload -->
 				<!-- insert -->
 				<c:if test="${!actionBean.isModify}">
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
-						<stripes:file name="fileBeanList[${loop.index}]" />
+						<stripes:file name="fileBeanList[${loop.index}]" /><br>
 					</c:forEach>
 				</c:if>
 				<!-- modify -->
@@ -161,10 +175,10 @@
 					<c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
 						${file.fileName} 		
 						<stripes:link class="detailLink" beanclass="com.spring.risk.web.actions.CategoryActionBean" event="deleteFile">
-						<stripes:param name="deleteFileIdx">${file.file_idx}</stripes:param>x</stripes:link>
+						<stripes:param name="deleteFileIdx">${file.file_idx}</stripes:param>x</stripes:link><br>
 					</c:forEach>
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
-						<stripes:file name="fileBeanList[${loop.index}]" />
+						<stripes:file name="fileBeanList[${loop.index}]" /><br>
 					</c:forEach>
 				</c:if>
 			</td>
@@ -176,27 +190,28 @@
 <c:if test = "${actionBean.codeType == 'TOOL'}">
 	<table id ="toolInsertTable">
 		<tr><th class="detailHeader">장비/공도구 코드</th><td><stripes:text  name="toolVO.toolCode" readonly="true" /></td></tr>
-		<tr><th class="detailHeader">장비/공도구명</th><td><stripes:text  name="toolVO.toolName"  /></td></tr>
-		<tr><th class="detailHeader">주요위험</th><td><stripes:textarea  name="toolVO.mainRisk" /></td></tr>
-		<tr><th class="detailHeader">안전작업가이드</th><td><stripes:textarea  name="toolVO.guide" /></td></tr>
-		<tr><th class="detailHeader">보호구</th><td><stripes:textarea  name="toolVO.equip" /></td></tr>
-		<tr><th class="detailHeader">사용전 점검 체크리스트</th>
+		<tr><th class="detailHeader">장비/공도구명</th><td><stripes:text  name="toolVO.toolName"  onkeyup="checkSpeChar(2)"/></td></tr>
+		<tr><th class="detailHeader">주요위험</th><td><stripes:textarea  name="toolVO.mainRisk" onkeyup="checkSpeChar(2)"/></td></tr>
+		<tr><th class="detailHeader">안전작업가이드</th><td><stripes:textarea  name="toolVO.guide" onkeyup="checkSpeChar(2)"/></td></tr>
+		<tr><th class="detailHeader">보호구</th><td><stripes:textarea  name="toolVO.equip" onkeyup="checkSpeChar(2)"/></td></tr>
+		<tr><th class="detailHeader">사용전 점검<br> 체크리스트</th>
 			<td><div id="checklistTD">
 				<c:if test ="${actionBean.checkList.size() > 0}"> 
 				<c:forEach begin="0" end="${actionBean.checkList.size()-1}" varStatus="loop">
 					<span id="added_${loop.index}">
 					<!-- 값은 checlist에서 가져오되 보내주는건 modfiyCheckList로 보냄 -->
-					<stripes:text class="tf_checkList" name="modifyCheckList[${loop.index}].checklist" style="width:60%">${actionBean.checkList[loop.index].checklist}</stripes:text> 
+					<stripes:text class="tf_checkList" name="modifyCheckList[${loop.index}].checklist" style="width:60%" onkeyup="checkSpeChar(2)">${actionBean.checkList[loop.index].checklist}</stripes:text> 
 					
 					<!-- image값 여부에 따라 image or file upload  -->
-					<c:if test="${actionBean.checkList[loop.index].image == null}" >
+					<c:if test="${actionBean.checkList[loop.index].virtName == null}" >
 						<stripes:file name="modifyCheckList[${loop.index}].fileBean"/>
 					</c:if>
-					<c:if test="${actionBean.checkList[loop.index].image != null}" >
-						<img class="checkListImage" src="Category.action?getChekcListImage=&fileName=${actionBean.checkList[loop.index].image}"/>
+					<c:if test="${actionBean.checkList[loop.index].virtName != null}" >
+						<img class="checkListImage" src="Data.action?getChekcListImage=&filename=${actionBean.checkList[loop.index].virtName}"/>
 						<stripes:hidden name="modifyCheckList[${loop.index}].image" value="${actionBean.checkList[loop.index].image}"/>
+						<stripes:hidden name="modifyCheckList[${loop.index}].virtName" value="${actionBean.checkList[loop.index].virtName}"/>
 					</c:if>
-					<div  onclick="delCheckList(${loop.index})" class="button checkListBtn" style="cursor:pointer">제거</div>
+					<div  onclick="delCheckList(${loop.index})" class="checkListBtn" style="cursor:pointer">  X</div>
 					</span>
 				</c:forEach>					
 				</c:if>
@@ -205,11 +220,12 @@
 				<div  onclick="addCheckList()" class="button checkListBtn" >추가</div>
 			</td>
 		</tr>
+		<tr><th class="detailHeader">장비이미지</th><td><stripes:file  name="toolVO.imgFileBean" /></td></tr>
 		<tr><th class="detailHeader">사고사례</th><td><!--File Upload -->
 				<!-- insert -->
 				<c:if test="${!actionBean.isModify}">
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
-						<stripes:file name="fileBeanList[${loop.index}]" />
+						<stripes:file name="fileBeanList[${loop.index}]" /><br>
 					</c:forEach>
 				</c:if>
 				<!-- modify -->
@@ -217,10 +233,10 @@
 					<c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
 						${file.fileName} 		
 						<stripes:link class="detailLink" beanclass="com.spring.risk.web.actions.CategoryActionBean" event="deleteFile">
-						<stripes:param name="deleteFileIdx">${file.file_idx}</stripes:param>x</stripes:link>
+						<stripes:param name="deleteFileIdx">${file.file_idx}</stripes:param>x</stripes:link><br>
 					</c:forEach>
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
-						<stripes:file name="fileBeanList[${loop.index}]" />
+						<stripes:file name="fileBeanList[${loop.index}]" /><br>
 					</c:forEach>
 				</c:if>
 			</td></tr>		
@@ -232,14 +248,14 @@
 <c:if test = "${actionBean.codeType == 'PLACE'}">
 	<table>
 		<tr><th class="detailHeader">장소코드</th><td><stripes:text name="placeVO.placeCode" readonly="true" /></td></tr>		
-		<tr><th class="detailHeader">장소명</th><td><stripes:text name="placeVO.placeName"  /></td></tr>
-		<tr><th class="detailHeader">주요위험</th><td><stripes:textarea  name="placeVO.mainRisk" /></td>	</tr>
-		<tr><th class="detailHeader">안전작업가이드</th><td><stripes:textarea  name="placeVO.guide" value=""/></td></tr>
-		<tr><th class="detailHeader">보호구</th><td><stripes:textarea  name="placeVO.equip" /></td>			</tr>
+		<tr><th class="detailHeader">장소명</th><td><stripes:text name="placeVO.placeName" onkeyup="checkSpeChar(2)" /></td></tr>
+		<tr><th class="detailHeader">주요위험</th><td><stripes:textarea  name="placeVO.mainRisk" onkeyup="checkSpeChar(2)" /></td>	</tr>
+		<tr><th class="detailHeader">안전작업가이드</th><td><stripes:textarea  name="placeVO.guide" onkeyup="checkSpeChar(2)"/></td></tr>
+		<tr><th class="detailHeader">보호구</th><td><stripes:textarea  name="placeVO.equip" onkeyup="checkSpeChar(2)"/></td>			</tr>
 		<tr><th class="detailHeader">사고사례</th><td><!-- insert -->
 				<c:if test="${!actionBean.isModify}">
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
-						<stripes:file name="fileBeanList[${loop.index}]" />
+						<stripes:file name="fileBeanList[${loop.index}]" /><br>
 					</c:forEach>
 				</c:if>
 				<!-- modify -->
@@ -247,10 +263,10 @@
 					<c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
 						${file.fileName} 		
 						<stripes:link class="detailLink" beanclass="com.spring.risk.web.actions.CategoryActionBean" event="deleteFile">
-						<stripes:param name="deleteFileIdx">${file.file_idx}</stripes:param>x</stripes:link>				
+						<stripes:param name="deleteFileIdx">${file.file_idx}</stripes:param>x</stripes:link>	<br>			
 					</c:forEach>
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
-						<stripes:file name="fileBeanList[${loop.index}]" />
+						<stripes:file name="fileBeanList[${loop.index}]" /><br>
 					</c:forEach>
 				</c:if>
 				</td></tr>				
@@ -260,9 +276,14 @@
 <!--Acc-->
 <c:if test = "${actionBean.codeType == 'ACC'}">
 </c:if>
+<br>
 <div class="updateBtnDiv">
-<!-- insert 모드 --> <c:if test="${!actionBean.isModify}"><stripes:submit name="insertDetail" class="button" value="등록" /></c:if>
-<!-- update 모드 --> <c:if test="${actionBean.isModify}"><stripes:submit name="updateDetail" class="button" value="수정" />	</c:if>
+<!-- insert 모드 --> <c:if test="${!actionBean.isModify}"><stripes:submit name="insertDetail" class="button" value="등록" onclick="checkSubmit('insertDetailSubmit')"/>
+<stripes:submit id="insertDetailSubmit" name="insertDetail" class="button" style="display:none"/></c:if>
+<!-- update 모드 --> <c:if test="${actionBean.isModify}"><stripes:button name="updateDetail" class="button" value="수정" onclick="checkSubmit('updateDetailSubmit')"/>
+<stripes:submit id="updateDetailSubmit" name="updateDetail" class="button" style="display:none"/>	</c:if>
 </div>
+<br>
+<br>
 </stripes:form>
 </div>

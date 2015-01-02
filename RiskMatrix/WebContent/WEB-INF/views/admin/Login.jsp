@@ -15,7 +15,13 @@
 
 <title>Risk Matrix Admin</title>
 
-
+<script>
+$(document).ready(function() {
+	if(${actionBean.loginFail} == true){
+		alert('ID 혹은 PASSWORD 가 잘못되었습니다.');
+	} 
+});
+</script>
 </head>
 
 <body>

@@ -82,6 +82,8 @@ public class CategoryActionBean extends AbstractActionBean {
 	
 	public static final String UPLOAD_PATH = "C:\\server\\upload";
 	public static final String CHEKCLIST_PATH = "C:\\server\\upload\\checklist";
+	public static final String TOOLIMG_PATH =  "C:\\server\\upload\\tool";
+	
 	
 	/** for view**/
 	private List<List<CategoryVO>> totalList;	
@@ -132,7 +134,8 @@ public class CategoryActionBean extends AbstractActionBean {
 	private int deleteCheckOrder=0;
 	private int checkCount=1;
 	
-	
+
+
 	/**File Upload **/
 	private FileBean fileBean;
 	private String fileIdx;
@@ -158,6 +161,9 @@ public class CategoryActionBean extends AbstractActionBean {
 	/**paging**/
 	private static final int MAX_SIZE = 100;
 	private static final int PAGE_SIZE = 10;
+
+
+
 	private int pageNum=1;
 	private int totalPage=1;
 
@@ -276,7 +282,7 @@ public class CategoryActionBean extends AbstractActionBean {
 				accList = categoryService.getCodeListByCategory(CategoryType.ACC.idx);
 				break;
 		case TOOL :
-				toolVO = toolListService.getToolByCode(code.getCode());					
+				toolVO = toolListService.getToolByCode(code.getCode());
 				checkList = toolVO.getCheckList();//141209 
 				break;
 		case PLACE :
@@ -455,6 +461,8 @@ public class CategoryActionBean extends AbstractActionBean {
 				//toolVO.setCheckList(checkList); // insert/update page에서 입력/변경된 checkList를 할당해줌
 				toolVO.setCheckList(modifyCheckList);
 				toolListService.insertToolVO(toolVO);
+			
+				
 				tmp_codeVO.setCode(toolVO.getToolCode());
 				tmp_codeVO.setName(toolVO.getToolName());
 				fileCode = toolVO.getToolCode();
@@ -518,6 +526,7 @@ public class CategoryActionBean extends AbstractActionBean {
 			//toolVO.setCheckList(checkList.subList(0, checkCount));
 			toolVO.setCheckList(modifyCheckList);
 			toolListService.updateToolVO(toolVO);
+				
 			tmp_codeVO.setCode(toolVO.getToolCode());
 			tmp_codeVO.setName(toolVO.getToolName());
 			fileCode=toolVO.getToolCode();
@@ -537,9 +546,9 @@ public class CategoryActionBean extends AbstractActionBean {
 		/**update Code Name -141117**/
 		categoryService.updateCodeName(tmp_codeVO);
 		
-		
 		/** input File **/
 		fileListService.updateFileListVO(fileCode, fileList, fileBeanList);
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 	

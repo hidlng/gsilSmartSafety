@@ -125,13 +125,13 @@
  <insert id="insertCode" parameterType="CodeVO">
 	INSERT INTO CODE_LIST (CODE, NAME, CATEGORY)
 	VALUES
-	(#{code}, #{name},#{category})
+	(#{code}, trim(#{name}),#{category})
 </insert>
 
  <update id="updateCodeName" parameterType="CodeVO">
 	UPDATE CODE_LIST
 	SET
-	NAME = #{name}
+	NAME = trim(#{name})
 	WHERE
 	CODE = #{code}
 </update>

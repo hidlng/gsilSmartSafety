@@ -29,15 +29,62 @@
 <meta http-equiv="Pragma" content="no-cache" />
 
  <script>
+ function zoom() {
+     document.body.style.zoom = "300%" 
+ }
+ 
 //뒤로가기 방지
  window.history.forward(0);
  history.navigationMode = 'compatible'; // 오페라, 사파리 뒤로가기 막기
  function _no_Back(){window.history.forward(0);}
- </script>
+ 
+
+ function removeHangul(obj) {
+     obj.value = obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+ }
+ 
+function checkSpeChar(level) {
+	var objEv = event.srcElement;
+	var regex_alphanum = /[0-9]|[a-z]|[A-Z]|[_-]/;
+	var regex_special = /[~!@\#$%<>^*\\=+{}\']/; //특수문자 정규식 변수 선언 허용
+	//var num = "{}|~`!@#$%^&*+\"'\\/"; //ㅔ[],(),<>,?, _ ,-허용 -- 일반 text
+	
+		//num = "{}[]()<>?_|~`!@#$%^&*-+\"'\\/ ";
+	event.returnValue = true;
+
+	isValid = true;
+	
+	for (var i = 0; i < objEv.value.length; i++) {
+		var cur_key  = objEv.value.charAt(i);
+		if( level <= 1 ){
+			if (!cur_key.match(regex_alphanum)) {
+				isValid = false;
+			}
+		}else if (level == 2){
+			//if (-1 != num.indexOf(cur_key)){ //특수문자 비교
+			if (cur_key.match(regex_special)){ //특수문자 비교
+				isValid = false;
+			}
+		}
+	}
+		
+	if(level <= 1 && !isValid) {
+		alert("_,-를 제외한 특수문자 및 한글은 입력하실 수 없습니다.");
+		objEv.value = "";
+	}
+	
+	if(level == 2 && !isValid) {
+		event.preventDefault();
+		alert("다음의 특수문자는 입력하실 수 없습니다.(~!@\#$%<>^*\\=+{}\)");
+		objEv.value = objEv.value.replace(/[~!@\#$%<>^*\\=+{}\']/gi, '');
+	}
+
+}
+	</script>
 </head>
 
 <body   onload="_no_Back();" onpageshow="if(event.persisted)_no_Back();">
-${actionBean.isAuthenticated()}
+
 	<div id="Header">
 		<div id="Title">RiskMatrix Admin</div>
 		<div id="Menu">
@@ -50,7 +97,7 @@ ${actionBean.isAuthenticated()}
 			</stripes:link>
 			
 		</div>
-		<stripes:link id="logout" beanclass="com.spring.risk.web.actions.LoginActionBean" event="logout">
+		<stripes:link id="logout" class="button" beanclass="com.spring.risk.web.actions.LoginActionBean" event="logout">
 						Logout
 		</stripes:link>
 	</div>

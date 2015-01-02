@@ -2,14 +2,13 @@ package com.spring.risk.web.actions;
 
 import javax.servlet.http.HttpSession;
 
-import net.sourceforge.stripes.action.DefaultHandler;
-import net.sourceforge.stripes.action.ForwardResolution;
-import net.sourceforge.stripes.action.RedirectResolution;
-import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 
 import com.spring.risk.domain.UserVO;
 import com.spring.risk.service.UserService;
+
+
 
 public class LoginActionBean extends AbstractActionBean {
 	
@@ -23,9 +22,14 @@ public class LoginActionBean extends AbstractActionBean {
 	private String password;
 	
 	private boolean isAuthenticated = false;
+	private boolean loginFail = false;
+	
 
-	@DefaultHandler
+
+	
+	@DefaultHandler 
 	public Resolution login() {
+		loginFail = false;
 		return new ForwardResolution(LOGINPAGE);
 	}
 
@@ -40,14 +44,17 @@ public class LoginActionBean extends AbstractActionBean {
 		    s.setAttribute("init", true);
 		    return new RedirectResolution(CategoryActionBean.class);
 		}
-		return new RedirectResolution(LoginActionBean.class);
+		
+		loginFail = true;
+		//System.out.println(loginFail);
+		return new ForwardResolution(LOGINPAGE);
 	}
 
 	public Resolution logout() {
 	 context.getRequest().getSession().invalidate();
 	
 	 clear();
-	 return new RedirectResolution(LogoutActionBean.class);
+	 return new RedirectResolution(LoginActionBean.class);
 	}
 	
 	public boolean isAuthenticated() {
@@ -78,6 +85,18 @@ public class LoginActionBean extends AbstractActionBean {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+
+	public boolean getLoginFail() {
+		return loginFail;
+	}
+
+
+	public void setLoginFail(boolean loginFail) {
+		this.loginFail = loginFail;
+	}
+
+
 
 
 	

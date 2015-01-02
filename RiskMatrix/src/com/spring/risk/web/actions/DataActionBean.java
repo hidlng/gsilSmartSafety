@@ -90,10 +90,6 @@ public class DataActionBean extends AbstractActionBean {
 		//List<CodeVO> codeList = categoryService.getCodeListByCategory(code);
 		
 		jsonObj = new JSONObject();
-		/*jsonObj.put("codeList", codeList);
-		System.out.println(jsonObj.toString());
-		*/
-		
 		List<FileVO> fileList = fileListService.getFileListByCode(code);
 		//TODO : 통합할부분 통합 할 것 (기획 확정전까지는 분리된상태로 보류)
 		
@@ -139,9 +135,21 @@ public class DataActionBean extends AbstractActionBean {
 	            is = new FileInputStream(new File(CategoryActionBean.CHEKCLIST_PATH + File.separator + filename)); 
 	        } catch (FileNotFoundException ex) {
 	        	ex.printStackTrace();
+	        	return null;
 	        } 
 	        return new StreamingResolution("image/png", is); 
 	}  
+	public Resolution getToolImage() {
+        InputStream is = null;
+        
+        try { 
+            is = new FileInputStream(new File(CategoryActionBean.TOOLIMG_PATH + File.separator + filename)); 
+        } catch (FileNotFoundException ex) {
+        	ex.printStackTrace();
+        	return null;
+        } 
+        return new StreamingResolution("image/png", is); 
+}  
 	
 
 	/**workcode!num_worker!worklevel 로 전달받음 */

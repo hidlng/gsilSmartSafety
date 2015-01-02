@@ -81,12 +81,19 @@
 			<tr><th class="detailHeader">사용전 점검 체크리스트</th><td >
 				<div class="checkListDiv">
 					<c:forEach var="check" items="${actionBean.toolVO.checkList}">
-							<img class="checkListImage" src="Category.action?getChekcListImage=&fileName=${check.image}"/>
+							<c:if test="${check.image != null}">
+							<img class="checkListImage" src="Data.action?getChekcListImage=&filename=${check.virtName}"/>
+							</c:if>
 						 	${check.checklist}
 						 	<p/>
+						 	
 					</c:forEach>
 				</div>
 			</td></tr>
+			<tr><th class="detailHeader">장비이미지</th><td class="wordBreak">
+				<img class="toolImage" src="Data.action?getToolImage=&filename=${actionBean.toolVO.imgVirtName}"/>
+				</td>
+			</tr>
 			<tr><th class="detailHeader">사고사례</th>
 				<!-- file list -->
 				<td><c:forEach var="file" items="${actionBean.fileList}"
@@ -139,6 +146,7 @@
 	<!--button id="closeViewBtn" onclick="closeViewContent()">닫기</button-->
 	
 							
-	
+	<br>
+	<br>
 </stripes:form>
 </div>
