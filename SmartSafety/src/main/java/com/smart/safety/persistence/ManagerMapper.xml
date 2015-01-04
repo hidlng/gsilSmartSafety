@@ -22,6 +22,7 @@
 			AND (
 			U.ID like #{id}
 			OR M.NAME like #{name}
+			OR M.POSITION like #{position}
 			OR M.GRADE like #{grade}
 			OR M.PHONE like #{phone}
 			OR S.SITENAME like #{sitename}
@@ -45,7 +46,8 @@
 			AND (
 			U.ID like #{id}
 			OR M.NAME like #{name}
-			OR M.GRADE like #{grade}
+			OR M.POSITION like #{position}
+			OR M.GRADE like #{grade}			
 			OR M.PHONE like #{phone}
 			OR S.SITENAME like #{sitename}
 			)AND U.LEVEL like #{level}

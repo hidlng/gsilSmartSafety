@@ -49,7 +49,7 @@ $(document).on("click", ".detailLink", function(e) {
 		<col style="width: 17%">
 		<col style="width: 20%">
 		<col>
-		<col style="width: 12%">
+		
 	</colgroup>
 	<thead>
 		<tr>
@@ -59,25 +59,24 @@ $(document).on("click", ".detailLink", function(e) {
 			<th scope="col">대표관리자</th>
 			<th scope="col">연락처</th>
 			<th scope="col">작업기간</th>
-			<th scope="col">정보수정</th>
-
 		</tr>
 	<thead>
 	<tbody>
 		<c:forEach var="site" items="${siteList}" varStatus="idx">
-			<tr>
+			<tr onclick="updateSubmit('${idx.index}')" class="listTR">
 				<!-- <td>${site.sitename}</td>-->
-				<td>${idx.index + 1}</td>
+				<td>${idx.index + 1} </td>
 				<td>${site.sitename}</td>
 				<td>${site.rep_name}</td>
 				<td>${site.rep_phone}</td>
 				<td>${site.starttime}~
 					<p>${site.endtime}
 				</td>
-				<td><input id="updateIdx_${idx.index}" type="hidden"
-					value="${site.site_idx}" />
-					<span class="signup"><span class="btn_typ01"  onclick="updateSubmit('${idx.index}')">수정</span></span>	
+				<td style="display:none"><input  type="hidden" id="updateIdx_${idx.index}"	value="${site.site_idx}" />
+					<!--<span class="signup"><span class="btn_typ01"  >수정</span></span>-->	
 				</td>
+				
+				
 			</tr>
 		</c:forEach>
 	</tbody>

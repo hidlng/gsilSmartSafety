@@ -43,6 +43,7 @@
   function goPopup(){
 		// 주소검색을 수행할 팝업 페이지를 호출합니다.
 		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+		
 		var pop = window.open("jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes, modal=yes"); 
 	}
 
@@ -62,46 +63,46 @@
 	<!-- //srchbox -->
 	<table class="user_signup">
 		<colgroup>
-			<col style="width: 25%">
-			<col style="width: 25%">
-			<col style="width: 25%">
+			<col style="width: 20%">
+			<col style="width: 30%">
+			<col style="width: 20%">
 			<col>
 		</colgroup>
 
 		<tr>
 			<th>현장명</th>
 			<td colspan="3"><form:input path="sitename" maxlength="45" />
-				<p />
+				<br>
 				<form:errors cssClass="formError" path="sitename" /></td>
 		</tr>
 		<tr>
 			<th>주소</th>
-			<td colspan="3"><form:input id="addr_detail" path="addr_detail" maxlength="255"  readonly="true" style="width:90%" onfocus="goPopup()"/>
-				<p />
+			<td colspan="3"><form:input id="addr_detail" path="addr_detail" maxlength="255"  readonly="true" style="width:90%" onclick="goPopup()"/>
+				<br>
 				<form:errors cssClass="formError" path="addr_detail" /></td>
 		</tr>
 		<tr>
 			<th>대표관리자</th>
 			<td><form:input path="rep_name" maxlength="45" />
-				<p />
+				<br>
 				<form:errors cssClass="formError" path="rep_name" /></td>
 			<th>연락처
-				<p />
+				<br>
 				<span style="font-size: 17px">(010-1234-5678)</span>
 			</th>
 			<td><form:input path="rep_phone" maxlength="13" onblur="checkPhone(this, this.value)"/>
-				<p />
+				<br>
 				<form:errors class="formError" path="rep_phone" /></td>
 		</tr>
 		<tr>
-			<th>작업 기간(시작)</th>
+			<th>작업 기간<br>(시작)</th>
 			<td><form:input id="startDateInput" path="starttime"
 					maxlength="10" />
-				<p />
+				<br>
 				<form:errors cssClass="formError" path="starttime" /></td>
-			<th>작업 기간(종료)</th>
+			<th>작업 기간<br>(종료)</th>
 			<td><form:input id="endDateInput" path="endtime" maxlength="10" />
-				<p />
+				<br>
 				<form:errors cssClass="formError" path="endtime" /></td>
 		</tr>
 	</table>

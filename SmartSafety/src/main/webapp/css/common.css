@@ -30,7 +30,7 @@ legend{/*visibility:hidden;overflow:hidden;position:absolute;top:0;left:0;width:
 
 /* Base CSS */
 html, body {width:100%; font-family: '돋움',Dotum; /* color:#666 */}
-body {font-size:12px;line-height:18px}
+body {position:relative;font-size:35px;line-height:35px}
 img{vertical-align:middle}
 button{cursor:pointer}
 table caption {display:none;}
@@ -42,112 +42,110 @@ a {color:#444;text-decoration:none; cursor:pointer}
 a:hover, a:active, a:focus {color:#444444; text-decoration:none; cursor:pointer}
 
 /* a-style */
-a{color:#333;text-decoration:none;}6
+a{color:#333;text-decoration:none;}
 a:hover, a:active{color:#666;text-decoration:none;}
 
 /* layout */
-body{width:100%;background:url("../images/bg001.png") repeat-x 0 0 #000; color:#fff; font-size:16px;}
+body{position:relative; width:100%;background:url("../images/bg001.png") repeat-x 0 0 #000; color:#fff; font-size:25px;}
 #wrap{width:100%;min-height:2000px;background:url("../images/bg002.png") no-repeat 0 0;min-width:1400px;}
 #wrap.sub{width:100%;background:url("../images/bg002.png") no-repeat 0 0; min-height:200px;min-width:1400px;}
 .back_bg{width:100%;min-width:1400px;min-height:2000px;background:url("../images/bg003.png") no-repeat right 500px; padding:250px 0 100px;}
 .back_bg.sub{ width:100%;min-width:1400px;background:none;padding:25px 0 100px; min-height:1500px;}
 .back_bg.workCh{width:100%;min-width:1400px;min-height:2000px;background:url("../images/bg003.png") no-repeat right 500px; padding:150px 0 100px;}
-h1{padding:50px 0 0 50px;}
+h1{padding:10px 0 0 10px;}
 h1 img{width:120px;}
 
 /* login page */
 .logBox{overflow:hidden;width:385px;height:223px;margin:0 auto;background:url("../images/log_box.png") no-repeat 0 0;padding:115px 29px 0 29px; }
 .logBox .inputLog{float:left; width:297px; padding-top:2px; margin-right:5px;}
-.logBox .inputLog input{margin:3px 0;width:286px;height:29px;border-radius:5px;moz-border-radius:5px;webkit-border-radius:5px;padding:0 5px; background-color:#e5edfa; font-size:16px; line-height:29px;}
+.logBox .inputLog input{margin:3px 0;width:286px;height:29px;border-radius:5px;moz-border-radius:5px;webkit-border-radius:5px;padding:0 5px; background-color:#e5edfa; font-size:20px; line-height:29px;}
 .logBox p{float:left;display:block;width:82px;cursor:pointer;}
 
 /* sub page 공통 */
 /* aside */
-.wrapBox{overflow:hidden; margin:0 auto; padding:50px; width:1328px; border:1px solid #d70e0a;background:url("../images/bg_box.png") repeat 0 0; }
-.aside{position:relative;float:left;width:200px; min-height:550px; padding:55px 35px;background:url("../images/bg_box.png") repeat 0 0;}
+.wrapBox{overflow:hidden; margin:0 auto; padding:50px; width:1628px; border:1px solid #d70e0a;background:url("../images/bg_box.png") repeat 0 0; }
+.aside{position:relative;float:left;width:250px; min-height:550px; padding:55px 35px;background:url("../images/bg_box.png") repeat 0 0;}
 .aside_list{margin-bottom:20px;}
-.aside_list li{color:#98b4e0; font-size:22px; line-height:40px; font-weight:bold;}
+.aside_list li{color:#98b4e0; font-size:30px; line-height:40px; font-weight:bold;}
 .aside_list li.on{color:#d70e0a;}
 .aside_ident {position:absolute; left:35px; bottom:55px; width:200px;  }
-.aside_ident li{color:#efefef; font-size:14px; line-height:30px; border-bottom:1px dotted #8c97a9; margin-bottom:10px;}
+.aside_ident li{color:#efefef; font-size:25px; line-height:30px; border-bottom:1px dotted #8c97a9; margin-bottom:10px;}
 .aside_ident li.last{ border-bottom:0px; text-align:center; float: right;margin-top: 5px;}
 .aside_ident li span.identTitle{width:50px;}
 .aside_ident li span input{width:150px; padding:5px 15px; background:none; border:0; font-size:18px; color:#fff;}
 /* search */
-.content{float:right; width:920px; min-height:500px; padding:55px 55px; background:url("../images/bg_box.png") repeat 0 0;}
+.content{float:right; width:1180px; min-height:500px; padding:55px 55px; background:url("../images/bg_box.png") repeat 0 0;}
 .content .srchbox{overflow:hidden;height:36px;padding-bottom:20px;}
 .content .srchbox p{float:right;overflow:hidden;  height:36px; border:1px solid #152133;background-color:#fff; }
-.content .srchbox .search_input{width:207px; height:36px; padding:3px 10px;font-size:14px; line-height:14px;background-color:#fff; color:#333; border:none;}
+.content .srchbox .search_input{width:207px; height:36px; padding:3px 10px;font-size:20px; line-height:20px;background-color:#fff; color:#333; border:none;}
 .content .srchbox .btn_search{float:right;width:35px;height:36px;text-indent: -9999px; border-left:1px solid #141e2d;background:url("../images/icon_search.png") no-repeat 10px 12px #fff;}
 /* contant */
-.content table{clear: both;width:100%; font-size:18px;line-height:30px; background-color:#1d2b43;border-collapse: collapse;border-spacing: 0;}
+.content table{clear: both;width:100%; font-size:35px;line-height:35px; background-color:#1d2b43;border-collapse: collapse;border-spacing: 0;}
 .content table tr th, .content table tr td{border:1px dotted #8c97a9; text-align:center;}
-.content table tr th{padding:14px 0; color:#98b4e0; font-size:20px;}
+.content table tr th{padding:14px 0; color:#98b4e0; font-size:35px;}
 .content table tr td{padding:10px 0;}
 .content table tr td a{cursor:pointer;}
-.content table.user_signup td input{width:80%; font-size:18px; padding:3px;line-height:30px; color:#fff; text-align:center; background:none; border: 1px dotted #1D4F99;}
+.content table.user_signup td input{width:80%; font-size:35px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 1px dotted #1D4F99;}
 
 /* paging */
 .content .paging{text-align:center; padding: 40px 0 0 0; }
-.content .paging span{font-size:18px; color:#fff; padding:5px;}
+.content .paging span{font-size:22px; color:#fff; padding:5px;}
 .content .paging span.now{color:#d70e0a; font-weight:bold;}
 .content .paging .signup{display:inline-block; width:100px; vertical-align:center; }
 
 /* sub page - smart safe */
 .aside .aside_title{font-size:30px; font-weight:bold;height:50px; line-height:30px;color:#5891ed;}
 /* sub page - input style */
-#author_typ{width:250px; padding:5px;background-color:#1d2b43;color: #fff; font-size:18px; line-height:24px;border:1px dotted #8c97a9;}
-#add_typ {width:200px; padding:5px;background-color:#1d2b43;color: #fff; font-size:18px; line-height:24px;;border:1px dotted #8c97a9;}
+#author_typ{width:250px; padding:5px;background-color:#1d2b43;color: #fff; font-size:25px; line-height:24px;border:1px dotted #8c97a9;}
+#add_typ {width:200px; padding:5px;background-color:#1d2b43;color: #fff; font-size:25px; line-height:24px;;border:1px dotted #8c97a9;}
 span.years{display:inline-block;margin:5px 0;}
-span.years #year_typ {width:150px; padding:5px;background-color:#1d2b43;color: #fff; font-size:18px; line-height:24px;border:0px;border-bottom:1px dotted #8c97a9;}
-
-/* 작업관리 - 선택화면 */
-.choiceBox{overflow:hidden; margin:0 auto; padding:50px; width:750px; /*border:1px solid #d70e0a;*/background:url("../images/bg_box.png") repeat 0 0; /*border-radius:15px;moz-border-radius:15px;webkit-border-radius:15px;*/}
-.choiceBox .title_work{font-size:24px; font-weight:normal; color:#fff; /*border-bottom:1px dotted #d70e0a;*/ padding-bottom:30px;margin-bottom:40px;text-align:center;}
-.choiceBox .btn_box{float:left;width:224px; height:100px; border:3px solid #fff;/*background:url("../images/bg_box.png") repeat 0 0;*/ margin-right:30px;}
-.choiceBox .btn_box.last{ margin-right:0;}
-.choiceBox a .btn_box:hover{border:3px solid #d70e0a;background:url("../images/bg_box.png") repeat 0 0;}
-.choiceBox a .btn_box p{text-align:center; font-size:26px; line-height:100px; color:#fff;}
-.choiceBox a .btn_box p .arrow{display:inline-block; vertical-align:middle; background:url("../images/icon_arrow01.png") no-repeat 0 0; width:20px; height:30px;}
-.choiceBox a .btn_box p:hover{color:#d70e0a; list-style:none;}
-.choiceBox a .btn_box p:hover .arrow{ background:url("../images/icon_arrow01_over.png") no-repeat 0 0; }
+span.years #year_typ {width:150px; padding:5px;background-color:#1d2b43;color: #fff; font-size:25px; line-height:24px;border:0px;border-bottom:1px dotted #8c97a9;}
 
 /* 작업관리 - 관리화면 */
 .content.work{position:relative;}
 .content.work table{margin-bottom:40px;}
 span.equipment{background:url("../images/icon_equipment.png") no-repeat 0 0;}
-.content.work table td input{width:70%; font-size:20px; padding:3px;line-height:26px; color:#fff; text-align:center; background:none;border: 1px dotted #1D4F99;}
+.content.work table td input{width:70%; font-size:35px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none;border: 1px dotted #1D4F99;}
 span.side{margin-right:30px;}
-span.side{font-size:18px;}
+span.side{font-size:25px;}
 .content.work table td input.radi {width:20px; background-color:none;}
-.content.work table td textarea{width:90%;height:200px;background:none;color:#fff;font-size:20px;padding:10px;margin:15px 0;border:1px dotted #ddd; border-right:0;overflow-y:scroll;overflow-x:hidden;}
+.content.work table td textarea{width:90%;height:200px;background:none;color:#fff;font-size:35px;padding:10px;margin:15px 0;border:1px dotted #ddd; border-right:0;overflow-y:scroll;overflow-x:hidden;}
 .goTop{position:absolute; left:50%; bottom:175px; margin-left:475px;}
-span.iconImg{display:block;margin:0 auto;}
-.content table tr th.red{color:#d70e0a;background:none;font-size:26px;text-align:left;}
-.red{color:#d70e0a;background:none;font-size:24px;text-align:left;padding:17px 0;}
+span.iconImg{margin:0 auto; width:110px;height:auto;}
+span.iconImg img{width:90px;height:auto;}
+.content table tr th.red{color:#d70e0a;background:none;font-size:35px;text-align:left;}
+.red{color:#d70e0a;background:none;font-size:35px;text-align:left;padding:17px 0;}
 ul.equipment_typ li{width:33%;height:150px;display:inline-block;float:left;margin-right:1px;background: url("../images/bg_box.png") repeat 0 0;padding-top:10px;}
 ul.equipment_typ li span.iconImg{display:block;width:80px;height:70px;margin:0 auto;font-weight:bold;}
 ul.equipment_typ li.on{border:2px dashed #8c97a9;border-bottom:0px;background: none;background-color: #1d2b43;}
 table.user_signup.equipment{border:2px dashed #8c97a9;}
-span.explain{display:block;width:90%;font-weight:normal;font-size:14px;line-height:18px;text-align:left; padding:10px;}
+span.explain{display:block;width:90%;font-weight:normal;font-size:30px;line-height:30px;text-align:left; padding:10px;}
 
 /* button style */
- .btn_typ01{display:block;width:70px; padding:2px; margin:0 auto;background-color:#475B7C;border:1px solid #222;border-radius:3px;font-size:13px; line-height:22px;color:#fff;text-decoration:none; cursor:pointer;}
- .btn_typ01:hover{background-color:transparent;color:#ffffff;border:1px solid #ffffff;}
- .btn_typ02{display:block; width:86px; padding:4px !important; margin:0 auto;background-color:#d70e0a; border:1px solid #d70e0a;border-radius:3px;font-size:18px !important; line-height:26px;color:#555555;text-decoration:none;cursor:pointer;}
- .btn_typ02:hover{background-color:transparent; color:#d70e0a; border:1px solid #d70e0a;}
- .btn_typ03{display:block;width:100px; padding:10px; margin:0 auto;background-color:#111927; border:1px solid #d70e0a;border-radius:3px;font-size:16px;color:#d70e0a;text-decoration:none;cursor:pointer;}
- .btn_typ03:hover{background-color:transparent;color:#ffffff;border:1px solid #ffffff;}
+.btn_typ01{display:block; width:150px; padding:2px; margin:0 auto;background-color:#475B7C;border:1px solid #222;border-radius:3px;text-align:center;
+		font-size:30px; line-height:35px;color:#fff;text-decoration:none; cursor:pointer}
+.btn_typ01:hover{background-color:transparent;color:#ffffff;border:1px solid #ffffff;}
+.btn_typ02{display:block; width:100px; padding:4px !important; margin:0 auto;background-color:#d70e0a; border:1px solid #d70e0a;border-radius:3px;text-align:center;
+font-size:30px !important; line-height:26px;color:#555555;text-decoration:none;cursor:pointer}
+.btn_typ02:hover{background-color:transparent; color:#d70e0a; border:1px solid #d70e0a;}
+.btn_typ03{display:block;width:150px; padding:10px; margin:0 auto;background-color:#111927; border:1px solid #d70e0a;border-radius:3px;
+			font-size:30px;text-align:center;
+		color:#d70e0a;text-decoration:none;cursor:pointer}
+.btn_typ03:hover{background-color:transparent;color:#ffffff;border:1px solid #ffffff;}
 
-/* popup */
-#wrap_pop{overflow:hidden;width:100%; padding:70px 0;background-color:#1d2b43;}
-#wrap_pop table.pop{width:90%;margin:0 auto;background-color:#111927;border-collapse:collapse; border-spacing: 0; border-top:1px solid #d70e0a;}
-#wrap_pop table.pop th, #wrap_pop table.pop td{border:1px dotted #8c97a9; text-align:center;text-align:left;font-size:14px;}
-#wrap_pop table.pop tr th{padding:10px; color:#98b4e0; font-size:20px;text-align:center;}
-#wrap_pop table.pop tr td{padding:10px;}
-#wrap_pop table.poptr td a{cursor:pointer;}
-#wrap_pop table.pop td input{width:95%; font-size:14px; padding:5px; color:#fff; text-align:left;background:none; border: 1px dotted #1D4F99; font-weight:normal;}
-#wrap_pop table.pop td input.typ03{width:40%; font-size:14px; padding:5px; color:#fff; text-align:left;background:none; border: 1px dotted #1D4F99; font-weight:normal;}
-.buttonBox{text-align:center;margin:40px 0 0;}
-.buttonBox a span{display:inline-block;}
-#wrap_pop table.pop td input.btntype{width:130px; font-size:12px;padding:5px; color:#111927;background:#98b4e0;cursor:pointer; text-align:center;margin-left:10px; font-weight:normal;} 
+.btnNewPasswd{width: 200px;}
+
+/* 추가 */
+.pageClosing{position:absolute; right:10px; top:10px;}
+.pageClosing span{display:inline-block; margin:0;padding:0;cursor:pointer;}
+.pageClosing .renew{margin:0 2px 0 0;}
+.printSelect{float:left;border: 1px dotted #D70E0A; padding:5px 10px 5px;height:25px;background: #152033;}
+.printSelect select{width:327px;padding:0px;font-size: 30px;background: #152033;color: #D70E0A;border:none;margin-right:10px;}
+.printSelect .btn_print{cursor:pointer;}
+/* ceo */
+.wrapBox.ceo{padding:50px;}
+.wrapBox.ceo .content{float:left; width:1228px;padding: 55px 55px;background: url("../images/bg_box.png") repeat 0 0;}
+a .btn_typ05 {display: block; width: 110px;padding:7px;margin: 0 auto;background-color: #475B7C;border: 1px solid #222;border-radius: 3px;font-size: 20px;line-height: 22px;color: #fff;text-decoration: none;}
+a .btn_typ05:hover{background-color:transparent;color:#ffffff;border:1px solid #ffffff;}
+.wrapBox.ceo .content table tr th {padding: 17px 0; font-size: 22px;color: #98b4e0;}
+.wrapBox.ceo .content table tr td {padding: 15px 0; }

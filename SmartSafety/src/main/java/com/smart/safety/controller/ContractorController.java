@@ -35,7 +35,7 @@ public class ContractorController {
 	@Resource(name="ContractorService")	
 	private ContractorService contractorService;
 	
-	public static final int MAX_ROW_NUM=10;
+	public static final int MAX_ROW_NUM=5;
 	public static final int MAX_PAGE_NUM=5;
 	
 	

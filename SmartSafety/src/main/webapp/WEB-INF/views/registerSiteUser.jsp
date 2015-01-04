@@ -150,7 +150,7 @@
 					path="password" maxlength="45" />
 				<p />
 				<form:errors cssClass="formError" path="password" /> 
-				<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01" style="width:170px">신규 비밀번호 발급</div> 
+				<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01 btnNewPasswd" >신규 비밀번호 발급</div> 
 			</td>
 
 		</tr>

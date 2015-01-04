@@ -72,166 +72,6 @@
 	
  });
  
- 
- 
- /**장비관련**/
- var equipIdx = 0;
-
- /**option 선택시 새로 추가될 selectbox형태 설정
-  * tarId : select박스를 추가할 TD
-  * isSelect : Seletbox/Text 결정
-  */
- function getTool(tarId, inputType) {
- 	var str;
- 	if(inputType == 0){//Select
- 		str = "<select id='toolSelect_" + equipIdx + "' name='toollist["
- 		+ equipIdx + "].toolname' class='siteSelectBox' onchange='selectTool("
- 		+ equipIdx + ", \""	+ tarId + "\")'>"
- 	//	+ "<option>:::선택:::</option>"
- 		+ "</select>";
- 	}else if(inputType == 1) { //readonly text
- 		str =  "<input type='text' id='toolSelect_" + equipIdx + "' name='toollist["
- 		+ equipIdx + "].toolname' readonly='true'/>";
- 	}else if(inputType == 2) {//수기입력 text
- 		str =  "<input type='text' id='toolSelect_" + equipIdx + "' name='toollist["
- 		+ equipIdx + "].toolname' value=''/>";
- 	}
- 	
- 	str += "<input type='button' id='toolDelete_" + equipIdx + "' style='width:30px;cursor:pointer' onclick='removeTool(" 
-    	+ equipIdx + ")' value='X' ></input>"
-    	+ "<input  type='hidden' name='toollist[" + equipIdx + "].toolcode' id='toolcode_" + equipIdx + "' />" 
-  	+ "<input  type='hidden' name='toollist[" + equipIdx + "].tooltype' id='tooltype_" + equipIdx + "' />" 
-    	;
-  	
-  	return str;
- }
-
- 
- /* selectbox 추가
-  * tarId : select박스를 추가할 TD
-  */
- function addTool(tarId, inputType) {	
-	var type;
-	
- 	var str = getTool(tarId , inputType);
- 	
- 	/**span 추가**/
- 	var addedSpan = document.createElement("span");
- 	addedSpan.id = "toolSpan_" + equipIdx;
- 	addedSpan.innerHTML = str;
- 	$("#" + tarId).append(addedSpan);
- 	
- 	if(inputType == 0){//selectbox 항목추가
- 		if(tarId == 'cons_machine') setCode(57, 'toolSelect_' + equipIdx);
- 		else if(tarId == 'trans_machine') setCode(58, 'toolSelect_' + equipIdx);
- 		else if(tarId == 'etc_machine') setCode(59, 'toolSelect_' + equipIdx);
- 		else if(tarId == 'weld_tool') setCode(61, 'toolSelect_' + equipIdx);
- 		else if(tarId == 'elec_tool') setCode(62, 'toolSelect_' + equipIdx);
- 		else if(tarId == 'nelec_tool') setCode(63, 'toolSelect_' + equipIdx);
- 		else if(tarId == 'etc_tool') setCode(64, 'toolSelect_' + equipIdx);
-
- 	}
- 	equipIdx++;
-// 	$("#checkCount").val(checkCount);//전달시 checklistArray에서 제거된 checkvo가 계속남아있으므로 이를 지정된 갯수만큼 잘라주기 위함	
- }
- 
- /**수기입력용 Textbox생성**/
- function addToolText(tarId, isTool) {
-	 var str = getTool(tarId , 2);//text박스
-	 
-	 var addedSpan = document.createElement("span");
-	 	addedSpan.id = "toolSpan_" + equipIdx;
-	 	addedSpan.innerHTML = str;
-	 	$("#" + tarId).append(addedSpan);
-	 	
-		/**hidden값 code, type 값 부여**/
-	 	$('#toolcode_' + equipIdx).val('_');
-	 	if(isTool) //공도구면 99
-	 		$('#tooltype_' + equipIdx).val(99); //99: 수기입력
-	 	else//장비면 98
-	 		$('#tooltype_' + equipIdx).val(98); //98: 수기입력
-	 	
-	 equipIdx++;
- }
-
- //넘겨받은 selectbox의 id값은 code값과 같음
- //code 및 type hiddne값 지정용도
- function selectTool(eIdx, tarId) {
- 	var code = $('#toolSelect_' + eIdx + ' option:selected').attr('id'); //선택된 option의 id값이 code값임.(val은 name)
- 	var type;
- 	if(tarId == 'cons_machine') type=0;
- 	else if(tarId == 'trans_machine') type=1;
- 	else if(tarId == 'etc_machine') type=2;
- 	else if(tarId == 'weld_tool') type=3;
-	else if(tarId == 'elec_tool')  type=4;
-	else if(tarId == 'nelec_tool') type=5;
-	else if(tarId == 'etc_tool') type=6;
- 	
- 	
- 	/**hidden값 code, type 값 부여**/
- 	$('#toolcode_' + eIdx).val(code);
- 	$('#tooltype_' + eIdx).val(type); //TODO : type에 따라 구분할것
- 	
- 	/**추가된 span 내 select에 항목 추가**/	
- //	addTool(tarId, true);
- }
-
- /**submit시 toollist에 추가되지않게 관련속성 모두 제거**/
-function removeTool(idx) {
-	$('#toolSelect_' + idx).remove();
-	$('#toolcode_' + idx).remove();
-	$('#tooltype_' + idx).remove();
-	$('#toolDelete_' + idx).remove();
-}
-
-//submit전 선택하지 않은 list에 대해 정리를 실시 
-//error발생시 ---선택--이 나타나는 문제떄문
-function checkBeforeSubmit() {
-	
-	for(var i = 0 ; i < equipIdx ; i++ ) {
-		if($('#toolcode_' + i).val() == ''){
-			removeTool(i);
-			//alert($('#toolcode_' + i).parent().attr('id'));
-		}
-	}
-		
-}
-
-
-function goPopup(){
-	$.ajax({
-		type : "POST",
-		url : "workPopup",
-		cache : false,
-		success : function(json){
-			$('#viewContent').html(json);
-			$('#popupOKBtn').hide();
-			setChildCategoryOf(1, 'worktype_pop');//init
-			doOverlayOpen();	
-		},
-		error : onError
-	});
-}
-
-
-
-function confirmCode() {
-	//alert(worktype + " 1" + category1 + " " + category2 + " " + workcode + " " + workname);	 
-	var worktype = $('#worktype_pop option:selected').val();
-	var category1 = $('#category1_pop option:selected').val();
-	var category2 = $('#category2_pop option:selected').val();
-	var workname = $('#workname_pop option:selected').val();
-	var workcode = $('#workname_pop  option:selected').attr('id');
-	
-	$('#worktype').val(worktype);
-	$('#category1').val(category1);
-	$('#category2').val(category2);
-	$('#workcode').val(workcode);
-	$('#workname').val(workname);
-	
-	$('#viewContent').html('');
-	doOverlayClose();	
-}
 
  function submitWork() {	
  var input;
@@ -254,7 +94,7 @@ function confirmCode() {
 <div class="bgCover">&nbsp;</div>
 <!-- overlay box -->
 <div class="overlayBox">
-<div class="closeLink" style="cursor:hand"><img src="images/x-button.png" onclick="doOverlayClose()" /></div>
+<div class="closeLink" style="cursor:pointer"><img src="images/closing.png" onclick="doOverlayClose()" style="cursor:pointer" /></div>
 <div class="overlayContent"><div id="viewContent"></div></div>
 </div>
 
@@ -294,24 +134,24 @@ function confirmCode() {
 				소분류
 			</th>
 		</tr>
-		<tr>
+		<tr class="listTR">
 			<td  onclick="goPopup()">						
-				<form:input id="worktype" path="worktype"  readonly="true" />
-				<form:errors path="worktype" cssClass="formError"/>
+				<form:input id="worktype" path="worktype"  readonly="true" style="cursor:pointer;" />
+				<br><form:errors path="worktype" cssClass="formError"/>
 			</td>
 			<td  onclick="goPopup()">				
-				<form:input id="category1"  path="category1"  readonly="true" />
-				<form:errors path="category1" cssClass="formError"/>
+				<form:input id="category1"  path="category1"  readonly="true" style="cursor:pointer;"/>
+				<br><form:errors path="category1" cssClass="formError"/>
 			<td  onclick="goPopup()">				
-				<form:input id="category2" path="category2"  readonly="true" />
-				<form:errors path="category2" cssClass="formError"/>
+				<form:input id="category2" path="category2"  readonly="true" style="cursor:pointer;"/>
+				<br><form:errors path="category2" cssClass="formError"/>
 			</td>
 		</tr>
 		<tr>
 			<th>작업종류</th>
 			<td colspan="2"  onclick="goPopup()">			
-				<form:input id="workname"  path="workname"  readonly="true" />
-				<form:errors path="workname" cssClass="formError"/>
+				<form:input id="workname"  path="workname"  readonly="true"  style="cursor:pointer;"/>
+				<br><form:errors path="workname" cssClass="formError"/>
 			</td>
 		</tr>			
 		
@@ -320,7 +160,7 @@ function confirmCode() {
 		<tr>
 			<th>작업타이틀</th>
 			<td colspan="2"><form:input path="worktitle" 	maxlength="30" />
-							<p /> <form:errors path="worktitle" cssClass="formError"  /></td>
+							<br> <form:errors path="worktitle" cssClass="formError"  /></td>
 		</tr>
 		<tr>
 			<th>작업 유형</th>
@@ -335,9 +175,9 @@ function confirmCode() {
 		<tr>
 			<th>작업기간</th>	
 			<td>시작 : <form:input id="startDateInput" path="startdate" 	maxlength="10" readonly="true"/>
-				<p /> <form:errors cssClass="formError" path="startdate" /></td>
+				<br> <form:errors cssClass="formError" path="startdate" /></td>
 			<td>마감 : <form:input id="endDateInput" path="enddate" maxlength="10" readonly="true"/>
-				<p /><form:errors cssClass="formError" path="enddate" /></td>
+				<br><form:errors cssClass="formError" path="enddate" /></td>
 		</tr>
 
 		<tr>
@@ -371,7 +211,7 @@ function confirmCode() {
 			</td>
 			<td id="etc_machine">
 				<span class="btn_typ01"  onclick="addTool('etc_machine', 0);">추가</span>
-				<span class="btn_typ01"  onclick="addToolText('etc_machine');">수기입력</span>
+				<!--span class="btn_typ01"  onclick="addToolText('etc_machine');">수기입력</span>-->
 			</td>
 		</tr>		
 	</table>
@@ -392,7 +232,8 @@ function confirmCode() {
 					src="images/icon_tool02.png" alt="전동도구"></span><br />전동도구</th>
 			<th><span class="iconImg"><img
 					src="images/icon_tool03.png" alt="비전동도구"></span><br />비전동도구</th>
-			<th>기타도구</th>
+			<th><span class="iconImg"><img
+					src="images/icon_tool04.png" alt="기타도구"></span><br />기타도구</th>
 		</tr>
 		<tr>
 			<td id="weld_tool">
@@ -435,7 +276,7 @@ function confirmCode() {
 			<th>세부장소</th>
 			<td colspan="3">
 				<form:input path="addr_detail" 	maxlength="255" />
-				<p /> <form:errors path="addr_detail" cssClass="formError"  />
+				<br> <form:errors path="addr_detail" cssClass="formError"  />
 			</td>
 		</tr>
 		<tr>
@@ -459,16 +300,16 @@ function confirmCode() {
 			<tr>
 				<th>성명</th>
 				<td><form:input path="pic_name" 	maxlength="45" />
-					<p /> <form:errors path="pic_name" cssClass="formError"  /></td>
+					<br> <form:errors path="pic_name" cssClass="formError"  /></td>
 				<th>생년월일</th>
 				<td><form:input id="birthInput" path="pic_birth" 	maxlength="10" readonly="true" />
-					<p /> <form:errors path="pic_birth" cssClass="formError"  />
+					<br> <form:errors path="pic_birth" cssClass="formError"  />
 				</td>
 			</tr>
 			<tr>
 				<th>연락처</th>
 				<td><form:input class="phone" path="pic_phone" 	maxlength="13" onblur="checkPhone(this, this.value)"/>
-				<p /> <form:errors path="pic_phone" cssClass="formError"  /></td>
+				<br> <form:errors path="pic_phone" cssClass="formError"  /></td>
 				<th>소속</th>
 				<td>
 				<form:select path="pic_position" class="siteSelectBox" >
@@ -515,7 +356,7 @@ function confirmCode() {
 	<table>
 		<tr>
 			<td><form:textarea path="remark" 	maxlength="600" />
-			<p /> <form:errors path="remark" cssClass="formError"  /></td>
+			<br> <form:errors path="remark" cssClass="formError"  /></td>
 		</tr>
 	</table>
 
@@ -530,9 +371,9 @@ function confirmCode() {
 			<span class="signup"><span class="btn_typ02"  onclick="submitWork()">수정 ></span></span>
 		</c:if>
 	</div>
-	<p class="goTop">
+	<!--p class="goTop">
 		<a href="#"><img src="images/icon_top.png" alt="top으로 가기">&nbsp;</a>
-	</p>
+	</p-->
 
 
 

@@ -53,6 +53,7 @@ $(document).ready(function() {
 	
  });
 
+/**viewWork에서 사용된s addTool 함수 **/
 function addTool(tarId, name) {	
 	var str = "<div>" + name + "</div>"; 	
 	/**span 추가**/

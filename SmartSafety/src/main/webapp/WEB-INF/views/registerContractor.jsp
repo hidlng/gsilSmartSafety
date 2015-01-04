@@ -69,9 +69,9 @@
 <!-- //srchbox -->
 <table class="user_signup">
 	<colgroup>
-		<col style="width: 25%">
-		<col style="width: 25%">
-		<col style="width: 25%">
+		<col style="width: 20%">
+		<col style="width: 30%">
+		<col style="width: 20%">
 		<col>
 	</colgroup>
 
@@ -83,7 +83,7 @@
 	</tr>
 	<tr>
 		<th>업체명</th>
-		<td><form:input path="cont_name" maxlength="45"/><p/><form:errors cssClass="formError" path="cont_name" /></td>
+		<td colspan="3"><form:input path="cont_name" maxlength="45"/><p/><form:errors cssClass="formError" path="cont_name" /></td>
 	</tr>
 	<tr>
 		<th>업체 연락처<p><span style="font-size:17px">(010-1234-5678)</span></th>
@@ -126,7 +126,7 @@
 		<th>PW</th>
 		<td colspan="3">					
 			<form:password id="input_password" path="password" maxlength="45"/><p/><form:errors cssClass="formError" path="password" />
-			<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01" style="width:170px">신규 비밀번호 발급</div> 						
+			<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01 btnNewPasswd" >신규 비밀번호 발급</div> 						
 		</td>
 	</tr>
 		

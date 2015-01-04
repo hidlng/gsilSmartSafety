@@ -49,7 +49,7 @@
 	<thead>
 	<tbody>
 		<c:forEach var="manager" items="${managerList}" varStatus="idx">
-			<tr>
+			<tr class="listTR"  onclick="updateSubmit('${idx.index}')">
 				<td>
 					<c:if test ="${manager.level == 4}">소장</c:if>
 					<c:if test ="${manager.level == 5}">작업팀장</c:if>
@@ -59,7 +59,7 @@
 				<td>${manager.phone}</td>
 				<td>${manager.id}</td>
 				<td><input id="updateIdx_${idx.index}" type="hidden"	value="${manager.manager_idx}" />
-					<span class="signup"><span class="btn_typ01"  onclick="updateSubmit('${idx.index}')">수정</span></span>	
+					<!-- <span class="signup"><span class="btn_typ01"  onclick="updateSubmit('${idx.index}')">수정</span></span>-->	
 				 </td>
 			</tr>
 		</c:forEach>

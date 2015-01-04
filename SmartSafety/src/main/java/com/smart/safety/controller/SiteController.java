@@ -31,7 +31,7 @@ public class SiteController {
 	@Resource(name="SiteService")
 	private SiteService siteService;
 	
-	public static final int MAX_ROW_NUM=10;
+	public static final int MAX_ROW_NUM=5;
 	public static final int MAX_PAGE_NUM=5;
 	
 	@RequestMapping(value ="siteList")

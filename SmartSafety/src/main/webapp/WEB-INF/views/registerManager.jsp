@@ -87,9 +87,9 @@
 <!-- //srchbox -->
 <table class="user_signup">
 	<colgroup>
-		<col style="width: 25%">
-		<col style="width: 25%">
-		<col style="width: 25%">
+		<col style="width: 20%">
+		<col style="width: 30%">
+		<col style="width: 20%">
 		<col>
 	</colgroup>
 
@@ -167,7 +167,7 @@
 		<th>PW</th>
 		<td colspan="3">					
 			<form:password id="input_password" path="password" maxlength="45"/><p/><form:errors cssClass="formError" path="password" />
-			<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01" style="width:170px">신규 비밀번호 발급</div> 							
+			<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01 btnNewPasswd" >신규 비밀번호 발급</div> 							
 		</td>
 											
 	</tr>

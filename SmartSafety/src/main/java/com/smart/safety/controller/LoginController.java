@@ -108,21 +108,29 @@ public class LoginController {
 		
 		
 		SiteVO siteVO = new SiteVO();
-		
+//		<c:if test ="${sessionScope.userLoginInfo.level == 0}">SS 관리자</c:if>
+//		<c:if test ="${sessionScope.userLoginInfo.level == 1}">본사 관리자(EHS팀)</c:if>
+//		<c:if test ="${sessionScope.userLoginInfo.level == 2}">현장 안전 관리자</c:if>
+//		<c:if test ="${sessionScope.userLoginInfo.level == 3}">CEO</c:if>
+//		<c:if test ="${sessionScope.userLoginInfo.level == 4}">현장 사용자(소장)</c:if>
+//		<c:if test ="${sessionScope.userLoginInfo.level == 5}">작업팀장(2)</c:if>
+//		<c:if test ="${sessionScope.userLoginInfo.level == 6}">일반 작업자(3)</c:if>
+//		<c:if test ="${sessionScope.userLoginInfo.level == 7}">현장 업체</c:if>
 		String userName="";
 		switch(userVO.getLevel()) {
-		case 1://안전관리자
+		case 1://본사관리자(EHS팀)
 			userName = managerSerivce.getManagerByID(id).getName();
 			//안전관리자는 site 정보 없음
 			break;
 		case 2://현장관리자
-		case 3://현장 사용자
+		case 3://CEO
+		case 4:case 5:case 6://현장 사용자(소장 ,팀장,작업자)
 			ManagerVO managerVO = managerSerivce.getManagerByID(id);
 			userName = managerVO.getName(); //관리자/사용자 명 할당			
 			siteVO = siteService.getSiteByIdx(managerVO.getSite_idx()) ; //소속 Site정보 가져옴
 			session.setAttribute("managerVO", managerVO); //작업등록시 필요
 			break;
-		case 4://업체
+		case 7://업체
 			ContractorVO contractorVO = contractorService.getContractorByID(id);
 			userName = contractorVO.getCont_name(); //업체명 할당
 			siteVO = siteService.getSiteByIdx(contractorVO.getSite_idx());

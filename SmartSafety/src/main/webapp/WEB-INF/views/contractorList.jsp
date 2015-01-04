@@ -50,14 +50,14 @@ function goPage(val) {
 	<thead>
 	<tbody>
 		<c:forEach var="contractor" items="${contractorList}" varStatus="idx">
-			<tr>
+			<tr class="listTR"  onclick="updateSubmit('${idx.index}')">
 				<td>${contractor.cont_name}</td>
 				<td>${contractor.cont_phone}</td>
 				<td>${contractor.rep_name}</td>
 				<td>${contractor.id}</td>
-				<td><input id="updateIdx_${idx.index}" type="hidden"
-					value="${contractor.cont_idx}" /> 
-					<span class="signup"><span class="btn_typ01"  onclick="updateSubmit('${idx.index}')">수정</span></span>
+				<td style="display:none">
+					<input id="updateIdx_${idx.index}" type="hidden" value="${contractor.cont_idx}" /> 
+					<!--span class="signup"><span class="btn_typ01"  onclick="updateSubmit('${idx.index}')">수정</span></span-->
 				</td>
 			</tr>
 		</c:forEach>

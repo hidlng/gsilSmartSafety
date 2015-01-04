@@ -42,7 +42,7 @@ public class ManagerController {
 	private SiteService siteService;
 	
 	
-	public static final int MAX_ROW_NUM=10;
+	public static final int MAX_ROW_NUM=5;
 	public static final int MAX_PAGE_NUM=5;
 	
 	@RequestMapping(value = "managerList")
@@ -57,6 +57,7 @@ public class ManagerController {
 		
 		managerVO.setId(keyword);
 		managerVO.setName(keyword);
+		managerVO.setPosition(keyword);
 		managerVO.setPhone(keyword);
 		managerVO.setGrade(keyword);
 		

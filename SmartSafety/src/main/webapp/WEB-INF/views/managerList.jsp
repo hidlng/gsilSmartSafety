@@ -49,32 +49,32 @@ function chgLevel(val) {
 	<!-- //srchbox -->
 	<table>
 		<colgroup>
-			<col style="width: 15%">
-			<col style="width: 15%">
 			<col style="width: 30%">
+			<col style="width: 10%">
 			<col style="width: 15%">
+			<col style="width: 27%">
 			<col>
 		</colgroup>
 		<thead>
-			<tr>
+			<tr>				
+				<th scope="col">소속</th>
+				<th scope="col">직급</th>
 				<th scope="col">이름</th>
-				<th scope="col">소속직급</th>
 				<th scope="col">연락처</th>
 				<th scope="col">ID</th>
-				<th scope="col">정보수정</th>
-
 			</tr>
 		<thead>
 		<tbody>
 			<c:forEach var="manager" items="${managerList}" varStatus="idx">
-				<tr>
-					<td>${manager.name}</td>
+				<tr class="listTR"  onclick="updateSubmit('${idx.index}')">					
+					<td>${manager.position}</td>
 					<td>${manager.grade}</td>
+					<td>${manager.name}</td>
 					<td>${manager.phone}</td>
 					<td>${manager.id}</td>
-					<td>
+					<td style="display:none">
 						<input id="updateIdx_${idx.index}" type="hidden" value="${manager.manager_idx}"/>
-						<span class="signup"><span class="btn_typ01"  onclick="updateSubmit('${idx.index}')">수정</span></span>
+						<!--<span class="signup"><span class="btn_typ01"  onclick="updateSubmit('${idx.index}')">수정</span></span>-->
 					</td>
 				</tr>		
 			</c:forEach>	

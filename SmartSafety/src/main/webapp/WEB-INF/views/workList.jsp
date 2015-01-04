@@ -13,6 +13,14 @@ function viewSubmit(val) {
 	$('#viewForm').submit();
 	
 }
+function workSubmit(val , work_idx) {
+	var user_idx = '${sessionScope.userLoginInfo.user_idx}';
+	
+	if(user_idx == work_idx)
+		updateSubmit(val);
+	else
+		viewSubmit(val);
+}
 
 function registerSubmit() {
 	$('#registerForm').submit();
@@ -42,7 +50,6 @@ function goPage(val) {
 		<col style="width: 15%">
 		<col style="width: 30%">
 		<col style="width: 20%">		
-		<col style="width: 15%">
 		<col>
 	</colgroup>
 	<thead>
@@ -52,27 +59,23 @@ function goPage(val) {
 			<th scope="col">작업타이틀</th>
 			<th scope="col">작업기간</th>
 			<th scope="col">작성자</th>
-			<th scope="col">정보수정</th>
 		</tr>
 	<thead>
 	<tbody>
 		<c:forEach var="work" items="${workList}" varStatus="idx">
-			<c:if test='${work.ischarge.equals("Y")}'><tr class="chargeWorkTR"></c:if> <!--  돌관작업 -->
-			<c:if test='${!work.ischarge.equals("Y")}'><tr></c:if>
+			<c:if test='${work.ischarge.equals("Y")}'><tr class="chargeWorkTR listTR"  onclick="workSubmit('${idx.index}','${work.write_user_idx}')"></c:if> <!--  돌관작업 -->
+			<c:if test='${!work.ischarge.equals("Y")}'><tr class="listTR" onclick="workSubmit('${idx.index}' ,'${work.write_user_idx}')"></c:if>
 			
 				<td>${((paging.pageNo - 1) * paging.pageSize) + (idx.index + 1) }</td>
 				<td>${work.worktype}</td>
 				<td>${work.worktitle}</td>
 				<td>${work.startdate} ~<p> ${work.enddate}</td>
 				<td>${work.username}</td>
-				<td>
+				<td style="display:none">
 				<input id="updateIdx_${idx.index}" type="hidden" value="${work.work_idx}" />
-				<c:if test="${sessionScope.userLoginInfo.user_idx  == work.write_user_idx }">
-					<span class="signup"><span class="btn_typ01"  onclick="updateSubmit('${idx.index}')">수정</span></span>
-				</c:if>
-				<c:if test="${sessionScope.userLoginInfo.user_idx  != work.write_user_idx }">
-					<span class="signup"><span class="btn_typ01"  onclick="viewSubmit('${idx.index}')">보기</span></span>
-				</c:if>
+				
+				
+			
 				</td>
 			</tr>
 		</c:forEach>

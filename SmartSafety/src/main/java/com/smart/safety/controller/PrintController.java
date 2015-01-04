@@ -27,7 +27,7 @@ public class PrintController {
 	
 	public static final String RISK_DATA_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getRiskData=&codelist=";
 	public static final String CODE_DETAIL_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getDetailByJSON=";
-	public static final String CHECK_IMG_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Category.action?getChekcListImage=&fileName=";
+	public static final String CHECK_IMG_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getChekcListImage=&filename=";
 		
 	@Resource(name="WorkService")
 	WorkService workService;
@@ -338,7 +338,7 @@ public class PrintController {
 									
 									CheckVO checkVO = new CheckVO();
 									checkVO.setCheck(check.get("checklist"));
-									checkVO.setUrl(CHECK_IMG_URL + check.get("image"));
+									checkVO.setUrl(CHECK_IMG_URL + check.get("virtName"));
 									
 									input_checklist.add(checkVO);
 								}

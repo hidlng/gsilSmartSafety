@@ -29,7 +29,7 @@
 	$(document).ready(function() {
 		var contentView = '#' +'${sessionScope.contentView}';
 		$(contentView).addClass('on');
-		document.body.style.zoom =1.4;
+		//document.body.style.zoom =1.4;
 	});
 	
    $(document).on("click", "#siteUserList", function(e) { $('#siteUserList_form').submit(); });
@@ -134,8 +134,7 @@
 					</c:if>
 					<li  class="last"><span id="logout" class="btn_typ01">로그아웃&nbsp;></span></li>
 				</ul><!-- //aside_ident -->
-			<input type="button" onclick="addZoom()" value="+++"/>
-			<input type="button" onclick="minusZoom()" value="---"/>
+			
 			</div><!-- //aside -->
 			
 			<div class="content work">
