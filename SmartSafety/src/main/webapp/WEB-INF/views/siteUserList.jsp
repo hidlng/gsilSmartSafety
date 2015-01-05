@@ -33,8 +33,7 @@
 	<colgroup>
 		<col style="width: 30%">
 		<col style="width: 15%">		
-		<col style="width: 20%">
-		<col style="width: 15%">
+		<col style="width: 30%">
 		<col>
 	</colgroup>
 	<thead>
@@ -43,8 +42,7 @@
 			<th scope="col">이름</th>			
 			<th scope="col">연락처</th>
 			<th scope="col">ID</th>
-			<th scope="col">정보수정</th>
-
+			
 		</tr>
 	<thead>
 	<tbody>

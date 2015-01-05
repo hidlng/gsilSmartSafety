@@ -32,10 +32,9 @@ function goPage(val) {
 <!-- //srchbox -->
 <table>
 	<colgroup>
-		<col style="width: 35%">
-		<col style="width: 18%">
-		<col style="width: 15%">
-		<col style="width: 18%">
+		<col style="width: 37%">
+		<col style="width: 30%">
+		<col style="width: 20%">
 		<col>
 	</colgroup>
 	<thead>
@@ -44,8 +43,6 @@ function goPage(val) {
 			<th scope="col">업체연락처</th>
 			<th scope="col">대표관리자</th>
 			<th scope="col">ID</th>
-			<th scope="col">정보수정</th>
-
 		</tr>
 	<thead>
 	<tbody>

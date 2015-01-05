@@ -32,7 +32,7 @@ function setChildCategoryOf(idx, targetId, selectName) {
  			}
  			
  			
- 			$('#' + targetId).append('<option id="" value="">----선택----</option>');
+ 			$('#' + targetId).append('<option id="" value="">------선택------</option>');
  			for(var i = 0 ; i < length; i ++) {
  				//alert(selectName +" : "+catList[i].name );
  				if(selectName == catList[i].name )
@@ -77,7 +77,7 @@ function setCode(categoryIdx , targetId, existList) {
 	  		success : function(json) {
 	  			$('#' + targetId).empty();
 	  			var codeList = json.codeList;
-	  			$('#' + targetId).append('<option val="test">----선택----</option>');
+	  			$('#' + targetId).append('<option val="test">------선택------</option>');
 	  			
 	  			var length = 0;
 	  			for(var prop in codeList){//size 파악
@@ -422,13 +422,61 @@ $(function() {
 /**핸드폰번호 체크**/
 function checkPhone(obj, strValue) {
 	 
-	 var rgEx = /(01[016789])[-](\d{4}|\d{3})[-]\d{4}$/g;  
-	 //  var strValue = f.hphone1.value+"-"+f.hphone2.value+"-"+f.hphone3.value;
-	   var chkFlg = rgEx.test(strValue);   
-	   if(!chkFlg){
-	    alert("올바른 휴대폰번호가 아닙니다.");
-	    obj.focus();
-	    return false; 
-	   }
+//	 var rgEx = /(01[016789])[-](\d{4}|\d{3})[-]\d{4}$/g;  
+//	 //  var strValue = f.hphone1.value+"-"+f.hphone2.value+"-"+f.hphone3.value;
+//	   var chkFlg = rgEx.test(strValue);   
+//	   if(!chkFlg){
+//	    alert("올바른 휴대폰번호가 아닙니다.");
+//	    obj.focus();
+//	    return false; 
+//	   }
 };
+
+
+function checkBtn(checkId) {
+	 $('#' + checkId).prop("checked", true);
+}
  
+
+/****/
+function getCurDate() {
+	var now=new Date();
+
+	year = now.getYear();           // 현재 년도 가져오기
+	alert(year);
+	month = now.getMonth() + 1      // 현재 월 가져오기
+	
+	if((month+"").length < 2) {  // 월이 한자리 수인 경우 (예: 1, 3, 5) 앞에 0을 붙여주기 위해, 즉 01, 03, 05
+		month = "0" + month;
+	}
+	
+	date = now.getDate();           // 현재 날짜 가져오기
+	if((date+"").length < 2) {       // 일이 한자리 수인 경우 앞에 0을 붙여주기 위해
+		date = "0" + date;
+	}
+	today = year +"" + month + "" + date;       // 오늘 날짜 (예: 20120316)
+	
+	alert(today);
+}
+
+/**print**/
+
+function openTBM(work_idx){
+   var url    ="tbm";
+   var title  = "tbmView";
+   var status = "toolbar=no,directories=no,scrollbars=yes,resizable=yes,status=no,menubar=no,width=900, height=700, top=0,left=20"; 
+   window.open("tbm?work_idx=" + work_idx , title,status);  //프로그램처럽보일떈 파업 X?   
+}
+
+function openPUI(work_idx){
+	   var url    ="pui";
+	   var title  = "puiView";
+	   var status = "toolbar=no,directories=no,scrollbars=yes,resizable=yes,status=no,menubar=no,width=900, height=700, top=0,left=20"; 
+	   window.open("pui?work_idx=" + work_idx , title,status);  //프로그램처럽보일떈 파업 X?   
+}
+function openPTW(work_idx){
+	   var url    ="ptw";
+	   var title  = "ptwView";
+	   var status = "toolbar=no,directories=no,scrollbars=yes,resizable=yes,status=no,menubar=no,width=900, height=700, top=0,left=20"; 
+	   window.open("ptw?work_idx=" + work_idx, title,status);  //프로그램처럽보일떈 파업 X?   
+}

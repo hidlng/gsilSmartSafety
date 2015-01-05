@@ -110,13 +110,13 @@ public class WorkController {
 				
 				//업체에 경우 현장사용자는 직접 타이핑 입력이기때문에
 				//통일 성을 위해 둘다 이름값만 입력함(cont_idx 사용 X)
-				if(userVO.getLevel() == 3) {//현장사용자
+				if(userVO.getLevel() == 4 || userVO.getLevel() == 5 || userVO.getLevel() == 6) {//현장사용자
 					ManagerVO managerVO = (ManagerVO)session.getAttribute("managerVO");
 					//workVO.setCont_name(managerVO.getCont_name());
-				}else if(userVO.getLevel() == 4) {//업체
+				}else if(userVO.getLevel() == 7) {//업체
 					ContractorVO contractorVO = (ContractorVO)session.getAttribute("contractorVO");
-					//workVO.setCont_idx(contractorVO.getCont_idx());
-					workVO.setCont_name(contractorVO.getCont_name());
+					workVO.setCont_idx(contractorVO.getCont_idx());
+					//workVO.setCont_name(contractorVO.getCont_name());
 					
 				}else {
 					//error 처리
@@ -180,7 +180,7 @@ public class WorkController {
 			
 			//redirectAttr.addFlashAttribute("work_idx", work_idx);
 			//return "redirect:printList";
-			return "redirect:printList?work_idx=" + workVO.getWork_idx();
+			return "redirect:viewWork?viewIdx=" + workVO.getWork_idx();
 		}
 		
 	}
@@ -231,7 +231,7 @@ public class WorkController {
 			
 			//redirectAttr.addFlashAttribute("work_idx",workVO.getWork_idx());
 			//return "redirect:workList";
-			return "redirect:printList?work_idx=" + workVO.getWork_idx();
+			return "redirect:viewWork?viewIdx=" + workVO.getWork_idx();
 		}
 		
 	}
@@ -292,8 +292,14 @@ public class WorkController {
 	public void viewWork(@RequestParam(value="viewIdx",required=false)String viewIdx, HttpServletRequest request, Model model, HttpSession session) {
 		if(viewIdx != null && !viewIdx.equals("")) {
 			WorkVO workVO = workService.getWorkByIdx(viewIdx);
+			//contname 가져오기 
+			
+			ContractorVO contVO = contractorService.getContractorByIdx(workVO.getCont_idx());
+			
+			
 			model.addAttribute("updateMode", true);
 			model.addAttribute("workVO", workVO);
+			model.addAttribute("cont_name", contVO.getCont_name());
 		}
 	}
 	

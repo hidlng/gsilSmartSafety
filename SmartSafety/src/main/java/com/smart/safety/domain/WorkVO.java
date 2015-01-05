@@ -17,8 +17,8 @@ public class WorkVO implements Serializable{
 	String site_idx;//id 정보를 통해 가져옴
 	String sitename;//조인 정보
 	String write_user_idx;//user_list에서 가져옴
-//	String cont_idx; //보류
-	String cont_name; 
+	private String cont_idx; 
+	//String cont_name; 
 	
 	@NotEmpty(message="입력 필요")
 	String ischarge = "N"; //돌관작업 여부
@@ -72,6 +72,11 @@ public class WorkVO implements Serializable{
 	String risk_grade;
 	String risk_warn;
 	String workpermit;
+	
+	String print_tbm;
+	String print_pui;
+	String print_ptw;
+	
 	String writetime;
 	String updatetime;
 	String delyn;
@@ -271,12 +276,7 @@ public class WorkVO implements Serializable{
 	public void setSitename(String sitename) {
 		this.sitename = sitename;
 	}
-	public String getCont_name() {
-		return cont_name;
-	}
-	public void setCont_name(String cont_name) {
-		this.cont_name = cont_name;
-	}
+	
 	public String getIndoor() {
 		return indoor;
 	}
@@ -325,6 +325,30 @@ public class WorkVO implements Serializable{
 	}
 	public void setWorkpermit(String workpermit) {
 		this.workpermit = workpermit;
+	}
+	public String getCont_idx() {
+		return cont_idx;
+	}
+	public void setCont_idx(String cont_idx) {
+		this.cont_idx = cont_idx;
+	}
+	public String getPrint_tbm() {
+		return print_tbm;
+	}
+	public void setPrint_tbm(String print_tbm) {
+		this.print_tbm = print_tbm;
+	}
+	public String getPrint_pui() {
+		return print_pui;
+	}
+	public void setPrint_pui(String print_pui) {
+		this.print_pui = print_pui;
+	}
+	public String getPrint_ptw() {
+		return print_ptw;
+	}
+	public void setPrint_ptw(String print_ptw) {
+		this.print_ptw = print_ptw;
 	}
 	
 }

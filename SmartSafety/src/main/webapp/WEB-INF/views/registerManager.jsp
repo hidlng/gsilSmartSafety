@@ -34,12 +34,7 @@
  
  function chgMLevel(val) {
 		if(val == 1) {//본사
-			 $('#siteTR').hide();
-			 /* $('<input>').attr({
-				    type: 'hidden',
-				    name: 'site_idx',
-				    value: 'NONE'
-				}).appendTo('#managerForm'); */
+			 $('#siteTR').hide();			
 		     $('#site_idx').val('');//make empty value
 		}else {//현장
 			$('#siteTR').show();
@@ -49,8 +44,13 @@
 		}
 }
 
- 
- 
+ function deleteManager() {	
+		input = confirm('삭제하시겠습니까?');
+		if(input){
+				$('#managerForm').attr('action', 'deleteManager');
+				$('#managerForm').submit();
+		}
+ }
   function submitManager() {
 	var input;
 	if(${updateMode} == true) {
@@ -183,7 +183,10 @@
 
 <!-- update -->
 <c:if test="${updateMode}">
-	<span class="signup"><span class="btn_typ02"  onclick="submitManager()">수정</span></span>
+	
+		<span class="btn_typ02"  onclick="submitManager()">수정</span>
+		<span class="btn_typ02"  onclick="deleteManager()">삭제 </span>
+	
 </c:if>
 
 	

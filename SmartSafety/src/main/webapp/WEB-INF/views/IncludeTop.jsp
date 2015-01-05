@@ -96,11 +96,11 @@
 						<li id="siteList" style="cursor:pointer" >현장 관리</li>
 					</c:if>
 					<c:if test= "${sessionScope.userLoginInfo.level <= 1}"><!-- 본사 관리자(EHS팀) & 현장 안전관리자 -->
-						<li id="managerList" style="cursor:pointer" >안전관리자 관리</li>						
+						<li id="managerList" style="cursor:pointer" >관리자 관리</li>						
 					</c:if>
 					
 					<c:if test= "${sessionScope.userLoginInfo.level == 2}">
-						<li id="siteUserList" style="cursor:pointer" >현장 사용자 관리</li> <!-- 현장 사용자 -->
+						<li id="siteUserList" style="cursor:pointer" >사용자 관리</li> <!-- 현장 사용자 -->
 						<li id="contractorList" style="cursor:pointer" >업체 관리</li> <!--  업체 관리 -->
 					</c:if>
 					<c:if test= "${sessionScope.userLoginInfo.level == 0 || sessionScope.userLoginInfo.level == 1 ||

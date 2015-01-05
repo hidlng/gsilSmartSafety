@@ -18,7 +18,7 @@ fieldset,img{border:0}
 address,caption,cite,code,dfn,var,em{font-style:normal;font-weight:normal}
 ol,ul,dl{list-style:none}
 caption {text-align:left}
-h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+h1,h2,h3,h4,h5,h6{font-weight:normal}
 q:before,q:after{content:''}
 abbr,acronym{border:0;font-variant:normal}
 sup{vertical-align:text-top}
@@ -63,8 +63,8 @@ h1 img{width:120px;}
 
 /* sub page 공통 */
 /* aside */
-.wrapBox{overflow:hidden; margin:0 auto; padding:50px; width:1628px; border:1px solid #d70e0a;background:url("../images/bg_box.png") repeat 0 0; }
-.aside{position:relative;float:left;width:250px; min-height:550px; padding:55px 35px;background:url("../images/bg_box.png") repeat 0 0;}
+.wrapBox{overflow:hidden; margin:0 auto; padding:50px; width:1328px; border:1px solid #d70e0a;background:url("../images/bg_box.png") repeat 0 0; }
+.aside{position:relative;float:left;width:200px; min-height:550px; padding:55px 35px;background:url("../images/bg_box.png") repeat 0 0;}
 .aside_list{margin-bottom:20px;}
 .aside_list li{color:#98b4e0; font-size:30px; line-height:40px; font-weight:bold;}
 .aside_list li.on{color:#d70e0a;}
@@ -72,20 +72,20 @@ h1 img{width:120px;}
 .aside_ident li{color:#efefef; font-size:25px; line-height:30px; border-bottom:1px dotted #8c97a9; margin-bottom:10px;}
 .aside_ident li.last{ border-bottom:0px; text-align:center; float: right;margin-top: 5px;}
 .aside_ident li span.identTitle{width:50px;}
-.aside_ident li span input{width:150px; padding:5px 15px; background:none; border:0; font-size:18px; color:#fff;}
+.aside_ident li span input{width:150px;  padding:5px 15px; background:none; border:0; font-size:18px; color:#fff;}
 /* search */
-.content{float:right; width:1180px; min-height:500px; padding:55px 55px; background:url("../images/bg_box.png") repeat 0 0;}
+.content{float:right; width:920px; min-height:500px; padding:55px 55px; background:url("../images/bg_box.png") repeat 0 0;}
 .content .srchbox{overflow:hidden;height:36px;padding-bottom:20px;}
 .content .srchbox p{float:right;overflow:hidden;  height:36px; border:1px solid #152133;background-color:#fff; }
 .content .srchbox .search_input{width:207px; height:36px; padding:3px 10px;font-size:20px; line-height:20px;background-color:#fff; color:#333; border:none;}
 .content .srchbox .btn_search{float:right;width:35px;height:36px;text-indent: -9999px; border-left:1px solid #141e2d;background:url("../images/icon_search.png") no-repeat 10px 12px #fff;}
-/* contant */
-.content table{clear: both;width:100%; font-size:35px;line-height:35px; background-color:#1d2b43;border-collapse: collapse;border-spacing: 0;}
+/* content */
+.content table{clear: both;width:100%; font-size:30px;line-height:35px; background-color:#1d2b43;border-collapse: collapse;border-spacing: 0;}
 .content table tr th, .content table tr td{border:1px dotted #8c97a9; text-align:center;}
-.content table tr th{padding:14px 0; color:#98b4e0; font-size:35px;}
+.content table tr th{padding:14px 0; color:#98b4e0; font-size:33px;}
 .content table tr td{padding:10px 0;}
 .content table tr td a{cursor:pointer;}
-.content table.user_signup td input{width:80%; font-size:35px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 1px dotted #1D4F99;}
+.content table.user_signup td input{width:80%; font-size:30px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 1px dotted #1D4F99;}
 
 /* paging */
 .content .paging{text-align:center; padding: 40px 0 0 0; }
@@ -105,7 +105,7 @@ span.years #year_typ {width:150px; padding:5px;background-color:#1d2b43;color: #
 .content.work{position:relative;}
 .content.work table{margin-bottom:40px;}
 span.equipment{background:url("../images/icon_equipment.png") no-repeat 0 0;}
-.content.work table td input{width:70%; font-size:35px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none;border: 1px dotted #1D4F99;}
+.content.work table td input{cursor:pointer; font-size:30px;width:80%;  padding:3px;line-height:35px; color:#fff; text-align:center; background:none;border: 1px dotted #1D4F99;}
 span.side{margin-right:30px;}
 span.side{font-size:25px;}
 .content.work table td input.radi {width:20px; background-color:none;}
@@ -119,13 +119,13 @@ ul.equipment_typ li{width:33%;height:150px;display:inline-block;float:left;margi
 ul.equipment_typ li span.iconImg{display:block;width:80px;height:70px;margin:0 auto;font-weight:bold;}
 ul.equipment_typ li.on{border:2px dashed #8c97a9;border-bottom:0px;background: none;background-color: #1d2b43;}
 table.user_signup.equipment{border:2px dashed #8c97a9;}
-span.explain{display:block;width:90%;font-weight:normal;font-size:30px;line-height:30px;text-align:left; padding:10px;}
+span.explain{display:block;width:90%;font-weight:normal;font-size:30px;line-height:35px;text-align:left; padding:10px;}
 
 /* button style */
 .btn_typ01{display:block; width:150px; padding:2px; margin:0 auto;background-color:#475B7C;border:1px solid #222;border-radius:3px;text-align:center;
 		font-size:30px; line-height:35px;color:#fff;text-decoration:none; cursor:pointer}
 .btn_typ01:hover{background-color:transparent;color:#ffffff;border:1px solid #ffffff;}
-.btn_typ02{display:block; width:100px; padding:4px !important; margin:0 auto;background-color:#d70e0a; border:1px solid #d70e0a;border-radius:3px;text-align:center;
+.btn_typ02{display:inline-block; width:100px; padding:4px !important; margin:0 auto;background-color:#d70e0a; border:1px solid #d70e0a;border-radius:3px;text-align:center;
 font-size:30px !important; line-height:26px;color:#555555;text-decoration:none;cursor:pointer}
 .btn_typ02:hover{background-color:transparent; color:#d70e0a; border:1px solid #d70e0a;}
 .btn_typ03{display:block;width:150px; padding:10px; margin:0 auto;background-color:#111927; border:1px solid #d70e0a;border-radius:3px;
@@ -133,15 +133,16 @@ font-size:30px !important; line-height:26px;color:#555555;text-decoration:none;c
 		color:#d70e0a;text-decoration:none;cursor:pointer}
 .btn_typ03:hover{background-color:transparent;color:#ffffff;border:1px solid #ffffff;}
 
-.btnNewPasswd{width: 200px;}
+.btnNewPasswd{width: 270px;}
 
 /* 추가 */
 .pageClosing{position:absolute; right:10px; top:10px;}
 .pageClosing span{display:inline-block; margin:0;padding:0;cursor:pointer;}
 .pageClosing .renew{margin:0 2px 0 0;}
-.printSelect{float:left;border: 1px dotted #D70E0A; padding:5px 10px 5px;height:25px;background: #152033;}
-.printSelect select{width:327px;padding:0px;font-size: 30px;background: #152033;color: #D70E0A;border:none;margin-right:10px;}
-.printSelect .btn_print{cursor:pointer;}
+.printSelect{float:left;border: 1px dotted #D70E0A; padding:5px 10px 5px;background: #152033;}
+.printSelect select{padding:0px;font-size: 30px;background: #152033;color: #D70E0A;border:none;margin-right:10px;}
+.printSelect .btn_print{color: #D70E0A;cursor:pointer;}
+
 /* ceo */
 .wrapBox.ceo{padding:50px;}
 .wrapBox.ceo .content{float:left; width:1228px;padding: 55px 55px;background: url("../images/bg_box.png") repeat 0 0;}

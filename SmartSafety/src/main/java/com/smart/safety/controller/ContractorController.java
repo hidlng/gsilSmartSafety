@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.smart.safety.domain.ContractorVO;
-import com.smart.safety.domain.SiteVO;
+import com.smart.safety.domain.*;
 import com.smart.safety.services.ContractorService;
 import com.smart.safety.services.LoginService;
 import com.smart.safety.util.Paging;
@@ -128,6 +127,13 @@ public class ContractorController {
 		}
 		
 	}
+	
+	@RequestMapping(value = "deleteContractor", method = RequestMethod.POST)
+	public String deleteContractor( @ModelAttribute @Valid ContractorVO contractorVO) {
+		contractorService.deleteContractor(contractorVO.getCont_idx(), contractorVO.getUser_idx());
+		return "redirect:contractorList";
+	}
+	
 	
 	
 }

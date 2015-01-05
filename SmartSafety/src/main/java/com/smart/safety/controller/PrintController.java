@@ -164,7 +164,7 @@ public class PrintController {
 	}
 	
 	private void makeBaseInfo(BaseInfoVO targetVO, WorkVO workVO) {
-		String cont_idx = workVO.getPic_position();
+		String cont_idx = workVO.getCont_idx();
 		ContractorVO contVO = contractorService.getContractorByIdx(cont_idx);
 		
 		targetVO.setCont_name(contVO.getCont_name());//		 cont_name

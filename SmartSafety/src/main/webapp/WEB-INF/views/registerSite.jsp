@@ -17,13 +17,17 @@
 
 	
  });
-/*  function deleteSite() {	
+
+ function deleteSite() {	
 	input = confirm('삭제하시겠습니까?');
-	if(input){
-		$('#siteForm').attr('action', 'deleteSite');
-		$('#siteForm').submit();
+	if(input){		
+		input_2 = confirm('현장 삭제시 관련된 사용자, 작업내용이 삭제됩니다. 진행하시겠습니까?');
+		if(input_2){
+			$('#siteForm').attr('action', 'deleteSite');
+			$('#siteForm').submit();
+		}
 	}
- } */
+ }
  
   function submitSite() {	
 	  var input;
@@ -110,13 +114,13 @@
 	<div class="paging">
 		<!--  insert -->
 		<c:if test="${!updateMode}">
-			<span id="popupOKBtn" class="btn_typ02"  onclick="submitSite()">등록 </span>
+			<span class="btn_typ02"  onclick="submitSite()">등록 </span>
 		</c:if>
 
 		<!-- update -->
 		<c:if test="${updateMode}">
-			<span id="popupOKBtn" class="btn_typ02"  onclick="submitSite()">수정 </span>
-			<!--span id="popupOKBtn" class="btn_typ02"  onclick="deleteSite()">삭제 </span-->
+			<span class="btn_typ02"  onclick="submitSite()">수정 </span>&nbsp;&nbsp;&nbsp;
+			<span class="btn_typ02"  onclick="deleteSite()">삭제 </span>
 		</c:if>
 
 

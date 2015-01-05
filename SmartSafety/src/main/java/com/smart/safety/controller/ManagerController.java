@@ -225,7 +225,17 @@ public class ManagerController {
 		
 	}
 	
+	@RequestMapping(value = "deleteManager", method = RequestMethod.POST)
+	public String deleteManager(@ModelAttribute @Valid ManagerVO managerVO) {
+		managerService.deleteManager(managerVO.getManager_idx(), managerVO.getUser_idx());
+		return "redirect:managerList";
+	}
 	
+	@RequestMapping(value = "deleteSiteUser", method = RequestMethod.POST)
+	public String deleteSiteUser(@ModelAttribute @Valid ManagerVO managerVO) {
+		managerService.deleteManager(managerVO.getManager_idx(), managerVO.getUser_idx());
+		return "redirect:siteUserList";
+	}
 	
 	
 	

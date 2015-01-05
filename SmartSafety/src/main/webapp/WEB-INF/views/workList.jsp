@@ -13,12 +13,12 @@ function viewSubmit(val) {
 	$('#viewForm').submit();
 	
 }
-function workSubmit(val , work_idx) {
-	var user_idx = '${sessionScope.userLoginInfo.user_idx}';
+function workSubmit(val) {
+/* 	var user_idx = '${sessionScope.userLoginInfo.user_idx}';
 	
 	if(user_idx == work_idx)
 		updateSubmit(val);
-	else
+	else */
 		viewSubmit(val);
 }
 
@@ -63,8 +63,8 @@ function goPage(val) {
 	<thead>
 	<tbody>
 		<c:forEach var="work" items="${workList}" varStatus="idx">
-			<c:if test='${work.ischarge.equals("Y")}'><tr class="chargeWorkTR listTR"  onclick="workSubmit('${idx.index}','${work.write_user_idx}')"></c:if> <!--  돌관작업 -->
-			<c:if test='${!work.ischarge.equals("Y")}'><tr class="listTR" onclick="workSubmit('${idx.index}' ,'${work.write_user_idx}')"></c:if>
+			<c:if test='${work.ischarge.equals("Y")}'><tr class="chargeWorkTR listTR"  onclick="workSubmit('${idx.index}')"></c:if> <!--  돌관작업 -->
+			<c:if test='${!work.ischarge.equals("Y")}'><tr class="listTR" onclick="workSubmit('${idx.index}')"></c:if>
 			
 				<td>${((paging.pageNo - 1) * paging.pageSize) + (idx.index + 1) }</td>
 				<td>${work.worktype}</td>
@@ -109,9 +109,9 @@ function goPage(val) {
 		<input id="searchWord" name="searchWord" type="hidden">
 		<input id="pageNum" name="pageNum" type="hidden">
 	</form>
-	<form id="updateForm" action="registerWork" method="POST" >
+	<!-- <form id="updateForm" action="registerWork" method="POST" >
 		<input id="updateIdx" type="hidden" name="updateIdx"/>
-	</form>	
+	</form>	 -->
 	<form id="registerForm" action="registerWork" action="POST" >
 	</form>
 	<form id="viewForm" action="viewWork" action="POST" >

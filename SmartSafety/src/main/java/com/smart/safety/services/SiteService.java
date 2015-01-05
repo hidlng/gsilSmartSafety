@@ -44,6 +44,8 @@ public class SiteService {
 	@Transactional
 	public void deleteSite(String idx) {
 		siteMapper.delete(idx);
+		//TODO: 관련 내용 제거
+		//contractor, manager, work
 	}
 	
 }

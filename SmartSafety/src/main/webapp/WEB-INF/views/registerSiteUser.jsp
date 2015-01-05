@@ -54,6 +54,13 @@
 			return;
  }
   
+ function deleteSiteUser() {	
+		input = confirm('삭제하시겠습니까?');
+		if(input){
+				$('#siteUserForm').attr('action', 'deleteSiteUser');
+				$('#siteUserForm').submit();
+		}
+}
  </script>
 
 
@@ -166,7 +173,8 @@
 
 		<!-- update -->
 		<c:if test="${updateMode}">
-			<span class="signup"><span class="btn_typ02"  onclick="submitSiteUser()">수정</span></span>
+			<span class="btn_typ02"  onclick="submitSiteUser()">수정</span>
+			<span class="btn_typ02"  onclick="deleteSiteUser()">삭제</span>
 		</c:if>
 
 

@@ -56,7 +56,7 @@ $(document).on("click", ".detailLink", function(e) {
 			<th scope="col">현장<br>번호
 			</th>
 			<th scope="col">현장명</th>
-			<th scope="col">대표관리자</th>
+			<th scope="col">대표<br>관리자</th>
 			<th scope="col">연락처</th>
 			<th scope="col">작업기간</th>
 		</tr>
