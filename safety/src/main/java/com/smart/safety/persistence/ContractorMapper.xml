@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.smart.safety.persistence.ContractorMapper">
+	<select id="getContractorListBySiteIdx" resultType="ContractorVO"	parameterType="String">
+		SELECT
+		*
+		FROM CONTRACTOR_LIST
+		WHERE 
+		DELYN='N'
+		AND SITE_IDX = #{site_idx}
+		ORDER BY CONT_NAME
+	</select>
+  <select id="getContractorListByVO" resultType="ContractorVO" parameterType="ContractorVO">
+	SELECT
+		*
+	FROM CONTRACTOR_LIST C
+	JOIN USER_LIST U
+	ON C.USER_IDX = U.USER_IDX
+	WHERE
+		C.DELYN='N'
+		AND U.DELYN='N'
+		AND (C.CONT_NAME like #{cont_name}
+		OR C.REP_NAME like #{rep_name}
+		OR C.CONT_WORK like #{cont_work}
+		OR C.REP_PHONE like #{rep_phone}
+		)
+		AND SITE_IDX like #{site_idx}
+	ORDER BY C.CONT_IDX
+	LIMIT #{start}, #{size}
+  </select>
+  
+  <select id="getContractorByIdx" resultType="ContractorVO" parameterType="String">
+   	SELECT
+		*
+	FROM CONTRACTOR_LIST C
+	JOIN USER_LIST U
+	ON C.USER_IDX = U.USER_IDX
+	WHERE
+		C.DELYN='N'
+		AND U.DELYN='N'
+		AND C.CONT_IDX = #{idx}
+  </select>
+  
+  <select id="getContractorByID" resultType="ContractorVO" parameterType="String">
+   	SELECT
+		*
+	FROM CONTRACTOR_LIST C
+	JOIN USER_LIST U
+	ON C.USER_IDX = U.USER_IDX
+	WHERE
+		C.DELYN='N'
+		AND U.DELYN='N'
+		AND U.ID = #{id}
+  </select>
+  
+  
+  <select id="getRowCount" resultType="Integer" parameterType="ContractorVO">
+        SELECT COUNT(*) 
+		FROM CONTRACTOR_LIST C
+		WHERE 
+			DELYN='N'  
+			AND (C.CONT_NAME like #{cont_name}
+			OR C.REP_NAME like #{rep_name}
+			OR C.CONT_WORK like #{cont_work}
+			OR C.REP_PHONE like #{rep_phone}
+			)
+			AND SITE_IDX like #{site_idx}
+  </select>
+       
+  <insert id="insert" parameterType="ManagerVO">
+    INSERT INTO
+	CONTRACTOR_LIST(CONT_IDX, USER_IDX, SITE_IDX,  CONT_NAME, CONT_WORK,CONT_PHONE, REP_NAME, REP_PHONE,WRITETIME, DELYN)
+	SELECT
+		GROUP_CONCAT('C',(SELECT COUNT(*) FROM CONTRACTOR_LIST), SYSDATE()) AS	CONT_IDX,
+		(SELECT USER_IDX FROM USER_LIST WHERE ID=#{id}) AS	USER_IDX,
+		#{site_idx},  #{cont_name},#{cont_work},#{cont_phone}, #{rep_name},#{rep_phone} , sysdate() , 'N'
+	FROM DUAL
+  </insert>
+  <update id="update" parameterType="ManagerVO">
+      UPDATE CONTRACTOR_LIST
+		SET CONT_NAME=#{cont_name}, CONT_WORK=#{cont_work} , CONT_PHONE=#{cont_phone}, REP_NAME=#{rep_name}, REP_PHONE=#{rep_phone}
+		WHERE CONT_IDX=#{cont_idx}
+  </update>
+  <update id="delete" parameterType="String">
+		UPDATE CONTRACTOR_LIST
+		SET DELYN='Y'
+		WHERE CONT_IDX = #{idx}
+  </update>
+</mapper>
