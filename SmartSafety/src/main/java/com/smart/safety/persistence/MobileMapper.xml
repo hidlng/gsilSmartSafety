@@ -4,12 +4,46 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.smart.safety.persistence.MobileMapper">
-  <select id="getMobileLogin" resultType="UserVO"  parameterType="UserVO" >
-         select * from user_list where id=#{id} AND password=#{password} AND DELYN='N'
-  </select>
+	  
+	  <select id="getMobileLogin" resultType="UserVO"  parameterType="UserVO" >
+	    select a.USER_IDX, a.ID, a.PASSWORD, a.LEVEL,a.WRITETIME, a.DELYN, a.PID, b.site_idx from user_list a, manager_list b
+		where a.USER_IDX = b.USER_IDX
+  		and id=#{id} AND password=#{password} AND a.DELYN='N'
+	  </select>
 
-	
+      <update id="updateRegId" parameterType="UserVO">
+         UPDATE USER_LIST
+         SET PID=#{pid}
+         WHERE USER_IDX=#{user_idx}
+     </update>
+
+	 <select id="getMobileWorkList" resultType="MobileVO"  >
+		SELECT DISTINCT W.RISK_GRADE, W.WORK_IDX, W.WORKLEVEL,
+		W.PIC_NAME, W.WORKTITLE, 
+		DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) STARTDATE 
+		,DATE_FORMAT( W.ENDDATE , '%Y%m%d' ) ENDDATE  
+		, IFNULL( P.CHECKYN, 'N' ) CHECKYN
+		FROM WORK_LIST W 
+		LEFT OUTER JOIN PRINT_LIST P
+		ON
+			W.WORK_IDX = P.WORK_IDX 
+		WHERE
+		W.SITE_IDX = #{siteidx}
+		<![CDATA[
+		AND DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) <= #{searchdate}
+		]]>
+		
+		<![CDATA[
+		AND DATE_FORMAT( W.ENDDATE , '%Y%m%d' )  >= #{searchdate}
+		]]>
+	</select>
  
+    <update id="updateCheckYn" parameterType="MobileVO">
+		UPDATE PRINT_LIST
+		SET CHECKYN = #{checkyn} , CHK_USER_IDX = #{user_idx}
+		WHERE WORK_IDX = #{work_idx}
+		  AND WORKDATE = #{workdate}
+    </update>
 
     
 </mapper>

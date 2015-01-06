@@ -19,6 +19,9 @@
         <intercept-url pattern="/css/**" access="permitAll" />
         <intercept-url pattern="/images/**" access="permitAll" />
         <intercept-url pattern="/js/**" access="permitAll" />
+        <intercept-url pattern="/mobilelogin" access="permitAll" />
+        <intercept-url pattern="/mobileworklist" access="permitAll" />
+        <intercept-url pattern="/mobileupdateresult" access="permitAll" />
         
         <intercept-url pattern="/**" access="isAuthenticated()" />
 	
