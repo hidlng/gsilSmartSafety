@@ -17,7 +17,7 @@
          WHERE USER_IDX=#{user_idx}
      </update>
 
-	 <select id="getMobileWorkList" resultType="MobileVO"  parameterType="String" >
+	 <select id="getMobileWorkList" resultType="MobileVO"  >
 		SELECT DISTINCT W.RISK_GRADE, W.WORK_IDX, W.WORKLEVEL,
 		W.PIC_NAME, W.WORKTITLE, 
 		DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) STARTDATE 
@@ -28,8 +28,9 @@
 		ON
 			W.WORK_IDX = P.WORK_IDX 
 		WHERE
+		W.SITE_IDX = #{siteidx}
 		<![CDATA[
-		DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) <= #{searchdate}
+		AND DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) <= #{searchdate}
 		]]>
 		
 		<![CDATA[
@@ -37,6 +38,12 @@
 		]]>
 	</select>
  
+    <update id="updateCheckYn" parameterType="MobileVO">
+		UPDATE PRINT_LIST
+		SET CHECKYN = #{checkyn} , CHK_USER_IDX = #{user_idx}
+		WHERE WORK_IDX = #{work_idx}
+		  AND WORKDATE = #{workdate}
+    </update>
 
     
 </mapper>

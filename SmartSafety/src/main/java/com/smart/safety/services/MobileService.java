@@ -8,13 +8,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import com.smart.safety.domain.ManagerVO;
 import com.smart.safety.domain.MobileVO;
 import com.smart.safety.domain.UserVO;
 import com.smart.safety.persistence.MobileMapper;
-
-
-
 
 @Service(value="MobileService")
 public class MobileService {
@@ -29,7 +25,7 @@ public class MobileService {
 		UserVO returnVO = mobileMapper.getMobileLogin( userVO );
 		
 		JSONObject jo = new JSONObject();
-		if( userVO != null && !userVO.getId().equals("") ) {
+		if( returnVO != null && !returnVO.getId().equals("") ) {
 			jo.put("result", "true");
 			jo.put("id", returnVO.getId());
 			jo.put("password", returnVO.getPassword());
@@ -48,11 +44,11 @@ public class MobileService {
 		return jo.toString();
 	}
 	
-	public String getMobileWorkList(String searchdate) {
+	public String getMobileWorkList(String siteidx, String searchdate) {
 		
 		JSONObject jo = new JSONObject();
 		
-		List<MobileVO> mlist = mobileMapper.getMobileWorkList(searchdate);
+		List<MobileVO> mlist = mobileMapper.getMobileWorkList(siteidx, searchdate);
 		
 		
 		if( mlist != null && mlist.size() > 0 ) {
@@ -75,6 +71,28 @@ public class MobileService {
 			}
 			jo.put("item", ja);
 			
+		} else {
+			jo.put("result", "false");
+		}
+		
+		
+		return jo.toString();
+	}
+	
+	public String updatCheckYn( String workdate, String useridx, String checkyn, String workidx ) {
+		
+		JSONObject jo = new JSONObject();
+		
+		MobileVO mobileVO = new MobileVO();
+		mobileVO.setCheckyn(checkyn);
+		mobileVO.setUser_idx(useridx);
+		mobileVO.setWork_idx(workidx);
+		mobileVO.setWorkdate(workdate);
+		
+		int resultInt = mobileMapper.updateCheckYn(mobileVO);
+		
+		if( resultInt > 0  ) {
+			jo.put("result", "true");
 		} else {
 			jo.put("result", "false");
 		}

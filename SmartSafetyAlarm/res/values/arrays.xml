@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:ignore="MissingTranslation">
+    <string-array translatable="false" name="kaodee_url">
+        <!-- TEST SERVER -->
+        <item>http://192.168.0.59:8080/safety/mobilelogin</item>
+        <item>http://192.168.0.59:8080/safety/mobileworklist</item>
+        <item>http://192.168.0.59:8080/safety/mobileupdateresult</item>
+        
+        <!-- AMAZON
+        <item>http://54.65.130.238:8080/SmartSafety/mobilelogin</item>
+        <item>http://54.65.130.238:8080/SmartSafety/mobileworklist</item>
+        <item>http://54.65.130.238:8080/SmartSafety/mobileupdateresult</item>
+         -->
+        
+	</string-array>
+</resources>

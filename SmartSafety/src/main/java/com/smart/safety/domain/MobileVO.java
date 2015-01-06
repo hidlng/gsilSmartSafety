@@ -14,7 +14,21 @@ public class MobileVO implements Serializable {
 	private String startdate;
 	private String enddate;
 	private String checkyn;
-		
+	private String workdate;
+	private String user_idx;
+	
+	public String getWorkdate() {
+		return workdate;
+	}
+	public void setWorkdate(String workdate) {
+		this.workdate = workdate;
+	}
+	public String getUser_idx() {
+		return user_idx;
+	}
+	public void setUser_idx(String user_idx) {
+		this.user_idx = user_idx;
+	}
 	public String getRisk_grade() {
 		return risk_grade;
 	}

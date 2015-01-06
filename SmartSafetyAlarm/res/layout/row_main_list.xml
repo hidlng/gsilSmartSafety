@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@null" >
+
+    <RelativeLayout
+        android:id="@+id/contentArea"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:layout_centerVertical="true" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+             >
+
+            <TextView
+                android:id="@+id/workTitleTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:textStyle="bold" 
+                android:singleLine="true"
+                android:textSize="20dp"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="10dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/relativeLayout2" >
+
+            <TextView
+                android:id="@+id/workpicnameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:singleLine="true"
+                android:textSize="15dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/darker_gray" />
+            
+            <TextView
+                android:id="@+id/workPicynTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:singleLine="true"
+                android:textSize="15dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@android:color/darker_gray" />
+            
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout 
+    android:layout_marginTop="5dp"
+    android:layout_below="@+id/contentArea"    
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="@android:color/darker_gray"
+    android:orientation="horizontal"/>
+</RelativeLayout>
