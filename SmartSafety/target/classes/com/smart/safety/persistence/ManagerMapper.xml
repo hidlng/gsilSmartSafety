@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+
+<mapper namespace="com.smart.safety.persistence.ManagerMapper">
+
+	<select id="getManagerListByVO" resultType="ManagerVO"	parameterType="ManagerVO">
+   	   	SELECT
+			M.MANAGER_IDX, M.USER_IDX, M.SITE_IDX, M.GRADE , M.NAME, M.BIRTH, M.PHONE, M.POSITION, M.CONT_NAME, M.CONT_WORK, M.WRITETIME,
+			M.DELYN	,U.ID AS ID , U.PASSWORD AS PASSWORD, U.LEVEL AS LEVEL
+		FROM MANAGER_LIST M
+		JOIN USER_LIST U
+		ON M.USER_IDX = U.USER_IDX
+		WHERE 
+			M.DELYN='N'  
+			AND U.DELYN='N' 
+			AND (
+			U.ID like #{id}
+			OR M.NAME like #{name}
+			OR M.GRADE like #{grade}
+			OR M.PHONE like #{phone}
+			OR M.CONT_NAME like #{cont_name}
+			)
+			AND U.LEVEL = #{level}
+			AND SITE_IDX like #{site_idx}
+		ORDER BY M.MANAGER_IDX
+		LIMIT #{start}, #{size}
+    </select>
+   	<select id="getRowCount" resultType="Integer" parameterType="ManagerVO">
+	    SELECT COUNT(*) 
+		FROM MANAGER_LIST M
+		JOIN USER_LIST U
+		ON M.USER_IDX = U.USER_IDX
+		WHERE 
+			M.DELYN='N'
+			AND U.DELYN='N'  
+			AND (
+			U.ID like #{id}
+			OR NAME like #{name}
+			OR GRADE like #{grade}
+			OR PHONE like #{phone}
+			OR CONT_NAME like #{cont_name}
+			)AND U.LEVEL = #{level}
+			AND SITE_IDX like #{site_idx}
+    </select>
+	
+    
+    <select id="getManagerByIdx" resultType="ManagerVO"	parameterType="String">
+		SELECT
+			*
+		FROM MANAGER_LIST M
+		JOIN USER_LIST U
+		ON M.USER_IDX = U.USER_IDX
+		WHERE 
+		 	M.DELYN='N'  
+			AND U.DELYN='N'
+			AND M.MANAGER_IDX=#{idx} 
+	</select>
+	
+	<select id="getManagerByID" resultType="ManagerVO"	parameterType="String">
+		SELECT
+			*
+		FROM MANAGER_LIST M
+		JOIN USER_LIST U
+		ON M.USER_IDX = U.USER_IDX 	 
+		WHERE    
+			M.DELYN='N'  
+			AND U.DELYN='N' 
+			AND U.ID = #{id}
+		
+	</select>
+ 
+
+	<insert id="insert" parameterType="ManagerVO">
+		INSERT INTO
+		MANAGER_LIST(MANAGER_IDX, USER_IDX, SITE_IDX, GRADE, NAME, BIRTH, PHONE, POSITION, CONT_NAME, CONT_WORK, WRITETIME, DELYN)
+		SELECT
+			GROUP_CONCAT('M',(SELECT COUNT(*) FROM MANAGER_LIST), SYSDATE()) AS	MANAGER_IDX,
+			(SELECT USER_IDX FROM USER_LIST WHERE ID=#{id}) AS	USER_IDX,
+			#{site_idx}, #{grade}, #{name}, #{birth}, #{phone} , #{position}, #{cont_name} ,#{cont_work} , sysdate() , 'N'
+		FROM DUAL
+	</insert>
+	
+ 	<update id="update" parameterType="ManagerVO">
+ 	    UPDATE MANAGER_LIST
+		SET SITE_IDX=#{site_idx}, GRADE=#{grade}, NAME=#{name}, BIRTH=#{birth}, PHONE=#{phone}, POSITION=#{position}, CONT_NAME=#{cont_name}, CONT_WORK=#{cont_work}
+		WHERE MANAGER_IDX=#{manager_idx}
+    </update>
+	
+   	<update id="delete" parameterType="String">
+		UPDATE MANAGER_LIST
+		SET DELYN='Y'
+		WHERE MANAGER_IDX = #{idx}
+	</update>
+   
+</mapper>
