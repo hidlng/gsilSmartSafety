@@ -25,7 +25,7 @@ public class MobileService {
 		UserVO returnVO = mobileMapper.getMobileLogin( userVO );
 		
 		JSONObject jo = new JSONObject();
-		if( userVO != null && !userVO.getId().equals("") ) {
+		if( returnVO != null && !returnVO.getId().equals("") ) {
 			jo.put("result", "true");
 			jo.put("id", returnVO.getId());
 			jo.put("password", returnVO.getPassword());
