@@ -5,10 +5,18 @@ public enum USERLEVEL {
 	EHS_MANAGER(1),//1
 	SITE_MANAGER(2),
 	CEO(3),
-	SITE_CHEIF(4),
-	SITE_LEADER(5),
-	SITE_WORKER(6),
-	SITE_CONTRACTOR(7);
-	public int idx;	 USERLEVEL(int val){this.idx = val;}
+	CONT_CHEIF(4),
+	CONT_LEADER(5),
+	CONT_WORKER(6),
+	CONTRACTOR(7);
+	public int idx;	
+	USERLEVEL(int val){this.idx = val;}
+	public static USERLEVEL get(int val){
+		for(USERLEVEL lv : USERLEVEL.values()) {
+			if(lv.idx == val)
+				return lv;
+		}
+		return null;
+	}
 }
 

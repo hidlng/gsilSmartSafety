@@ -90,9 +90,9 @@ function updateSubmit(){
 </div>
 
 
-<div onclick="openTBM('${workVO.work_idx}')">tbm</div>
-<div onclick="openPUI('${workVO.work_idx}')">pui</div>
-<div onclick="openPTW('${workVO.work_idx}')">ptw</div>
+<span onclick="openTBM('${workVO.work_idx}')">tbm</span>
+<span onclick="openPUI('${workVO.work_idx}')">pui</span>
+<span onclick="openPTW('${workVO.work_idx}')">ptw</span>
 <!-- div onclick="openAcc('${workVO.work_idx}')">사고사례</div>-->
 </div>
 
@@ -282,9 +282,11 @@ function updateSubmit(){
 	</table>
 
 	<div class="paging">
-		<span class="btn_typ02 toHomePage">목록</span>&nbsp;&nbsp;&nbsp;&nbsp;
+		<span class="btn_typ02 toHomePage">목록</span>&nbsp;
 		
-		<span class="btn_typ02" onclick="updateSubmit();">수정</span>
+		<c:if test="${canModify == true}">
+			<span class="btn_typ02" onclick="updateSubmit();">수정</span>
+		</c:if>
 	</div>
 	<p class="goTop">
 		<a href="#"><img src="images/icon_top.png" alt="top으로 가기">&nbsp;</a>

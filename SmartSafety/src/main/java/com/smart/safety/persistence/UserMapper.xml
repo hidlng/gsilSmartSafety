@@ -12,14 +12,14 @@
    
    <insert id="insertUser" parameterType="UserVO">
 	INSERT INTO USER_LIST (USER_IDX, ID, PASSWORD, LEVEL, WRITETIME, DELYN)
- 	 SELECT 
- 	 	GROUP_CONCAT('U',(SELECT COUNT(*) FROM USER_LIST), SYSDATE()) AS USER_IDX,  
+ 	 values(
+ 	 	#{user_idx}, 	 
  	 	#{id},
  	 	#{password},
  	 	#{level},
  	 	SYSDATE(),
  	 	'N' 
- 	 	FROM DUAL	  
+ 	 	)	  
 	</insert>
 	
     

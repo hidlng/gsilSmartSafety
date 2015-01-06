@@ -21,6 +21,7 @@
         <intercept-url pattern="/js/**" access="permitAll" />
         <intercept-url pattern="/mobilelogin" access="permitAll" />
         <intercept-url pattern="/mobileworklist" access="permitAll" />
+        <intercept-url pattern="/mobileupdateresult" access="permitAll" />
         
         <intercept-url pattern="/**" access="isAuthenticated()" />
 	
@@ -57,7 +58,7 @@
     
  <beans:bean id="loginSuccessHandler" class="com.smart.safety.util.LoginSuccessHandler"/>
 
- <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+ <!--beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/-->
 
  <!-- ROLE NAME should have prefix : 'ROLE_'  -->
  	<authentication-manager>
@@ -66,7 +67,7 @@
 				data-source-ref="dataSource"
 				users-by-username-query="select id as username,password as password, 1 as enabled from USER_LIST where id = ? AND DELYN='N'"
 				authorities-by-username-query=" select id as username,CASE WHEN (LEVEL=0)then 'ROLE_S' WHEN(LEVEL=1)then 'ROLE_A'  WHEN(LEVEL=2) then'ROLE_B' WHEN(LEVEL=3) then'ROLE_C'end AS AUTHORITY from USER_LIST where id = ? AND DELYN='N' " />
-			<password-encoder ref="encoder" />
+			<!--password-encoder ref="encoder" /-->
 		</authentication-provider>
 	</authentication-manager>
 	

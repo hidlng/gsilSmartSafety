@@ -1,18 +1,22 @@
-/* just maintain some attributes like display & position, and everything is changeable */
+
+
 
 .listTR {
 	cursor:pointer;
 }
 
 .listTR:hover{
- 	background-color: transparent;
-	border: 5px dashed #36c;
-	color:threedshadow;
+ 	background-color:#8CB4E0;
+	border: 2px solid #ffffff;
+	t color:#162133 !importan;
+	
+	
 }
 
 .closeLink {
 	display:block;
 	text-align:right;
+	margin-bottom:10px;
 }
 .bgCover {
 	background: #000;
@@ -28,12 +32,13 @@
 	border: 5px solid #09F;
 	position: absolute;
 	display: none;
-	padding: 2px;
+	padding: 10px;
 }
 
 .overlayContent {
 	max-height: 400px;
 	overflow-y: auto;
+	text-align:center;
 }
 
 .formError {
@@ -105,4 +110,16 @@ a:hover.infoBtn {
 
 .chargeWorkTR {
 	border: 2px solid red;
+}
+
+#startDateInput {
+	cursor:pointer;
+	height:25px;
+	background: url('../images/cal_icon.png') no-repeat right;
+}
+ 
+ #endDateInput {
+	cursor:pointer;
+	height:25px;
+	background: url('../images/cal_icon.png') no-repeat right;
 }

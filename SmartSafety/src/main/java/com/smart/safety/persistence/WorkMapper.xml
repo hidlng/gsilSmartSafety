@@ -4,7 +4,35 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.smart.safety.persistence.WorkMapper">
-	
+<!-- WORK_LIST_WITH_NAME : view query => 
+CREATE OR REPLACE VIEW WORK_LIST_WITH_NAME AS 												
+SELECT W.*, C.CONT_NAME AS USERNAME 
+FROM WORK_LIST W 
+JOIN USER_LIST U 
+JOIN CONTRACTOR_LIST C
+ON 
+	(W.WRITE_USER_IDX = U.USER_IDX
+	AND 
+	W.WRITE_USER_IDX = C.USER_IDX)
+WHERE 
+	W.DELYN = 'N'
+	AND U.DELYN = 'N'
+	AND C.DELYN = 'N'
+UNION ALL
+SELECT W.*, M.NAME AS USERNAME 
+FROM WORK_LIST W 
+JOIN USER_LIST U 
+JOIN MANAGER_LIST M
+ON 
+	W.WRITE_USER_IDX = U.USER_IDX
+	AND 
+	W.WRITE_USER_IDX = M.USER_IDX
+WHERE 
+	W.DELYN = 'N'
+	AND U.DELYN = 'N'
+	AND M.DELYN = 'N'
+;
+-->	
   <select id="getWorkListByVO" resultType="WorkVO" parameterType="WorkVO">
 	SELECT *
 	FROM WORK_LIST_WITH_NAME W  
@@ -17,6 +45,7 @@
 	OR W.WORKTITLE like #{worktitle}
 	OR W.USERNAME like #{username}
 	)
+	AND W.SITE_IDX like #{site_idx}
 	ORDER BY W.STARTDATE, W.STARTTIME
 	LIMIT #{start}, #{size}
   </select>
@@ -34,6 +63,7 @@
 			OR W.WORKTITLE like #{worktitle}
 			OR W.USERNAME like #{username}
 			)
+			AND W.SITE_IDX like #{site_idx}
   </select>
   
    <select id="getRowCntForInsert" resultType="Integer">

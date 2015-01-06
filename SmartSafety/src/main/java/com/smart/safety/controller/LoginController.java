@@ -19,6 +19,7 @@ import com.smart.safety.services.ContractorService;
 import com.smart.safety.services.LoginService;
 import com.smart.safety.services.ManagerService;
 import com.smart.safety.services.SiteService;
+import com.smart.safety.util.*;
 
 /**
  * Handles requests for the application home page.
@@ -108,22 +109,29 @@ public class LoginController {
 		
 		
 		SiteVO siteVO = new SiteVO();
-
+		
 		String userName="";
-		switch(userVO.getLevel()) {
-		case 1://본사관리자(EHS팀)
+		
+		
+		USERLEVEL userlevel = USERLEVEL.get(userVO.getLevel());
+		
+		switch(userlevel) {
+		case SS_MANAGER:
+			break;
+		case EHS_MANAGER ://본사관리자(EHS팀)
 			userName = managerSerivce.getManagerByID(id).getName();
 			//안전관리자는 site 정보 없음
 			break;
-		case 2://현장관리자
-		case 3://CEO
-		case 4:case 5:case 6://현장 사용자(소장 ,팀장,작업자)
+		case SITE_MANAGER:case CONT_CHEIF:case CONT_LEADER:case CONT_WORKER://	/현장관리자 & 현장 사용자(소장 ,팀장,작업자)
 			ManagerVO managerVO = managerSerivce.getManagerByID(id);
 			userName = managerVO.getName(); //관리자/사용자 명 할당			
 			siteVO = siteService.getSiteByIdx(managerVO.getSite_idx()) ; //소속 Site정보 가져옴
 			session.setAttribute("managerVO", managerVO); //작업등록시 필요
 			break;
-		case 7://업체
+		case CEO://CEO
+			userName = managerSerivce.getManagerByID(id).getName();
+			break;
+		case CONTRACTOR://업체
 			ContractorVO contractorVO = contractorService.getContractorByID(id);
 			userName = contractorVO.getCont_name(); //업체명 할당
 			siteVO = siteService.getSiteByIdx(contractorVO.getSite_idx());

@@ -104,6 +104,7 @@ if(input) { //yes
 <!--다른사용자의update동작을 고려하여 자동으로 입력되는 부분 추가시 주의-->
 <input type="hidden" name="site_idx" value="${workVO.site_idx}" />
 <input type="hidden" name="work_idx" value="${workVO.work_idx}" />
+<input type="hidden" name="cont_idx" value="${workVO.cont_idx}" />
 <input type="hidden" name="write_user_idx" value="${workVO.write_user_idx}" />
 <input type="hidden" name="workcode" value="${workVO.workcode}" id="workcode" />
 <input type="hidden" name="placecode" value="${workVO.placecode}" id="placecode" />
@@ -115,21 +116,29 @@ if(input) { //yes
 
 <table class="user_signup">
 	<colgroup>
-		<col>
 		<col style="width: 33%">
+		<col>		
 		<col style="width: 33%">
 	</colgroup>
 	<tr>
 		<th>업체</th>
 		<td colspan="2">
-		<form:select id="cont_select_box" path="cont_idx" class="siteSelectBox" >
-					<c:forEach var="cont" items="${contList}" >
-						<form:option value="${cont.cont_idx}">${cont.cont_name}</form:option>
-					</c:forEach>
-		</form:select>
+		<form:input id="cont_name"  path="cont_name"  readonly="true"/>
+		
 		</td>
 	</tr>
-	<!-- work start -->
+</table>
+
+
+<!-- work start -->
+<p class="red">작업선택</p>
+<table class="user_signup">
+	<colgroup>
+		<col>
+		<col style="width: 33%">
+		<col style="width: 33%">
+	</colgroup>
+	
 	<tr>
 		<th>						
 			공종
@@ -179,17 +188,17 @@ if(input) { //yes
 		</td>
 	</tr>
 	<tr>
-		<th>작업기간</th>	
-		<td>시작 : <form:input id="startDateInput" path="startdate" 	maxlength="10" readonly="true"/>
+		<th>작업시작</th>	
+		<td><form:input id="startDateInput" path="startdate" 	maxlength="10" readonly="true"/>
 			<br> <form:errors cssClass="formError" path="startdate" /></td>
-		<td>마감 : <form:input id="endDateInput" path="enddate" maxlength="10" readonly="true"/>
-			<br><form:errors cssClass="formError" path="enddate" /></td>
+		<td><form:input path="starttime" id="starttimeInput" class="selectBox" autocomplete="off" readonly="true" ></form:input> </td>
 	</tr>
 
 	<tr>
-		<th>작업시간</th>
-		<td>시작 : <form:input path="starttime" id="starttimeInput" class="selectBox" autocomplete="off" readonly="true" ></form:input> </td>
-		<td>마감 : <form:input path="endtime" id="endtimeInput" class="time ui-timepicker-input" autocomplete="off" readonly="true" ></form:input> </td>
+		<th>작업마감</th>
+		<td><form:input id="endDateInput" path="enddate" maxlength="10" readonly="true"/>
+			<br><form:errors cssClass="formError" path="enddate" /></td>
+		<td><form:input path="endtime" id="endtimeInput" class="time ui-timepicker-input" autocomplete="off" readonly="true" ></form:input> </td>
 	</tr>
 
 </table>

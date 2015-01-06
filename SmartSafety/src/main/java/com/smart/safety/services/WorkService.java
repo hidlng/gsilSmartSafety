@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.smart.safety.domain.*;
 import com.smart.safety.persistence.*;
+import com.smart.safety.util.*;
 
 @Service(value="WorkService")
 public class WorkService{	
@@ -43,10 +44,10 @@ public class WorkService{
 	
 	@Transactional
 	public synchronized String insertWork(WorkVO workVO) {
-		int count = getRowCntForInsert();
+		//int count = getRowCntForInsert();
 		
 		//work 및 tool 동시삽입위해 여기서 key생성
-		String work_idx = "W" + count + Calendar.getInstance().getTimeInMillis();
+		String work_idx = UIDMaker.makeNewUID("W");
 		
 		workVO.setWork_idx(work_idx);
 		workMapper.insert(workVO);
@@ -55,7 +56,8 @@ public class WorkService{
 		List<ToolVO> toollist = workVO.getToollist();	
 		if(toollist != null) {
 			for(ToolVO toolVO : toollist){
-				toolVO.setWork_idx(work_idx);
+				toolVO.setTool_idx(UIDMaker.makeNewUID("TL"));
+				toolVO.setWork_idx(work_idx);				
 				toolMapper.insert(toolVO);
 			}
 		}
@@ -75,6 +77,7 @@ public class WorkService{
 		toolMapper.deleteByWorkIdx(workVO.getWork_idx());
 		for(ToolVO toolVO : toollist){
 			toolVO.setWork_idx(workVO.getWork_idx());
+			toolVO.setTool_idx(UIDMaker.makeNewUID("TL"));
 			toolMapper.insert(toolVO);
 		}
 	}

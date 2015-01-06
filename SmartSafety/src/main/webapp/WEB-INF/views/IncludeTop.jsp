@@ -129,8 +129,8 @@ $(document).on("keydown", disableF5);
 						<c:if test ="${sessionScope.userLoginInfo.level == 2}">현장 안전 관리자</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 3}">CEO</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 4}">현장 사용자(소장)</c:if>
-						<c:if test ="${sessionScope.userLoginInfo.level == 5}">작업팀장(2)</c:if>
-						<c:if test ="${sessionScope.userLoginInfo.level == 6}">일반 작업자(3)</c:if>
+						<c:if test ="${sessionScope.userLoginInfo.level == 5}">작업팀장</c:if>
+						<c:if test ="${sessionScope.userLoginInfo.level == 6}">일반 작업자</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 7}">현장 업체</c:if>
 					</span></li>
 					<c:if test ="${sessionScope.userLoginInfo.level >= 2}"> 

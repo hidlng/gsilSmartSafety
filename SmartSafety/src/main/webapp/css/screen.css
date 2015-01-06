@@ -13,7 +13,7 @@
   body{background:#fff;font-family: Dotum,돋움,Helvetica,AppleSDGothicNeo,sans-serif; font-size:14px; color:#333;}
   hr {display:none}
   hr.blkie8 {display:block;;border:none} /* ie8 block display */
-  #wrap{position:relative;margin:0 auto; width:900px; padding:10px; }
+  #wrap{position:relative;margin:0 auto; width:900px; padding:10px;clear:both; }
   .top {width:100%;margin-bottom:60px;margin-top:-38px;}
   .top p.title01{text-align:center;font-size:18px;color:#1367b6;font-weight:bold;}
   .date{position:absolute;right:0; top:27px;font-size:12px;}
@@ -28,7 +28,7 @@
   table.typ02 th, table.typ02 td{border:0;text-align:left;padding:0px; border-bottom:1px dotted #ddd;}
   table.typ02 th{background:none;} 
   p.textBox{display:block; width:99%; margin:30px auto 30px; border:1px solid #222; padding:15px 0; text-align:center;font-weight:bold;}
- .signBox{overflow:hidden;width:400px;height:30px;float:right;border-bottom:2px solid #000;margin:100px 0;}
+ .signBox{float:right;overflow:hidden;width:400px;height:30px;border-bottom:2px solid #000;margin:100px 0;}
  .signBox p{float:left;width:300px; font-weight:bold;} 
  .signBox span{float:right;width:50px;} 
  table.lastsign{margin-top:200px;}

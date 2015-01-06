@@ -53,11 +53,7 @@
      INSERT INTO
 	 SITE_LIST( SITE_IDX, SITENAME, ADDR_DETAIL, REP_NAME, REP_PHONE,STARTTIME,ENDTIME,
 	 	WRITETIME, DELYN)
-	 SELECT
-		GROUP_CONCAT('S',(SELECT COUNT(*) FROM SITE_LIST), SYSDATE()) AS SITE_IDX,
-		#{sitename}, #{addr_detail},#{rep_name},#{rep_phone},#{starttime} , #{endtime},
-		sysdate() , 'N'
-	FROM DUAL
+	 VALUES( #{site_idx}, #{sitename}, #{addr_detail},#{rep_name},#{rep_phone},#{starttime} , #{endtime}, sysdate() , 'N')
 	</insert>
 	
  	<update id="update" parameterType="SiteVO">

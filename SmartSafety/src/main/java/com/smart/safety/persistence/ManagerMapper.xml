@@ -99,11 +99,8 @@
 	<insert id="insert" parameterType="ManagerVO">
 		INSERT INTO
 		MANAGER_LIST(MANAGER_IDX, USER_IDX, SITE_IDX, CONT_IDX, ISMANAGER, GRADE, NAME, BIRTH, PHONE, POSITION, WRITETIME, DELYN)
-		SELECT
-			GROUP_CONCAT('M',(SELECT COUNT(*) FROM MANAGER_LIST), SYSDATE()) AS	MANAGER_IDX,
-			(SELECT USER_IDX FROM USER_LIST WHERE ID=#{id} AND DELYN='N') AS	USER_IDX,
-			#{site_idx}, #{cont_idx}, #{ismanager}, #{grade}, #{name}, #{birth}, #{phone} , #{position}, sysdate() , 'N'
-		FROM DUAL
+		VALUES( #{manager_idx},	#{user_idx},
+			#{site_idx}, #{cont_idx}, #{ismanager}, #{grade}, #{name}, #{birth}, #{phone} , #{position}, sysdate() , 'N' )
 	</insert>
 	
  	<update id="update" parameterType="ManagerVO">

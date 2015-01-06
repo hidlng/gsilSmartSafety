@@ -36,13 +36,19 @@ public class ManagerService{
 	@Transactional
 	public void insertManager(ManagerVO managerVO) {
 		
-		PasswordEncoder  passwordEncoder = new BCryptPasswordEncoder();
+		//PasswordEncoder  passwordEncoder = new BCryptPasswordEncoder();
 		
 		UserVO userVO = new UserVO();
+		
+		String user_idx = UIDMaker.makeNewUID("U");
+		userVO.setUser_idx(user_idx);
 		userVO.setId(managerVO.getId());
-		userVO.setPassword(passwordEncoder.encode(managerVO.getPassword()));
+		userVO.setPassword(managerVO.getPassword());
 		userVO.setLevel(Integer.valueOf(managerVO.getLevel()));
 		//userVO.setUser_idx(managerVO.getUser_idx());
+		
+		managerVO.setManager_idx(UIDMaker.makeNewUID("M"));
+		managerVO.setUser_idx(user_idx);
 		
 		userMapper.insertUser(userVO);
 		managerMapper.insert(managerVO);
@@ -54,11 +60,11 @@ public class ManagerService{
 	@Transactional
 	public void updateManager(ManagerVO managerVO) {
 	
-		PasswordEncoder  passwordEncoder = new BCryptPasswordEncoder();
+		//PasswordEncoder  passwordEncoder = new BCryptPasswordEncoder();
 		
 		UserVO userVO = new UserVO();
 		userVO.setId(managerVO.getId());
-		userVO.setPassword(passwordEncoder.encode(managerVO.getPassword()));
+		userVO.setPassword(managerVO.getPassword());
 		userVO.setLevel(Integer.valueOf(managerVO.getLevel()));
 		userVO.setUser_idx(managerVO.getUser_idx());
 		
@@ -92,7 +98,7 @@ public class ManagerService{
 	public ManagerVO getChiefByContIdx(String cont_idx) {		
 		Map<String, Object>params = new HashMap<String, Object>();
 		params.put("cont_idx", cont_idx); 
-		params.put("level", USERLEVEL.SITE_CHEIF.idx); 
+		params.put("level", USERLEVEL.CONT_CHEIF.idx); 
 		return managerMapper.getChiefByContIdx(params);
 	}
 

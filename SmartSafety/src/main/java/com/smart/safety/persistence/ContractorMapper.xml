@@ -77,12 +77,9 @@
  
   <insert id="insert" parameterType="ContractorVO">
     INSERT INTO
-	CONTRACTOR_LIST(CONT_IDX, USER_IDX, SITE_IDX,  CONT_NAME, CONT_PHONE, CONT_EMG_PHONE REP_NAME, REP_PHONE,WRITETIME, DELYN)
-	SELECT
-		GROUP_CONCAT('C',(SELECT COUNT(*) FROM CONTRACTOR_LIST), SYSDATE()) AS	CONT_IDX,
-		(SELECT USER_IDX FROM USER_LIST WHERE ID=#{id}  AND DELYN='N') AS	USER_IDX,
-		#{site_idx},  #{cont_name},#{cont_phone}, #{cont_emg_phone}, #{rep_name},#{rep_phone} , sysdate() , 'N'
-	FROM DUAL
+	CONTRACTOR_LIST(CONT_IDX, USER_IDX, SITE_IDX,  CONT_NAME, CONT_PHONE, CONT_EMG_PHONE, REP_NAME, REP_PHONE,WRITETIME, DELYN)
+	VALUES(	#{cont_idx},	#{user_idx}, #{site_idx},  #{cont_name},#{cont_phone}, #{cont_emg_phone}, #{rep_name},#{rep_phone} , sysdate() , 'N' )
+	
   </insert>
   <update id="update" parameterType="ContractorVO">
       UPDATE CONTRACTOR_LIST

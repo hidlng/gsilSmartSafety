@@ -21,7 +21,7 @@
  </head>
  <body>
 
- <div id="wrap a4"> 
+ <div id="wrap" class="a4"> 
 	 <div class="box_top">
 		<h1><img src="images/logo_ds.png" width="100"alt="두산로고"></h1>
 		<div class="top">

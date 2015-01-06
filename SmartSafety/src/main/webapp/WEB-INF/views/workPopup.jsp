@@ -26,7 +26,7 @@
 	</tr>
 	</table>	
 	<span  class="signup">
-		<span id="popupOKBtn" class="btn_typ02"  onclick="confirmCode()">선택 </span>
+		<span id="popupOKBtn" class="btn_typ02"  style="display:inline-block;" onclick="confirmCode()">선택 </span>
 	</span>
 	
 

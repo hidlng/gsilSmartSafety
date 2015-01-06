@@ -13,11 +13,7 @@
        
   <insert id="insert" parameterType="ToolVO">
    INSERT INTO TOOL_LIST(TOOL_IDX, WORK_IDX, TOOLTYPE, TOOLCODE, TOOLNAME, WRITETIME, DELYN)
-	SELECT
-		GROUP_CONCAT('TL',(SELECT COUNT(*) FROM TOOl_LIST), SYSDATE()) AS	TOOl_IDX,
-		#{work_idx}, #{tooltype}, #{toolcode}, #{toolname},		
-		sysdate(),	'N'		
-	FROM DUAL
+	VALUES(#{tool_idx},#{work_idx}, #{tooltype}, #{toolcode}, #{toolname},	sysdate(),	'N')
   </insert>
   <update id="update" parameterType="ManagerVO">
      UPDATE 

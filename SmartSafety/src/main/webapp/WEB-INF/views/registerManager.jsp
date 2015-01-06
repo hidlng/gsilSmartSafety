@@ -83,7 +83,7 @@
 		<input type="hidden" name="user_idx" value="${managerVO.user_idx}"/>
 		<input type="hidden" name="ismanager" value="1" />
 		<input type="hidden" id="isPWChanged" name="isPWChanged" value="false" />
-		
+		<input type="hidden" id="cont_idx" name="cont_idx" value="NONE" />
 <!-- //srchbox -->
 <table class="user_signup">
 	<colgroup>
@@ -119,7 +119,7 @@
 	<tr id="siteTR">
 		<th>현장</th>
 		<td colspan="3">
-		<form:select id="site_selectBox" path="site_idx" class="siteSelectBox" >
+		<form:select id="site_selectBox" path="site_idx" class="siteSelectBox" style="width:80%" >
 			<c:forEach var="site" items="${siteList}" varStatus="idx">
 					<form:option value="${site.site_idx}">${site.sitename}</form:option>
 			</c:forEach>

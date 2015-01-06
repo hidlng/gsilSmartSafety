@@ -27,6 +27,7 @@ public class PrintController {
 	
 	public static final String RISK_DATA_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getRiskData=&codelist=";
 	public static final String CODE_DETAIL_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getDetailByJSON=";
+	public static final String TOOL_IMG_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getToolImage=&filename=";
 	public static final String CHECK_IMG_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getChekcListImage=&filename=";
 		
 	@Resource(name="WorkService")
@@ -86,7 +87,7 @@ public class PrintController {
 		
 		/**작업시작 이후 출력을 한 경우에만 printVO insert**/		
 		try {
-			printService.insertPrintVO(workVO.getWork_idx(), workVO.getStartdate());
+			printService.insertPrintVO(workVO.getWork_idx(), workVO.getStartdate(), PrintType.TBM);
 		} catch (ParseException e) {e.printStackTrace();}	
 		
 		TBMVO tbmVO = makeTBM(workVO);
@@ -100,7 +101,7 @@ public class PrintController {
 		
 		/**작업시작 이후 출력을 한 경우에만 printVO insert**/		
 		try {
-			printService.insertPrintVO(workVO.getWork_idx(), workVO.getStartdate());
+			printService.insertPrintVO(workVO.getWork_idx(), workVO.getStartdate(), PrintType.PTW);
 		} catch (ParseException e) {e.printStackTrace();}	
 		
 		//List<PUIVO> puiList = makePUI(workVO);
@@ -114,7 +115,7 @@ public class PrintController {
 		
 		/**작업시작 이후 출력을 한 경우에만 printVO insert**/		
 		try {
-			printService.insertPrintVO(workVO.getWork_idx(), workVO.getStartdate());
+			printService.insertPrintVO(workVO.getWork_idx(), workVO.getStartdate(), PrintType.PUI);
 		} catch (ParseException e) {e.printStackTrace();}			
 		
 		List<PUIVO> puiList = makePUI(workVO);
@@ -353,6 +354,7 @@ public class PrintController {
 					String json_result = getDetailByJSON(toolVO.getToolcode(), 2);
 					if(json_result != null) {
 						Map<String, Object> jsonMap = null;
+						
 						//수기입력 체크 제외
 						System.out.println(json_result.toString());
 						jsonMap = objectMapper.readValue(json_result, Map.class);
@@ -363,7 +365,7 @@ public class PrintController {
 								puiVO.setToolname(toolVO.getToolname());
 								//PUIVO.setToolurl();
 								puiVO.setMainrisk(puiVO.getMainrisk() + "<br>" + (String) tool.get("mainRisk").replace("\r\n", "<br>"));
-								
+								puiVO.setToolurl(TOOL_IMG_URL + tool.get("imgVirtName"));
 								
 								//set Checklist
 								ArrayList<Map<String,String>>checklist = (ArrayList<Map<String,String>>)jsonMap.get("checkList");
@@ -375,8 +377,11 @@ public class PrintController {
 									
 									CheckVO checkVO = new CheckVO();
 									checkVO.setCheck(check.get("checklist"));
-									checkVO.setUrl(CHECK_IMG_URL + check.get("virtName"));
 									
+									if(check.get("virtName") != null && !check.get("virtName").equals(""))
+										checkVO.setUrl(CHECK_IMG_URL + check.get("virtName"));
+									else {//null일 경우 그냥둠 (jsp에서 null check하여 img src를 아예 사용안하도록))
+									}
 									input_checklist.add(checkVO);
 								}
 		

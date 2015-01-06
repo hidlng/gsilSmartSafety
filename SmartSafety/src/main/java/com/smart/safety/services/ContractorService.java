@@ -14,6 +14,7 @@ import com.smart.safety.domain.ManagerVO;
 import com.smart.safety.domain.UserVO;
 import com.smart.safety.persistence.ContractorMapper;
 import com.smart.safety.persistence.UserMapper;
+import com.smart.safety.util.*;
 
 @Service(value="ContractorService")
 public class ContractorService{	
@@ -37,15 +38,20 @@ public class ContractorService{
 	@Transactional
 	public void insertContractor(ContractorVO contractorVO) {
 		
-		PasswordEncoder  passwordEncoder = new BCryptPasswordEncoder();
+		//PasswordEncoder  passwordEncoder = new BCryptPasswordEncoder();
 		
 		UserVO userVO = new UserVO();
+		String user_idx = UIDMaker.makeNewUID("U");
+		userVO.setUser_idx(user_idx);
 		userVO.setId(contractorVO.getId());
-		userVO.setPassword(passwordEncoder.encode(contractorVO.getPassword()));
+		userVO.setPassword(contractorVO.getPassword());
 		userVO.setLevel(contractorVO.getLevel());
 		//userVO.setUser_idx(contractorVO.getUser_idx());
 		
 		userMapper.insertUser(userVO);
+		
+		contractorVO.setCont_idx(UIDMaker.makeNewUID("C"));
+		contractorVO.setUser_idx(user_idx);
 		contractorMapper.insert(contractorVO);
 	}
 	
@@ -55,11 +61,11 @@ public class ContractorService{
 	@Transactional
 	public void updateContractor(ContractorVO contractorVO) {
 	
-		PasswordEncoder  passwordEncoder = new BCryptPasswordEncoder();
+		//PasswordEncoder  passwordEncoder = new BCryptPasswordEncoder();
 		
 		UserVO userVO = new UserVO();
 		userVO.setId(contractorVO.getId());
-		userVO.setPassword(passwordEncoder.encode(contractorVO.getPassword()));
+		userVO.setPassword(contractorVO.getPassword());
 		userVO.setLevel(contractorVO.getLevel());
 		userVO.setUser_idx(contractorVO.getUser_idx());
 		

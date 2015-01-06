@@ -81,12 +81,12 @@
 		</tr>
 		<tr>
 			<th>주소</th>
-			<td colspan="3"><form:input id="addr_detail" path="addr_detail" maxlength="255"  readonly="true" style="width:90%" onclick="goPopup()"/>
+			<td colspan="3"><form:input id="addr_detail" path="addr_detail" maxlength="255"  readonly="true" style="width:90%;cursor:pointer" onclick="goPopup()" />
 				<br>
 				<form:errors cssClass="formError" path="addr_detail" /></td>
 		</tr>
 		<tr>
-			<th>대표관리자</th>
+			<th>대표<br>관리자</th>
 			<td><form:input path="rep_name" maxlength="45" />
 				<br>
 				<form:errors cssClass="formError" path="rep_name" /></td>

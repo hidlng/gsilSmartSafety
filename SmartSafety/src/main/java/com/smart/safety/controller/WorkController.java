@@ -53,11 +53,29 @@ public class WorkController {
 				@RequestParam(value="searchWord", defaultValue="")String searchWord ,
 				HttpSession session) {
 			//keyword 생성
+		
+		
+			//검색조건설정
+			UserVO userVO = (UserVO)session.getAttribute("userLoginInfo");
+			SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");			
+			
 			String keyword = "%" + searchWord + "%";
 			WorkVO workVO = new WorkVO();
 			workVO.setWorktype(keyword);
 			workVO.setWorktitle(keyword);
 			workVO.setUsername(keyword);
+			
+			if(userVO.getLevel() == USERLEVEL.SS_MANAGER.idx ||
+					userVO.getLevel() == USERLEVEL.EHS_MANAGER.idx || 
+					userVO.getLevel() == USERLEVEL.CEO.idx) //SS관리자, EHS , CEO 의 경우 모든 현장 볼수 있도록 
+				workVO.setSite_idx("%");
+			else if(siteVO != null)
+				workVO.setSite_idx(siteVO.getSite_idx());
+			else {
+				//TODO:excpetion
+			}
+			
+			
 			
 			//Paging처리			
 			int rowCnt = workService.getRowCount(workVO);
@@ -71,11 +89,10 @@ public class WorkController {
 		    model.addAttribute("paging",paging);
 		     
 			List<WorkVO> list = workService.getWorkListByVO(workVO);
-			
-//			model.addAttribute("startPage", startPage);
-//			model.addAttribute("endPage", endPage);
 			model.addAttribute("workList", list);
 			session.setAttribute("contentView", "workList");
+			
+		
 		}
 	
 	@RequestMapping(value = "registerWork")
@@ -90,6 +107,10 @@ public class WorkController {
 		
 		if(updateIdx != null && !updateIdx.equals("")) {
 			WorkVO workVO = workService.getWorkByIdx(updateIdx);
+			//contname은 따로저장하지않으므로
+			ContractorVO contractorVO = contractorService.getContractorByIdx(workVO.getCont_idx());
+			workVO.setCont_name(contractorVO.getCont_name());
+			
 			model.addAttribute("updateMode", true);
 			model.addAttribute("workVO", workVO);
 		}
@@ -110,17 +131,18 @@ public class WorkController {
 				
 				//업체에 경우 현장사용자는 직접 타이핑 입력이기때문에
 				//통일 성을 위해 둘다 이름값만 입력함(cont_idx 사용 X)
-				if(userVO.getLevel() == 4 || userVO.getLevel() == 5 || userVO.getLevel() == 6) {//현장사용자
+				if(userVO.getLevel() == USERLEVEL.CONT_CHEIF.idx || userVO.getLevel() == USERLEVEL.CONT_LEADER.idx || userVO.getLevel() == USERLEVEL.CONT_WORKER.idx) {//현장사용자
 					ManagerVO managerVO = (ManagerVO)session.getAttribute("managerVO");
-					//workVO.setCont_name(managerVO.getCont_name());
-				}else if(userVO.getLevel() == 7) {//업체
+					ContractorVO contractorVO = contractorService.getContractorByIdx(managerVO.getCont_idx());	
+					workVO.setCont_idx(managerVO.getCont_idx());
+					workVO.setCont_name(contractorVO.getCont_name());
+				}else if(userVO.getLevel() == USERLEVEL.CONTRACTOR.idx) {//업체
 					ContractorVO contractorVO = (ContractorVO)session.getAttribute("contractorVO");
 					workVO.setCont_idx(contractorVO.getCont_idx());
-					//workVO.setCont_name(contractorVO.getCont_name());
-					
+					workVO.setCont_name(contractorVO.getCont_name());
 				}else {
 					//error 처리
-					//workVO.setCont_name("소속없체 없음");
+					workVO.setCont_name("소속없음");
 				}
 				
 			}
@@ -278,7 +300,7 @@ public class WorkController {
 		}
 		
 		workVO.setRisk_warn("1");//RiskWarn
-		workVO.setWorkpermit("1");//WorkPermit
+		workVO.setWorkpermit("N");//WorkPermit
 		
 	}
 
@@ -297,14 +319,43 @@ public class WorkController {
 	public void viewWork(@RequestParam(value="viewIdx",required=false)String viewIdx, HttpServletRequest request, Model model, HttpSession session) {
 		if(viewIdx != null && !viewIdx.equals("")) {
 			WorkVO workVO = workService.getWorkByIdx(viewIdx);
-			//contname 가져오기 
+			UserVO userVO = (UserVO)session.getAttribute("userLoginInfo");
+			SiteVO siteVO = (SiteVO)session.getAttribute("siteVO");
 			
+			//contname 가져오기 			
 			ContractorVO contVO = contractorService.getContractorByIdx(workVO.getCont_idx());
+			
 			
 			
 			model.addAttribute("updateMode", true);
 			model.addAttribute("workVO", workVO);
 			model.addAttribute("cont_name", contVO.getCont_name());
+			
+			/**수정권한 체크 - 대상 : 작성자 or 작업 관련 업체 사람 or 현장관리자**/				
+			
+			USERLEVEL userlevel = USERLEVEL.get(userVO.getLevel());
+			
+			boolean canModify = false;
+			
+			switch(userlevel) {
+			case SS_MANAGER:case EHS_MANAGER:case CEO:break;
+			case SITE_MANAGER ://자신의 현장의 모든 작업 수정 가능
+				canModify = true;
+				break;
+			case CONT_CHEIF: case CONT_LEADER : case CONT_WORKER ://자신업체에 대해 수정가능
+				ManagerVO managerVO = (ManagerVO)session.getAttribute("managerVO");
+				if(managerVO != null && workVO.getCont_idx().equals(managerVO.getCont_idx()))
+					canModify = true;
+				break;
+			case CONTRACTOR://자신업체에 대해 수정가능
+				ContractorVO contractorVO = (ContractorVO)session.getAttribute("contractorVO");
+				if(contractorVO != null && workVO.getCont_idx().equals(contractorVO.getCont_idx()))
+					canModify = true;
+				break;
+			}
+			
+			//수정권한 체크 작업의 업체idx와 UserSession의 소속현장 idx를 비교 
+			model.addAttribute("canModify", canModify);
 		}
 	}
 	

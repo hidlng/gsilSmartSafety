@@ -12,6 +12,7 @@ import com.smart.safety.domain.SiteVO;
 import com.smart.safety.persistence.ManagerMapper;
 import com.smart.safety.persistence.SiteMapper;
 import com.smart.safety.persistence.UserMapper;
+import com.smart.safety.util.*;
 
 @Service(value="SiteService")
 public class SiteService {
@@ -35,6 +36,7 @@ public class SiteService {
 	
 	@Transactional
 	public void insertSite(SiteVO siteVO) {
+		siteVO.setSite_idx(UIDMaker.makeNewUID("S"));
 		siteMapper.insert(siteVO);
 	}
 	@Transactional

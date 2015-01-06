@@ -18,7 +18,7 @@ public class WorkVO implements Serializable{
 	String sitename;//조인 정보
 	String write_user_idx;//user_list에서 가져옴
 	private String cont_idx; 
-	//String cont_name; 
+	String cont_name; 
 	
 	@NotEmpty(message="입력 필요")
 	String ischarge = "N"; //돌관작업 여부
@@ -356,6 +356,12 @@ public class WorkVO implements Serializable{
 	}
 	public void setRisk_level(int risk_level) {
 		this.risk_level = risk_level;
+	}
+	public String getCont_name() {
+		return cont_name;
+	}
+	public void setCont_name(String cont_name) {
+		this.cont_name = cont_name;
 	}
 
 	
