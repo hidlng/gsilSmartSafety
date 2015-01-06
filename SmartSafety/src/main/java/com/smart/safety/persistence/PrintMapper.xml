@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.smart.safety.persistence.PrintMapper">
+  <select id="getPrintCnt" resultType="Integer" parameterType="PrintVO">
+   	SELECT count(*)
+	FROM PRINT_LIST
+	WHERE 
+		WORK_IDX = #{work_idx}
+		AND PRINT_TYPE = #{print_type}
+		AND WORKDATE = #{workdate}
+  </select>
+  
+  <select id="getPrintByWorkIdx" resultType="PrintVO" parameterType="String">
+   	SELECT *
+	FROM PRINT_LIST
+	WHERE WORK_IDX = #{work_idx}
+  </select>
+       
+  <insert id="insert" parameterType="PrintVO">
+   INSERT INTO PRINT_LIST(WORK_IDX, PRINT_TYPE, WORKDATE, CHK_USER_IDX, PRINTTIME, CHECKTIME)
+	VALUES(#{work_idx}, #{print_type}, #{workdate}, #{chk_user_idx}, sysdate(), null )
+  </insert>
+ 
+   <insert id="update" parameterType="PrintVO">
+   UPDATE 
+     	PRINT_LIST
+     SET
+		CHK_USER_IDX = #{chk_user_idx}
+		,PRINTTIME = #{printtime}
+		,CHECKTIME = sysdate()
+	WHERE
+		WORK_IDX = #{work_idx}
+		AND WORKDATE = #{workdate}
+		AND PRINT_TYPE = #{print_type}
+  </insert>
+  
+  
+  <update id="deleteByWorkIdx" parameterType="String">
+		DELETE FROM PRINT_LIST
+		WHERE WORK_IDX = #{work_idx}
+  </update>
+</mapper>
+
