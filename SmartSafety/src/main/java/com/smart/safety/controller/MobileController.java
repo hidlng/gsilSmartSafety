@@ -25,9 +25,21 @@ public class MobileController {
 	
 	@RequestMapping( value = "mobileworklist" )
 	public void mobileWorkList(Model model
-			, @RequestParam(value="searchdate", defaultValue="")String searchdate) {
+			, @RequestParam(value="searchdate", defaultValue="")String searchdate
+			, @RequestParam(value="siteidx", defaultValue="")String siteidx) {
 		
-		String resultJson = mobileServie.getMobileWorkList(searchdate);
+		String resultJson = mobileServie.getMobileWorkList(siteidx,searchdate);
+		model.addAttribute("jsonResult", resultJson);
+	}
+
+	@RequestMapping( value = "mobileupdateresult" )
+	public void mobileUpdateResult(Model model
+			, @RequestParam(value="workdate", defaultValue="")String workdate
+			, @RequestParam(value="useridx", defaultValue="")String useridx
+			, @RequestParam(value="checkyn", defaultValue="")String checkyn
+			, @RequestParam(value="workidx", defaultValue="")String workidx ) {
+		
+		String resultJson = mobileServie.updatCheckYn(workdate, useridx, checkyn, workidx);
 		model.addAttribute("jsonResult", resultJson);
 	}
 	
