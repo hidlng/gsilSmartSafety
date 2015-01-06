@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+
+<mapper namespace="com.smart.safety.persistence.SiteMapper">
+	<select id="getSiteList" resultType="SiteVO">
+	    SELECT 
+	    	*
+	 	FROM SITE_LIST
+	    WHERE DELYN='N'
+	    ORDER BY SITE_IDX
+	</select>
+	<select id="getSiteListByVO" resultType="SiteVO"	parameterType="SiteVO">
+   	   	SELECT
+			*
+		FROM SITE_LIST 
+		WHERE 
+			DELYN='N'  
+			AND (REP_NAME like #{rep_name}
+			OR SITENAME like #{sitename}
+			OR REP_PHONE like #{rep_phone}
+			)
+		ORDER BY SITE_IDX
+		LIMIT #{start}, #{size}
+    </select>
+    
+   	<select id="getRowCount" resultType="Integer" parameterType="SiteVO">
+  	   	SELECT
+			COUNT(*)
+		FROM SITE_LIST 
+		WHERE 
+			DELYN='N'  
+			AND (REP_NAME like #{rep_name}
+			OR SITENAME like #{sitename}
+			OR REP_PHONE like #{rep_phone}
+			)	   
+    </select>
+	
+    
+    <select id="getSiteByIdx" resultType="SiteVO"		parameterType="String">	
+        SELECT 
+        	 *
+        FROM SITE_LIST
+        WHERE DELYN='N'
+        AND SITE_IDX = #{site_idx}	
+	</select>
+	
+	<insert id="insert" parameterType="SiteVO">		
+     INSERT INTO
+	 SITE_LIST( SITE_IDX, SITENAME, ADDR_DETAIL, REP_NAME, REP_PHONE,STARTTIME,ENDTIME,
+	 	WRITETIME, DELYN)
+	 SELECT
+		GROUP_CONCAT('S',(SELECT COUNT(*) FROM SITE_LIST), SYSDATE()) AS SITE_IDX,
+		#{sitename}, #{addr_detail},#{rep_name},#{rep_phone},#{starttime} , #{endtime},
+		sysdate() , 'N'
+	FROM DUAL
+	</insert>
+	
+ 	<update id="update" parameterType="SiteVO">
+ 	    UPDATE SITE_LIST
+		SET SITENAME=#{sitename}, ADDR_DETAIL=#{addr_detail} , REP_NAME=#{rep_name}, REP_PHONE=#{rep_phone}
+		,STARTTIME=#{starttime}, ENDTIME=#{endtime}
+		WHERE SITE_IDX=#{site_idx}
+    </update>
+	
+   	<update id="delete" parameterType="String">		
+   	    UPDATE SITE_LIST
+		SET DELYN='Y'
+		WHERE SITE_IDX = #{idx}
+	</update>
+   
+</mapper>

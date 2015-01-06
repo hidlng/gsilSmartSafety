@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.smart.safety.persistence.WorkMapper">
+	
+  <select id="getWorkListByVO" resultType="WorkVO" parameterType="WorkVO">
+	SELECT *
+	FROM WORK_LIST_WITH_NAME W  
+	JOIN SITE_LIST S
+	ON W.SITE_IDX = S.SITE_IDX
+	WHERE W.DELYN='N'
+	AND S.DELYN='N'
+	AND (
+	W.WORKTYPE like #{worktype}
+	OR W.WORKTITLE like #{worktitle}
+	OR W.USERNAME like #{username}
+	)
+	ORDER BY W.STARTDATE, W.STARTTIME
+	LIMIT #{start}, #{size}
+  </select>
+  
+  <select id="getRowCount" resultType="Integer" parameterType="WorkVO">
+        SELECT COUNT(*) 
+		FROM WORK_LIST_WITH_NAME W
+		JOIN SITE_LIST S
+		ON W.SITE_IDX = S.SITE_IDX
+		WHERE 
+			W.DELYN='N' 
+			AND S.DELYN='N' 
+			AND (
+			W.WORKTYPE like #{worktype}
+			OR W.WORKTITLE like #{worktitle}
+			OR W.USERNAME like #{username}
+			)
+  </select>
+  
+   <select id="getRowCntForInsert" resultType="Integer">
+        SELECT COUNT(*) 
+		FROM WORK_LIST;
+  </select>
+  
+  <select id="getWorkByIdx" resultType="WorkVO" parameterType="String">
+   	SELECT *
+	FROM WORK_LIST W
+	JOIN SITE_LIST S
+	ON W.SITE_IDX = S.SITE_IDX
+	WHERE
+		W.DELYN='N'
+		AND S.DELYN='N'
+		AND W.WORK_IDX = #{work_idx}
+  </select>
+       
+  <insert id="insert" parameterType="WorkVO">
+    INSERT INTO
+	WORK_LIST(WORK_IDX,	SITE_IDX, WRITE_USER_IDX, CONT_IDX, ISCHARGE, WORKTYPE, WORKSTATUS,	CATEGORY1,	CATEGORY2,	CATEGORY3,	WORKCODE,	WORKNAME,	WORKTITLE,
+	STARTDATE,	STARTTIME,	ENDDATE,	ENDTIME,	PLACECODE,	PLACENAME,	ADDR_DETAIL,	INDOOR,	PIC_NAME,	PIC_BIRTH	,PIC_PHONE,	
+	PIC_POSITION,	PIC_NUM_WORKER,	WORKLEVEL,	REMARK, RISK_LEVEL, RISK_GRADE,	RISK_WARN, WORKPERMIT, WRITETIME, UPDATETIME, DELYN )
+	SELECT
+		#{work_idx},
+		#{site_idx},		#{write_user_idx},		#{cont_idx},		#{ischarge},		#{worktype},	#{workstatus},	#{category1},
+		#{category2},		#{category3},		#{workcode},	#{workname},		#{worktitle},
+		#{startdate},		#{starttime},		#{enddate},		#{endtime},		#{placecode},		#{placename},		#{addr_detail},		#{indoor},
+		#{pic_name},		#{pic_birth},		#{pic_phone},	#{pic_position},		#{pic_num_worker},		#{worklevel},		#{remark},
+		#{risk_level}, 	#{risk_grade}, 		#{risk_warn},		#{workpermit},	sysdate(),	sysdate(),	'N'		
+	FROM DUAL
+  </insert>
+  <update id="update" parameterType="ManagerVO">
+     UPDATE 
+     	WORK_LIST
+     SET
+     	CONT_IDX = #{cont_idx}
+		,ISCHARGE = #{ischarge}
+		,WORKTYPE = #{worktype}
+		,WORKSTATUS = #{workstatus}
+		,CATEGORY1 = #{category1}
+		,CATEGORY2 = #{category2}
+		,CATEGORY3 = #{category3}	
+		,WORKCODE = #{workcode}	
+		,WORKNAME = #{workname}
+		,WORKTITLE = #{worktitle}
+			
+		,STARTDATE = #{startdate}
+		,STARTTIME = #{starttime}
+		,ENDDATE = #{enddate}
+		,ENDTIME = #{endtime}
+		,PLACECODE = #{placecode}
+		,PLACENAME = #{placename}
+		,ADDR_DETAIL = #{addr_detail}
+		,INDOOR = #{indoor}
+		
+		,PIC_NAME = #{pic_name}
+		,PIC_BIRTH = #{pic_birth}
+		,PIC_PHONE = #{pic_phone}	
+		,PIC_POSITION = #{pic_position}
+		,PIC_NUM_WORKER = #{pic_num_worker}
+		,WORKLEVEL = #{worklevel}
+		,RISK_LEVEL = #{risk_level}
+		,RISK_GRADE = #{risk_grade}		
+		,RISK_WARN = #{risk_warn}	
+		,WORKPERMIT = #{workpermit}		
+		,REMARK = #{remark}		
+		,UPDATETIME = sysdate()
+	WHERE
+		WORK_IDX = #{work_idx}
+	
+  </update>
+  <update id="delete" parameterType="String">
+		UPDATE WORK_LIST
+		SET DELYN='Y'
+		WHERE WORK_IDX = #{work_idx}
+  </update>
+</mapper>

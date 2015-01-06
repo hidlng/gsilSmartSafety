@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.smart.safety.persistence.ToolMapper">
+  <select id="getToolByWorkIdx" resultType="ToolVO" parameterType="String">
+   	SELECT *
+	FROM Tool_LIST
+	WHERE WORK_IDX = #{work_idx}
+	AND DELYN='N';
+  </select>
+       
+  <insert id="insert" parameterType="ToolVO">
+   INSERT INTO TOOL_LIST(TOOL_IDX, WORK_IDX, TOOLTYPE, TOOLCODE, TOOLNAME, WRITETIME, DELYN)
+	SELECT
+		GROUP_CONCAT('TL',(SELECT COUNT(*) FROM TOOl_LIST), SYSDATE()) AS	TOOl_IDX,
+		#{work_idx}, #{tooltype}, #{toolcode}, #{toolname},		
+		sysdate(),	'N'		
+	FROM DUAL
+  </insert>
+  <update id="update" parameterType="ManagerVO">
+     UPDATE 
+     	TOOl_LIST
+     SET
+		TOOLTYPE = #{tooltype}
+		,TOOLCODE = #{toolcode}
+		,TOOLNAME = #{toolname}
+	WHERE
+		TOOl_IDX = #{tool_idx}
+	
+  </update>
+  <update id="deleteByWorkIdx" parameterType="String">
+		DELETE FROM TOOl_LIST
+		WHERE WORK_IDX = #{work_idx}
+  </update>
+</mapper>

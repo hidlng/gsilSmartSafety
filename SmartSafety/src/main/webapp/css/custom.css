@@ -1,0 +1,108 @@
+/* just maintain some attributes like display & position, and everything is changeable */
+
+.listTR {
+	cursor:pointer;
+}
+
+.listTR:hover{
+ 	background-color: transparent;
+	border: 5px dashed #36c;
+	color:threedshadow;
+}
+
+.closeLink {
+	display:block;
+	text-align:right;
+}
+.bgCover {
+	background: #000;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+	overflow: hidden
+}
+
+.overlayBox {
+	background-color:#1d2b43;
+	border: 5px solid #09F;
+	position: absolute;
+	display: none;
+	padding: 2px;
+}
+
+.overlayContent {
+	max-height: 400px;
+	overflow-y: auto;
+}
+
+.formError {
+	color: red;
+	font-size: 22px;
+}
+
+.duplCheckOk {
+	color: green;
+	font-size: 25px;
+}
+
+/* 
+a.signupBtn {
+	display:block;
+	height:40px;
+	margin-top:7px;
+	background: url('../images/btn_signup.png') no-repeat center; 
+}
+
+
+a:hover.signupBtn {		
+	background: url('../images/btn_signup_over.png') no-repeat center; 
+}
+ 
+a.infoBtn {
+	display:block;
+	height:33px;
+	width:90px;
+	background: url('../images/btn_info.png') no-repeat center; 
+}
+
+
+a:hover.infoBtn {
+	background: url('../images/btn_info_over.png') no-repeat center; 
+}
+*/
+.selectBox {
+	padding: 5px;
+	background-color: #1d2b43;
+	color: #fff;
+	font-size: 35px;
+	line-height: 36px;
+	border: 1px dotted #8c97a9;
+	text-align: center;
+	
+}
+
+.selectBox option {
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+.siteSelectBox {
+	width: 70%;
+	padding: 5px;
+	background-color: #1d2b43;
+	color: #fff;
+	font-size: 35px;
+	line-height: 36px;
+	border: 1px dotted #8c97a9;
+	text-align: center;
+}
+
+.siteSelectBox option {
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+.chargeWorkTR {
+	border: 2px solid red;
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.smart.safety.persistence.UserMapper">  
+   <select id="getLoginUserById" resultType="UserVO" parameterType="String">
+     select * from user_list where id=#{id} AND DELYN='N'
+   </select>
+   
+
+   
+   <insert id="insertUser" parameterType="UserVO">
+	INSERT INTO USER_LIST (USER_IDX, ID, PASSWORD, LEVEL, WRITETIME, DELYN)
+ 	 SELECT 
+ 	 	GROUP_CONCAT('U',(SELECT COUNT(*) FROM USER_LIST), SYSDATE()) AS USER_IDX,  
+ 	 	#{id},
+ 	 	#{password},
+ 	 	#{level},
+ 	 	SYSDATE(),
+ 	 	'N' 
+ 	 	FROM DUAL	  
+	</insert>
+	
+    
+	
+     <update id="updateUser" parameterType="UserVO">
+         UPDATE USER_LIST
+         SET PASSWORD=#{password}, LEVEL=#{level}
+         WHERE USER_IDX=#{user_idx}
+     </update>
+     
+      <update id="updateUserWithoutPW" parameterType="UserVO">
+         UPDATE USER_LIST
+         SET LEVEL=#{level}
+         WHERE USER_IDX=#{user_idx}
+     </update>
+      <update id="updateUserPID" parameterType="UserVO">
+         UPDATE USER_LIST
+         SET PID=#{pid}
+         WHERE USER_IDX=#{user_idx}
+     </update>
+     
+
+  	<delete id="deleteUserByIdx" parameterType="String">
+		UPDATE USER_LIST SET DELYN='Y' WHERE USER_IDX=#{user_idx} 
+	</delete>
+	
+ 
+
+    
+</mapper>
+

@@ -152,7 +152,7 @@ public class DataActionBean extends AbstractActionBean {
 }  
 	
 
-	/**workcode!num_worker!worklevel 로 전달받음 */
+	/**workcode!num_worker!worklevel 형태로 전달받음 */
 	public Resolution getRiskData() {
 		//c를 JSON으로 넘겨받음
 		//조합
@@ -180,6 +180,7 @@ public class DataActionBean extends AbstractActionBean {
 		}
 		
 		try{
+			/**risklevel 계산 **/
 			if(token.hasMoreElements())  {// num _worker
 				int num_worker = Integer.valueOf((String)token.nextElement());
 				System.out.println(num_worker);
@@ -198,14 +199,15 @@ public class DataActionBean extends AbstractActionBean {
 			e.printStackTrace();
 		}
 		
-		String riskLevel = "";
+		String riskgrade = "";
 		//등급결정
-		if(riskPoint < 3) riskLevel = "C";
-		else if(riskPoint < 6) riskLevel = "B";
-		else riskLevel = "A";
+		if(riskPoint < 3) riskgrade = "C";
+		else if(riskPoint < 6) riskgrade = "B";
+		else riskgrade = "A";
 		
 		jsonObj = new JSONObject();
-		jsonObj.put("riskLevel", riskLevel);
+		jsonObj.put("risklevel", riskPoint);
+		jsonObj.put("riskgrade", riskgrade);
 		
 		return new ForwardResolution(DATAPAGE);
 	}
