@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+
+<mapper namespace="com.smart.safety.persistence.CeoMapper">
+
+	<select id="getCeoList" resultType="CeoVO"	parameterType="CeoVO">
+		SELECT 
+		 T.WORK_IDX,
+		 T.SITENAME, 
+		 T.WORKTITLE, 
+		 T.WORKDATE,
+		 T.STARTDATE, 
+		 T.ENDDATE, 
+		 T.SITE_IDX, 
+		 T.CHECKYN, 
+		 T.CHK_USER_IDX , 
+		 T.RISK_GRADE, 
+		 IFNULL ( G.USER_IDX, '0' ) USER_IDX, 
+		 IFNULL ( G.NAME, '대기' ) NAME  
+		FROM
+		 ( SELECT A.WORK_IDX, S.SITENAME, A.WORKTITLE, A.WORKDATE, A.STARTDATE, A.ENDDATE, A.SITE_IDX, A.CHECKYN, A.CHK_USER_IDX , A.RISK_GRADE
+		  FROM SITE_LIST S 
+		  JOIN
+		   ( SELECT DISTINCT W.WORKTITLE,  W.RISK_GRADE, W.WORK_IDX, IFNULL(DATE_FORMAT( P.WORKDATE, '%Y%m%d' ), #{basedate} ) WORKDATE,
+		     DATE_FORMAT ( W.STARTDATE, '%Y%m%d' ) STARTDATE, DATE_FORMAT ( W.ENDDATE, '%Y%m%d' ) ENDDATE, W.SITE_IDX, IFNULL ( P.CHECKYN, 'N' ) CHECKYN,  IFNULL ( P.CHK_USER_IDX, '0' ) CHK_USER_IDX
+		   FROM WORK_LIST W
+		   LEFT OUTER JOIN PRINT_LIST P
+		   ON
+		    W.WORK_IDX = P.WORK_IDX
+		   WHERE 
+		   <![CDATA[
+		   		DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) <= #{basedate} 
+		   ]]>
+		   <![CDATA[
+				AND DATE_FORMAT( W.ENDDATE , '%Y%m%d' )  >= #{basedate}
+			]]>
+		   ) A
+		 ON S.SITE_IDX = A.SITE_IDX
+		 WHERE A.WORKDATE = #{basedate} 
+		 ) T
+		LEFT OUTER JOIN
+		 ( SELECT DISTINCT U.USER_IDX, M.NAME 
+		  FROM USER_LIST U
+		  JOIN MANAGER_LIST M
+		  ON
+		   U.USER_IDX = M.USER_IDX
+		  WHERE M.DELYN = 'N' ) G
+		ON T.CHK_USER_IDX = G.USER_IDX
+		ORDER BY RISK_GRADE ASC
+		LIMIT #{start}, #{size}
+    </select>
+   	<select id="getRowCount" resultType="Integer" parameterType="CeoVO">
+		SELECT 
+			COUNT(*)
+		FROM
+		 ( SELECT A.WORK_IDX, S.SITENAME, A.WORKTITLE, A.WORKDATE, A.STARTDATE, A.ENDDATE, A.SITE_IDX, A.CHECKYN, A.CHK_USER_IDX , A.RISK_GRADE
+		  FROM SITE_LIST S 
+		  JOIN
+		   ( SELECT DISTINCT W.WORKTITLE,  W.RISK_GRADE, W.WORK_IDX, IFNULL(DATE_FORMAT( P.WORKDATE, '%Y%m%d' ), #{basedate} ) WORKDATE,
+		     DATE_FORMAT ( W.STARTDATE, '%Y%m%d' ) STARTDATE, DATE_FORMAT ( W.ENDDATE, '%Y%m%d' ) ENDDATE, W.SITE_IDX, IFNULL ( P.CHECKYN, 'N' ) CHECKYN,  IFNULL ( P.CHK_USER_IDX, '0' ) CHK_USER_IDX
+		   FROM WORK_LIST W
+		   LEFT OUTER JOIN PRINT_LIST P
+		   ON
+		    W.WORK_IDX = P.WORK_IDX
+		   WHERE 
+		   <![CDATA[
+		   		DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) <= #{basedate} 
+		   ]]>
+		   <![CDATA[
+				AND DATE_FORMAT( W.ENDDATE , '%Y%m%d' )  >= #{basedate}
+			]]>
+		   ) A
+		 ON S.SITE_IDX = A.SITE_IDX
+		 WHERE A.WORKDATE = #{basedate} 
+		 ) T
+		LEFT OUTER JOIN
+		 ( SELECT DISTINCT U.USER_IDX, M.NAME 
+		  FROM USER_LIST U
+		  JOIN MANAGER_LIST M
+		  ON
+		   U.USER_IDX = M.USER_IDX
+		  WHERE M.DELYN = 'N' ) G
+		ON T.CHK_USER_IDX = G.USER_IDX
+    </select>
+
+   
+</mapper>
