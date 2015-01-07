@@ -103,6 +103,16 @@ h1 img{width:120px;}
 	text-align: center;
 }
 
+.listTR {
+	cursor:pointer;
+}
+
+.listTR:hover{
+ 	background-color:#8CB4E0;
+	border: 2px solid #ffffff;
+	t color:#162133 !importan;
+}
+
 /* contant */
 .content table{clear: both;width:100%; font-size:18px;line-height:30px; background-color:#1d2b43;border-collapse: collapse;border-spacing: 0;}
 .content table tr th, .content table tr td{border:1px dotted #8c97a9; text-align:center;}

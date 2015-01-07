@@ -19,11 +19,53 @@ public class CeoVO implements Serializable {
 	private String name;
 	private String workdate;
 	private String basedate;
-	
+	private String siteValue;
+	private String riskSearchValue;
+	private String chkSearchValue;
+	private String searchWord;
+		
 	private int start=0;
 	private int size=10;
 	
-	
+	public String getRiskSearchValue() {
+		return riskSearchValue;
+	}
+	public void setRiskSearchValue(String riskSearchValue) {
+		if( riskSearchValue.equals("1") ) {
+			this.riskSearchValue = "A";
+		} else if( riskSearchValue.equals("2") ) {
+			this.riskSearchValue = "B";
+		} else if( riskSearchValue.equals("3") ) {
+			this.riskSearchValue = "C";
+		} else {
+			this.riskSearchValue = "";
+		}
+		
+	}
+	public String getChkSearchValue() {
+		return chkSearchValue;
+	}
+	public void setChkSearchValue(String chkSearchValue) {
+		if( chkSearchValue.equals("1") ) {
+			this.chkSearchValue = "Y";
+		} else if( chkSearchValue.equals("2") ) {
+			this.chkSearchValue = "N";
+		} else {
+			this.chkSearchValue = "";
+		}
+	}
+	public String getSearchWord() {
+		return searchWord;
+	}
+	public void setSearchWord(String searchWord) {
+		this.searchWord = searchWord;
+	}
+	public String getSiteValue() {
+		return siteValue;
+	}
+	public void setSiteValue(String siteValue) {
+		this.siteValue = siteValue;
+	}
 	public String getWorkdate() {
 		return workdate;
 	}

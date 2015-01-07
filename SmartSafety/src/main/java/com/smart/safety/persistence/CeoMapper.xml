@@ -21,7 +21,8 @@
 		 T.CHK_USER_IDX , 
 		 T.RISK_GRADE, 
 		 IFNULL ( G.USER_IDX, '0' ) USER_IDX, 
-		 IFNULL ( G.NAME, '대기' ) NAME  
+		 IFNULL ( G.NAME, '대기' ) NAME ,
+		 G.DELYN 
 		FROM
 		 ( SELECT A.WORK_IDX, S.SITENAME, A.WORKTITLE, A.WORKDATE, A.STARTDATE, A.ENDDATE, A.SITE_IDX, A.CHECKYN, A.CHK_USER_IDX , A.RISK_GRADE
 		  FROM SITE_LIST S 
@@ -44,20 +45,33 @@
 		 WHERE A.WORKDATE = #{basedate} 
 		 ) T
 		LEFT OUTER JOIN
-		 ( SELECT DISTINCT U.USER_IDX, M.NAME 
+		 ( SELECT DISTINCT U.USER_IDX, M.NAME , M.DELYN
 		  FROM USER_LIST U
 		  JOIN MANAGER_LIST M
 		  ON
 		   U.USER_IDX = M.USER_IDX
 		  WHERE M.DELYN = 'N' ) G
 		ON T.CHK_USER_IDX = G.USER_IDX
+		WHERE IFNULL( G.DELYN ,'N') = 'N'
+		<if test = "siteValue !=''" >
+		AND T.SITE_IDX = #{siteValue}
+		</if>
+		
+		<if test = "riskSearchValue !=''" >
+		AND T.RISK_GRADE = #{riskSearchValue}
+		</if>
+		
+		<if test = "chkSearchValue !=''" >
+		AND T.CHECKYN = #{chkSearchValue}
+		</if>
+		
 		ORDER BY RISK_GRADE ASC
 		LIMIT #{start}, #{size}
     </select>
    	<select id="getRowCount" resultType="Integer" parameterType="CeoVO">
 		SELECT 
 			COUNT(*)
-		FROM
+		FROM 
 		 ( SELECT A.WORK_IDX, S.SITENAME, A.WORKTITLE, A.WORKDATE, A.STARTDATE, A.ENDDATE, A.SITE_IDX, A.CHECKYN, A.CHK_USER_IDX , A.RISK_GRADE
 		  FROM SITE_LIST S 
 		  JOIN
@@ -79,13 +93,26 @@
 		 WHERE A.WORKDATE = #{basedate} 
 		 ) T
 		LEFT OUTER JOIN
-		 ( SELECT DISTINCT U.USER_IDX, M.NAME 
+		 ( SELECT DISTINCT U.USER_IDX, M.NAME , M.DELYN
 		  FROM USER_LIST U
 		  JOIN MANAGER_LIST M
 		  ON
 		   U.USER_IDX = M.USER_IDX
 		  WHERE M.DELYN = 'N' ) G
 		ON T.CHK_USER_IDX = G.USER_IDX
+		WHERE IFNULL( G.DELYN ,'N') = 'N'
+		<if test = "siteValue !=''" >
+		AND T.SITE_IDX = #{siteValue}
+		</if>
+		
+		<if test = "riskSearchValue !=''" >
+		AND T.RISK_GRADE = #{riskSearchValue}
+		</if>
+		
+		<if test = "chkSearchValue !=''" >
+		AND T.CHECKYN = #{chkSearchValue}
+		</if>
+		
     </select>
 
    

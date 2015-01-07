@@ -14,8 +14,44 @@
 		<script type="text/javascript" src="js/jquery.timer.js"></script>
 
 		<script>
+
+
+		$(document).ready(function() {
+			if(document.getElementById( 'riskSearchValue' ).value != '' ) {
+				document.getElementById( 'riskSearch' ).selectedIndex = document.getElementById( 'riskSearchValue' ).value;
+			}
+			
+			if(document.getElementById( 'chkSearchValue' ).value != '' ) {
+				document.getElementById( 'checkSearch' ).selectedIndex = document.getElementById( 'chkSearchValue' ).value;
+			}
+
+			if(document.getElementById( 'siteindex' ).value != '' ) {
+				document.getElementById( 'siteSearch' ).selectedIndex = document.getElementById( 'siteindex' ).value;
+			}
+		}); 
+		
 		function goPage(val) {
 			$('#pageNum').val(val);
+			$('#searchForm').submit();
+		}
+		
+		function chgLevel(gubun,val) {
+			
+			if( gubun == '1' ) {
+				$('#riskSearchValue').val(val);
+			} else if( gubun == '2' ) {
+				$('#chkSearchValue').val(val);	
+			} else if( gubun == '3' ) {
+				if( val.substring((val.indexOf("/")+1)) == '0' ) {
+					$('#siteValue').val("");
+					$('#siteindex').val("0");
+				} else {
+					$('#siteValue').val(val.substring(1,val.indexOf("/")));
+					$('#siteindex').val(val.substring((val.indexOf("/")+1)));
+				}
+				
+			}
+			
 			$('#searchForm').submit();
 		}
 		
@@ -23,9 +59,15 @@
  			var timer = $.timer(function(){ 
 				window.location.reload();
  			});
-			timer.set({ time :300000 , autostart :true}); 
+			timer.set({ time :300000 , autostart :true});
 		}
-		
+		function viewSubmit(val) {
+			
+			var idx = $("#updateIdx_"+val).val();
+			$("#viewIdx").val(idx);
+			$('#viewForm').submit();
+		 	
+		}
 		</script>
 	</head>
 
@@ -37,35 +79,29 @@
 
 					<div class="content ">
 					
-					<div class="siteSearchBox">
-						<select id="mSelectBox" class="selectBox" onchange="chgLevel(this.value)">
-								<option value="1" >본사 관리자(EHS팀)</option>
-								<option value="2" >현장 안전관리자</option>
-						</select>
-					</div>
 					<div class="searchboxdata" >
 					
 						<div class="listLevelBox">
-							<select id="mSelectBox" class="selectBox" onchange="chgLevel(this.value)">
-									<option value="1" >본사 관리자(EHS팀)</option>
-									<option value="2" >현장 안전관리자</option>
+						
+							<select id="siteSearch" class="selectBox" onchange="chgLevel('3',this.value)">
+								<option value="/0" >--현장선--</option>
+							<c:forEach var="site" items="${siteList}" varStatus="idx">
+								<option value="${site.site_idx}/${idx.count}" >${site.sitename}</option>
+							</c:forEach>
+							</select>						
+						
+							<select id="riskSearch" class="selectBox" onchange="chgLevel('1',this.value)">
+									<option value="0" >위험도</option>
+									<option value="1" >A</option>
+									<option value="2" >B</option>
+									<option value="3" >C</option>
 							</select>
 							
-							<select id="mSelectBox" class="selectBox" onchange="chgLevel(this.value)">
-									<option value="1" >본사 관리자(EHS팀)</option>
-									<option value="2" >현장 안전관리자</option>
+							<select id="checkSearch" class="selectBox" onchange="chgLevel('2',this.value)">
+									<option value="0" >점검여부</option>
+									<option value="1" >점검확인</option>
+									<option value="2" >점검대기</option>
 							</select>
-							
-							<select id="mSelectBox" class="selectBox" onchange="chgLevel(this.value)">
-									<option value="1" >본사 관리자(EHS팀)</option>
-									<option value="2" >현장 안전관리자</option>
-							</select>
-							
-							<select id="mSelectBox" class="selectBox" onchange="chgLevel(this.value)">
-									<option value="1" >본사 관리자(EHS팀)</option>
-									<option value="2" >현장 안전관리자</option>
-							</select>
-							
 						</div>					
 						<div class="srchbox">
 							<p>
@@ -96,14 +132,14 @@
 							</tr>
 							
 							<c:forEach var="ceo" items="${ceoList}" varStatus="idx">
-								<tr class="listTR">
+								<tr class="listTR" onclick="viewSubmit('${idx.index}')">
 									<td>${ceo.sitename}</td>
 									<td>${ceo.worktitle}</td>
 									<td>${ceo.risk_grade}</td>
 									<td><c:if test="${ceo.checkyn == 'Y'}"><img src="images/check-blue.png" /></c:if><c:if test="${ceo.checkyn == 'N'}"><img src="images/check-red.png" /></c:if>
 									</td>
 									<td>${ceo.name}</td>
-									<td>${ceo.startdate} ~ ${ceo.enddate}</td>
+									<td>${ceo.startdate} ~ ${ceo.enddate}<input id="updateIdx_${idx.index}" type="hidden" value="${ceo.work_idx}" /></td>
 								</tr>		
 							</c:forEach>
 						</table>					
@@ -138,7 +174,15 @@
 		<div id="form_group" style="display:none">
 			<form id="searchForm" action="ceolist" action="GET" >
 				<input id="searchWord" name="searchWord" type="hidden">
+				<input id="siteValue" name="siteValue" type="hidden" value="${siteValue}" >
+				<input id="siteindex" name="siteindex" type="hidden" value="${siteindex}" >
+				<input id="riskSearchValue" name="riskSearchValue" value="${riskSearchValue}" type="hidden">
+				<input id="chkSearchValue" name="chkSearchValue" value="${chkSearchValue}" type="hidden">
 				<input id="pageNum" name="pageNum" type="hidden">
+			</form>
+			
+			<form id="viewForm" action="viewWork" action="POST" >
+				<input id="viewIdx" type="hidden" name="viewIdx"/>
 			</form>
 		</div>
 	</body>
