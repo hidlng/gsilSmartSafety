@@ -28,7 +28,7 @@ public class ManagerVO implements Serializable {
 	String writetime;
 	String delyn;
 	
-	@NotNull(message="입력 필요")
+	
 	String site_idx;
 	
 	/**안전관리자**/	

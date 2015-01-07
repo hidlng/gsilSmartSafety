@@ -5,7 +5,7 @@
 <%@ page session="true"%>
 
 <!doctype html>
-<html lang="en">
+<html>
  <head>
   <meta charset="UTF-8">
   <meta name="Generator" content="EditPlus®">
@@ -27,38 +27,52 @@
 		</div><!-- //top -->
 		<h2>작업 허가증(Permit to work)</h2>
 	 </div><!-- //box_top -->
-	  <table class="typ02">
+
+	 <div class="wrap_table">
+		<table class="typ02">
 		<caption>정보</caption>
 		<colgroup>
 				<col style="width: 12%">
+				<col style="width: 2%">
 				<col style="width: 38%">
 				<col style="width: 12%">
-				<col style="width: 38%">			
+				<col style="width: 2%">
+				<col style="width: 34%">			
 		</colgroup>
 		 <tr>
-			<th class="bold">협력업체 : </th>
-			<td class="bold">앞으로 철골 주식회사</td>
-			<th>소장 : </th>
-			<td>강감찬 이사(010-2323-2323)</td>
+			<th class="bold"><span class="bull_dot">&middot;&nbsp;</span>협&nbsp;력&nbsp;업&nbsp;체</th>
+			<th> : </th>
+			<td class="bold">${ptwVO.cont_name}</td>
+			<th><span class="bull_dot">&middot;&nbsp;</span>소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장 </th>
+			<th> : </th>
+			<td>${ptwVO.inspector}(${ptwVO.inspector_phone})</td>
 		 </tr>
 		 <tr>
-			<th>작업명 : </th>
-			<td>나동 앞 장비 창고 철골 조립 작업</td>
-			<th>공사감독자 : </th>
-			<td>강감찬 이사(010-2323-2323)</td>
+			<th><span class="bull_dot">&middot;&nbsp;</span>작&nbsp;&nbsp;&nbsp;업&nbsp;&nbsp;&nbsp;명 </th>
+			<th> : </th>
+			<td>${ptwVO.worktitle}</td>
+			<th><span class="bull_dot">&middot;&nbsp;</span>공사감독자 </th>
+			<th> : </th>
+			<td>${ptwVO.cont_rep_name}(${ptwVO.cont_rep_phone})</td>
 		 </tr>
 		 <tr>
-			<th>작업책임자 : </th>
-			<td></td>
-			<th>작업자 수 : </th>
-			<td></td>
+			<th><span class="bull_dot">&middot;&nbsp;</span>작업책임자 </th>
+			<th> : </th>
+			<td>${ptwVO.pic_name} (${ptwVO.pic_phone})</td>
+			<th><span class="bull_dot">&middot;&nbsp;</span>작업자&nbsp; 수 </th>
+			<th> : </th>
+			<td>${ptwVO.pic_num_worker}</td>
 		 </tr>
 		 <tr>
-			<th>날씨 : </th>
-			<td colspan="3"></td>
+			<th><span class="bull_dot">&middot;&nbsp;</span>날&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;씨 </th>
+			<th> : </th>
+			<td colspan="3">${ptwVO.weather}</td>
 			
 		 </tr>
 	 </table><!-- //typ02 -->
+	 </div>
+
+
 
 	 <table>
 	 <caption>작업허가서</caption>

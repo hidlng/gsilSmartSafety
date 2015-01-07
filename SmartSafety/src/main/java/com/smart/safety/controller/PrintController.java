@@ -104,8 +104,9 @@ public class PrintController {
 			printService.insertPrintVO(workVO.getWork_idx(), workVO.getStartdate(), PrintType.PTW);
 		} catch (ParseException e) {e.printStackTrace();}	
 		
+		PTWVO ptwVO = makePTW(workVO);
 		//List<PUIVO> puiList = makePUI(workVO);
-		//model.addAttribute("puiVO", puiList.get(0));
+		model.addAttribute("ptwVO", ptwVO);
 	}
 
 	/**pui이 호출 된 순간 출력이 되었다고 판단하기로함**/
@@ -181,7 +182,7 @@ public class PrintController {
 		
 		
 		
-		tbmVO.setRemark(workVO.getRemark());//		 remark
+		tbmVO.setRemark(workVO.getRemark().replace("\r\n", "<br>"));//		 remark
 		tbmVO.setSitename(workVO.getSitename());
 		
 		
@@ -400,9 +401,11 @@ public class PrintController {
 		
 		return puilist;
 	}
-	private TBMVO makePTW(WorkVO workVO) {
-		// TODO Auto-generated method stub
-		return null;
+	private PTWVO makePTW(WorkVO workVO) {
+		PTWVO ptwVO = new PTWVO();
+		//기본정보 setting
+		makeBaseInfo(ptwVO, workVO);
+		return ptwVO;
 	}
 
 }

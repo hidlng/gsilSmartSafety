@@ -131,7 +131,7 @@ if(input) { //yes
 
 
 <!-- work start -->
-<p class="red">작업선택</p>
+<p class="red">작업선택<br>
 <table class="user_signup">
 	<colgroup>
 		<col>
@@ -205,7 +205,7 @@ if(input) { //yes
 
 
 <!--  start -->
-	<p class="red">장비선택</p>				
+	<p class="red">장비선택<br>				
 	<table class="user_signup">		
 	<colgroup>	
 		<col style="width:33%">
@@ -228,13 +228,13 @@ if(input) { //yes
 		<td id="etc_machine"></td>
 		<td><span class="btn_typ01"  onclick="addTool('etc_machine', 0);">추가</span>
 		<br>
-		<span class="btn_typ01"  onclick="addToolText('etc_machine',false);">수기입력</span>
+		<span class="btn_typ01 handWrite"  onclick="addToolText('etc_machine',false);">수기입력</span>
 		</td>
 	</tr>	
 </table>
 
 <!--  //user_signup -->
-<p class="red">공도구선택</p>
+<p class="red">공도구선택<br>
 <table class="user_signup">
 	<colgroup>	
 		<col style="width:33%">
@@ -261,13 +261,13 @@ if(input) { //yes
 		<td>
 			<span class="btn_typ01"  onclick="addTool('etc_tool', 0);">추가</span>
 			<br>
-			<span class="btn_typ01"  onclick="addToolText('etc_tool', true);">수기입력</span>
+			<span class="btn_typ01 handWrite"  onclick="addToolText('etc_tool', true);">수기입력</span>
 		</td>
 	</tr>
 </table>
 <!-- end  -->
 
-<p class="red">작업장소등록</p>
+<p class="red">작업장소등록<br>
 <table class="user_signup">
 	<colgroup>
 		<col style="width: 25%">
@@ -306,7 +306,7 @@ if(input) { //yes
 </table>
 
 <div class="work_cap">
-	<p class="red">작업책임자</p>
+	<p class="red">작업책임자<br>
 	<table class="work_cap">
 		<colgroup>
 			<col style="width: 20%">
@@ -372,7 +372,7 @@ if(input) { //yes
 	</table>
 </div>
 
-<p class="red">특이사항</p>
+<p class="red">특이사항<br>
 <table>
 	<tr>
 		<td><form:textarea path="remark" 	maxlength="600" />

@@ -107,7 +107,7 @@
 	<stripes:form id="insertCategoryForm" name="insertCategory"
 		beanclass="com.spring.risk.web.actions.CategoryActionBean" >
 		
-		<img src="../images/blue_title.gif"/> 등록하기
+		<img src="../images/blue_title.gif"/> 코드/카테고리 등록
 		<!--<stripes:submit id="catsub" name="catsub" value="추가" class="button" />-->
 		<table>
 			<tr>

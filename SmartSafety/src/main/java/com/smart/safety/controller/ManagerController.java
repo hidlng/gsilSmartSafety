@@ -160,6 +160,7 @@ public class ManagerController {
 		boolean isManager = request.getServletPath().equals("/insertManager");
 		boolean hasError = false;
 		
+		
 		if(bindingResult.hasErrors())
 			hasError = true;		
 		else {

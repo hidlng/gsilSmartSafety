@@ -25,7 +25,7 @@ function goPage(val) {
 			onkeypress="if(event.keyCode=='13') goPage(1)"> <a href="#"><span
 			class="btn_search" onclick="goPage(1)">&nbsp;</span></a>
 
-	</p>
+	<br>
 </div>
 
 

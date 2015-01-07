@@ -58,7 +58,11 @@ public class WorkService{
 			for(ToolVO toolVO : toollist){
 				toolVO.setTool_idx(UIDMaker.makeNewUID("TL"));
 				toolVO.setWork_idx(work_idx);				
-				toolMapper.insert(toolVO);
+				try{
+					toolMapper.insert(toolVO);
+				}catch(Exception e){
+					System.out.println("중복건발생 (toolVO)" + toolVO.getToolcode() + " : " + toolVO.getToolname() );
+				}
 			}
 		}
 		
@@ -78,7 +82,13 @@ public class WorkService{
 		for(ToolVO toolVO : toollist){
 			toolVO.setWork_idx(workVO.getWork_idx());
 			toolVO.setTool_idx(UIDMaker.makeNewUID("TL"));
-			toolMapper.insert(toolVO);
+			try{
+				toolMapper.insert(toolVO);
+			}catch(Exception e){
+				System.out.println("중복건발생 (toolVO)" + toolVO.getToolcode() + " : " + toolVO.getToolname() );
+			}
+		
+			
 		}
 	}
 	

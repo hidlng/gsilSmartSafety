@@ -21,12 +21,12 @@
   table{margin:0 auto;width:99%; border:1px solid #666;margin-bottom:20px;border-collapse:collapse;}
   table th, td{padding:5px; border:1px solid #666; height:10px; height:28px; text-align:center;}
   table th{background-color:#efefef;}
-  table td.lft{text-align:left;}
+  table td.lft{text-align:left;vertical-align: top;}
   caption{display:none;}
   /* .wrap_table{border-top:1px dotted #ddd;border-bottom:1px dotted #ddd;padding:10px 0;margin-bottom:20px}*/
   table.typ02{border:0; }
   table.typ02 th, table.typ02 td{border:0;text-align:left;padding:0px; border-bottom:1px dotted #ddd;}
-  table.typ02 th{background:none;} 
+  table.typ02 th{text-align:justify; background:none;} 
   p.textBox{display:block; width:99%; margin:30px auto 30px; border:1px solid #222; padding:15px 0; text-align:center;font-weight:bold;}
  .signBox{float:right;overflow:hidden;width:400px;height:30px;border-bottom:2px solid #000;margin:100px 0;}
  .signBox p{float:left;width:300px; font-weight:bold;} 

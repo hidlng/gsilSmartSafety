@@ -143,12 +143,12 @@ public class CategoryActionBean extends AbstractActionBean {
 	//private String fileName;
 	private List<FileVO> fileList;//for get List
 	private List<FileBean> fileBeanList;//for insert
-	
+	private List<Integer> delFileList;
 	private int uploadFileMaxIdx = 2;
 	//private int inputFileCurSize = 0;
 	//private String deleteFileCode;
 	//private String deleteFileName;
-	private String deleteFileIdx;
+	
 	
 	
 	/**search**/
@@ -411,6 +411,7 @@ public class CategoryActionBean extends AbstractActionBean {
 		isModify=false;
 		fileList = fileListService.getFileListByCode(code.getCode());
 		modifyCheckList = new ArrayList<CheckVO>();
+		delFileList = new ArrayList<Integer>();
 		switch(codeType) {
 		case WORK :	workVO = new WorkVO();
 					workVO.setWorkCode(code.getCode());
@@ -546,7 +547,12 @@ public class CategoryActionBean extends AbstractActionBean {
 		/**update Code Name -141117**/
 		categoryService.updateCodeName(tmp_codeVO);
 		
+		
+		
+		
+		
 		/** input File **/
+		deleteFile();//fileList에서 deleteFileList에 해당하는 내용을 제거(수정화면에서 파일 x 버튼누른것들)
 		fileListService.updateFileListVO(fileCode, fileList, fileBeanList);
 		
 		} catch (IOException e) {
@@ -565,25 +571,18 @@ public class CategoryActionBean extends AbstractActionBean {
 		return new ForwardResolution(CATEGORYLIST); 
 	}
 	
-	public Resolution deleteFile() {
-//		FileVO vo = new FileVO();
-//		vo.setCode(deleteFileCode);
-//		vo.setFileName(deleteFileName);
-//		fileListService.deleteFileVOByVO(vo);
-		System.out.println(fileList.size());
+	public void deleteFile() {
+		if(delFileList.size() == 0) return;
 		Iterator<FileVO>it =  fileList.iterator();
 		while(it.hasNext()) {
 			FileVO vo = it.next();
-			if( deleteFileIdx.equals(vo.getFile_idx()) ) {
-				it.remove();
+			
+			for(int delIdx : delFileList){
+				if( delIdx == Integer.valueOf(vo.getFile_idx()) ) {
+					it.remove();
+				}
 			}
 		}
-		
-		System.out.println(fileList.size());
-		
-		//fileList = fileListService.getFileListByCode(vo.getCode());
-				
-		return new ForwardResolution(TOTALINSERT);
 	}
 	
 //	public Resolution addCheckList() {
@@ -1060,13 +1059,7 @@ public class CategoryActionBean extends AbstractActionBean {
 		this.modifyCheckList = modifyCheckList;
 	}
 
-	public String getDeleteFileIdx() {
-		return deleteFileIdx;
-	}
 
-	public void setDeleteFileIdx(String deleteFileIdx) {
-		this.deleteFileIdx = deleteFileIdx;
-	}
 
 	public String getFileIdx() {
 		return fileIdx;
@@ -1074,6 +1067,14 @@ public class CategoryActionBean extends AbstractActionBean {
 
 	public void setFileIdx(String fileIdx) {
 		this.fileIdx = fileIdx;
+	}
+
+	public List<Integer> getDelFileList() {
+		return delFileList;
+	}
+
+	public void setDelFileList(List<Integer> delFileList) {
+		this.delFileList = delFileList;
 	}
 
 

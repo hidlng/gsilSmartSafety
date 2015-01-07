@@ -19,6 +19,7 @@
 	
 	<!-- Category Navgation -->	
 	<div id="categorySelectWrap">
+			<img src="../images/blue_title.gif"/> 카테고리 선택 >> 
 			<c:forEach var="list" items="${actionBean.totalList}" varStatus="count">		
 				<!--div class="select open" style="width:200px;">
 				<span class="ctrl"><span class="arrow"></span></span>
@@ -40,15 +41,16 @@
 	<!--  마지막으로 선택한 카테고리의 하위 자식들 출력 . 나중에는 코드도 출력 할 것-->
 	<div id="categoryChildWrap">	
 		<c:if test="${actionBean.childList.size() > 0}">
-			<!--h1>카테고리</h1-->
-		</c:if>	<ul class="childWrapUL">
+			
+		</c:if>			
+		<ul class="childWrapUL">
 				<c:forEach var="child" items="${actionBean.childList}" >
 					<li class="childWrap" onclick="chgValue('${child.idx}')"> ${child.name}
 					<!--
 					<stripes:link  class="deleteCategory" beanclass="com.spring.risk.web.actions.CategoryActionBean" 	event="deleteCategory"> <stripes:param name="deleteCategoryIdx">${child.idx}</stripes:param>X</stripes:link>
 					-->
 					</li>
-					
+					<li style="float:left">  | &nbsp;&nbsp;</li>				
 				</c:forEach>
 			</ul>
 		

@@ -1,12 +1,6 @@
-<%@ page pageEncoding="utf-8" contentType="text/html;charset=UTF-8"	language="java"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<%@ page session="true"%>
- 
-  
 <!doctype html>
-<html lang="en">
+<%@ page pageEncoding="utf-8" contentType="text/html;charset=UTF-8"	language="java"%>
+<html>
  <head>
   <meta charset="UTF-8">
   <meta name="Generator" content="EditPlus®">
@@ -15,75 +9,88 @@
   <meta name="Description" content="">
   <title>두산건설-작업전 위험 예지 조회(TBM)</title>
   <link rel="stylesheet" href="css/screen.css" type="text/css">
-  <link rel="stylesheet" href="css/custom.css" type="text/css">
-   <link rel="stylesheet" href="css/print.css" type="text/css" media="print"/>      
-     
+  <link rel="stylesheet" href="css/print.css" type="text/css">
  </head>
  <body>
 
- <div id="wrap" class="a4"> 
+ <div id="wrap"> 
 	 <div class="box_top">
 		<h1><img src="images/logo_ds.png" width="100"alt="두산로고"></h1>
+		<span class="date">${tbmVO.printtime}</span>
 		<div class="top">
-			<p class="title01">${tbmVO.sitename}</p>
-			<span class="date">${tbmVO.printtime}</span>
+			<p class="title01">${tbmVO.sitename}</p>			
 		</div><!-- //top -->
 		<h2>작업전 위험 예지 조회(TBM)</h2>
 	 </div><!-- //box_top -->
-	 <table class="typ02">
+	 <div class="wrap_table">
+		<table class="typ02">
 		<caption>정보</caption>
 		<colgroup>
 				<col style="width: 12%">
+				<col style="width: 2%">
 				<col style="width: 38%">
 				<col style="width: 12%">
-				<col style="width: 38%">			
+				<col style="width: 2%">
+				<col style="width: 34%">			
 		</colgroup>
 		 <tr>
-			<th class="bold">협력업체 : </th>
+			<th class="bold"><span class="bull_dot">&middot;&nbsp;</span>협&nbsp;력&nbsp;업&nbsp;체</th>
+			<th> : </th>
 			<td class="bold">${tbmVO.cont_name}</td>
-			<th>소장 : </th>
+			<th><span class="bull_dot">&middot;&nbsp;</span>소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장 </th>
+			<th> : </th>
 			<td>${tbmVO.inspector}(${tbmVO.inspector_phone})</td>
 		 </tr>
 		 <tr>
-			<th>작업명 : </th>
+			<th><span class="bull_dot">&middot;&nbsp;</span>작&nbsp;&nbsp;&nbsp;업&nbsp;&nbsp;&nbsp;명 </th>
+			<th> : </th>
 			<td>${tbmVO.worktitle}</td>
-			<th>공사감독자 : </th>
+			<th><span class="bull_dot">&middot;&nbsp;</span>공사감독자 </th>
+			<th> : </th>
 			<td>${tbmVO.cont_rep_name}(${tbmVO.cont_rep_phone})</td>
 		 </tr>
 		 <tr>
-			<th>작업책임자 : </th>
+			<th><span class="bull_dot">&middot;&nbsp;</span>작업책임자 </th>
+			<th> : </th>
 			<td>${tbmVO.pic_name} (${tbmVO.pic_phone})</td>
-			<th>작업자 수 : </th>
+			<th><span class="bull_dot">&middot;&nbsp;</span>작업자&nbsp; 수 </th>
+			<th> : </th>
 			<td>${tbmVO.pic_num_worker}</td>
 		 </tr>
 		 <tr>
-			<th>날씨 : </th>
+			<th><span class="bull_dot">&middot;&nbsp;</span>날&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;씨 </th>
+			<th> : </th>
 			<td colspan="3">${tbmVO.weather}</td>
 			
 		 </tr>
 	 </table><!-- //typ02 -->
+	 </div>
 
 	 <table>
 		<caption>사용안전점검여부</caption>
 		<colgroup>
 			<col style="/">
-			<col style="width: 12%">
-			<col style="width: 12%">
-			<col style="width: 12%">
-			<col style="width: 18%">
-			<col style="width: 20%">			
+			<col style="width: 16%">
+			<col style="width: 16%">
+			<col style="width: 16%">
+			<col style="width: 16%">
+			<col style="width: 16%">			
 		</colgroup>
 		 <tr>
-			<th colspan="6">사용장비 /사용안전점검여부</th>			
-		 </tr>
-		 <tr>	
-			<td colspan="6"> ${tbmVO.toollist}</td>
+			<th>장비명<br>(사용전점검)</th>
+			<td colspan="5"> ${tbmVO.toollist}</td>
 		 </tr>
 		 <tr>
 			<th>주요 위험정보</th>
-			<td colspan="3">${tbmVO.mainrisk}</td>	
-			<th>작업장소</th>
-			<td colspan="2">${tbmVO.workname}</td>	
+			<td td colspan="5">${tbmVO.mainrisk}</td>
+			
+		 </tr>
+		 <tr>
+		 	<th>작업장소</th>
+			<td colspan="5">${tbmVO.placename}</td>		
+		 </tr>
+		 <tr>
+			
 		 </tr>
 		 <tr>
 			<th>위험등급</th>
@@ -105,25 +112,25 @@
 			<th colspan="2">안전 작업 지침</th>		
 		 </tr>
 		 <tr>	
-			<td class="lft">안전 조치 사항 안내
-						 ${tbmVO.measure}</td>
-			<td class="lft">보호구 착용 지침
-					${tbmVO.equip}</td>		
+			<td class="lft"><b>안전 조치 사항 안내</b>
+							${tbmVO.measure}</td>
+			<td class="lft"><b>보호구 착용 지침</b>
+							${tbmVO.equip}</td>		
 		 </tr>
 		 <tr>
-			<td class="lft">안전 작업 가이드
-			${tbmVO.guide}</td>
-			<td class="lft">비상시 조치 사항(보류)</td>		
+			<td class="lft"><b>안전 작업 가이드</b>
+						${tbmVO.guide}</td>
+			<td class="lft"><b>비상시 조치 사항</b></td>		
 		 </tr>
 	 </table><!-- //table -->
 
 	 <table>
-		<caption>안전구호</caption>	
+		<caption>안&nbsp;전&nbsp;구&nbsp;호</caption>	
 		 <tr>
-			<th>안전구호</th>
+			<th>안&nbsp;전&nbsp;구&nbsp;호</th>
 		 </tr>
 		 <tr>
-			<td class="lft">작업 전 지시사항
+			<td class="lft"><b>작업 전 지시사항</b><br><br>
 			${tbmVO.remark}</td>
 		 </tr>
 	 </table><!-- //table -->
@@ -140,7 +147,7 @@
 			<th>두산건설<br/>공사담당자</th>
 			<td>${tbmVO.site_rep_name}<br>(${tbmVO.site_rep_phone})</td>
 			<th>긴급연락처</th>
-			<td>${tbmVO.cont_emg_phone}</td>
+			<td>${tbmVO.cont_phone}(${tbmVO.cont_emg_phone})</td>
 		 </tr>
 	 </table><!-- //table -->
  

@@ -6,8 +6,9 @@
  <script>
  var idNotDuplicate = false;
  $(document).ready(function() {
-	 var level = '${managerVO.level}';
-	 if( level <= 0 )//default val
+	 var level = '${managerVO.level}'; //
+	
+	 if( level == "" || level == null || level <= 0 )//default value는 본사로 지정
 		 level = 1
 	 chgMLevel(level);
 	  
@@ -33,14 +34,14 @@
  });
  
  function chgMLevel(val) {
-		if(val == 1) {//본사
-			 $('#siteTR').hide();			
-		     $('#site_idx').val('');//make empty value
-		}else {//현장
+		if(val == 2) {//현장
 			$('#siteTR').show();
 			if(${updateMode} == false) {//insert mode 일때
 				$("#site_selectBox option:eq(0)").attr("selected", "selected");
 			}
+		}else {//본사,CEO(1,3)
+			 $('#siteTR').hide();			
+		     $('#site_idx').val('');//make empty value
 		}
 }
 
@@ -100,6 +101,7 @@
 				<form:select class="selectBox"  path="level" onchange="chgMLevel(this.value)">
 						<form:option value="1" selected="selected">본사 관리자(EHS팀)</form:option>
 						<form:option value="2">현장 안전관리자</form:option>
+						<form:option value="3">CEO</form:option>
 				</form:select>
 			</c:if>
 			<c:if test="${updateMode}">
@@ -109,6 +111,9 @@
 				</c:if>
 				<c:if test="${managerVO.level == 2}">
 					현장 안전관리자
+				</c:if>
+				<c:if test="${managerVO.level == 3}">
+					CEO
 				</c:if>
 			</c:if>
 		</td>
@@ -147,7 +152,7 @@
 		<c:if test="${!updateMode}">
 			<td colspan="2">
 			<form:input id="input_id" path="id" maxlength="45" />
-				<p/><form:errors id="idError" cssClass="formError" path="id" />
+				<br><form:errors id="idError" cssClass="formError" path="id" />
 			</td>
 			<td><span class="btn_typ01 duplCheck"  onclick="duplicateIdCheck()">중복체크</span>
 				<span class="duplCheckOk" style="display:none">사용 가능</span>

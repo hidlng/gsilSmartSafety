@@ -118,12 +118,12 @@ $(document).on("keydown", disableF5);
 			
 				
 				<ul class="aside_ident">
-					<li><span class="identTitle"> I D  : ${sessionScope.userLoginInfo.id}</span></li>
-					<li><span class="identTitle"> 이름 : 
+					<li><span class="identTitle"> <span class="head">I D  : </span>${sessionScope.userLoginInfo.id}</span></li>
+					<li><span class="identTitle"> <span class="head"> 이름 : </span>
 						<c:if test ="${sessionScope.userLoginInfo.level == 0}"> 관리자</c:if> 
 						<c:if test ="${sessionScope.userLoginInfo.level != 0}">${sessionScope.userName}</c:if>
 						</span></li>
-					<li><span class="identTitle">권한 : 
+					<li><span class="identTitle"> <span class="head">권한 : </span>
 						<c:if test ="${sessionScope.userLoginInfo.level == 0}">SS 관리자</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 1}">본사 관리자(EHS팀)</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 2}">현장 안전 관리자</c:if>
@@ -134,7 +134,7 @@ $(document).on("keydown", disableF5);
 						<c:if test ="${sessionScope.userLoginInfo.level == 7}">현장 업체</c:if>
 					</span></li>
 					<c:if test ="${sessionScope.userLoginInfo.level >= 2}"> 
-						<li><span class="identTitle">소속 현장 : ${sessionScope.siteVO.sitename}</span></li>
+						<li><span class="identTitle"><span class="head">소속 현장 : </span>${sessionScope.siteVO.sitename}</span></li>
 					</c:if>
 					<li  class="last"><span id="logout" class="btn_typ01">로그아웃&nbsp;></span></li>
 				</ul><!-- //aside_ident -->

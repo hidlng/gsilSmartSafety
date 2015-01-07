@@ -52,7 +52,7 @@
 					<td class="wordBreak" colspan="${actionBean.inputAccList.size()}">${actionBean.workVO.equip}</td>
 				</tr>
 				<tr>
-					<th class="detailHeader">이상징후/비상시조치사항
+					<th class="detailHeader">이상징후/<br>비상시조치사항
 					</th>
 					<td class="wordBreak" colspan="${actionBean.inputAccList.size()}">${actionBean.workVO.measure}</td>
 				</tr>
@@ -78,7 +78,7 @@
 			<tr><th class="detailHeader">주요위험</th><td class="wordBreak">${actionBean.toolVO.mainRisk}</td></tr>
 			<tr><th class="detailHeader">안전작업가이드</th><td class="wordBreak">${actionBean.toolVO.guide}</td></tr>
 			<tr><th class="detailHeader">보호구</th><td class="wordBreak">${actionBean.toolVO.equip}</td></tr>
-			<tr><th class="detailHeader">사용전 점검 체크리스트</th><td >
+			<tr><th class="detailHeader">사용전 점검<br> 체크리스트</th><td >
 				<div class="checkListDiv">
 					<c:forEach var="check" items="${actionBean.toolVO.checkList}">
 							<c:if test="${check.image != null}">

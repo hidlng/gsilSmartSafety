@@ -104,6 +104,23 @@
 		}
 		
 	}	
+	
+	var listIdx =0;
+	function deleteFileList(fileIdx){
+		
+	 	$('#file_' + fileIdx).remove();
+		$('#file_del_' + fileIdx).remove();
+		
+		var input = "<input type='text' name='delFileList[" + listIdx +"]' value='" + fileIdx +"'/>";
+    	
+		var addedSpan = document.createElement("span");
+		addedSpan.innerHTML = input;
+		$("#delListSpan").append(addedSpan);
+		
+		listIdx++;
+		 
+		//deleteFileIdx
+	}
 	</script>
 
 
@@ -113,7 +130,7 @@
 	beanclass="com.spring.risk.web.actions.CategoryActionBean"
 	enctype="multipart-form/data"  method="POST">
 	
-	
+<span id="delListSpan" style="display:none"></span>
 <stripes:hidden name="codeType" value="${actionBean.codeType}"/>
 <stripes:hidden id="checkCount" name="checkCount" value="${actionBean.checkList.size()}"/>
 <!--Work-->
@@ -162,7 +179,7 @@
 		</tr>
 		<tr><th class="detailHeader">안전작업가이드</th><td  colspan="5"><stripes:textarea   name="workVO.guide" onkeyup="checkSpeChar(2)"/></td>		</tr>
 		<tr><th class="detailHeader">보호구</th><td  colspan="5"><stripes:textarea  name="workVO.equip" onkeyup="checkSpeChar(2)"/></td>		</tr>
-		<tr><th class="detailHeader">이상징후/비상시조치사항</th><td colspan="5"><stripes:textarea  name="workVO.measure" onkeyup="checkSpeChar(2)" /></td>		</tr>
+		<tr><th class="detailHeader">이상징후/<br>비상시조치사항</th><td colspan="5"><stripes:textarea  name="workVO.measure" onkeyup="checkSpeChar(2)" /></td>		</tr>
 		<tr><th class="detailHeader">사고사례</th><td  colspan="5"><!--File Upload -->
 				<!-- insert -->
 				<c:if test="${!actionBean.isModify}">
@@ -173,9 +190,8 @@
 				<!-- modify -->
 				<c:if test="${actionBean.isModify}">
 					<c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
-						${file.fileName} 		
-						<stripes:link class="detailLink" beanclass="com.spring.risk.web.actions.CategoryActionBean" event="deleteFile">
-						<stripes:param name="deleteFileIdx">${file.file_idx}</stripes:param>x</stripes:link><br>
+						<span id="file_${file.file_idx}">${file.fileName} </span>
+						<span id="file_del_${file.file_idx}" style="cursor:poitner" onclick="deleteFileList(${file.file_idx})">X</span><br>
 					</c:forEach>
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
 						<stripes:file name="fileBeanList[${loop.index}]" /><br>
@@ -211,7 +227,7 @@
 						<stripes:hidden name="modifyCheckList[${loop.index}].image" value="${actionBean.checkList[loop.index].image}"/>
 						<stripes:hidden name="modifyCheckList[${loop.index}].virtName" value="${actionBean.checkList[loop.index].virtName}"/>
 					</c:if>
-					<div  onclick="delCheckList(${loop.index})" class="checkListBtn" style="cursor:pointer">  X</div>
+					<span  onclick="delCheckList(${loop.index})" class="checkListBtn" style="cursor:pointer">  X</span>
 					</span>
 				</c:forEach>					
 				</c:if>
@@ -231,9 +247,8 @@
 				<!-- modify -->
 				<c:if test="${actionBean.isModify}">
 					<c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
-						${file.fileName} 		
-						<stripes:link class="detailLink" beanclass="com.spring.risk.web.actions.CategoryActionBean" event="deleteFile">
-						<stripes:param name="deleteFileIdx">${file.file_idx}</stripes:param>x</stripes:link><br>
+						<span id="file_${file.file_idx}">${file.fileName} </span>
+						<span id="file_del_${file.file_idx}"  style="cursor:poitner" onclick="deleteFileList(${file.file_idx})">X</span><br>
 					</c:forEach>
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
 						<stripes:file name="fileBeanList[${loop.index}]" /><br>
@@ -261,9 +276,8 @@
 				<!-- modify -->
 				<c:if test="${actionBean.isModify}">
 					<c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
-						${file.fileName} 		
-						<stripes:link class="detailLink" beanclass="com.spring.risk.web.actions.CategoryActionBean" event="deleteFile">
-						<stripes:param name="deleteFileIdx">${file.file_idx}</stripes:param>x</stripes:link>	<br>			
+						<span id="file_${file.file_idx}">${file.fileName} </span>
+						<span id="file_del_${file.file_idx}" style="cursor:poitner" onclick="deleteFileList(${file.file_idx})">X</span><br>	
 					</c:forEach>
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
 						<stripes:file name="fileBeanList[${loop.index}]" /><br>

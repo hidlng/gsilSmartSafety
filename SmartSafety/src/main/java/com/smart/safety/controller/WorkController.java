@@ -185,20 +185,20 @@ public class WorkController {
 			
 			//return "redirect:workList";
 			
-		/*	//현장의 소장에 push알림
+			//현장의 유저 ? 소장?에 push알림
 			try {
-				//UserVO userVO = (UserVO) session.getAttribute("userLoginInfo");
-				//SiteVO siteVO = siteService.getSiteByIdx(workVO.getCont_name());
-				//siteVO.getre
-//				
-//				if(userVO.getPid() != null & !userVO.getPid().equals("")){
-//					
-//					sendMessage(userVO.getPid());	
-//				}
+				UserVO userVO = (UserVO) session.getAttribute("userLoginInfo");
+				SiteVO siteVO = siteService.getSiteByIdx(workVO.getSite_idx());
+				
+				//managerSerivce.get
+				
+				if(userVO.getPid() != null & !userVO.getPid().equals("")){
+					sendMessage(userVO.getPid());	
+				}
 					
 			} catch (Exception e) {
 				e.printStackTrace();
-			}*/
+			}
 			
 			
 			
@@ -315,6 +315,13 @@ public class WorkController {
 
 	
 
+	/**
+	 * 
+	 * @param viewIdx -> workIdx
+	 * @param request
+	 * @param model
+	 * @param session
+	 */
 	@RequestMapping(value = "viewWork")
 	public void viewWork(@RequestParam(value="viewIdx",required=false)String viewIdx, HttpServletRequest request, Model model, HttpSession session) {
 		if(viewIdx != null && !viewIdx.equals("")) {

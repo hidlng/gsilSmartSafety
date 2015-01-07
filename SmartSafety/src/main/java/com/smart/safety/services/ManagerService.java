@@ -33,6 +33,8 @@ public class ManagerService{
 		return managerMapper.getManagerByID(id);
 	}
 	
+
+	
 	@Transactional
 	public void insertManager(ManagerVO managerVO) {
 		

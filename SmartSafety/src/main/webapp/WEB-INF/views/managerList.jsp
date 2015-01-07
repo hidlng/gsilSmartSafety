@@ -35,6 +35,7 @@ function chgLevel(val) {
 <select id="mSelectBox" class="selectBox" onchange="chgLevel(this.value)">
 		<option value="1" >본사 관리자(EHS팀)</option>
 		<option value="2" >현장 안전관리자</option>
+		<option value="3" >CEO</option>
 </select>
 </div>
 	<div class="srchbox">
@@ -42,7 +43,7 @@ function chgLevel(val) {
 			<input id="searchInput" type="search"  title="검색창" class="search_input" autocomplete="off" value="${searchWord}" onkeypress="if(event.keyCode=='13') goPage(1)">
 			<a href="#"><span class="btn_search" onclick="goPage(1)">&nbsp;</span></a>
 			
-		</p>
+		<br>
 	</div>
 	
 

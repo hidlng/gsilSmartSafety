@@ -456,19 +456,23 @@ function diffDateWithCurDate(dateString) {
 function openTBM(work_idx){
    var url    ="tbm";
    var title  = "tbmView";
-   var status = "toolbar=no,directories=no,scrollbars=yes,resizable=yes,status=no,menubar=no,width=900, height=700, top=0,left=20"; 
+   var status = "toolbar=no,directories=no,scrollbars=yes,resizable=yes,status=no,menubar=no,width=930, height=700, top=0,left=20"; 
    window.open("tbm?work_idx=" + work_idx , title,status);  //프로그램처럽보일떈 파업 X?   
 }
 
 function openPUI(work_idx){
 	   var url    ="pui";
 	   var title  = "puiView";
-	   var status = "toolbar=no,directories=no,scrollbars=yes,resizable=yes,status=no,menubar=no,width=900, height=700, top=0,left=20"; 
+	   var status = "toolbar=no,directories=no,scrollbars=yes,resizable=yes,status=no,menubar=no,width=930, height=700, top=0,left=20"; 
 	   window.open("pui?work_idx=" + work_idx , title,status);  //프로그램처럽보일떈 파업 X?   
 }
 function openPTW(work_idx){
 	   var url    ="ptw";
 	   var title  = "ptwView";
-	   var status = "toolbar=no,directories=no,scrollbars=yes,resizable=yes,status=no,menubar=no,width=900, height=700, top=0,left=20"; 
+	   var status = "toolbar=no,directories=no,scrollbars=yes,resizable=yes,status=no,menubar=no,width=930, height=700, top=0,left=20"; 
 	   window.open("ptw?work_idx=" + work_idx, title,status);  //프로그램처럽보일떈 파업 X?   
+}
+
+function goBack() {
+	
 }

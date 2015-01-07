@@ -114,6 +114,7 @@ public class LoginController {
 		
 		
 		USERLEVEL userlevel = USERLEVEL.get(userVO.getLevel());
+		boolean siteDeleted = false; //site를 가지는 현장 사용자들에 대한 처리
 		
 		switch(userlevel) {
 		case SS_MANAGER:
@@ -127,6 +128,7 @@ public class LoginController {
 			userName = managerVO.getName(); //관리자/사용자 명 할당			
 			siteVO = siteService.getSiteByIdx(managerVO.getSite_idx()) ; //소속 Site정보 가져옴
 			session.setAttribute("managerVO", managerVO); //작업등록시 필요
+			if(siteVO == null)siteDeleted = true;
 			break;
 		case CEO://CEO
 			userName = managerSerivce.getManagerByID(id).getName();
@@ -144,11 +146,11 @@ public class LoginController {
 		session.setAttribute("siteVO", siteVO);
 		
 		//현장 사용자/업체가 소속된 현장이 삭제된 (혹은 잘못 링크된경우) 경우 로그아웃 시킴
-		if (siteVO == null) { 
-			return "redirect:logout";	
-		}
+		//if (siteDeleted) { return "redirect:logout";}//일단 보류
+		
 		logger.info("Welcome login_success! {}, {}", session.getId(), userVO.getId() + "/" + userVO.getPassword());
 		
+		//if(userlevel == CEO) return "redirect:
 		return "redirect:workList";
 
 	}

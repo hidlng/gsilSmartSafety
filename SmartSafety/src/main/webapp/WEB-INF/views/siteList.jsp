@@ -53,7 +53,7 @@ $(document).on("click", ".detailLink", function(e) {
 	</colgroup>
 	<thead>
 		<tr>
-			<th scope="col">현장<br>번호
+			<th scope="col">NO.
 			</th>
 			<th scope="col">현장명</th>
 			<th scope="col">대표<br>관리자</th>

@@ -31,11 +31,16 @@ input[type="text"] {
 	line-height: normal;
 }
 
-input[type="file"] {
+#checklistTD input[type="file"] {
+	width:300px;
 	height:30px;
 	line-height: normal;
 }
 
+input[type="file"] {
+	height:30px;
+	line-height: normal;
+}
 
 p {
 	font-family: helvetica, tahoma, arial, verdana, sans-serif;
@@ -279,6 +284,7 @@ div .button, p .button ,td .button{
 }
 
 #categoryChildWrap {
+	line-height:40px;
 	border: 1px solid #757577;
 }
 

@@ -4,6 +4,8 @@
 
 <script>
 $(document).ready(function() {
+	
+	
 	var toolSize;
 	
 	<c:if test="${workVO.toollist== null}">
@@ -49,7 +51,7 @@ $(document).ready(function() {
 	//setCode(3, 'placename', 'placename');//작업 형태 지정
 	
 
-	
+//	alert($("#cons_machine").length);
 	
  });
 
@@ -78,25 +80,19 @@ function updateSubmit(){
 <div class="overlayContent"><div id="viewContent"></div></div>
 </div>
 
+<div onclick="goBack()">back</div>
 
-<div class="srchbox">	
-<div class="printSelect">
-	<select class="selectBox" name="print_typ">
-		<option selected="selected">Print Select</option>
-		<option>작업전 위험 예지 조회(TMB)</option>
-		<option>사용전 점검(Pre Use Inspection)</option>
-		<option>작업 허가증(Permit to work)</option>
-	</select> <span class="btn_print">출력하기 <img src="images/icon_print.png" width="20" alt="인쇄하기"></span>
-</div>
+<!--  ceo 출력 숨김 -->
+<c:if test = "${userLoginInfo.level != 3 }">
+<div class="printSelect">	
+	<span class="printSetting"><img src="images/icon_print.png"  alt="인쇄하기" />Print Select :</span>
+	<span class="btn_txtPrint" onclick="openTBM('${workVO.work_idx}')" >TBM</span>
+	<span class="btn_txtPrint" onclick="openPUI('${workVO.work_idx}')">PUI</span>
+	<span class="btn_txtPrint" onclick="openPTW('${workVO.work_idx}')">PTW</span>		
+</div><!-- //printSelect -->
+</c:if>
 
 
-<span onclick="openTBM('${workVO.work_idx}')">tbm</span>
-<span onclick="openPUI('${workVO.work_idx}')">pui</span>
-<span onclick="openPTW('${workVO.work_idx}')">ptw</span>
-<!-- div onclick="openAcc('${workVO.work_idx}')">사고사례</div>-->
-</div>
-
-	<!-- //srchbox -->
 <form:form id="workForm" method="POST" modelAttribute="workVO"
 		autocomplete="off">
 	<!--다른사용자의update동작을 고려하여 자동으로 입력되는 부분 추가시 주의-->
@@ -156,13 +152,13 @@ function updateSubmit(){
 
 
 	<!--  start -->
-	<p class="red">장비선택</p>
+	<p class="red">장비<br>
 	<table class="user_signup">
 		<colgroup>
 			<col style="width: 33%">
 			<col>
 		</colgroup>
-		<tr>
+		<tr id ="test">
 			<th><span class="iconImg"><img src="images/icon_equipment02.png" alt="건설장비"><br />건설장비</span></th>
 			<td id="cons_machine"></td>
 		</tr>
@@ -177,7 +173,7 @@ function updateSubmit(){
 	</table>
 	<!--  //user_signup -->
 
-	<p class="red">공도구선택</p>
+	<p class="red">공도구<br>
 	<table class="user_signup">
 		<colgroup>
 			<col style="width:33%">
@@ -202,7 +198,7 @@ function updateSubmit(){
 	</table>
 	<!-- end  -->
 
-	<p class="red">작업장소등록</p>
+	<p class="red">작업장소등록<br>
 	<table class="user_signup">
 		<colgroup>
 			<col style="width: 25%">
@@ -232,7 +228,7 @@ function updateSubmit(){
 	</table>
 
 	<div class="work_cap">
-		<p class="red">작업책임자</p>
+		<p class="red">작업책임자<br>
 		<table class="work_cap">
 			<colgroup>
 				<col style="width: 25%">
@@ -274,7 +270,7 @@ function updateSubmit(){
 		</table>
 	</div>
 
-	<p class="red">특이사항</p>
+	<p class="red">특이사항<br>
 	<table>
 		<tr>
 			<td>${workVO.remark}</td>
@@ -290,7 +286,7 @@ function updateSubmit(){
 	</div>
 	<p class="goTop">
 		<a href="#"><img src="images/icon_top.png" alt="top으로 가기">&nbsp;</a>
-	</p>
+	<br>
 	</form:form>
 	
 	

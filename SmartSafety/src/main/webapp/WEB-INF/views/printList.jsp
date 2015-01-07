@@ -14,7 +14,7 @@ $(document).ready(function() {
 function openTBM(){
    var url    ="tbm";
    var title  = "tbmView";
-   var status = "toolbar=no,directories=no,scrollbars=yes,resizable=yes,status=no,menubar=no,width=700, height=700, top=0,left=20"; 
+   var status = "toolbar=no,directories=no,scrollbars=yes,resizable=yes,status=no,menubar=no,width=740, height=800, top=0,left=20"; 
    window.open("tbm?work_idx=" + $('#work_idx').val() , title,status);  //프로그램처럽보일떈 파업 X?   
 }
 
