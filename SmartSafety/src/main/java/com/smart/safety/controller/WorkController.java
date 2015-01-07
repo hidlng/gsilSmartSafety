@@ -1,6 +1,7 @@
 package com.smart.safety.controller;
 
 import java.io.*;
+import java.net.*;
 import java.util.*;
 
 import javax.annotation.*;
@@ -160,7 +161,7 @@ public class WorkController {
 		String work_idx;
 		
 		/**error발생시 이전 form으로 되돌아갈때 사용하기 위함**/
-		if(workVO.getToollist() != null) arrayFilter(workVO.getToollist()); //빈공간 제거		
+		arrayFilter(workVO.getToollist()); //빈공간 제거		
 		model.addAttribute("workVO", workVO);
 		model.addAttribute("updateMode", false);
 		
@@ -185,20 +186,7 @@ public class WorkController {
 			
 			//return "redirect:workList";
 			
-			//현장의 유저 ? 소장?에 push알림
-			try {
-				UserVO userVO = (UserVO) session.getAttribute("userLoginInfo");
-				SiteVO siteVO = siteService.getSiteByIdx(workVO.getSite_idx());
-				
-				//managerSerivce.get
-				
-				if(userVO.getPid() != null & !userVO.getPid().equals("")){
-					sendMessage(userVO.getPid());	
-				}
-					
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		pushWorkToUser(workVO);
 			
 			
 			
@@ -210,11 +198,35 @@ public class WorkController {
 		
 	}
 	
+	private void pushWorkToUser(WorkVO workVO) {
+		try {
+			
+			List<ManagerVO> manList = managerSerivce.getManagerListBySiteIdx(workVO.getSite_idx());
+			
+			Iterator<ManagerVO> it = manList.iterator();
+			
+			while(it.hasNext()) {
+				ManagerVO manVO = it.next();
+				int level = Integer.valueOf(manVO.getLevel());
+				if(level == USERLEVEL.SITE_MANAGER.idx || level == USERLEVEL.CONT_CHEIF.idx ||
+					level == USERLEVEL.CONT_LEADER.idx) 
+					//||  level == USERLEVEL.CONT_WORKER.idx  )
+					if(manVO.getPid() != null && !manVO.getPid().equals("")){
+						sendMessage(manVO.getPid());	
+				}
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 	/**push**/
 	public void sendMessage(String regId) throws IOException {
 		Sender sender = new Sender("AIzaSyBQNLUyd80UKgvloLjeUg3FUYRHNCRKtjU");
 		//String regId = "APA91bHKzAacDO86UqeCntFzUck6bf8RcVyiDDJo4uvcYSJzErpGkLWNBKAZLArm3G0lpLllxp1mHfK4__SKytzqLtXh9sRkH66tmI9Fs5h1JO_eIP8qaVryYsSeCY3TRdleBgbSn9G06_625NAiDdVrDKbkVU_HEaSkyca01lSUt3ts4dz_Dwg";
-		Message message = new Message.Builder().addData("msg", "push notify").build();
+		Message message = new Message.Builder().addData("msg", URLEncoder.encode("점검해야할 작업이 있습니다","UTF-8")).build();
 		List<String> list = new ArrayList<String>();
 		list.add(regId);
 		
@@ -305,6 +317,7 @@ public class WorkController {
 	}
 
 	private void arrayFilter(List<ToolVO> toollist) {
+		if(toollist == null) return;  
 		Iterator<ToolVO> it = toollist.iterator();
 		while (it.hasNext()) {
 			ToolVO vo = it.next();

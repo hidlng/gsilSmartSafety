@@ -51,6 +51,7 @@ public class ManagerVO implements Serializable {
 	private String password;
 	private String isPWChanged;	
 	private String level;//int값이지만like구문 위해 String으론	
+	private String pid;
 	
 	/**Site Data**/
 	private String sitename;
@@ -179,5 +180,11 @@ public class ManagerVO implements Serializable {
 	}
 	public void setCont_idx(String cont_idx) {
 		this.cont_idx = cont_idx;
+	}
+	public String getPid() {
+		return pid;
+	}
+	public void setPid(String pid) {
+		this.pid = pid;
 	}
 }

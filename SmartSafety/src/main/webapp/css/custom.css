@@ -112,6 +112,13 @@ a:hover.infoBtn {
 	border: 2px solid red;
 }
 
+#birthInput{
+	cursor:pointer;
+	height:25px;
+	background: url('../images/cal_icon.png') no-repeat right;
+	background-size : 23px 23px;
+}
+
 #startDateInput {
 	cursor:pointer;
 	height:25px;
@@ -138,7 +145,7 @@ a:hover.infoBtn {
 	height:30px;
 	background: url('../images/clock_icon.png') no-repeat right;
 	background-size : 23px 23px;
-	background-color:#475B7C;
+	
 }
 
 .handWrite {

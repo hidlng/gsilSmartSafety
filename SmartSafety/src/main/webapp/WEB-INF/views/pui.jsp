@@ -21,7 +21,7 @@
  <c:forEach var="puiVO" items="${puiList}" varStatus="index">
  <div id="wrap" class="a4"> 
  	 <div class="box_top">
-		<h1><img src="images/logo_ds.png" width="100"alt="두산로고"></h1>
+		<h1><img src="images/logo_ds.png" width="100" alt="두산로고"></h1>
 		<span class="date">${tbmVO.printtime}</span>
 		<div class="top">
 			<p class="title01">${tbmVO.sitename}</p>			
@@ -113,7 +113,7 @@
 		</tr>
 		<c:forEach var="check" items="${puiVO.checklist}" varStatus="index">
 			<tr>
-				<td><img src="${check.url}" width="60" height="60" alt=""></td>
+				<td><img src="${check.url}" width="55" height="55" alt=""></td>
 				<td> ${check.check}</td>
 				<td></td>
 			</tr>

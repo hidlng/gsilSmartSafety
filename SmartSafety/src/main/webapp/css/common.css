@@ -108,7 +108,7 @@ span.years #year_typ {width:150px; padding:5px;background-color:#1d2b43;color: #
 .content.work{position:relative;}
 .content.work table{margin-bottom:40px;}
 span.equipment{background:url("../images/icon_equipment.png") no-repeat 0 0;}
-.content.work table td input{cursor:pointer; font-size:30px;width:80%;  padding:3px;line-height:35px; color:#fff; text-align:center; background:none;border: 3px solid #1D4F99;}
+.content.work table td input{cursor:text; font-size:30px;width:80%;  padding:3px;line-height:35px; color:#fff; text-align:center; background:none;border: 2px solid #1D4F99;}
 .content.work table td input[readonly='readonly'] {border:0px solid blue; cursor:default;}
 span.side{margin-right:30px;}
 span.side{font-size:25px;}

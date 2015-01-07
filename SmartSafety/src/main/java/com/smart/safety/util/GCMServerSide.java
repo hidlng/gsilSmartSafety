@@ -11,7 +11,7 @@ public class GCMServerSide {
 	public void sendMessage(String regId) throws IOException {
 		Sender sender = new Sender("AIzaSyBQNLUyd80UKgvloLjeUg3FUYRHNCRKtjU");
 		//String regId = "APA91bHKzAacDO86UqeCntFzUck6bf8RcVyiDDJo4uvcYSJzErpGkLWNBKAZLArm3G0lpLllxp1mHfK4__SKytzqLtXh9sRkH66tmI9Fs5h1JO_eIP8qaVryYsSeCY3TRdleBgbSn9G06_625NAiDdVrDKbkVU_HEaSkyca01lSUt3ts4dz_Dwg";
-		Message message = new Message.Builder().addData("msg", "push notify").build();
+		Message message = new Message.Builder().addData("msg", "작업이 새로 등록되었습니다").build();
 		List<String> list = new ArrayList<String>();
 		list.add(regId);
 		

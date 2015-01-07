@@ -13,6 +13,7 @@ public interface ManagerMapper {
 	public ManagerVO getManagerByIdx(String idx);
 	public ManagerVO getManagerByID(String id);
 	public ManagerVO getChiefByContIdx(Map<String, Object> params);
+	public List<ManagerVO> getManagerListBySiteIdx(String site_idx);
 	public void insert(ManagerVO managerVO);
 	public void update(ManagerVO managerVO);
 	public void delete(String idx);

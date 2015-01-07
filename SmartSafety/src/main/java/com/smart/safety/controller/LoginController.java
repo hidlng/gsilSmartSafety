@@ -1,24 +1,17 @@
 package com.smart.safety.controller;
 
-import java.io.IOException;
-import java.security.Principal;
+import java.io.*;
+import java.security.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 import javax.servlet.http.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
+import org.slf4j.*;
+import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
-import com.smart.safety.domain.ContractorVO;
-import com.smart.safety.domain.ManagerVO;
-import com.smart.safety.domain.SiteVO;
-import com.smart.safety.domain.UserVO;
-import com.smart.safety.services.ContractorService;
-import com.smart.safety.services.LoginService;
-import com.smart.safety.services.ManagerService;
-import com.smart.safety.services.SiteService;
+import com.smart.safety.domain.*;
+import com.smart.safety.services.*;
 import com.smart.safety.util.*;
 
 /**
@@ -150,8 +143,8 @@ public class LoginController {
 		
 		logger.info("Welcome login_success! {}, {}", session.getId(), userVO.getId() + "/" + userVO.getPassword());
 		
-		//if(userlevel == CEO) return "redirect:
-		return "redirect:workList";
+		if(userlevel == USERLEVEL.CEO) return "redirect:ceolist";
+		else return "redirect:workList";
 
 	}
 	

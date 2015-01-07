@@ -79,8 +79,11 @@ function updateSubmit(){
 <div class="closeLink" style="cursor:hand"><img src="images/x-button.png" onclick="doOverlayClose()" /></div>
 <div class="overlayContent"><div id="viewContent"></div></div>
 </div>
-
-<div onclick="goBack()">back</div>
+<!-- 임시. ceo화면에서 상세보기 했을때 back -->
+<c:if test = "${userLoginInfo.level == 3 }">
+<div onclick="history.back(-1)" style="cursor:pointer"><img src="images/back_btn.png" width="30px" height="30px"> back</div>
+<br>
+</c:if>
 
 <!--  ceo 출력 숨김 -->
 <c:if test = "${userLoginInfo.level != 3 }">

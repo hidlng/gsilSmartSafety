@@ -235,7 +235,7 @@ public class PrintController {
 	private String makeToolString(List<ToolVO> toollist) {	
 		//JSONObject jsonObject = new JSONObject(); // JSONObject 생성
 		//JSONArray array = new JSONArray();
-		
+		if(toollist == null || toollist.size() == 0 ) return "";
 		StringBuffer sb = new StringBuffer();
 		
 		for(ToolVO toolVO : toollist) {

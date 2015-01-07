@@ -34,7 +34,27 @@ public class ManagerService{
 	}
 	
 
+	public int getRowCount(ManagerVO managerVO) {
+		return managerMapper.getRowCount(managerVO);
+	}
+
+	public List<ManagerVO> getManagerListByVO(ManagerVO managerVO) {
+		return managerMapper.getManagerListByVO(managerVO);
+	}
+
+	/**cont_idx를 가진 managerlist중 level이 소장인 사람을 가져옴(참고 - 쿼리에 LIMIT 0,1사용하여 한건만가져옴 )**/
+	public ManagerVO getChiefByContIdx(String cont_idx) {		
+		Map<String, Object>params = new HashMap<String, Object>();
+		params.put("cont_idx", cont_idx); 
+		params.put("level", USERLEVEL.CONT_CHEIF.idx); 
+		return managerMapper.getChiefByContIdx(params);
+	}
+
 	
+	public List<ManagerVO> getManagerListBySiteIdx(String site_idx) {
+		return managerMapper.getManagerListBySiteIdx(site_idx);
+	}
+
 	@Transactional
 	public void insertManager(ManagerVO managerVO) {
 		
@@ -87,22 +107,4 @@ public class ManagerService{
 		userMapper.deleteUserByIdx(user_idx);
 		managerMapper.delete(manager_idx);
 	}
-
-	public int getRowCount(ManagerVO managerVO) {
-		return managerMapper.getRowCount(managerVO);
-	}
-
-	public List<ManagerVO> getManagerListByVO(ManagerVO managerVO) {
-		return managerMapper.getManagerListByVO(managerVO);
-	}
-
-	/**cont_idx를 가진 managerlist중 level이 소장인 사람을 가져옴(참고 - 쿼리에 LIMIT 0,1사용하여 한건만가져옴 )**/
-	public ManagerVO getChiefByContIdx(String cont_idx) {		
-		Map<String, Object>params = new HashMap<String, Object>();
-		params.put("cont_idx", cont_idx); 
-		params.put("level", USERLEVEL.CONT_CHEIF.idx); 
-		return managerMapper.getChiefByContIdx(params);
-	}
-
-	
 }

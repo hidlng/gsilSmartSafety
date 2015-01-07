@@ -27,7 +27,7 @@
   table.typ02{border:0; }
   table.typ02 th, table.typ02 td{border:0;text-align:left;padding:0px; border-bottom:1px dotted #ddd;}
   table.typ02 th{text-align:justify; background:none;} 
-  p.textBox{display:block; width:99%; margin:30px auto 30px; border:1px solid #222; padding:15px 0; text-align:center;font-weight:bold;}
+  p.textBox{display:block; width:99%; margin:10px auto 10px; border:1px solid #222; padding:15px 0; text-align:center;font-weight:bold;}
  .signBox{float:right;overflow:hidden;width:400px;height:30px;border-bottom:2px solid #000;margin:100px 0;}
  .signBox p{float:left;width:300px; font-weight:bold;} 
  .signBox span{float:right;width:50px;} 

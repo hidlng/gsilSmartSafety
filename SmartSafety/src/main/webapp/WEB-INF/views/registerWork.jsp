@@ -164,7 +164,7 @@ if(input) { //yes
 	</tr>
 	<tr>
 		<th>작업종류</th>
-		<td colspan="2"  onclick="goPopup()">			
+		<td colspan="2"  onclick="goPopup()"  class="listTR">			
 			<form:input id="workname"  path="workname"  readonly="true"  style="cursor:pointer;"/>
 			<br><form:errors path="workname" cssClass="formError"/>
 		</td>

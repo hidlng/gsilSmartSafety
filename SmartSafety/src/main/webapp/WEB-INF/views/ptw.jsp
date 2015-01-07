@@ -20,7 +20,7 @@
  <body>
  <div id="wrap"> 
 	 <div class="box_top">
-		<h1><img src="images/logo_ds.png" width="100"alt="두산로고"></h1>
+		<h1><img src="images/logo_ds.png" width="100" alt="두산로고"></h1>
 		<div class="top">
 			<p class="title01">두산건설 신사동 멋쟁이 증설 현장</p>
 			<span class="date">2014-12-09 09:00</span>

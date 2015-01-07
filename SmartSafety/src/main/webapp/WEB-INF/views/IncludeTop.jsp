@@ -30,6 +30,14 @@
 		var contentView = '#' +'${sessionScope.contentView}';
 		$(contentView).addClass('on');
 		//document.body.style.zoom =1.4;
+		
+		//CEO일경우 class="aside" 숨김 ,  .content widht 속성 제거
+		<c:if test ="${sessionScope.userLoginInfo.level == 3}">
+		//alert('ceo');
+		$('.aside').hide();
+		$('.content').css('width', 'auto');
+		</c:if>
+		
 	});
 	
    $(document).on("click", "#siteUserList", function(e) { $('#siteUserList_form').submit(); });

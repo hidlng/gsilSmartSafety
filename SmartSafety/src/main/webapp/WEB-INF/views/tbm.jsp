@@ -15,7 +15,7 @@
 
  <div id="wrap"> 
 	 <div class="box_top">
-		<h1><img src="images/logo_ds.png" width="100"alt="두산로고"></h1>
+		<h1><img src="images/logo_ds.png" width="100" alt="두산로고"></h1>
 		<span class="date">${tbmVO.printtime}</span>
 		<div class="top">
 			<p class="title01">${tbmVO.sitename}</p>			
@@ -60,7 +60,7 @@
 		 <tr>
 			<th><span class="bull_dot">&middot;&nbsp;</span>날&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;씨 </th>
 			<th> : </th>
-			<td colspan="3">${tbmVO.weather}</td>
+			<td colspan="3">맑음 ${tbmVO.weather} <img src="images/weather_sunny-40.gif" height="20px" width="20"> </td>
 			
 		 </tr>
 	 </table><!-- //typ02 -->
@@ -82,7 +82,7 @@
 		 </tr>
 		 <tr>
 			<th>주요 위험정보</th>
-			<td td colspan="5">${tbmVO.mainrisk}</td>
+			<td colspan="5">${tbmVO.mainrisk}</td>
 			
 		 </tr>
 		 <tr>

@@ -474,5 +474,7 @@ function openPTW(work_idx){
 }
 
 function goBack() {
+	alert(1);
+	
 	
 }
