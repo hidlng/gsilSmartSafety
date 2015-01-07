@@ -264,8 +264,8 @@ function updateSubmit(){
 			<tr>
 				<td colspan="3"><span class="explain"> <b
 						style="color: red">0점</b> : 평범 평상 시 작업과 유사한 조건으로 작업 상 애로사항이 없음.<br>
-						<b style="color: red">1점</b> : 어려운 상황 혹서기, 혹한기, 일기(비, 눈, 바람 등)등에
-						의해 작업상 어려움이 있어 관리가 필요한 상황<br> <b style="color: red">2점</b> :
+						<b style="color: red">1점</b> : 어려운 상황 혹서기, 혹한기, 일기(비, 눈, 바람 등)등에 의해 
+						작업상 어려움이 있어 관리가 필요한 상황<br> <b style="color: red">2점</b> :
 						매우어려운상황 작업이 매우 어려운 상황이지만 불가하게 작업을 진행해야 하는 경우, 특별관리가 필요한 상황<br>
 				</span></td>
 			</tr>
@@ -276,10 +276,10 @@ function updateSubmit(){
 	<p class="red">특이사항<br>
 	<table>
 		<tr>
-			<td>${workVO.remark}</td>
+			<td id="remark">${workVO.remark}</td>
 		</tr>
 	</table>
-
+<c:if test = "${userLoginInfo.level != 3 }">
 	<div class="paging">
 		<span class="btn_typ02 toHomePage">목록</span>&nbsp;
 		
@@ -287,6 +287,7 @@ function updateSubmit(){
 			<span class="btn_typ02" onclick="updateSubmit();">수정</span>
 		</c:if>
 	</div>
+</c:if>
 	<p class="goTop">
 		<a href="#"><img src="images/icon_top.png" alt="top으로 가기">&nbsp;</a>
 	<br>

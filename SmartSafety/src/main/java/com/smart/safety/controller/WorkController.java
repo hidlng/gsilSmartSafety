@@ -340,7 +340,7 @@ public class WorkController {
 		if(viewIdx != null && !viewIdx.equals("")) {
 			WorkVO workVO = workService.getWorkByIdx(viewIdx);
 			UserVO userVO = (UserVO)session.getAttribute("userLoginInfo");
-			SiteVO siteVO = (SiteVO)session.getAttribute("siteVO");
+		//	SiteVO siteVO = (SiteVO)session.getAttribute("siteVO");
 			
 			//contname 가져오기 			
 			ContractorVO contVO = contractorService.getContractorByIdx(workVO.getCont_idx());
@@ -348,6 +348,9 @@ public class WorkController {
 			
 			
 			model.addAttribute("updateMode", true);
+
+			//remark의 경우 줄바꿈이 안되어서 나타나므로 다음작업 수행
+			workVO.setRemark(workVO.getRemark().replace("\r\n", "<br>"));//		 remark
 			model.addAttribute("workVO", workVO);
 			model.addAttribute("cont_name", contVO.getCont_name());
 			

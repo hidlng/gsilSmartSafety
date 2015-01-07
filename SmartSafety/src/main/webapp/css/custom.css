@@ -51,6 +51,11 @@
 	font-size: 25px;
 }
 
+#remark {
+	text-align:left;
+	
+}
+
 /* 
 a.signupBtn {
 	display:block;
@@ -114,28 +119,28 @@ a:hover.infoBtn {
 
 #birthInput{
 	cursor:pointer;
-	height:25px;
+	
 	background: url('../images/cal_icon.png') no-repeat right;
 	background-size : 23px 23px;
 }
 
 #startDateInput {
 	cursor:pointer;
-	height:25px;
+	
 	background: url('../images/cal_icon.png') no-repeat right;
 	background-size : 23px 23px;
 }
  
  #endDateInput {
 	cursor:pointer;
-	height:25px;
+	
 	background: url('../images/cal_icon.png') no-repeat right;
 	background-size : 23px 23px;
 }
 
 #starttimeInput {
 	cursor:pointer;
-	height:25px;
+	
 	background: url('../images/clock_icon.png') no-repeat right;
 	background-size : 23px 23px;
 }
