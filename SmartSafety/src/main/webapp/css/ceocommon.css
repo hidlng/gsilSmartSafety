@@ -74,7 +74,7 @@ h1 img{width:120px;}
 .aside_ident li span.identTitle{width:50px;}
 .aside_ident li span input{width:150px; padding:5px 15px; background:none; border:0; font-size:18px; color:#fff;}
 /* search */
-.content{float:right; width:920px; min-height:500px; padding:55px 55px; background:url("../images/bg_box.png") repeat 0 0;}
+.content{float:right; width:100%; min-height:500px; padding-top:20px; padding-left:5px;padding-right:5px; background:url("../images/bg_box.png") repeat 0 0;}
 .content .srchbox{width:250px; float:right; overflow:hidden;height:36px;padding-bottom:20px;}
 .content .srchbox p{float:right;overflow:hidden;  height:36px; border:1px solid #152133;background-color:#fff; }
 .content .srchbox .search_input{width:207px; height:36px; padding:3px 10px;font-size:14px; line-height:14px;background-color:#fff; color:#333; border:none;}
@@ -89,6 +89,7 @@ h1 img{width:120px;}
 	line-height: 36px;
 	border: 1px dotted #8c97a9;
 	text-align: center;
+	font-size: 28px;
 }
 
 .content .searchboxdata{ height:55px; }
@@ -101,6 +102,7 @@ h1 img{width:120px;}
 	line-height: 36px;
 	border: 1px dotted #8c97a9;
 	text-align: center;
+	font-size: 28px;
 }
 
 .listTR {
@@ -114,7 +116,7 @@ h1 img{width:120px;}
 }
 
 /* contant */
-.content table{clear: both;width:100%; font-size:18px;line-height:30px; background-color:#1d2b43;border-collapse: collapse;border-spacing: 0;}
+.content table{clear: both;width:100%; font-size:28px;line-height:30px; background-color:#1d2b43;border-collapse: collapse;border-spacing: 0;}
 .content table tr th, .content table tr td{border:1px dotted #8c97a9; text-align:center;}
 .content table tr th{padding:14px 0; color:#98b4e0; font-size:20px;}
 .content table tr td{padding:10px 0;}
@@ -123,7 +125,7 @@ h1 img{width:120px;}
 
 /* paging */
 .content .paging{text-align:center; padding: 40px 0 0 0; }
-.content .paging span{font-size:18px; color:#fff; padding:5px;}
+.content .paging span{font-size:28px; color:#fff; padding:5px;}
 .content .paging span.now{color:#d70e0a; font-weight:bold;}
 .content .paging .signup{display:inline-block; width:100px; vertical-align:center; }
 
@@ -198,8 +200,8 @@ a .btn_typ03:hover{background-color:transparent;color:#ffffff;border:1px solid #
 .content .printSelect a .btn_txtPrint:hover{border:1px solid #d70e0a;background-color:#d70e0a;color: #fff;}
 /* ceo */
 .wrapBox.ceo{padding:50px;}
-.wrapBox.ceo .content{float:left; width:1228px;padding: 55px 55px;background: url("../images/bg_box.png") repeat 0 0;}
+.wrapBox.ceo .content{float:left; width:100%;background: url("../images/bg_box.png") repeat 0 0;}
 a .btn_typ05 {display: block; width: 110px;padding:7px;margin: 0 auto;background-color: #475B7C;border: 1px solid #222;border-radius: 3px;font-size: 14px;line-height: 22px;color: #fff;text-decoration: none;}
 a .btn_typ05:hover{background-color:transparent;color:#ffffff;border:1px solid #ffffff;}
-.wrapBox.ceo .content table tr th {padding: 17px 0; font-size: 22px;color: #98b4e0;}
+.wrapBox.ceo .content table tr th {padding: 17px 0; font-size: 28px;color: #98b4e0;}
 .wrapBox.ceo .content table tr td {padding: 15px 0; }
