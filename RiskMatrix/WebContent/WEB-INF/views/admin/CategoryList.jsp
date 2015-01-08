@@ -79,6 +79,26 @@
 		} 
 	}
 	
+
+	function submitCode(){
+		
+		if($('.inputCodeDiv').css("display") != "none") {//code입력모드
+			if($('#inputCode').val() == '' || $('#inputName').val() == '')
+				alert('내용을 입력해야합니다');
+			else
+				$('#categorySubmit').click();
+		
+		}else{ 		//category입력모드
+			if($('#inputName').val() == '')
+				alert('내용을 입력해야합니다');
+			else
+				$('#categorySubmit').click();
+		}
+			
+			
+	}
+	
+	
 	function closeViewContent() {
 		$('#viewContent').html('');
 		doOverlayClose();
@@ -133,7 +153,9 @@
 			</td>	
 			<td class="inputCodeDiv"><stripes:text id="inputCode" name="inputCode" size="10" onkeyup="checkSpeChar(1)"/></td>
 			<td><stripes:text id="inputName" name="inputName" size="10" onkeyup="checkSpeChar(2)"/></td>
-			<td><stripes:submit class="button" name="insertCategory" value="추가" /></td>
+			<td>
+			<stripes:button class="button" name="insertCategory" value="추가" onclick="submitCode()"/>
+			<stripes:submit class="button" id="categorySubmit" name="insertCategory" value="추가" style="display:none"/></td>
 			</tr>
 			</c:if>
 		</table>
@@ -240,7 +262,7 @@
 
 
 
-<!--div><img src="../images/blue_title.gif"/> 결과 메시지(임시)</div>
-<div>${actionBean.resultMsg}</div-->
+<div><img src="../images/blue_title.gif"/> 결과 메시지(임시)</div>
+<div>${actionBean.resultMsg}</div>
 
 <%@ include file="IncludeBottom.jsp"%>

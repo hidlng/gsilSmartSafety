@@ -32,7 +32,7 @@ function setChildCategoryOf(idx, targetId, selectName) {
  			}
  			
  			
- 			$('#' + targetId).append('<option id="" value="">------선택------</option>');
+ 			$('#' + targetId).append('<option id="" value="">-------선택-------</option>');
  			for(var i = 0 ; i < length; i ++) {
  				//alert(selectName +" : "+catList[i].name );
  				if(selectName == catList[i].name )
@@ -175,7 +175,7 @@ function getTool(tarId, inputType) {
 		+ equipIdx + "].toolname' value=''/>";
 	}
 	
-	str += "<input type='button' id='toolDelete_" + equipIdx + "' style='width:30px;cursor:pointer;border:0px;' onclick='removeTool(" 
+	str += "<input type='button' class='deleteButton' id='toolDelete_" + equipIdx + "'  onclick='removeTool(" 
    	+ equipIdx + ")' value='X' ></input>"
    	+ "<input  type='hidden' name='toollist[" + equipIdx + "].toolcode' id='toolcode_" + equipIdx + "' />" 
  	+ "<input  type='hidden' name='toollist[" + equipIdx + "].tooltype' id='tooltype_" + equipIdx + "' />" 

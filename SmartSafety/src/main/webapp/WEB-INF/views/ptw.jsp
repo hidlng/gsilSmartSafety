@@ -117,15 +117,7 @@
 			<td class="lft"></td>
 			<td>Y / N</td>
 			<td>Y / N</td>
-			<td>Y / N</td>
-			
-		</tr>
-		<tr>
-			<td class="lft"></td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-			
+			<td>Y / N</td>			
 		</tr>
 	 </table><!-- //table -->
 
@@ -159,7 +151,6 @@
 			<td>Y / N</td>
 		</tr>
 	 </table><!-- //table -->
-
 	 <table class="lastsign">
 	 <caption>작업허가 최종 승인</caption>
 		<colgroup>		

@@ -174,7 +174,7 @@ if(input) { //yes
 	
 	<tr>
 		<th>작업타이틀</th>
-		<td colspan="2"><form:input path="worktitle" 	maxlength="30" />
+		<td colspan="2"><form:input path="worktitle" class="colspanInput"	maxlength="30" />
 						<br> <form:errors path="worktitle" cssClass="formError"  /></td>
 	</tr>
 	<tr>
@@ -331,7 +331,7 @@ if(input) { //yes
 			<th>작업자 수</th>
 			<td >
 				<form:select id="test" path="pic_num_worker" class="selectBox" >
-				<c:forEach begin="1" end="50" varStatus="idx">
+				<c:forEach begin="1" end="30" varStatus="idx">
 						<form:option value="${idx.index}">${idx.index}</form:option>
 				</c:forEach>
 				</form:select>
@@ -354,7 +354,7 @@ if(input) { //yes
 			<td colspan="3">
 			<form:select path="worklevel" class="selectBox" >
 				<c:forEach begin="0" end="2" varStatus="count">
-						<form:option value="${count.index}">난이도 ${count.index}</form:option>
+						<form:option value="${count.index}"> ${count.index} 점</form:option>
 				</c:forEach>
 			</form:select>
 			</td>

@@ -90,20 +90,20 @@
 	</tr>
 	<tr>
 		<th>업체명</th>
-		<td colspan="3"><form:input path="cont_name" maxlength="45"/><p/><form:errors cssClass="formError" path="cont_name" /></td>
+		<td colspan="3"><form:input path="cont_name" class="colspanInput" maxlength="45"/><p/><form:errors cssClass="formError" path="cont_name" /></td>
 	</tr>
 	<tr>
-		<th>업체 연락처<p><span style="font-size:17px">(010-1234-5678)</span></th>
+		<th>업체 연락처<p><span style="font-size:20px">(010-1234-5678)</span></th>
 		<td><form:input path="cont_phone" maxlength="13" onblur="checkPhone(this, this.value)"/><p/><form:errors cssClass="formError" path="cont_phone" /></td>
 		
-		<th>긴급연락처<p><span style="font-size:17px">(010-1234-5678)</span></th>
+		<th>긴급연락처<p><span style="font-size:20px">(010-1234-5678)</span></th>
 		<td><form:input path="cont_emg_phone" maxlength="13" onblur="checkPhone(this, this.value)"/><p/><form:errors cssClass="formError" path="cont_emg_phone" /></td>
 	</tr>
 	<tr>
 		<th>대표<br>관리자</th>
 		<td><form:input path="rep_name" maxlength="45"/><p/><form:errors cssClass="formError" path="rep_name" />
 		</td>
-		<th>연락처<p><span style="font-size:17px">(010-1234-5678)</span></th>
+		<th>연락처<p><span style="font-size:20px">(010-1234-5678)</span></th>
 		<td><form:input path="rep_phone" maxlength="13" onblur="checkPhone(this, this.value)"/><p/><form:errors cssClass="formError" path="rep_phone" />
 	</tr>
 	
@@ -123,7 +123,7 @@
 		<!--  update -->
 		<c:if test="${updateMode}">
 			<td colspan="3">
-			<form:input id="input_id" path="id" maxlength="45" readonly="true" />
+			<form:input id="input_id" path="id" class="colspanInput" maxlength="45" readonly="true" />
 			</td>
 		</c:if>
 			
@@ -132,7 +132,7 @@
 	<tr>
 		<th>PW</th>
 		<td colspan="3">					
-			<form:password id="input_password" path="password" maxlength="45"/><p/><form:errors cssClass="formError" path="password" />
+			<form:password id="input_password" path="password" class="colspanInput" maxlength="45"/><p/><form:errors cssClass="formError" path="password" />
 			<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01 btnNewPasswd" >신규 비밀번호 발급</div> 						
 		</td>
 	</tr>
