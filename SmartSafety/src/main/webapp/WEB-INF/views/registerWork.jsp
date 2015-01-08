@@ -123,7 +123,7 @@ if(input) { //yes
 	<tr>
 		<th>업체</th>
 		<td colspan="2">
-		<form:input id="cont_name"  path="cont_name"  readonly="true"/>
+		<form:input id="cont_name"  path="cont_name"  readonly="true" style="border: 0px solid;"/>
 		
 		</td>
 	</tr>

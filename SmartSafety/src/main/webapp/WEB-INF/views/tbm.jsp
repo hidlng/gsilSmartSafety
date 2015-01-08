@@ -60,7 +60,7 @@
 		 <tr>
 			<th><span class="bull_dot">&middot;&nbsp;</span>날&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;씨 </th>
 			<th> : </th>
-			<td colspan="3">맑음 ${tbmVO.weather} <img src="images/weather_sunny-40.gif" height="20px" width="20"> </td>
+			<td colspan="3">맑음 ${tbmVO.weather} </td>
 			
 		 </tr>
 	 </table><!-- //typ02 -->
@@ -147,7 +147,7 @@
 			<th>두산건설<br/>공사담당자</th>
 			<td>${tbmVO.site_rep_name}<br>(${tbmVO.site_rep_phone})</td>
 			<th>긴급연락처</th>
-			<td>${tbmVO.cont_phone}(${tbmVO.cont_emg_phone})</td>
+			<td>${tbmVO.cont_phone}<br>(${tbmVO.cont_emg_phone})</td>
 		 </tr>
 	 </table><!-- //table -->
  

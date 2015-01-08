@@ -288,8 +288,8 @@ function updateSubmit(){
 		</c:if>
 	</div>
 </c:if>
-	<p class="goTop">
-		<a href="#"><img src="images/icon_top.png" alt="top으로 가기">&nbsp;</a>
+	<!-- class="goTop">
+		<a href="#"><img src="images/icon_top.png" alt="top으로 가기">&nbsp;</a-->
 	<br>
 	</form:form>
 	

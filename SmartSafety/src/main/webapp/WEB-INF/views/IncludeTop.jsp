@@ -117,7 +117,7 @@ $(document).on("keydown", disableF5);
 					</c:if>
 					<c:if test= "${sessionScope.userLoginInfo.level == 0 || sessionScope.userLoginInfo.level == 1 ||
 									 sessionScope.userLoginInfo.level == 3}">
-						<li id="report" style="cursor:pointer" >CEO 리포트</li>
+						<!--li id="report" style="cursor:pointer" >CEO 리포트</li-->
 					</c:if>
 					<li id="workList" style="cursor:pointer" >작업 관리</li><!--   -->
 					

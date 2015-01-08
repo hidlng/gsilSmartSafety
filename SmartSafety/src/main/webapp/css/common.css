@@ -88,7 +88,7 @@ h1 img{width:120px;}
 .content table tr td{padding:10px 0;}
 .content table tr td a{cursor:pointer;}
 .content table.user_signup td {text-align:left; padding-left: 10px;}
-.content table.user_signup td input{width:80%; font-size:30px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 3px solid #1D4F99;}
+.content table.user_signup td input{width:80%; font-size:30px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 2px solid #1D4F99;}
 .content table.user_signup td input[readonly='true'] {border:0px solid blue;}
 
 
@@ -123,11 +123,11 @@ span.iconImg img{width:90px;height:auto;}
 .red{color:#d70e0a;background:none;font-size:35px;text-align:left;padding:17px 0;}
 ul.equipment_typ li{width:33%;height:150px;display:inline-block;float:left;margin-right:1px;background: url("../images/bg_box.png") repeat 0 0;padding-top:10px;}
 ul.equipment_typ li span.iconImg{display:block;width:80px;height:70px;margin:0 auto;font-weight:bold;}
-ul.equipment_typ li.on{border:2px dashed #8c97a9;border-bottom:0px;background: none;background-color: #1d2b43;}
+ul.equipment_typ li.on{border:1px dashed #8c97a9;border-bottom:0px;background: none;background-color: #1d2b43;}
 table.work_signup.equipment{border:2px dashed #8c97a9;}
 span.explain{display:block;width:92%;font-weight:normal;font-size:25px;line-height:35px;text-align:justify; padding-left:30px;}
 .content table.work_signup td {}
-.content table.work_signup td input{width:80%; font-size:30px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 3px solid #1D4F99;}
+.content table.work_signup td input{width:80%; font-size:30px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 2px solid #1D4F99;}
 .content table.work_signup td input[readonly='true'] {border:0px solid blue;}
 
 

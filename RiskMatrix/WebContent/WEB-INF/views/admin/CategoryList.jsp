@@ -147,7 +147,7 @@
 <div id="searchCode">
 <stripes:form id="search" name="search"
 	beanclass="com.spring.risk.web.actions.CategoryActionBean">
-	<stripes:text name="searchString" onkeyup="checkSpeChar(1)"/><stripes:submit class="button" name="searchCode" value="검색" />
+	<stripes:text name="searchString" onkeyup="checkSpeChar(2)"/><stripes:submit class="button" name="searchCode" value="검색" />
 </stripes:form>
 </div>
 
