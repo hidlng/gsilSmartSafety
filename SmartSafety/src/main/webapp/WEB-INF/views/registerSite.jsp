@@ -75,13 +75,13 @@
 
 		<tr>
 			<th>현장명</th>
-			<td colspan="3"><form:input path="sitename" maxlength="45" />
+			<td colspan="3"><form:input path="sitename" class="colspanInput" maxlength="45" />
 				<br>
 				<form:errors cssClass="formError" path="sitename" /></td>
 		</tr>
 		<tr>
 			<th>주소</th>
-			<td colspan="3"><form:input id="addr_detail" path="addr_detail" maxlength="255"  readonly="true" style="width:90%;font-size:25px;cursor:pointer" onclick="goPopup()" />
+			<td colspan="3"><form:input id="addr_detail" path="addr_detail" class="colspanInput" maxlength="255"  readonly="true" style="font-size:25px;cursor:pointer" onclick="goPopup()" />
 				<br>
 				<form:errors cssClass="formError" path="addr_detail" /></td>
 		</tr>
@@ -92,7 +92,7 @@
 				<form:errors cssClass="formError" path="rep_name" /></td>
 			<th>연락처
 				<br>
-				<span style="font-size: 17px">(010-1234-5678)</span>
+				<span style="font-size: 20px">(010-1234-5678)</span>
 			</th>
 			<td><form:input path="rep_phone" maxlength="13" onblur="checkPhone(this, this.value)"/>
 				<br>

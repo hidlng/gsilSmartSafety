@@ -80,7 +80,7 @@ function checkSpeChar(level) {
 	}
 
 }
-	
+
 	
 	</script>
 </head>

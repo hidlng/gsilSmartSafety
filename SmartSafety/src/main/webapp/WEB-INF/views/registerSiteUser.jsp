@@ -90,9 +90,9 @@
 	<!-- //srchbox -->
 	<table class="user_signup">
 		<colgroup>
-			<col style="width: 25%">
-			<col style="width: 25%">
-			<col style="width: 25%">
+			<col style="width: 20%">
+			<col style="width: 30%">
+			<col style="width: 20%">
 			<col>
 		</colgroup>
 		<tr>
@@ -104,10 +104,7 @@
 			<td><form:input path="name" maxlength="45" />
 				<p />
 				<form:errors cssClass="formError" path="name" /></td>
-			<th>생년월일
-				<p />
-				<span style="font-size: 17px">(YYYMMDD)</span>
-			</th>
+			<th>생년월일</th>
 			<td><form:input id="birthInput" path="birth" maxlength="10" />
 				<p />
 				<span id="birthError" class="formError"></span></td>
@@ -115,7 +112,7 @@
 		<tr>
 			<th>연락처
 				<p />
-				<span style="font-size: 17px">(010-1234-5678)</span>
+				<span style="font-size: 20px">(010-1234-5678)</span>
 			</th>
 			<td><form:input path="phone" maxlength="13" onblur="checkPhone(this, this.value)"/>
 				<p />
@@ -133,7 +130,7 @@
 		<tr>
 			<th>소속업체</th>
 			<td colspan="3">
-			<form:select id="cont_select_box" path="cont_idx" class="siteSelectBox" >
+			<form:select id="cont_select_box" path="cont_idx" class="siteSelectBox colspanInput"  style="width:95%">
 					<c:forEach var="cont" items="${contList}" >
 						<form:option value="${cont.cont_idx}">${cont.cont_name}</form:option>
 					</c:forEach>
@@ -145,7 +142,7 @@
 			<th>ID</th>
 			<!-- insert -->
 			<c:if test="${!updateMode}">
-				<td colspan="2"><form:input id="input_id" path="id"
+				<td colspan="2"><form:input id="input_id" path="id" 
 						maxlength="45" />
 					<p />
 					<form:errors id="idError" cssClass="formError" path="id" /></td>
@@ -155,15 +152,14 @@
 
 			<!--  update -->
 			<c:if test="${updateMode}">
-				<td colspan="3"><form:input id="input_id" path="id"
-						maxlength="45" readonly="true" /></td>
+				<td colspan="3"><form:input id="input_id" path="id" class="colspanInput" maxlength="45" readonly="true" /></td>
 			</c:if>
 
 
 		</tr>
 		<tr>
 			<th>PW</th>
-			<td colspan="3"><form:password id="input_password"
+			<td colspan="3"><form:password id="input_password" class="colspanInput"
 					path="password" maxlength="45" />
 				<p />
 				<form:errors cssClass="formError" path="password" /> 

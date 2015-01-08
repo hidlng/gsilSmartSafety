@@ -134,28 +134,28 @@
 	
 	<tr>
 		<th>직급</th>
-		<td><form:input path="grade" maxlength="45"/><p/><form:errors cssClass="formError" path="grade" /></td>
+		<td><form:input path="grade" maxlength="45"/><br><form:errors cssClass="formError" path="grade" /></td>
 		<th>성명</th>
-		<td><form:input path="name" maxlength="45"/><p/><form:errors cssClass="formError" path="name" />
+		<td><form:input path="name" maxlength="45"/><br><form:errors cssClass="formError" path="name" />
 		</td>
 		
 	</tr>
 	<tr>
 		<th>생년월일</th>
-		<td><form:input id="birthInput" path="birth" maxlength="10" /><p/><form:errors cssClass="formError" path="birth" /></td>
-		<th>연락처<p/><span style="font-size:17px">(010-1234-5678)</span></th>
-		<td><form:input path="phone" maxlength="13" onblur="checkPhone(this, this.value)"/><p/><form:errors cssClass="formError" path="phone" /></td>
+		<td><form:input id="birthInput" path="birth" maxlength="10" /><br><form:errors cssClass="formError" path="birth" /></td>
+		<th>연락처<br><span style="font-size:17px">(010-1234-5678)</span></th>
+		<td><form:input path="phone" maxlength="13" onblur="checkPhone(this, this.value)"/><br><form:errors cssClass="formError" path="phone" /></td>
 	</tr>
 	<tr>
 		<th>소속</th>
-		<td colspan="3"><form:input path="position" maxlength="45"/><p/><form:errors cssClass="formError" path="position" /></td>
+		<td colspan="3"><form:input path="position" class="colspanInput" maxlength="45"/><br><form:errors cssClass="formError" path="position" /></td>
 	</tr>
 	<tr>
 		<th>ID</th>
 		<!-- insert -->
 		<c:if test="${!updateMode}">
 			<td colspan="2">
-			<form:input id="input_id" path="id" maxlength="45" />
+			<form:input id="input_id" path="id"  maxlength="45" />
 				<br><form:errors id="idError" cssClass="formError" path="id" />
 			</td>
 			<td><span class="btn_typ01 duplCheck"  onclick="duplicateIdCheck()">중복체크</span>
@@ -166,7 +166,7 @@
 		<!--  update -->
 		<c:if test="${updateMode}">
 			<td colspan="3">
-			<form:input id="input_id" path="id" maxlength="45" readonly="true" />
+			<form:input id="input_id" path="id" class="colspanInput" maxlength="45" readonly="true" />
 			</td>
 		</c:if>
 			
@@ -175,7 +175,7 @@
 	<tr>
 		<th>PW</th>
 		<td colspan="3">					
-			<form:password id="input_password" path="password" maxlength="45"/><p/><form:errors cssClass="formError" path="password" />
+			<form:password id="input_password" path="password" class="colspanInput" maxlength="45"/><br><form:errors cssClass="formError" path="password" />
 			<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01 btnNewPasswd" >신규 비밀번호 발급</div> 							
 		</td>
 											

@@ -253,12 +253,12 @@ function updateSubmit(){
 			</tr>
 			<tr>
 				<th>작업자 수</th>
-				<td colspan="3">${workVO.pic_num_worker}</td>
+				<td colspan="3">${workVO.pic_num_worker} 명</td>
 			</tr>
 			<tr>
 				<th rowspan="2">작업상황<br />난이도
 				</th>
-				<td colspan="3">${workVO.worklevel}</td>
+				<td colspan="3">${workVO.worklevel} 점</td>
 			</tr>
 
 			<tr>
