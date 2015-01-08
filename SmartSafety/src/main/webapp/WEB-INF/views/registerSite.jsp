@@ -81,7 +81,7 @@
 		</tr>
 		<tr>
 			<th>주소</th>
-			<td colspan="3"><form:input id="addr_detail" path="addr_detail" maxlength="255"  readonly="true" style="width:90%;cursor:pointer" onclick="goPopup()" />
+			<td colspan="3"><form:input id="addr_detail" path="addr_detail" maxlength="255"  readonly="true" style="width:90%;font-size:25px;cursor:pointer" onclick="goPopup()" />
 				<br>
 				<form:errors cssClass="formError" path="addr_detail" /></td>
 		</tr>

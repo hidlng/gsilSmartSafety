@@ -10,12 +10,11 @@
 
 	<select id="getManagerListByVO" resultType="ManagerVO"	parameterType="ManagerVO">
  	    SELECT
-			M.*, U.*, S.SITENAME AS SITENAME
+			M.*, U.*
 		FROM MANAGER_LIST M
 		JOIN USER_LIST U
-		JOIN SITE_LIST S
 		ON M.USER_IDX = U.USER_IDX
-		AND M.SITE_IDX = S.SITE_IDX
+		
 		WHERE 
 			M.DELYN='N'  
 			AND U.DELYN='N' 
@@ -25,7 +24,6 @@
 			OR M.POSITION like #{position}
 			OR M.GRADE like #{grade}
 			OR M.PHONE like #{phone}
-			OR S.SITENAME like #{sitename}
 			)AND U.LEVEL like #{level}
 			AND M.ISMANAGER = #{ismanager}
 			AND M.SITE_IDX like #{site_idx}
@@ -37,9 +35,7 @@
 	    	COUNT(*)
 		FROM MANAGER_LIST M
 		JOIN USER_LIST U
-		JOIN SITE_LIST S
 		ON M.USER_IDX = U.USER_IDX
-		AND M.SITE_IDX = S.SITE_IDX
 		WHERE 
 			M.DELYN='N'
 			AND U.DELYN='N'  
@@ -49,7 +45,6 @@
 			OR M.POSITION like #{position}
 			OR M.GRADE like #{grade}			
 			OR M.PHONE like #{phone}
-			OR S.SITENAME like #{sitename}
 			)AND U.LEVEL like #{level}
 			AND M.ISMANAGER = #{ismanager}
 			AND M.SITE_IDX like #{site_idx}
@@ -58,12 +53,10 @@
     
     <select id="getManagerByIdx" resultType="ManagerVO"	parameterType="String">
 	 	SELECT
-			M.*, U.*, S.SITENAME AS SITENAME
+			M.*, U.*
 		FROM MANAGER_LIST M
-		JOIN USER_LIST U
-		JOIN SITE_LIST S
+		JOIN USER_LIST U		
 		ON M.USER_IDX = U.USER_IDX
-		AND M.SITE_IDX = S.SITE_IDX
 		WHERE 
 		 	M.DELYN='N'  
 			AND U.DELYN='N'
@@ -107,7 +100,7 @@
  		WHERE 
  			M.DELYN = 'N'
  			AND U.DELYN = 'N'
- 			AND SITE_IDX = #{site_idx}
+ 			AND M.SITE_IDX = #{site_idx}
  	</select>
 
 	<insert id="insert" parameterType="ManagerVO">

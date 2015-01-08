@@ -46,15 +46,15 @@ function goPage(val) {
 	<!-- //srchbox -->
 <table>
 	<colgroup>
-		<col style="width: 6%">
-		<col style="width: 15%">
+		<col style="width: 7%">
+		<col style="width: 14%">
 		<col style="width: 30%">
 		<col style="width: 20%">		
 		<col>
 	</colgroup>
 	<thead>
 		<tr>
-			<th scope="col">번호</th>
+			<th scope="col">NO.</th>
 			<th scope="col">공종</th>
 			<th scope="col">작업타이틀</th>
 			<th scope="col">작업기간</th>

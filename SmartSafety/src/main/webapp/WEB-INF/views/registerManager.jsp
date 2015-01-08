@@ -41,7 +41,7 @@
 			}
 		}else {//본사,CEO(1,3)
 			 $('#siteTR').hide();			
-		     $('#site_idx').val('');//make empty value
+		     $('#site_idx').val('NONE');//make empty value
 		}
 }
 
@@ -96,7 +96,7 @@
 
 	<tr>
 		<th>권한</th>
-		<td>
+		<td colspan="3">
 			<c:if test="${!updateMode}">
 				<form:select class="selectBox"  path="level" onchange="chgMLevel(this.value)">
 						<form:option value="1" selected="selected">본사 관리자(EHS팀)</form:option>
@@ -117,8 +117,7 @@
 				</c:if>
 			</c:if>
 		</td>
-		<th>직급</th>
-		<td colspan="3"><form:input path="grade" maxlength="45"/><p/><form:errors cssClass="formError" path="grade" /></td>
+		
 	</tr>
 	
 	<tr id="siteTR">
@@ -134,17 +133,22 @@
 	</tr>
 	
 	<tr>
+		<th>직급</th>
+		<td><form:input path="grade" maxlength="45"/><p/><form:errors cssClass="formError" path="grade" /></td>
 		<th>성명</th>
 		<td><form:input path="name" maxlength="45"/><p/><form:errors cssClass="formError" path="name" />
 		</td>
-		<th>생년월일</th>
-		<td><form:input id="birthInput" path="birth" maxlength="10" /><p/><form:errors cssClass="formError" path="birth" /></td>
+		
 	</tr>
 	<tr>
+		<th>생년월일</th>
+		<td><form:input id="birthInput" path="birth" maxlength="10" /><p/><form:errors cssClass="formError" path="birth" /></td>
 		<th>연락처<p/><span style="font-size:17px">(010-1234-5678)</span></th>
 		<td><form:input path="phone" maxlength="13" onblur="checkPhone(this, this.value)"/><p/><form:errors cssClass="formError" path="phone" /></td>
+	</tr>
+	<tr>
 		<th>소속</th>
-		<td><form:input path="position" maxlength="45"/><p/><form:errors cssClass="formError" path="position" /></td>
+		<td colspan="3"><form:input path="position" maxlength="45"/><p/><form:errors cssClass="formError" path="position" /></td>
 	</tr>
 	<tr>
 		<th>ID</th>

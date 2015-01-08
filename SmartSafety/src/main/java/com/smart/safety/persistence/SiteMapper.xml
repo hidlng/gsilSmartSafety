@@ -12,7 +12,7 @@
 	    	*
 	 	FROM SITE_LIST
 	    WHERE DELYN='N'
-	    ORDER BY SITE_IDX
+	    ORDER BY WRITETIME
 	</select>
 	<select id="getSiteListByVO" resultType="SiteVO"	parameterType="SiteVO">
    	   	SELECT
@@ -24,7 +24,7 @@
 			OR SITENAME like #{sitename}
 			OR REP_PHONE like #{rep_phone}
 			)
-		ORDER BY SITE_IDX
+		ORDER BY WRITETIME
 		LIMIT #{start}, #{size}
     </select>
     

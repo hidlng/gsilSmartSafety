@@ -114,7 +114,7 @@ if(input) { //yes
 <input type="hidden" name="risk_warn" value="${workVO.risk_warn}" id="risk_warn" />
 <input type="hidden" name="workpermit" value="${workVO.workpermit}" id="workpermit" />
 
-<table class="user_signup">
+<table class="work_signup">
 	<colgroup>
 		<col style="width: 33%">
 		<col>		
@@ -132,7 +132,7 @@ if(input) { //yes
 
 <!-- work start -->
 <p class="red">작업선택<br>
-<table class="user_signup">
+<table class="work_signup">
 	<colgroup>
 		<col>
 		<col style="width: 33%">
@@ -151,21 +151,21 @@ if(input) { //yes
 	</tr>
 	<tr class="listTR">
 		<td  onclick="goPopup()">						
-			<form:input id="worktype" path="worktype"  readonly="true" style="cursor:pointer;" />
+			<form:input id="worktype" class="categoryInput" path="worktype"  readonly="true" style="cursor:pointer;border:2px solid #1D4F99" />
 			<br><form:errors path="worktype" cssClass="formError"/>
 		</td>
 		<td  onclick="goPopup()">				
-			<form:input id="category1"  path="category1"  readonly="true" style="cursor:pointer;"/>
+			<form:input id="category1"  class="categoryInput" path="category1"  readonly="true" style="cursor:pointer;border:2px solid #1D4F99"/>
 			<br><form:errors path="category1" cssClass="formError"/>
 		<td  onclick="goPopup()">				
-			<form:input id="category2" path="category2"  readonly="true" style="cursor:pointer;"/>
+			<form:input id="category2"  class="categoryInput" path="category2"  readonly="true" style="cursor:pointer;border:2px solid #1D4F99"/>
 			<br><form:errors path="category2" cssClass="formError"/>
 		</td>
 	</tr>
 	<tr>
 		<th>작업종류</th>
-		<td colspan="2"  onclick="goPopup()"  class="listTR">			
-			<form:input id="workname"  path="workname"  readonly="true"  style="cursor:pointer;"/>
+		<td colspan="2"  onclick="goPopup()"  class="listTR categoryInput">			
+			<form:input id="workname"  path="workname"  readonly="true"  style="cursor:pointer;border:2px solid #1D4F99"/>
 			<br><form:errors path="workname" cssClass="formError"/>
 		</td>
 	</tr>			
@@ -206,7 +206,7 @@ if(input) { //yes
 
 <!--  start -->
 	<p class="red">장비선택<br>				
-	<table class="user_signup">		
+	<table class="work_signup">		
 	<colgroup>	
 		<col style="width:33%">
 		<col>					
@@ -233,9 +233,9 @@ if(input) { //yes
 	</tr>	
 </table>
 
-<!--  //user_signup -->
+<!--  //work_signup -->
 <p class="red">공도구선택<br>
-<table class="user_signup">
+<table class="work_signup">
 	<colgroup>	
 		<col style="width:33%">
 		<col>					
@@ -268,7 +268,7 @@ if(input) { //yes
 <!-- end  -->
 
 <p class="red">작업장소등록<br>
-<table class="user_signup">
+<table class="work_signup">
 	<colgroup>
 		<col style="width: 25%">
 		<col style="width: 25%">

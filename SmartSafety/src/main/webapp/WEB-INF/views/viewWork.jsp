@@ -101,7 +101,7 @@ function updateSubmit(){
 	<!--다른사용자의update동작을 고려하여 자동으로 입력되는 부분 추가시 주의-->
 
 
-	<table class="user_signup">
+	<table class="work_signup">
 		<colgroup>
 			<col>
 			<col style="width: 33%">
@@ -156,7 +156,7 @@ function updateSubmit(){
 
 	<!--  start -->
 	<p class="red">장비<br>
-	<table class="user_signup">
+	<table class="work_signup">
 		<colgroup>
 			<col style="width: 33%">
 			<col>
@@ -174,10 +174,10 @@ function updateSubmit(){
 			<td id="etc_machine"></td>
 		</tr>
 	</table>
-	<!--  //user_signup -->
+	<!--  //work_signup -->
 
 	<p class="red">공도구<br>
-	<table class="user_signup">
+	<table class="work_signup">
 		<colgroup>
 			<col style="width:33%">
 			<col>	
@@ -202,7 +202,7 @@ function updateSubmit(){
 	<!-- end  -->
 
 	<p class="red">작업장소등록<br>
-	<table class="user_signup">
+	<table class="work_signup">
 		<colgroup>
 			<col style="width: 25%">
 			<col style="width: 25%">

@@ -3,12 +3,13 @@
 
 .listTR {
 	cursor:pointer;
+	
 }
 
 .listTR:hover{
  	background-color:#8CB4E0;
-	border: 2px solid #ffffff;
-	t color:#162133 !importan;
+	/*border: 2px solid #ffffff;*/
+	color:#162133 !important;
 	
 	
 }
@@ -53,6 +54,7 @@
 
 #remark {
 	text-align:left;
+	padding-left:20px;
 	
 }
 
@@ -87,7 +89,7 @@ a:hover.infoBtn {
 	color: #fff;
 	font-size: 35px;
 	line-height: 36px;
-	border: 1px dotted #8c97a9;
+	border: 2px solid #1D4F99;
 	text-align: center;
 	
 }
@@ -104,7 +106,7 @@ a:hover.infoBtn {
 	color: #fff;
 	font-size: 35px;
 	line-height: 36px;
-	border: 1px dotted #8c97a9;
+	border: 2px solid #1D4F99;
 	text-align: center;
 }
 
@@ -117,11 +119,16 @@ a:hover.infoBtn {
 	border: 2px solid red;
 }
 
+.categoryInput {
+	border:2px solid #1D4F99;
+}
+
 #birthInput{
 	cursor:pointer;
 	
 	background: url('../images/cal_icon.png') no-repeat right;
 	background-size : 23px 23px;
+	
 }
 
 #startDateInput {
@@ -158,6 +165,8 @@ a:hover.infoBtn {
 	background: url('../images/write_icon.png') no-repeat right;
 	background-size : 23px 23px;
 	background-color:#475B7C;
+	background-position-x: 15px;
+	text-indent: 20px;
 }
 
 

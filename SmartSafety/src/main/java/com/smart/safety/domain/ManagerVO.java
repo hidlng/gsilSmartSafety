@@ -53,9 +53,6 @@ public class ManagerVO implements Serializable {
 	private String level;//int값이지만like구문 위해 String으론	
 	private String pid;
 	
-	/**Site Data**/
-	private String sitename;
-	
 	/**paging**/
 	private int start=0;
 	private int size=10;
@@ -155,12 +152,6 @@ public class ManagerVO implements Serializable {
 	}
 	public void setSite_idx(String site_idx) {
 		this.site_idx = site_idx;
-	}
-	public String getSitename() {
-		return sitename;
-	}
-	public void setSitename(String sitename) {
-		this.sitename = sitename;
 	}
 
 	public String getLevel() {

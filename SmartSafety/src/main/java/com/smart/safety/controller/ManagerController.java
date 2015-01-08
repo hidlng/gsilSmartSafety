@@ -160,11 +160,17 @@ public class ManagerController {
 		boolean isManager = request.getServletPath().equals("/insertManager");
 		boolean hasError = false;
 		
+		//업체리스트 출력 (siteUser에서 사용)	
+		SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");	
+		List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
+		model.addAttribute("contList", contList);
+		
 		
 		if(bindingResult.hasErrors())
 			hasError = true;		
 		else {
 			try{
+				if(managerVO.getSite_idx() == null)managerVO.setSite_idx("NONE");//임시. 본사관리자 등록시 site_idx가 null이면 like조건에 걸리지 않아 list에 나오지않음&삽입안됨
 				managerService.insertManager(managerVO);
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -197,12 +203,18 @@ public class ManagerController {
 		boolean isManager = request.getServletPath().equals("/updateManager"); 		
 		boolean hasError = false;
 		
+		//업체리스트 출력 (siteUser에서 사용)	
+		SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");	
+		List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
+		model.addAttribute("contList", contList);
+		
 		
 		if(bindingResult.hasErrors())
 			hasError = true;
 		
 		else {
 			try{
+				if(managerVO.getSite_idx() == null)managerVO.setSite_idx("NONE");//임시. 본사관리자 등록시 site_idx가 null이면 like조건에 걸리지 않아 list에 나오지않음&삽입안됨
 				managerService.updateManager(managerVO);
 			}catch(Exception e) {
 				e.printStackTrace();
