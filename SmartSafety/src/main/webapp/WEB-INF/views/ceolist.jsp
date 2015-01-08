@@ -36,8 +36,15 @@
 		}); 
 		
 	  	$(function() {
-		    $( "#searchDate" ).datepick();
-		    $( "#searchDate" ).datepick( "option", "dateFormat", 'yyyymmdd' ); 
+		    
+		    $( "#searchDate" ).datepick( { 
+	    		onClose: function (selectedDate) {
+	    		if(selectedDate != "") {	    			
+	    			$( "#searchDate" ).datepick( "option", "dateFormat", 'yyyymmdd' ); 
+	    			goPage(1);
+	    		}
+	    	}
+		    } ); 
 		});
 		
 	  	function goPage(val) {
@@ -116,7 +123,7 @@
 						</div>					
 						<div class="srchbox">
 							<p>
-								<input id="searchDate" type="search" name="searchWord" title="검색창" class="search_input" value="${searchWord}" autocomplete="off" readonly="true" >
+								<input id="searchDate" type="search" name="searchWord" title="검색창" class="search_input" value="${searchWord}" autocomplete="off" >
 								<span class="btn_search" onclick="goPage(1)" ><a href="#">검색</a></span>
 							</p>
 						</div><!-- //srchbox -->

@@ -46,7 +46,7 @@ a{color:#333;text-decoration:none;}6
 a:hover, a:active{color:#666;text-decoration:none;}
 
 /* layout */
-body{position:relative; width:100%;background:url("../images/bg001.png") repeat-x 0 0 #000; color:#fff; font-size:18px;}
+body{position:relative; width:100%;background:url("../images/bg001.png") repeat-x 0 0 #000; color:#fff; font-size:28px;line-height: 34px;}
 #wrap{width:100%;min-height:1000px;background:url("../images/bg002.png") no-repeat 0 0;min-width:1400px;}
 #wrap.sub{width:100%;background:url("../images/bg002.png") no-repeat 0 0; min-height:200px;min-width:1400px;}
 .back_bg{width:100%;min-width:1400px;min-height:1000px;background:url("../images/bg003.png") no-repeat right 500px; padding:250px 0 100px;}
@@ -77,7 +77,7 @@ h1 img{width:120px;}
 .content{float:right; width:100%; min-height:500px; padding-top:20px; padding-left:5px;padding-right:5px; background:url("../images/bg_box.png") repeat 0 0;}
 .content .srchbox{width:250px; float:right; overflow:hidden;height:36px;padding-bottom:20px;}
 .content .srchbox p{float:right;overflow:hidden;  height:36px; border:1px solid #152133;background-color:#fff; }
-.content .srchbox .search_input{width:207px; height:36px; padding:3px 10px;font-size:14px; line-height:14px;background-color:#fff; color:#333; border:none;}
+.content .srchbox .search_input{width:207px; height:36px; padding:3px 10px;font-size:28px; line-height:14px;background-color:#fff; color:#333; border:none;}
 .content .srchbox .btn_search{float:right;width:35px;height:36px;text-indent: -9999px; border-left:1px solid #141e2d;background:url("../images/icon_search.png") no-repeat 10px 12px #fff;}
 
 .content .listLevelBox{ width:900px;float:left; }

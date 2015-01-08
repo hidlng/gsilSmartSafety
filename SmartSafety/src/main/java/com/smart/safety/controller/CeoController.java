@@ -51,7 +51,7 @@ public class CeoController {
 		String bdate = mFormat.format(cTime);
 		
 		if( searchWord != null && !searchWord.equals("") ) {
-			bdate = searchWord;
+			bdate = searchWord.replaceAll("-","");
 		}
 		
 		ceoVO.setBasedate(bdate);
