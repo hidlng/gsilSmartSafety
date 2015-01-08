@@ -49,6 +49,11 @@ public class CeoController {
 		SimpleDateFormat mFormat = new SimpleDateFormat( "yyyyMMdd", Locale.KOREA );
 		Date cTime = new Date();
 		String bdate = mFormat.format(cTime);
+		
+		if( searchWord != null && !searchWord.equals("") ) {
+			bdate = searchWord;
+		}
+		
 		ceoVO.setBasedate(bdate);
 		
 		/**paging**/

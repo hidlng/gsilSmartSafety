@@ -6,7 +6,9 @@
 <html >
 	<head>
 		<title>GSIL</title>
-		<link rel="stylesheet" href="css/ceocommon.css" type="text/css">  
+		<link rel="stylesheet" href="css/ceocommon.css" type="text/css"> 
+  		<link rel="stylesheet" href="css/jquery.datepick.css" type="text/css" >
+  		<link rel="stylesheet" href="css/jquery.timepicker.css" type="text/css" >  
   	    <script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
 		<script type="text/javascript" src="js/jquery.plugin.js"></script>
 		<script type="text/javascript" src="js/jquery.datepick.js"></script> 
@@ -28,12 +30,21 @@
 			if(document.getElementById( 'siteindex' ).value != '' ) {
 				document.getElementById( 'siteSearch' ).selectedIndex = document.getElementById( 'siteindex' ).value;
 			}
+			
+
+		   
 		}); 
 		
-		function goPage(val) {
-			$('#pageNum').val(val);
-			$('#searchForm').submit();
-		}
+	  	$(function() {
+		    $( "#searchDate" ).datepick();
+		    $( "#searchDate" ).datepick( "option", "dateFormat", 'yyyymmdd' ); 
+		});
+		
+	  	function goPage(val) {
+	  		$('#searchWord').val($('#searchDate').val());
+	  		$('#pageNum').val(val);
+	  		$('#searchForm').submit();
+	  	}
 		
 		function chgLevel(gubun,val) {
 			
@@ -46,7 +57,7 @@
 					$('#siteValue').val("");
 					$('#siteindex').val("0");
 				} else {
-					$('#siteValue').val(val.substring(1,val.indexOf("/")));
+					$('#siteValue').val(val.substring(0,val.indexOf("/")));
 					$('#siteindex').val(val.substring((val.indexOf("/")+1)));
 				}
 				
@@ -61,8 +72,8 @@
  			});
 			timer.set({ time :300000 , autostart :true});
 		}
+
 		function viewSubmit(val) {
-			
 			var idx = $("#updateIdx_"+val).val();
 			$("#viewIdx").val(idx);
 			$('#viewForm').submit();
@@ -84,7 +95,7 @@
 						<div class="listLevelBox">
 						
 							<select id="siteSearch" class="selectBox" onchange="chgLevel('3',this.value)">
-								<option value="/0" >--현장선--</option>
+								<option value="/0" >--현장선택--</option>
 							<c:forEach var="site" items="${siteList}" varStatus="idx">
 								<option value="${site.site_idx}/${idx.count}" >${site.sitename}</option>
 							</c:forEach>
@@ -105,8 +116,8 @@
 						</div>					
 						<div class="srchbox">
 							<p>
-								<input type="search" name="searchWord" title="검색창" class="search_input" autocomplete="off" >
-								<span class="btn_search"><a href="#">검색</a></span>
+								<input id="searchDate" type="search" name="searchWord" title="검색창" class="search_input" value="${searchWord}" autocomplete="off" readonly="true" >
+								<span class="btn_search" onclick="goPage(1)" ><a href="#">검색</a></span>
 							</p>
 						</div><!-- //srchbox -->
 					</div>
@@ -123,10 +134,10 @@
 						</colgroup>
 							
 							<tr>
-								<th>현장</th>
-								<th>작업</th>
+								<th>현&nbsp;&nbsp;장</th>
+								<th>작&nbsp;&nbsp;업</th>
 								<th>위험도</th>
-								<th>안전점검<br/>여부</th>								
+								<th>점검여부</th>								
 								<th>점검자</th>
 								<th>작업기간</th>						
 							</tr>
@@ -173,7 +184,7 @@
 		
 		<div id="form_group" style="display:none">
 			<form id="searchForm" action="ceolist" action="GET" >
-				<input id="searchWord" name="searchWord" type="hidden">
+				<input id="searchWord" name="searchWord" type="hidden" value="${searchWord}">
 				<input id="siteValue" name="siteValue" type="hidden" value="${siteValue}" >
 				<input id="siteindex" name="siteindex" type="hidden" value="${siteindex}" >
 				<input id="riskSearchValue" name="riskSearchValue" value="${riskSearchValue}" type="hidden">
