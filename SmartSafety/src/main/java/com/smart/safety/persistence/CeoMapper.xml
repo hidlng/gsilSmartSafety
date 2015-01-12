@@ -65,7 +65,7 @@
 		AND T.CHECKYN = #{chkSearchValue}
 		</if>
 		
-		ORDER BY RISK_GRADE ASC
+		ORDER BY RISK_GRADE ASC, CHECKYN ASC
 		LIMIT #{start}, #{size}
     </select>
    	<select id="getRowCount" resultType="Integer" parameterType="CeoVO">

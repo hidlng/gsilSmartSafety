@@ -77,4 +77,6 @@ public class CeoController {
 		model.addAttribute("ceoList", list);
 		model.addAttribute("siteList", sitelist);	
 	}
+	
+	
 }

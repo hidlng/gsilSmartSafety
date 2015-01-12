@@ -14,10 +14,10 @@
 		<script type="text/javascript" src="js/jquery.datepick.js"></script> 
 		<script type="text/javascript" src="js/jquery.datepick-ko.js"></script>
 		<script type="text/javascript" src="js/jquery.timer.js"></script>
-
+		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=ture_or_false"></script>
 		<script>
 
-
+		
 		$(document).ready(function() {
 			if(document.getElementById( 'riskSearchValue' ).value != '' ) {
 				document.getElementById( 'riskSearch' ).selectedIndex = document.getElementById( 'riskSearchValue' ).value;
@@ -31,8 +31,19 @@
 				document.getElementById( 'siteSearch' ).selectedIndex = document.getElementById( 'siteindex' ).value;
 			}
 			
-
-		   
+			 var geocoder = new google.maps.Geocoder();
+			 var addr="서울시 영등포구 신길7동 1147";
+			 var lat="";
+			 var lng="";
+			 geocoder.geocode({'address':addr},
+			 function(results, status){
+				 if(results!=""){
+				    var location=results[0].geometry.location;
+				    lat=location.lat();
+				    lng=location.lng(); 
+				 } 
+			 })
+					   
 		}); 
 		
 	  	$(function() {
@@ -46,7 +57,7 @@
 	    	}
 		    } ); 
 		});
-		
+	  	
 	  	function goPage(val) {
 	  		$('#searchWord').val($('#searchDate').val());
 	  		$('#pageNum').val(val);
