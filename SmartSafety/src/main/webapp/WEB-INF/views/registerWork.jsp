@@ -164,8 +164,8 @@ if(input) { //yes
 	</tr>
 	<tr>
 		<th>작업종류</th>
-		<td colspan="2"  onclick="goPopup()"  class="listTR categoryInput">			
-			<form:input id="workname"  path="workname"  readonly="true"  style="cursor:pointer;border:2px solid #1D4F99"/>
+		<td colspan="2"  onclick="goPopup()"  class="listTR categoryInput ">			
+			<form:input id="workname"  path="workname"  readonly="true" class="colspanInput" style="cursor:pointer;border:2px solid #1D4F99"/>
 			<br><form:errors path="workname" cssClass="formError"/>
 		</td>
 	</tr>			
@@ -280,7 +280,7 @@ if(input) { //yes
 	<tr>
 		<th>장소유형</th>
 		<td colspan="3">
-		<form:select path="placename" class="siteSelectBox" id="placename">
+		<form:select path="placename" class="siteSelectBox" id="placename" style="width:92%">
 			<form:option value="">:::선택:::</form:option>
 			<form:option value="" selected="true">2</form:option>
 		</form:select></td>
@@ -290,7 +290,7 @@ if(input) { //yes
 	<tr>
 		<th>세부장소</th>
 		<td colspan="3">
-			<form:input path="addr_detail" 	maxlength="255" />
+			<form:input path="addr_detail" class="colspanInput" 	maxlength="255" />
 			<br> <form:errors path="addr_detail" cssClass="formError"  />
 		</td>
 	</tr>
@@ -330,17 +330,18 @@ if(input) { //yes
 			
 			<th>작업자 수</th>
 			<td >
-				<form:select id="test" path="pic_num_worker" class="selectBox" >
+				<form:select id="test" path="pic_num_worker" class="selectBox" style="width:83%">
 				<c:forEach begin="1" end="30" varStatus="idx">
 						<form:option value="${idx.index}">${idx.index}</form:option>
 				</c:forEach>
+				
 				</form:select>
 			</td>
 		</tr>
 		<tr>
 			<th>소속</th>
 			<td colspan="3">
-				<form:select path="pic_position" class="siteSelectBox" >
+				<form:select path="pic_position" class="siteSelectBox"  style="width:94%;">
 					<c:forEach var="cont" items="${contList}" >
 						<form:option value="${cont.cont_name}">${cont.cont_name}</form:option>
 					</c:forEach>
@@ -349,22 +350,22 @@ if(input) { //yes
 			</td>	
 		</tr>
 		<tr>
-			<th rowspan="2">작업<br>상황<br />난이도
+			<th rowspan="2">작&nbsp;&nbsp;&nbsp;업<br>상&nbsp;&nbsp;&nbsp;황<br />난이도
 			</th>
 			<td colspan="3">
 			<form:select path="worklevel" class="selectBox" >
-				<c:forEach begin="0" end="2" varStatus="count">
-						<form:option value="${count.index}"> ${count.index} 점</form:option>
-				</c:forEach>
+				<form:option value="0">평범한 상황</form:option>
+				<form:option value="1">어려운 상황</form:option>
+				<form:option value="2">매우 어려운 상황</form:option>
 			</form:select>
 			</td>
 		</tr>
 
 		<tr>
 		<td colspan="3"><span class="explain">
-		<b style="color:red">0점</b> : 평범 평상 시 작업과 유사한 조건으로 작업 상 애로사항이 없음.<br>
-		<b style="color:red">1점</b> : 어려운 상황 혹서기, 혹한기, 일기(비, 눈, 바람 등)등에 의해 작업상 어려움이 있어 관리가 필요한 상황<br>
-		<b style="color:red">2점</b> : 매우어려운상황 작업이 매우 어려운 상황이지만 불가하게 작업을 진행해야 하는 경우, 특별관리가 필요한 상황<br>
+		<b style="color:limegreen">평범한 상황</b> : 평상 시 작업과 유사한 조건으로 작업 상 애로사항이 없음<br>
+		<b style="color:yellow">어려운 상황</b> : 혹서기, 혹한기, 일기(비, 눈, 바람 등)등에 의해 작업상 어려움이 있어 관리가 필요한 상황<br>
+		<b style="color:red">매우 어려운 상황</b> : 작업이 매우 어려운 상황이지만 불가피하게 작업을 진행해야 하는 경우, 특별관리가 필요한 상황<br>
 	</span>
 		</td>
 		</tr>

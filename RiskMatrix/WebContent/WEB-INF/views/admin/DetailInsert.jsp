@@ -177,9 +177,10 @@
 			</td>
 			</c:forEach>
 		</tr>
-		<tr><th class="detailHeader">안전작업가이드</th><td  colspan="5"><stripes:textarea   name="workVO.guide" onkeyup="checkSpeChar(2)"/></td>		</tr>
-		<tr><th class="detailHeader">보호구</th><td  colspan="5"><stripes:textarea  name="workVO.equip" onkeyup="checkSpeChar(2)"/></td>		</tr>
-		<tr><th class="detailHeader">이상징후/<br>비상시조치사항</th><td colspan="5"><stripes:textarea  name="workVO.measure" onkeyup="checkSpeChar(2)" /></td>		</tr>
+		<tr><th class="detailHeader">안전작업가이드</th><td  colspan="5"><stripes:textarea   name="workVO.guide" onkeyup="checkSpeChar(2)"/></td>	</tr>
+		<tr><th class="detailHeader">보호구</th><td  colspan="5"><stripes:textarea  name="workVO.equip" onkeyup="checkSpeChar(2)"/></td></tr>
+		<tr><th class="detailHeader">이상징후/<br>비상시조치사항</th><td colspan="5"><stripes:textarea  name="workVO.measure" onkeyup="checkSpeChar(2)" /></td></tr>
+		<tr><th class="detailHeader">안전조치사항</th><td colspan="5"><stripes:textarea  name="workVO.safety" onkeyup="checkSpeChar(2)" /></td></tr>
 		<tr><th class="detailHeader">사고사례</th><td  colspan="5"><!--File Upload -->
 				<!-- insert -->
 				<c:if test="${!actionBean.isModify}">
@@ -191,7 +192,7 @@
 				<c:if test="${actionBean.isModify}">
 					<c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
 						<span id="file_${file.file_idx}">${file.fileName} </span>
-						<span id="file_del_${file.file_idx}" style="cursor:poitner" onclick="deleteFileList(${file.file_idx})">X</span><br>
+						<span id="file_del_${file.file_idx}" style="cursor:pointer" onclick="deleteFileList(${file.file_idx})">X</span><br>
 					</c:forEach>
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
 						<stripes:file name="fileBeanList[${loop.index}]" /><br>
@@ -248,7 +249,7 @@
 				<c:if test="${actionBean.isModify}">
 					<c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
 						<span id="file_${file.file_idx}">${file.fileName} </span>
-						<span id="file_del_${file.file_idx}"  style="cursor:poitner" onclick="deleteFileList(${file.file_idx})">X</span><br>
+						<span id="file_del_${file.file_idx}"  style="cursor:pointer" onclick="deleteFileList(${file.file_idx})">X</span><br>
 					</c:forEach>
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
 						<stripes:file name="fileBeanList[${loop.index}]" /><br>
@@ -277,7 +278,7 @@
 				<c:if test="${actionBean.isModify}">
 					<c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
 						<span id="file_${file.file_idx}">${file.fileName} </span>
-						<span id="file_del_${file.file_idx}" style="cursor:poitner" onclick="deleteFileList(${file.file_idx})">X</span><br>	
+						<span id="file_del_${file.file_idx}" style="cursor:pointer" onclick="deleteFileList(${file.file_idx})">X</span><br>	
 					</c:forEach>
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
 						<stripes:file name="fileBeanList[${loop.index}]" /><br>

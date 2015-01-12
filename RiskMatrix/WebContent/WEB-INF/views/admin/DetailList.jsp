@@ -56,6 +56,10 @@
 					</th>
 					<td class="wordBreak" colspan="${actionBean.inputAccList.size()}">${actionBean.workVO.measure}</td>
 				</tr>
+				<tr>
+					<th class="detailHeader">안전 조치 사항</th>
+					<td class="wordBreak" colspan="${actionBean.inputAccList.size()}">${actionBean.workVO.safety}</td>
+				</tr>
 				<tr><th class="detailHeader">사고사례</th>					
 					<td colspan="${actionBean.inputAccList.size()}"><c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
 							<stripes:link	beanclass="com.spring.risk.web.actions.CategoryActionBean"	event="getFile">

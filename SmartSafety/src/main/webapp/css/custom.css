@@ -1,6 +1,5 @@
 
 
-
 .listTR {
 	cursor:pointer;
 	
@@ -55,6 +54,7 @@
 #remark {
 	text-align:left;
 	padding-left:20px;
+	font-size:25px;
 	
 }
 

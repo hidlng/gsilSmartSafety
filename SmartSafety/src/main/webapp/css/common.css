@@ -71,7 +71,7 @@ h1 img{width:120px;}
 .aside_ident {position:absolute; left:35px; bottom:55px; width:200px;  }
 .aside_ident li{color:#efefef; font-size:23px; line-height:30px; border-bottom:1px dotted #8c97a9; margin-bottom:15px;}
 .aside_ident li.last{ border-bottom:0px; text-align:center; float: right;margin-top: 5px;}
-.aside_ident li span.identContent{width:50px; }
+.aside_ident li span.identContent{width:50px; text-align:right;}
 .aside_ident li span.identTitle .head{width:50px; color:#5891ed;}
 
 .aside_ident li span input{width:150px;  padding:5px 15px; background:none; border:0; font-size:18px; color:#fff;}
@@ -90,7 +90,7 @@ h1 img{width:120px;}
 .content table.user_signup td {text-align:left; padding-left: 18px;}
 .content table.user_signup td input{width:80%; font-size:30px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 2px solid #1D4F99;}
 .content table.user_signup td input[readonly='true'] {border:0px solid blue;}
-.content table.user_signup td .colspanInput{width:92%;}
+.content table.user_signup td .colspanInput{width:93%;}
 
 /* paging */
 .content .paging{text-align:center; padding: 40px 0 0 0; }
@@ -129,7 +129,7 @@ span.explain{display:block;width:92%;font-weight:normal;font-size:25px;line-heig
 .content table.work_signup td {}
 .content table.work_signup td input{width:80%; font-size:35px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 2px solid #1D4F99;}
 .content table.work_signup td input[readonly='true'] {border:0px solid blue;}
-.content table.work_signup td .colspanInput{width:92%;}
+.content table.work_signup td .colspanInput{width:90%;}
 
 /* button style */
 .btn_typ01{display:block; width:150px; padding:2px; margin:0 auto;background-color:#475B7C;border:1px solid #222;border-radius:3px;text-align:center;

@@ -7,24 +7,24 @@ public class TBMVO extends BaseInfoVO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -642899471456883370L;
-	String tbm_idx;
-	String work_idx;
+	private String tbm_idx;
+	private String work_idx;
 	
-	String workname;//작업코드관련 이름임..
-	String placename;
-	int risk_level;
-	String risk_grade;
-	String risk_warn;
-	String workpermit;
-	String toollist ="";
-	String mainrisk ="";
-	String measure ="";
-	String equip ="";
-	String guide ="";
-	String remark ="";
+	private String workname;//작업코드관련 이름임..
+	private String placename;
+	private int risk_level;
+	private String risk_grade;
+	private String risk_warn;
+	private String workpermit;
+	private String toollist ="";
+	//private String mainrisk ="";
+	private String measure ="";
+	private String equip ="";
+	private String guide ="";
+	private String remark ="";
+	private String safety ="";
 	
-	String site_rep_name;
-	String site_rep_phone;
+	
 	
 	public String getToollist() {
 		return toollist;
@@ -32,13 +32,7 @@ public class TBMVO extends BaseInfoVO implements Serializable{
 	public void setToollist(String toollist) {
 		this.toollist = toollist;
 	}
-	public String getMainrisk() {
-		return mainrisk;
-	}
-	public void setMainrisk(String mainrisk) {
-		this.mainrisk = mainrisk;
-	}
-	
+
 	
 	public String getTbm_idx() {
 		return tbm_idx;
@@ -106,23 +100,18 @@ public class TBMVO extends BaseInfoVO implements Serializable{
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public String getSite_rep_name() {
-		return site_rep_name;
-	}
-	public void setSite_rep_name(String site_rep_name) {
-		this.site_rep_name = site_rep_name;
-	}
-	public String getSite_rep_phone() {
-		return site_rep_phone;
-	}
-	public void setSite_rep_phone(String site_rep_phone) {
-		this.site_rep_phone = site_rep_phone;
-	}
+
 	public int getRisk_level() {
 		return risk_level;
 	}
 	public void setRisk_level(int risk_level) {
 		this.risk_level = risk_level;
+	}
+	public String getSafety() {
+		return safety;
+	}
+	public void setSafety(String safety) {
+		this.safety = safety;
 	}
 
 	

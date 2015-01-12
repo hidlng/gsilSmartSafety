@@ -201,7 +201,7 @@ function updateSubmit(){
 	</table>
 	<!-- end  -->
 
-	<p class="red">작업장소등록<br>
+	<p class="red">작업장소<br>
 	<table class="work_signup">
 		<colgroup>
 			<col style="width: 25%">
@@ -258,15 +258,18 @@ function updateSubmit(){
 			<tr>
 				<th rowspan="2">작업상황<br />난이도
 				</th>
-				<td colspan="3">${workVO.worklevel} 점</td>
+				<td colspan="3">
+					<c:if test="${workVO.worklevel == 0}"><b style="color: limegreen">평범한 상황</b></c:if>
+					<c:if test="${workVO.worklevel == 1}"><b style="color: yellow">어려운 상황</b></c:if>
+					<c:if test="${workVO.worklevel == 2}"><b style="color: red">매우 어려운 상황</b></c:if>
+				</td>
 			</tr>
 
 			<tr>
-				<td colspan="3"><span class="explain"> <b
-						style="color: red">0점</b> : 평범 평상 시 작업과 유사한 조건으로 작업 상 애로사항이 없음.<br>
-						<b style="color: red">1점</b> : 어려운 상황 혹서기, 혹한기, 일기(비, 눈, 바람 등)등에 의해 
-						작업상 어려움이 있어 관리가 필요한 상황<br> <b style="color: red">2점</b> :
-						매우어려운상황 작업이 매우 어려운 상황이지만 불가하게 작업을 진행해야 하는 경우, 특별관리가 필요한 상황<br>
+				<td colspan="3"><span class="explain">
+						<b style="color: limegreen">평범한 상황</b> : 평상 시 작업과 유사한 조건으로 작업 상 애로사항이 없음<br>
+						<b style="color: yellow">어려운 상황</b> : 혹서기, 혹한기, 일기(비, 눈, 바람 등)등에 의해 작업상 어려움이 있어 관리가 필요한 상황<br> 
+						<b style="color: red">매우 어려운 상황</b> : 작업이 매우 어려운 상황이지만 불가피하게 작업을 진행해야 하는 경우,특별관리가 필요한 상황<br>
 				</span></td>
 			</tr>
 

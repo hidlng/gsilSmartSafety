@@ -14,7 +14,7 @@
   hr {display:none}
   hr.blkie8 {display:block;;border:none} /* ie8 block display */
   #wrap{position:relative;margin:0 auto; width:900px; padding:10px;clear:both; }
-  .top {width:100%;margin-bottom:60px;margin-top:-38px;}
+  .top {width:100%;margin-bottom:20px;margin-top:-38px;}
   .top p.title01{text-align:center;font-size:18px;color:#1367b6;font-weight:bold;}
   .date{position:absolute;right:0; top:27px;font-size:12px;}
   h2{font-size:30px;text-align:center;margin-bottom:60px;}

@@ -71,6 +71,8 @@ $(document).on("keydown", disableF5);
 	   document.body.style.zoom -=0.1;
    }
    
+   alert(1);
+   test();
   </script>
 <meta http-equiv="Cache-Control" content="max-age=0" />
 <meta http-equiv="Cache-Control" content="no-cache" />
@@ -126,8 +128,8 @@ $(document).on("keydown", disableF5);
 			
 				
 				<ul class="aside_ident">
-					<li><span class="identTitle"> <span class="head">I D  : </span>${sessionScope.userLoginInfo.id}</span></li>
-					<li><span class="identTitle"> <span class="head"> 이름 : </span>
+					<li><span class="identTitle"> <span class="head">I D  : </span><br><span class="identContent">${sessionScope.userLoginInfo.id}</span></span></li>
+					<li><span class="identTitle"> <span class="head"> 이름 : <br></span>
 						<c:if test ="${sessionScope.userLoginInfo.level == 0}"> 관리자</c:if> 
 						<c:if test ="${sessionScope.userLoginInfo.level != 0}">${sessionScope.userName}</c:if>
 						</span></li>
@@ -142,7 +144,7 @@ $(document).on("keydown", disableF5);
 						<c:if test ="${sessionScope.userLoginInfo.level == 7}">현장 업체</c:if>
 					</span></li>
 					<c:if test ="${sessionScope.userLoginInfo.level >= 2}"> 
-						<li><span class="identTitle"><span class="head">소속 현장 : </span>${sessionScope.siteVO.sitename}</span></li>
+						<li><span class="identTitle"><span class="head">소속 현장 : <br></span>${sessionScope.siteVO.sitename}</span></li>
 					</c:if>
 					<li  class="last"><span id="logout" class="btn_typ01">로그아웃&nbsp;></span></li>
 				</ul><!-- //aside_ident -->

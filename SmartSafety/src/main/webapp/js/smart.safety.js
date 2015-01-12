@@ -12,6 +12,31 @@ function clearSelect() {
 function setChildCategoryOf(idx, targetId) {
 	setChildCategoryOf(idx,targetId,"")
 }
+
+function test() {
+	
+	$.ajax({
+ 		type : "POST",
+ 		url : "http://map.naver.com/common2/getRegionByPosition.nhn?",
+ 		data : {xPos : 127.4833016, yPos : 36.9719265},
+ 		dataType : "jsonp",
+ 	    jsonp : "callback",
+ 		cache : false,
+ 		success : function(json) {
+ 			alert(json);
+ 			
+ 	 		
+ 		}
+			
+ 		,
+ 		error : function(status) {
+ 			alert(status);
+ 		}
+	});
+}
+
+
+
 function setChildCategoryOf(idx, targetId, selectName) {
 	
 	$.ajax({

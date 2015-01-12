@@ -12,6 +12,8 @@ public class BaseInfoVO implements Serializable{
 	String cont_emg_phone;
 	String worktitle;
 	String weather;
+	String site_rep_name;
+	String site_rep_phone;
 	
 	String inspector;
 	String inspector_phone;
@@ -133,6 +135,18 @@ public class BaseInfoVO implements Serializable{
 	}
 	public void setWeather(String weather) {
 		this.weather = weather;
+	}
+	public String getSite_rep_name() {
+		return site_rep_name;
+	}
+	public void setSite_rep_name(String site_rep_name) {
+		this.site_rep_name = site_rep_name;
+	}
+	public String getSite_rep_phone() {
+		return site_rep_phone;
+	}
+	public void setSite_rep_phone(String site_rep_phone) {
+		this.site_rep_phone = site_rep_phone;
 	}
 	
 }

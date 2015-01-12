@@ -28,8 +28,8 @@
 	<div class="back_bg">
 		<div class="logBox">
 			<div class="inputLog" >
-				<input type="text" name="id"  placeholder="Enrer your ID">
-				<input type="password" name="password"  placeholder="Enrer your PASSWORD" onkeypress="if(event.keyCode=='13') login()">
+				<input type="text" name="id"  placeholder="Enter your ID">
+				<input type="password" name="password"  placeholder="Enter your PASSWORD" onkeypress="if(event.keyCode=='13') login()">
 			</div>
 			<p><img id="loginButton" src="images/btn_log.png" alt="login" style="cursor:pointer" onclick="login()" ></p>
 		</div><!-- //logBox -->

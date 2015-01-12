@@ -123,7 +123,7 @@
 	<tr id="siteTR">
 		<th>현장</th>
 		<td colspan="3">
-		<form:select id="site_selectBox" path="site_idx" class="siteSelectBox" style="width:80%" >
+		<form:select id="site_selectBox" path="site_idx" class="siteSelectBox" style="width:94%" >
 			<c:forEach var="site" items="${siteList}" varStatus="idx">
 					<form:option value="${site.site_idx}">${site.sitename}</form:option>
 			</c:forEach>

@@ -12,7 +12,7 @@
   <meta name="Author" content="">
   <meta name="Keywords" content="">
   <meta name="Description" content="">
-  <title>두산건설-사용전 점검(Pre Use Inspection)</title>
+  <title>작업 허가증(Permit to work)</title>
     <link rel="stylesheet" href="css/screen.css" type="text/css">
   	<link rel="stylesheet" href="css/custom.css" type="text/css">
      <link rel="stylesheet" href="css/print.css" type="text/css" media="print"/>   
@@ -66,7 +66,7 @@
 		 <tr>
 			<th><span class="bull_dot">&middot;&nbsp;</span>날&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;씨 </th>
 			<th> : </th>
-			<td colspan="3">${ptwVO.weather}</td>
+			<td colspan="3">맑음${ptwVO.weather}</td>
 			
 		 </tr>
 	 </table><!-- //typ02 -->
@@ -101,7 +101,7 @@
 		</tr>
 		<tr>
 			<td rowspan="4">화기작업</td>
-			<td class="lft">ㅇ론아너ㅣㅏ</td>
+			<td class="lft">작업 장 주변 불꽃 비산 방지조치가 이루어졌는가?</td>
 			<td>Y / N</td>
 			<td>Y / N</td>
 			<td>Y / N</td>

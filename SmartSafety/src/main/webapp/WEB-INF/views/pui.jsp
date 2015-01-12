@@ -22,11 +22,11 @@
  <div id="wrap" class="a4"> 
  	 <div class="box_top">
 		<h1><img src="images/logo_ds.png" width="100" alt="두산로고"></h1>
-		<span class="date">${tbmVO.printtime}</span>
+		<span class="date">${puiVO.printtime}</span>
 		<div class="top">
-			<p class="title01">${tbmVO.sitename}</p>			
+			<p class="title01">${puiVO.sitename}</p>			
 		</div><!-- //top -->
-		<h2>작업전 위험 예지 조회(TBM)</h2>
+		<h2>사용전 점검(Pre Use Inspection)</h2>
 	 </div><!-- //box_top -->
 	
 	
@@ -68,7 +68,7 @@
 		 <tr>
 			<th><span class="bull_dot">&middot;&nbsp;</span>날&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;씨 </th>
 			<th> : </th>
-			<td colspan="3">${puiVO.weather}</td>
+			<td colspan="3">맑음${puiVO.weather}</td>
 			
 		 </tr>
 	 </table><!-- //typ02 -->
@@ -114,7 +114,7 @@
 		<c:forEach var="check" items="${puiVO.checklist}" varStatus="index">
 			<tr>
 				<td><img src="${check.url}" width="55" height="55" alt=""></td>
-				<td> ${check.check}</td>
+				<td style="text-align:left; padding-left:20px"> ${check.check}</td>
 				<td></td>
 			</tr>
 		</c:forEach>

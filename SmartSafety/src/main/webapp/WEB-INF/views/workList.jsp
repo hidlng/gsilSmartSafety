@@ -81,7 +81,6 @@ function goPage(val) {
 		</c:forEach>
 	</tbody>
 
-	</tbody>
 </table>
 
 <div class="paging">

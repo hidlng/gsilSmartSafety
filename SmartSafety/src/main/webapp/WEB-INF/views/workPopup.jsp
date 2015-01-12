@@ -1,6 +1,6 @@
 <%@ page pageEncoding="utf-8" contentType="text/html;charset=UTF-8"	language="java"%>
 
-	<table>
+	<table class="work_signup">
 	<tr>
 		<th>공종</th>
 		<th>대분류</th>
@@ -8,18 +8,18 @@
 	</tr>
 	<tr>
 		<th>	
-			<select id="worktype_pop"  class="siteSelectBox" onchange="clearSelect('category1_pop','category2_pop','workname_pop');setCateogry(this.id, 'category1_pop')"></select>
+			<select id="worktype_pop"  class="siteSelectBox colspanInput" onchange="clearSelect('category1_pop','category2_pop','workname_pop');setCateogry(this.id, 'category1_pop')"></select>
 		</th>
 		<th>
-			<select id="category1_pop"  class="siteSelectBox" onchange="clearSelect('category2_pop','workname_pop');setCateogry(this.id, 'category2_pop')"></select>							
+			<select id="category1_pop"  class="siteSelectBox colspanInput" onchange="clearSelect('category2_pop','workname_pop');setCateogry(this.id, 'category2_pop')"></select>							
 		</th>
 		<th>
-			<select id="category2_pop" class="siteSelectBox" onchange="clearSelect('workname_pop');setCodeBySelect (this.id, 'workname_pop')"></select>
+			<select id="category2_pop" class="siteSelectBox colspanInput" onchange="clearSelect('workname_pop');setCodeBySelect (this.id, 'workname_pop')"></select>
 		</th>
 	</tr>
 	<tr>
 		<th>작업명</th>
-		<td colspan="2"><select id="workname_pop" class="siteSelectBox" onchange="$('#popupOKBtn').show();">
+		<td colspan="2"><select id="workname_pop" class="siteSelectBox" onchange="$('#popupOKBtn').show();" style="width:85%;">
 			<option value="" selected="selected" >작업명 선택</option>					
 		</select>			
 		</td>

@@ -152,7 +152,7 @@
 
 			<!--  update -->
 			<c:if test="${updateMode}">
-				<td colspan="3"><form:input id="input_id" path="id" class="colspanInput" maxlength="45" readonly="true" /></td>
+				<td colspan="3"><form:input id="input_id" path="id" class="colspanInput" maxlength="45" readonly="true" style="width:93.5%;"/></td>
 			</c:if>
 
 

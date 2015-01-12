@@ -5,19 +5,20 @@ import java.io.Serializable;
 public class WorkVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	String workCode;		
-	String workName;
-	String guide;
-	String equip;
-	String measure;
+	private String workCode;		
+	private String workName;
+	private String guide;
+	private String equip;
+	private String measure;
+	private String safety;
 	
-	String accName;
-	String accCode;
-	String accPoss;
-	String accSerious;	
+	private String accName;
+	private String accCode;
+	private String accPoss;
+	private String accSerious;	
 	
-	String fileName;
-	int accCnt;
+	private String fileName;
+	private int accCnt;
 	public String getWorkCode() {
 		return workCode;
 	}
@@ -83,6 +84,12 @@ public class WorkVO implements Serializable {
 	}
 	public void setAccCnt(int accCnt) {
 		this.accCnt = accCnt;
+	}
+	public String getSafety() {
+		return safety;
+	}
+	public void setSafety(String safety) {
+		this.safety = safety;
 	}
 
 	

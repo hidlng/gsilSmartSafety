@@ -56,12 +56,15 @@ public class WorkService{
 		List<ToolVO> toollist = workVO.getToollist();	
 		if(toollist != null) {
 			for(ToolVO toolVO : toollist){
-				toolVO.setTool_idx(UIDMaker.makeNewUID("TL"));
-				toolVO.setWork_idx(work_idx);				
-				try{
-					toolMapper.insert(toolVO);
-				}catch(Exception e){
-					System.out.println("중복건발생 (toolVO)" + toolVO.getToolcode() + " : " + toolVO.getToolname() );
+				if(toolVO.getToolname().equals("")){
+					toolVO.setTool_idx(UIDMaker.makeNewUID("TL"));
+					toolVO.setWork_idx(work_idx);				
+					try{
+						toolMapper.insert(toolVO);
+					}catch(Exception e){
+						e.printStackTrace();
+						System.out.println("중복건발생 (toolVO)" + toolVO.getToolcode() + " : " + toolVO.getToolname() );
+					}
 				}
 			}
 		}

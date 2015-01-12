@@ -37,7 +37,7 @@
 			<th class="bold"><span class="bull_dot">&middot;&nbsp;</span>협&nbsp;력&nbsp;업&nbsp;체</th>
 			<th> : </th>
 			<td class="bold">${tbmVO.cont_name}</td>
-			<th><span class="bull_dot">&middot;&nbsp;</span>소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장 </th>
+			<th><span class="bull_dot">&middot;&nbsp;</span>협력사소장</th>
 			<th> : </th>
 			<td>${tbmVO.inspector}(${tbmVO.inspector_phone})</td>
 		 </tr>
@@ -81,11 +81,6 @@
 			<td colspan="5"> ${tbmVO.toollist}</td>
 		 </tr>
 		 <tr>
-			<th>주요 위험정보</th>
-			<td colspan="5">${tbmVO.mainrisk}</td>
-			
-		 </tr>
-		 <tr>
 		 	<th>작업장소</th>
 			<td colspan="5">${tbmVO.placename}</td>		
 		 </tr>
@@ -113,14 +108,15 @@
 		 </tr>
 		 <tr>	
 			<td class="lft"><b>안전 조치 사항 안내</b>
-							${tbmVO.measure}</td>
+							${tbmVO.safety}</td>
 			<td class="lft"><b>보호구 착용 지침</b>
 							${tbmVO.equip}</td>		
 		 </tr>
 		 <tr>
 			<td class="lft"><b>안전 작업 가이드</b>
 						${tbmVO.guide}</td>
-			<td class="lft"><b>비상시 조치 사항</b></td>		
+			<td class="lft"><b>비상시 조치 사항</b>
+						${tbmVO.measure}</td>		
 		 </tr>
 	 </table><!-- //table -->
 

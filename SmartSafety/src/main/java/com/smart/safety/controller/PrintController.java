@@ -139,21 +139,12 @@ public class PrintController {
 	private TBMVO makeTBM(WorkVO workVO) {		
 		ObjectMapper objectMapper = new ObjectMapper();		
 		TBMVO tbmVO = new TBMVO();	
-		SiteVO siteVO = siteService.getSiteByIdx(workVO.getSite_idx());
-		//ContractorVO contVO = contractorService.getContractorByIdx(workVO.getCont_name())
-		
-		//tbmVO.setTbm_idx(tbm_idx);
+
+		String site_idx = workVO.getSite_idx();
+
 		tbmVO.setWork_idx(workVO.getWork_idx());//		 work_idx	
 		
-		//현장관련
-		String site_idx = workVO.getSite_idx();
-		siteService.getSiteByIdx(site_idx);
-		tbmVO.setSitename(siteVO.getSitename());//		 sitename
-		tbmVO.setSite_rep_phone(siteVO.getRep_phone());
 		
-		SimpleDateFormat formatter = new SimpleDateFormat  ("yyyy.MM.dd hh:mm");// ("yyyy.MM.dd G 'at' hh:mm:ss a zzz");
-		Date cur_date= new Date();	
-		tbmVO.setPrinttime(formatter.format(cur_date));//		 printtime
 		
 		//기본정보 setting
 		makeBaseInfo(tbmVO, workVO);
@@ -184,14 +175,7 @@ public class PrintController {
 		
 		tbmVO.setRemark(workVO.getRemark().replace("\r\n", "<br>"));//		 remark
 		tbmVO.setSitename(workVO.getSitename());
-		
-		
-		tbmVO.setSite_rep_name(siteVO.getRep_name());
-		tbmVO.setSite_rep_phone(siteVO.getRep_phone());
-		//		 writetime
-		//		 delyn
-		//1:work 2:tool 3:place
-		
+
 		
 		
 		return tbmVO;
@@ -203,6 +187,16 @@ public class PrintController {
 		String cont_idx = workVO.getCont_idx();
 		ContractorVO contVO = contractorService.getContractorByIdx(cont_idx);
 		ManagerVO chiefVO = managerSerivce.getChiefByContIdx(cont_idx);
+		//현장관련
+		
+		SiteVO siteVO = siteService.getSiteByIdx(workVO.getSite_idx());
+		targetVO.setSitename(siteVO.getSitename());//		 sitename
+		targetVO.setSite_rep_phone(siteVO.getRep_phone());
+		targetVO.setSite_rep_name(siteVO.getRep_name());
+		
+		SimpleDateFormat formatter = new SimpleDateFormat  ("yyyy.MM.dd hh:mm");// ("yyyy.MM.dd G 'at' hh:mm:ss a zzz");
+		Date cur_date= new Date();	
+		targetVO.setPrinttime(formatter.format(cur_date));//		 printtime
 		
 		targetVO.setCont_name(contVO.getCont_name());//		 cont_name
 		targetVO.setCont_phone(contVO.getCont_phone());
@@ -266,6 +260,7 @@ public class PrintController {
 				tbmVO.setMeasure(tbmVO.getMeasure() + "<br>" + (String) work.get("measure").replace("\r\n", "<br>"));
 				tbmVO.setEquip(tbmVO.getEquip() + "<br>" + (String) work.get("equip").replace("\r\n", "<br>"));
 				tbmVO.setGuide(tbmVO.getGuide() + "<br>" + (String) work.get("guide").replace("\r\n", "<br>"));
+				tbmVO.setSafety(tbmVO.getSafety() + "<br>" + (String) work.get("safety").replace("\r\n", "<br>"));
 			}
 		
 		}
@@ -288,7 +283,7 @@ public class PrintController {
 				Map<String,String>tool = (Map<String, String>) jsonMap.get("toolVO");
 				if(tool != null) {
 					//기존에 추가된 내용에 더함
-					tbmVO.setMainrisk(tbmVO.getMainrisk() + "<br>" + (String) tool.get("mainRisk").replace("\r\n", "<br>"));
+					//tbmVO.setMainrisk(tbmVO.getMainrisk() + "<br>" + (String) tool.get("mainRisk").replace("\r\n", "<br>"));
 					tbmVO.setEquip(tbmVO.getEquip() + "<br>" + (String) tool.get("equip").replace("\r\n", "<br>"));
 					tbmVO.setGuide(tbmVO.getGuide() + "<br>" + (String) tool.get("guide").replace("\r\n", "<br>"));
 					//System.out.println(tool.get("equip"));
