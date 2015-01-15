@@ -55,8 +55,8 @@ public class WorkService{
 		/**toollist삽입**/
 		List<ToolVO> toollist = workVO.getToollist();	
 		if(toollist != null) {
-			for(ToolVO toolVO : toollist){
-				if(toolVO.getToolname().equals("")){
+			for(ToolVO toolVO : toollist){//수기입력 empty 방지
+				if(!toolVO.getToolname().equals("")){
 					toolVO.setTool_idx(UIDMaker.makeNewUID("TL"));
 					toolVO.setWork_idx(work_idx);				
 					try{
@@ -75,23 +75,25 @@ public class WorkService{
 	
 	
 	@Transactional
-	public void updateWork(WorkVO workVO) {
+	public synchronized void updateWork(WorkVO workVO) {
 		workMapper.update(workVO);
 		
 		/**toollist delete All & insert**/
 		/** update의 경우 항목의 추가/제거가 있을수 있으므로 delete 후 insert를 수행함**/ 
 		List<ToolVO> toollist = workVO.getToollist();	
 		toolMapper.deleteByWorkIdx(workVO.getWork_idx());
-		for(ToolVO toolVO : toollist){
-			toolVO.setWork_idx(workVO.getWork_idx());
-			toolVO.setTool_idx(UIDMaker.makeNewUID("TL"));
-			try{
-				toolMapper.insert(toolVO);
-			}catch(Exception e){
-				System.out.println("중복건발생 (toolVO)" + toolVO.getToolcode() + " : " + toolVO.getToolname() );
+		if(toollist != null) {
+			for(ToolVO toolVO : toollist){
+				if(!toolVO.getToolname().equals("")){//수기입력 empty 방지
+					toolVO.setWork_idx(workVO.getWork_idx());
+					toolVO.setTool_idx(UIDMaker.makeNewUID("TL"));
+					try{
+						toolMapper.insert(toolVO);
+					}catch(Exception e){
+						System.out.println("중복건발생 (toolVO)" + toolVO.getToolcode() + " : " + toolVO.getToolname() );
+					}
+				}
 			}
-		
-			
 		}
 	}
 	

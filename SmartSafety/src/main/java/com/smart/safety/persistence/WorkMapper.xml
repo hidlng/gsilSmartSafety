@@ -72,13 +72,18 @@ WHERE
   </select>
   
   <select id="getWorkByIdx" resultType="WorkVO" parameterType="String">
-   	SELECT *
+   	SELECT W.*,S.*,C.CONT_NAME AS CONT_NAME, M.NAME AS INSPEC_MGR_NAME
 	FROM WORK_LIST W
-	JOIN SITE_LIST S
+	LEFT OUTER JOIN SITE_LIST S
 	ON W.SITE_IDX = S.SITE_IDX
-	WHERE
-		W.DELYN='N'
-		AND S.DELYN='N'
+		AND S.DELYN ='N'
+	LEFT OUTER JOIN CONTRACTOR_LIST C
+	ON W.CONT_IDX = C.CONT_IDX
+		AND C.DELYN ='N'
+	LEFT OUTER JOIN MANAGER_LIST M
+	ON W.INSPEC_MGR_IDX = M.MANAGER_IDX
+		AND M.DELYN ='N'
+	WHERE W.DELYN='N'
 		AND W.WORK_IDX = #{work_idx}
   </select>
        
@@ -86,14 +91,16 @@ WHERE
     INSERT INTO
 	WORK_LIST(WORK_IDX,	SITE_IDX, WRITE_USER_IDX, CONT_IDX, ISCHARGE, WORKTYPE, WORKSTATUS,	CATEGORY1,	CATEGORY2,	CATEGORY3,	WORKCODE,	WORKNAME,	WORKTITLE,
 	STARTDATE,	STARTTIME,	ENDDATE,	ENDTIME,	PLACECODE,	PLACENAME,	ADDR_DETAIL,	INDOOR,	PIC_NAME,	PIC_BIRTH	,PIC_PHONE,	
-	PIC_POSITION,	PIC_NUM_WORKER,	WORKLEVEL,	REMARK, RISK_LEVEL, RISK_GRADE,	RISK_WARN, WORKPERMIT, WRITETIME, UPDATETIME, DELYN )
+	PIC_POSITION,	PIC_POS_DETAIL,	PIC_NUM_WORKER,	WORKLEVEL,	REMARK, REMARK_LEADER, REMARK_CHIEF,
+	INSPEC_MGR_IDX, RISK_LEVEL, RISK_GRADE,	RISK_WARN, WORKPERMIT, WRITETIME, UPDATETIME, DELYN )
 	SELECT
 		#{work_idx},
 		#{site_idx},		#{write_user_idx},		#{cont_idx},		#{ischarge},		#{worktype},	#{workstatus},	#{category1},
 		#{category2},		#{category3},		#{workcode},	#{workname},		#{worktitle},
 		#{startdate},		#{starttime},		#{enddate},		#{endtime},		#{placecode},		#{placename},		#{addr_detail},		#{indoor},
-		#{pic_name},		#{pic_birth},		#{pic_phone},	#{pic_position},		#{pic_num_worker},		#{worklevel},		#{remark},
-		#{risk_level}, 	#{risk_grade}, 		#{risk_warn},		#{workpermit},	sysdate(),	sysdate(),	'N'		
+		#{pic_name},		#{pic_birth},		#{pic_phone},	#{pic_position},	#{pic_pos_detail},		#{pic_num_worker},		#{worklevel},	
+		#{remark},			#{remark_leader},	#{remark_chief},
+		#{inspec_mgr_idx},	#{risk_level}, 	#{risk_grade}, 		#{risk_warn},		#{workpermit},	sysdate(),	sysdate(),	'N'		
 	FROM DUAL
   </insert>
   <update id="update" parameterType="ManagerVO">
@@ -124,6 +131,7 @@ WHERE
 		,PIC_BIRTH = #{pic_birth}
 		,PIC_PHONE = #{pic_phone}	
 		,PIC_POSITION = #{pic_position}
+		,PIC_POS_DETAIL = #{pic_pos_detail}
 		,PIC_NUM_WORKER = #{pic_num_worker}
 		,WORKLEVEL = #{worklevel}
 		,RISK_LEVEL = #{risk_level}
@@ -131,6 +139,9 @@ WHERE
 		,RISK_WARN = #{risk_warn}	
 		,WORKPERMIT = #{workpermit}		
 		,REMARK = #{remark}		
+		,REMARK_LEADER = #{remark_leader}
+		,REMARK_CHIEF = #{remark_chief}
+		,INSPEC_MGR_IDX = #{inspec_mgr_idx}
 		,UPDATETIME = sysdate()
 	WHERE
 		WORK_IDX = #{work_idx}

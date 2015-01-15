@@ -43,9 +43,9 @@
 			<th class="bold"><span class="bull_dot">&middot;&nbsp;</span>협&nbsp;력&nbsp;업&nbsp;체</th>
 			<th> : </th>
 			<td class="bold">${ptwVO.cont_name}</td>
-			<th><span class="bull_dot">&middot;&nbsp;</span>소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장 </th>
+			<th><span class="bull_dot">&middot;&nbsp;</span>협력사소장 </th>
 			<th> : </th>
-			<td>${ptwVO.inspector}(${ptwVO.inspector_phone})</td>
+			<td>${ptwVO.cont_rep_name}(${ptwVO.cont_rep_phone})</td>
 		 </tr>
 		 <tr>
 			<th><span class="bull_dot">&middot;&nbsp;</span>작&nbsp;&nbsp;&nbsp;업&nbsp;&nbsp;&nbsp;명 </th>
@@ -53,7 +53,7 @@
 			<td>${ptwVO.worktitle}</td>
 			<th><span class="bull_dot">&middot;&nbsp;</span>공사감독자 </th>
 			<th> : </th>
-			<td>${ptwVO.cont_rep_name}(${ptwVO.cont_rep_phone})</td>
+			<td>${ptwVO.inspector}(${ptwVO.inspector_phone})</td>
 		 </tr>
 		 <tr>
 			<th><span class="bull_dot">&middot;&nbsp;</span>작업책임자 </th>
@@ -61,12 +61,14 @@
 			<td>${ptwVO.pic_name} (${ptwVO.pic_phone})</td>
 			<th><span class="bull_dot">&middot;&nbsp;</span>작업자&nbsp; 수 </th>
 			<th> : </th>
-			<td>${ptwVO.pic_num_worker}</td>
+			<td><c:if test="${ptwVO.pic_num_worker >= 999 }">30+</c:if>
+				<c:if test="${ptwVO.pic_num_worker < 999 }">${ptwVO.pic_num_worker}</c:if>
+			</td>
 		 </tr>
 		 <tr>
 			<th><span class="bull_dot">&middot;&nbsp;</span>날&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;씨 </th>
 			<th> : </th>
-			<td colspan="3">맑음${ptwVO.weather}</td>
+			<td colspan="3">${ptwVO.weather}</td>
 			
 		 </tr>
 	 </table><!-- //typ02 -->

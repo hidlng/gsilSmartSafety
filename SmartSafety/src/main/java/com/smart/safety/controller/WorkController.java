@@ -99,12 +99,10 @@ public class WorkController {
 	@RequestMapping(value = "registerWork")
 	public void registerWork(@RequestParam(value="updateIdx",required=false)String updateIdx, HttpServletRequest request, Model model, HttpSession session) {
 		model.addAttribute("isNotValid", false);
-		UserVO userVO = (UserVO)session.getAttribute("userLoginInfo");
 		SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");	
+		setBaseModel(siteVO, model);
 		
-		//업체리스트 호출 , 작업책임자 소속에서 사용		
-		List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
-		model.addAttribute("contList", contList);
+		UserVO userVO = (UserVO)session.getAttribute("userLoginInfo");
 		
 		if(updateIdx != null && !updateIdx.equals("")) {
 			WorkVO workVO = workService.getWorkByIdx(updateIdx);
@@ -132,7 +130,7 @@ public class WorkController {
 				
 				//업체에 경우 현장사용자는 직접 타이핑 입력이기때문에
 				//통일 성을 위해 둘다 이름값만 입력함(cont_idx 사용 X)
-				if(userVO.getLevel() == USERLEVEL.CONT_CHEIF.idx || userVO.getLevel() == USERLEVEL.CONT_LEADER.idx || userVO.getLevel() == USERLEVEL.CONT_WORKER.idx) {//현장사용자
+				if(userVO.getLevel() == USERLEVEL.CONT_CHEIF.idx || userVO.getLevel() == USERLEVEL.CONT_LEADER.idx || userVO.getLevel() == USERLEVEL.CONT_INSPECTOR.idx) {//현장사용자
 					ManagerVO managerVO = (ManagerVO)session.getAttribute("managerVO");
 					ContractorVO contractorVO = contractorService.getContractorByIdx(managerVO.getCont_idx());	
 					workVO.setCont_idx(managerVO.getCont_idx());
@@ -155,10 +153,24 @@ public class WorkController {
 	
 	
 	
+	private void setBaseModel(SiteVO siteVO, Model model) {	
+		//업체리스트 호출 , 작업책임자 소속에서 사용		
+		List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
+		model.addAttribute("contList", contList);
+		
+		//감독자리스트 호출 , 작업책임자 소속에서 사용		
+		List<ManagerVO> managerList = managerSerivce.getManagerListByLevel(siteVO.getSite_idx(), USERLEVEL.CONT_INSPECTOR); 		
+		model.addAttribute("managerList", managerList);
+		
+	}
+
 	@RequestMapping(value = "insertWork", method = RequestMethod.POST)
 	public String insertWork(HttpSession session, @ModelAttribute @Valid WorkVO workVO
 			, BindingResult bindingResult, Model model, RedirectAttributes redirectAttr) {
 		String work_idx;
+		
+		SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");	
+		setBaseModel(siteVO, model);
 		
 		/**error발생시 이전 form으로 되돌아갈때 사용하기 위함**/
 		arrayFilter(workVO.getToollist()); //빈공간 제거		
@@ -166,7 +178,6 @@ public class WorkController {
 		model.addAttribute("updateMode", false);
 		
 		if(bindingResult.hasErrors()) {
-			SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");
 			//업체리스트 호출 , 작업책임자 소속에서 사용		
 			List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
 			model.addAttribute("contList", contList);
@@ -200,21 +211,30 @@ public class WorkController {
 	
 	private void pushWorkToUser(WorkVO workVO) {
 		try {
-			
+			//Manager 전달 (감독자제외 전부)
 			List<ManagerVO> manList = managerSerivce.getManagerListBySiteIdx(workVO.getSite_idx());
 			
-			Iterator<ManagerVO> it = manList.iterator();
-			
-			while(it.hasNext()) {
-				ManagerVO manVO = it.next();
-				int level = Integer.valueOf(manVO.getLevel());
-				if(level == USERLEVEL.SITE_MANAGER.idx || level == USERLEVEL.CONT_CHEIF.idx ||
-					level == USERLEVEL.CONT_LEADER.idx) 
-					//||  level == USERLEVEL.CONT_WORKER.idx  )
+			Iterator<ManagerVO> it_man = manList.iterator();			
+			while(it_man.hasNext()) {
+				ManagerVO manVO = it_man.next();
+				int level = manVO.getLevel();
+				if(level == USERLEVEL.SITE_MANAGER.idx || level == USERLEVEL.CONT_CHEIF.idx || level == USERLEVEL.CONT_LEADER.idx) 
 					if(manVO.getPid() != null && !manVO.getPid().equals("")){
 						sendMessage(manVO.getPid());	
+						System.out.println("push 알림 전달 [ " + manVO.getId() +"]");
 				}
 			}
+			
+			//Contractor 전달
+			List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(workVO.getSite_idx());
+			
+			Iterator<ContractorVO> it_cont = contList.iterator();			
+			while(it_cont.hasNext()) {
+				ContractorVO contVO = it_cont.next();
+				sendMessage(contVO.getPid());	
+				System.out.println("push 알림 전달 [ " + contVO.getId() +"]");
+			}
+			
 				
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -237,6 +257,8 @@ public class WorkController {
 				System.out.println(result.getMessageId());
 			}
 		}
+		
+		
 	}
 	
 	
@@ -244,12 +266,15 @@ public class WorkController {
 	public String updateWork(HttpSession session, @ModelAttribute @Valid WorkVO workVO, BindingResult bindingResult,
 		Model model, RedirectAttributes redirectAttr) {
 		
+		SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");	
+		setBaseModel(siteVO, model);
+		
 		model.addAttribute("updateMode", true);
 		arrayFilter(workVO.getToollist()); //빈공간 제거
 		model.addAttribute("workVO", workVO);
 		
 		if(bindingResult.hasErrors()) { 
-			SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");			
+						
 			//업체리스트 호출 , 작업책임자 소속에서 사용		
 			List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
 			model.addAttribute("contList", contList);
@@ -336,26 +361,22 @@ public class WorkController {
 	 * @param session
 	 */
 	@RequestMapping(value = "viewWork")
-	public void viewWork(@RequestParam(value="viewIdx",required=false)String viewIdx, HttpServletRequest request, Model model, HttpSession session) {
+	public void viewWork(@RequestParam(value="viewIdx",required=false)String viewIdx, @RequestParam(value="fromCEO",required=false)boolean fromCEO,
+			HttpServletRequest request, Model model, HttpSession session) {
 		if(viewIdx != null && !viewIdx.equals("")) {
+			model.addAttribute("updateMode", true);//null값 방지용	
+			model.addAttribute("fromCEO", fromCEO);//ceo화면에서 넘어온 경우 체크하여 jsp에반영
+			
 			WorkVO workVO = workService.getWorkByIdx(viewIdx);
 			UserVO userVO = (UserVO)session.getAttribute("userLoginInfo");
-		//	SiteVO siteVO = (SiteVO)session.getAttribute("siteVO");
-			
-			//contname 가져오기 			
-			ContractorVO contVO = contractorService.getContractorByIdx(workVO.getCont_idx());
-			
-			
-			
-			model.addAttribute("updateMode", true);
 
 			//remark의 경우 줄바꿈이 안되어서 나타나므로 다음작업 수행
 			workVO.setRemark(workVO.getRemark().replace("\r\n", "<br>"));//		 remark
 			model.addAttribute("workVO", workVO);
-			model.addAttribute("cont_name", contVO.getCont_name());
 			
-			/**수정권한 체크 - 대상 : 작성자 or 작업 관련 업체 사람 or 현장관리자**/				
 			
+			
+			/**수정권한 체크 - 대상 : 작성자 or 작업 관련 업체 사람 or 현장관리자**/
 			USERLEVEL userlevel = USERLEVEL.get(userVO.getLevel());
 			
 			boolean canModify = false;
@@ -365,7 +386,7 @@ public class WorkController {
 			case SITE_MANAGER ://자신의 현장의 모든 작업 수정 가능
 				canModify = true;
 				break;
-			case CONT_CHEIF: case CONT_LEADER : case CONT_WORKER ://자신업체에 대해 수정가능
+			case CONT_CHEIF: case CONT_LEADER : case CONT_INSPECTOR ://자신업체에 대해 수정가능
 				ManagerVO managerVO = (ManagerVO)session.getAttribute("managerVO");
 				if(managerVO != null && workVO.getCont_idx().equals(managerVO.getCont_idx()))
 					canModify = true;

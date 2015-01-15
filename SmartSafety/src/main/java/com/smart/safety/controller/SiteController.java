@@ -37,6 +37,7 @@ public class SiteController {
 	@RequestMapping(value ="siteList")
 	public void siteList(Model model, @RequestParam(value="pageNum", defaultValue="1")int pageNum,
 			@RequestParam(value="searchWord", defaultValue="")String searchWord ,
+			 @RequestParam(value="type", defaultValue="0")int type,
 			HttpSession session, HttpServletRequest request) {
 				
 		//keyword 생성
@@ -44,26 +45,23 @@ public class SiteController {
 		SiteVO siteVO = new SiteVO();
 		
 		siteVO.setSitename(keyword);
-		siteVO.setRep_name(keyword);
-		//siteVO.setAddr_detail(keyword);
-		siteVO.setRep_phone(keyword);
-		//siteVO.setStart/Endtime
+		//siteVO.setRep_name(keyword);
+		siteVO.setType(type);
 			
 		//Paging처리
 		int rowCnt = siteService.getRowCount(siteVO);
 	    Paging paging = new Paging(pageNum, rowCnt, MAX_ROW_NUM, MAX_PAGE_NUM);
 	    paging.makePaging();
 	    siteVO.setStart((pageNum - 1) * MAX_ROW_NUM);
-	    siteVO.setSize(MAX_ROW_NUM);		
+	    siteVO.setSize(MAX_ROW_NUM);
+	    
+	    List<SiteVO> list = siteService.getSiteListByVO(siteVO);
 
 		//model setting
 		model.addAttribute("searchWord",searchWord);
-	    model.addAttribute("paging",paging);
-	     
-		List<SiteVO> list = siteService.getSiteListByVO(siteVO);
-
+	    model.addAttribute("paging",paging);	    
+	    model.addAttribute("type", type);
 		model.addAttribute("siteList", list);
-		
 		session.setAttribute("contentView", "siteList");
 	}
 	

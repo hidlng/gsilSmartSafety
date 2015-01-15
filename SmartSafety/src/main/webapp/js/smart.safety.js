@@ -17,7 +17,7 @@ function test() {
 	
 	$.ajax({
  		type : "POST",
- 		url : "http://map.naver.com/common2/getRegionByPosition.nhn?",
+ 		url : "http://map.naver.com/common2/getRegionByPosition.nhn",
  		data : {xPos : 127.4833016, yPos : 36.9719265},
  		dataType : "jsonp",
  	    jsonp : "callback",
@@ -29,8 +29,8 @@ function test() {
  		}
 			
  		,
- 		error : function(status) {
- 			alert(status);
+ 		error : function(status, message) {
+ 			alert(status + message);
  		}
 	});
 }

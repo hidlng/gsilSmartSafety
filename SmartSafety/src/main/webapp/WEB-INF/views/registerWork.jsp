@@ -4,74 +4,83 @@
 
 <script>
 $(document).ready(function() {	
-if (${isNotValid} == true) {
-	alert("입력하지 않은 항목이 있습니다. 확인해주시기 바랍니다");
-}
+	if (${isNotValid} == true) {
+		alert("입력하지 않은 항목이 있습니다. 확인해주시기 바랍니다");
+	}
+	 
+	 /**updatemode**/
+	if(${updateMode} == true) {	
+		$('#workForm').attr('action', 'updateWork');			
+	}else {/**insertmode**/		
+		$('#workForm').attr('action', 'insertWork');
+	
+	 }
+
+			//장비공도구 설정
+	var toolSize;
+	
+	<c:if test="${workVO.toollist== null}">
+		toolSize = 0 ;
+	</c:if>
+	<c:if test="${workVO.toollist != null}">
+		toolSize = ${workVO.toollist.size()};
+	</c:if>
+	
+	if(toolSize > 0) {
+	var i=0;
+		<c:forEach var="tool" items="${workVO.toollist}" varStatus="idx">
+	
+		var type = '${tool.tooltype}';
+		var code = '${tool.toolcode}';
+		var name = '${tool.toolname}';
+		
+		if(type == 0)
+			addTool('cons_machine' , 1);
+		else if(type == 1)
+			addTool('trans_machine' , 1);
+		else if(type == 2)
+			addTool('etc_machine' , 1);
+		else if(type == 3)
+			addTool('weld_tool' , 1);
+		else if(type == 4)
+			addTool('elec_tool' , 1);
+		else if(type == 5)
+			addTool('nelec_tool' , 1);
+		else if(type == 6)
+			addTool('etc_tool' , 1);
+		else if(type == 98) //장비 수기
+			addTool('etc_machine' , 1);
+		else if(type == 99)//공도구 수기
+			addTool('etc_tool' , 1);
+		
+		$('#toolSelect_' + i).val(name);
+		$('#toolcode_' + i).val(code);
+		$('#tooltype_' + i).val(type);		
+		
+		i++;
+		</c:forEach>
+		
+	}else {}
+	//장비공도구 설정 END
  
- /**updatemode**/
-if(${updateMode} == true) {	
-	$('#workForm').attr('action', 'updateWork');			
-}else {/**insertmode**/		
-	$('#workForm').attr('action', 'insertWork');
 
- }
- 
-var toolSize;
-
-<c:if test="${workVO.toollist== null}">
-	toolSize = 0 ;
-</c:if>
-<c:if test="${workVO.toollist != null}">
-	toolSize = ${workVO.toollist.size()};
-</c:if>
-
-if(toolSize > 0) {
-var i=0;
-	<c:forEach var="tool" items="${workVO.toollist}" varStatus="idx">
-
-	var type = '${tool.tooltype}';
-	var code = '${tool.toolcode}';
-	var name = '${tool.toolname}';
-	
-	if(type == 0)
-		addTool('cons_machine' , 1);
-	else if(type == 1)
-		addTool('trans_machine' , 1);
-	else if(type == 2)
-		addTool('etc_machine' , 1);
-	else if(type == 3)
-		addTool('weld_tool' , 1);
-	else if(type == 4)
-		addTool('elec_tool' , 1);
-	else if(type == 5)
-		addTool('nelec_tool' , 1);
-	else if(type == 6)
-		addTool('etc_tool' , 1);
-	else if(type == 98) //장비 수기
-		addTool('etc_machine' , 1);
-	else if(type == 99)//공도구 수기
-		addTool('etc_tool' , 1);
-	
-	$('#toolSelect_' + i).val(name);
-	$('#toolcode_' + i).val(code);
-	$('#tooltype_' + i).val(type);		
-	
-	i++;
-	</c:forEach>
-	
-}else {
-	/* addTool('cons_machine' , true); //건설장비 selectbox
-	addTool('trans_machine' , true);//운반장비
-	addTool('etc_machine' , true);//기타 장비 */
-}
-
-//setCode(3, 'placename', 'placename');//작업 형태 지정
-
-
-
-
+	/**updateMode일 경우 pic_pos_detail 설정**/
+	if($('#pic_position').val() == '기타업체') {
+		 showPicDetail();
+	}else
+		 hidePicDetail();
 });
 
+function showPicDetail() {
+	 $('#td_pic_pos_detail_1').show();
+	 $('#td_pic_pos_detail_2').show();
+}
+
+function hidePicDetail() {
+	 $('#td_pic_pos_detail_1').hide();
+	 $('#td_pic_pos_detail_2').hide();
+	 $('#pic_pos_detail').val('');
+}
 
 
 function submitWork() {	
@@ -123,8 +132,16 @@ if(input) { //yes
 	<tr>
 		<th>업체</th>
 		<td colspan="2">
-		<form:input id="cont_name"  path="cont_name"  readonly="true" style="border: 0px solid;"/>
-		
+			<form:input id="cont_name"  path="cont_name"  readonly="true" style="border: 0px solid;"/>		
+		</td>		
+	</tr>
+	<tr>
+		<th>감독자</th>
+		<td><form:select path="inspec_mgr_idx" class="siteSelectBox colspanInput"  style="width:95%">
+				<c:forEach var="manager" items="${managerList}" >
+					<form:option value="${manager.manager_idx}">${manager.name}</form:option>
+				</c:forEach>
+		</form:select>
 		</td>
 	</tr>
 </table>
@@ -181,8 +198,8 @@ if(input) { //yes
 		<th>작업 유형</th>
 		<td colspan="2">
 			<span>
-			<form:radiobutton path="ischarge" class="radi"  value="N" id="chkbtn_charge_N" /><label onclick="checkBtn('chkbtn_charge_N')" style="cursor:pointer">신규작업</label>			
-			<form:radiobutton path="ischarge" class="radi" value="Y" id="chkbtn_charge_Y"/><label style="color:red;cursor:pointer" onclick="checkBtn('chkbtn_charge_Y')" >돌관작업</label>				
+			<form:radiobutton path="ischarge" class="radi"  value="N" id="ischarge1"/><label for="ischarge1" style="cursor:pointer">신규작업</label>			
+			<form:radiobutton path="ischarge" class="radi" value="Y"  id="ischarge2"/><label for="ischarge2"  style="color:red;cursor:pointer">돌관작업</label>				
 			</span>
 			<p><form:errors path="ischarge" cssClass="formError"/>
 		</td>
@@ -296,10 +313,10 @@ if(input) { //yes
 	</tr>
 	<tr>
 		<th>실내/외 여부</th>
-		<td colspan="3">
+		<td colspan="3" class="radi_td">
 		<span class="side">
-			<form:radiobutton path="indoor" class="radi" value="Y" id="chkbtn_indoor_Y"/><label onclick="checkBtn('chkbtn_indoor_Y','chkbtn_indoor_N')" style="cursor:pointer">실내</label>				
-			<form:radiobutton path="indoor" class="radi" value="N" id="chkbtn_indoor_N"/><label onclick="checkBtn('chkbtn_indoor_N','chkbtn_indoor_Y')" style="cursor:pointer">실외</label>
+			<form:radiobutton path="indoor" class="radi" value="Y" label="실내"/>				
+			<form:radiobutton path="indoor" class="radi" value="N" label="실외"/>
 			</span>
 		</td>
 	</tr>
@@ -334,21 +351,30 @@ if(input) { //yes
 				<c:forEach begin="1" end="30" varStatus="idx">
 						<form:option value="${idx.index}">${idx.index}</form:option>
 				</c:forEach>
-				
+					<form:option value="999">31+</form:option>
 				</form:select>
 			</td>
 		</tr>
 		<tr>
-			<th>소속</th>
+			<th  rowspan="2">소속</th>
 			<td colspan="3">
-				<form:select path="pic_position" class="siteSelectBox"  style="width:94%;">
+				<form:select id="pic_position" path="pic_position" class="siteSelectBox"  style="width:94%;">
+					
 					<c:forEach var="cont" items="${contList}" >
-						<form:option value="${cont.cont_name}">${cont.cont_name}</form:option>
+						<form:option value="${cont.cont_name}" onclick="hidePicDetail()">${cont.cont_name}</form:option>
 					</c:forEach>
-					<form:option value="etc">기타</form:option>
+					<form:option value="기타업체" onclick="showPicDetail()">기타</form:option>
 				</form:select>
+				 <form:errors path="pic_position" cssClass="formError"  />
 			</td>	
 		</tr>
+		<tr>
+		<td id="td_pic_pos_detail_1">기타업체명</td>
+		<td id="td_pic_pos_detail_2" colspan="2">
+			<form:input path="pic_pos_detail"/>
+		</td>
+		</tr>
+	
 		<tr>
 			<th rowspan="2">작&nbsp;&nbsp;&nbsp;업<br>상&nbsp;&nbsp;&nbsp;황<br />난이도
 			</th>
@@ -373,11 +399,29 @@ if(input) { //yes
 	</table>
 </div>
 
-<p class="red">특이사항<br>
+<p class="red">특이사항(최대 100자 입력)<br>
 <table>
+	<colgroup>
+		<col style="width: 20%">
+		<col>
+	</colgroup>
 	<tr>
-		<td><form:textarea path="remark" 	maxlength="600" />
-		<br> <form:errors path="remark" cssClass="formError"  /></td>
+		<th>작성자<br>	특이사항</th>
+		<td><form:textarea path="remark" 	maxlength="100" />
+			<br> <form:errors path="remark" cssClass="formError"  />
+		</td>
+	</tr>
+	<tr>
+		<th>팀장/<br>안전관리자<br>특이사항</th>
+			<td><form:textarea path="remark_leader" 	maxlength="100" />
+			<br> <form:errors path="remark_leader" cssClass="formError"  />
+		</td>
+	</tr>
+	<tr>
+		<th>현장소장<br> 특이사항</th>
+				<td><form:textarea path="remark_chief" 	maxlength="100" />
+		<br> <form:errors path="remark_chief" cssClass="formError"  />
+		</td>
 	</tr>
 </table>
 

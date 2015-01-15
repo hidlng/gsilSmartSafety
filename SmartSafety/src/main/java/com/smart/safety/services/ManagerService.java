@@ -41,13 +41,27 @@ public class ManagerService{
 	public List<ManagerVO> getManagerListByVO(ManagerVO managerVO) {
 		return managerMapper.getManagerListByVO(managerVO);
 	}
+	
+	
+	/**siteIdx 및 Userlevel을 통해 리스트 검색 **/
+	public List<ManagerVO> getManagerListByLevel(String site_idx, USERLEVEL level) {
+		ManagerVO managerVO = new ManagerVO();
+		managerVO.setSite_idx(site_idx);
+		managerVO.setSearchlevel(new int[]{level.idx});
+		managerVO.setId("%");
+		managerVO.setName("%");
+		managerVO.setPhone("%");
+		managerVO.setIsmanager(0);
+		return getManagerListByVO(managerVO);
+		
+	}
 
 	/**cont_idx를 가진 managerlist중 level이 소장인 사람을 가져옴(참고 - 쿼리에 LIMIT 0,1사용하여 한건만가져옴 )**/
-	public ManagerVO getChiefByContIdx(String cont_idx) {		
+	public ManagerVO getChiefBySiteIdx(String site_idx) {		
 		Map<String, Object>params = new HashMap<String, Object>();
-		params.put("cont_idx", cont_idx); 
+		params.put("site_idx", site_idx); 
 		params.put("level", USERLEVEL.CONT_CHEIF.idx); 
-		return managerMapper.getChiefByContIdx(params);
+		return managerMapper.getChiefBySiteIdx(params);
 	}
 
 	
@@ -66,7 +80,8 @@ public class ManagerService{
 		userVO.setUser_idx(user_idx);
 		userVO.setId(managerVO.getId());
 		userVO.setPassword(managerVO.getPassword());
-		userVO.setLevel(Integer.valueOf(managerVO.getLevel()));
+		userVO.setLevel(managerVO.getLevel());
+		
 		//userVO.setUser_idx(managerVO.getUser_idx());
 		
 		managerVO.setManager_idx(UIDMaker.makeNewUID("M"));
@@ -87,7 +102,7 @@ public class ManagerService{
 		UserVO userVO = new UserVO();
 		userVO.setId(managerVO.getId());
 		userVO.setPassword(managerVO.getPassword());
-		userVO.setLevel(Integer.valueOf(managerVO.getLevel()));
+		userVO.setLevel(managerVO.getLevel());
 		userVO.setUser_idx(managerVO.getUser_idx());
 		
 		
@@ -107,4 +122,7 @@ public class ManagerService{
 		userMapper.deleteUserByIdx(user_idx);
 		managerMapper.delete(manager_idx);
 	}
+
+
+	
 }

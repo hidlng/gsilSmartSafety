@@ -116,7 +116,7 @@ public class LoginController {
 			userName = managerSerivce.getManagerByID(id).getName();
 			//안전관리자는 site 정보 없음
 			break;
-		case SITE_MANAGER:case CONT_CHEIF:case CONT_LEADER:case CONT_WORKER://	/현장관리자 & 현장 사용자(소장 ,팀장,작업자)
+		case SITE_MANAGER:case CONT_CHEIF:case CONT_LEADER:case CONT_INSPECTOR://	/현장관리자 & 현장 사용자(소장 ,팀장,작업자)
 			ManagerVO managerVO = managerSerivce.getManagerByID(id);
 			userName = managerVO.getName(); //관리자/사용자 명 할당			
 			siteVO = siteService.getSiteByIdx(managerVO.getSite_idx()) ; //소속 Site정보 가져옴

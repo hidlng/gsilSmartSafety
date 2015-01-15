@@ -7,7 +7,7 @@ public enum USERLEVEL {
 	CEO(3),
 	CONT_CHEIF(4),
 	CONT_LEADER(5),
-	CONT_WORKER(6),
+	CONT_INSPECTOR(6),
 	CONTRACTOR(7);
 	public int idx;	
 	USERLEVEL(int val){this.idx = val;}
@@ -18,5 +18,7 @@ public enum USERLEVEL {
 		}
 		return null;
 	}
+	
+	
 }
 

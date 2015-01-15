@@ -13,29 +13,29 @@ public class ManagerVO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String manager_idx;
-	String user_idx;
+	private String manager_idx;
+	private String user_idx;
 	
 	
 	
 	@NotEmpty(message="입력 필요")
-	String name;		
+	private String name;		
 	@NotEmpty(message="입력 필요")
-	String birth;	
+	private String birth;	
 	@NotEmpty(message="입력 필요")
-	String phone;
+	private String phone;
 	
-	String writetime;
-	String delyn;
+	private String writetime;
+	private String delyn;
 	
 	
-	String site_idx;
+	private String site_idx;
 	
 	/**안전관리자**/	
 	@NotEmpty(message="입력 필요")
-	String grade;
+	private String grade;
 	@NotEmpty(message="입력 필요")
-	String position; 
+	private String position; 
 		
 	/**현장사용자**/
 	@NotNull(message="선택 필요")
@@ -50,14 +50,14 @@ public class ManagerVO implements Serializable {
 	@NotEmpty(message="비밀번호 등록시 빈 값이 아니어야 합니다.")
 	private String password;
 	private String isPWChanged;	
-	private String level;//int값이지만like구문 위해 String으론	
+	private int level;	
 	private String pid;
 	
 	/**paging**/
 	private int start=0;
 	private int size=10;
 	
-	
+	private int[] searchlevel;
 	
 	public String getManager_idx() {
 		return manager_idx;
@@ -154,12 +154,7 @@ public class ManagerVO implements Serializable {
 		this.site_idx = site_idx;
 	}
 
-	public String getLevel() {
-		return level;
-	}
-	public void setLevel(String level) {
-		this.level = level;
-	}
+
 	public int getIsmanager() {
 		return ismanager;
 	}
@@ -177,5 +172,17 @@ public class ManagerVO implements Serializable {
 	}
 	public void setPid(String pid) {
 		this.pid = pid;
+	}
+	public int[] getSearchlevel() {
+		return searchlevel;
+	}
+	public void setSearchlevel(int[] searchlevel) {
+		this.searchlevel = searchlevel;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
 	}
 }

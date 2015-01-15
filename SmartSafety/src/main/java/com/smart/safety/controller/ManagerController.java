@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.safety.domain.*;
 import com.smart.safety.services.*;
-import com.smart.safety.util.Paging;
+import com.smart.safety.util.*;
 
 
 @Controller(value="ManagerController")
@@ -60,7 +60,8 @@ public class ManagerController {
 		managerVO.setGrade(keyword);
 		
 		//Level 지정 : 본사 or 현장  
-		managerVO.setLevel(listLevel+"");
+		//managerVO.setLevel(listLevel+"");
+		managerVO.setSearchlevel(new int[]{listLevel});
 		
 		//안전관리자/현장사용자 구분
 		managerVO.setIsmanager(1);
@@ -92,7 +93,7 @@ public class ManagerController {
 			HttpSession session) {
 		
 		/**searching**/
-		String keyword = "%" + searchWord + "%";
+ 		String keyword = "%" + searchWord + "%";
 		ManagerVO managerVO = new ManagerVO();
 		
 		//현장사용자 
@@ -101,9 +102,8 @@ public class ManagerController {
 		managerVO.setPhone(keyword);
 		//managerVO.setCont_name(keyword);
 		//managerVO.setCont_work(keyword);
-		
-		//안전관리자/현장사용자 구분
-		managerVO.setLevel("%");
+			
+		managerVO.setSearchlevel(new int[]{USERLEVEL.CONT_CHEIF.idx, USERLEVEL.CONT_LEADER.idx,USERLEVEL.CONT_INSPECTOR.idx,});
 		managerVO.setIsmanager(0);
 		
 		
@@ -129,7 +129,7 @@ public class ManagerController {
 	}
 	
 	
-	@RequestMapping(value = {"registerManager","registerSiteUser"})
+	@RequestMapping(value = "registerManager")
 	public void registerManager(@RequestParam(value="updateIdx",required=false)String updateIdx, HttpServletRequest request, Model model, HttpSession session) {
 		
 		if(updateIdx != null && !updateIdx.equals("")) {
@@ -142,6 +142,28 @@ public class ManagerController {
 			model.addAttribute("managerVO", new ManagerVO());
 		}
 		
+		setBaseModel(session, model);
+		
+	}
+	
+	@RequestMapping(value = "registerSiteUser")
+	public void registerSiteUser(@RequestParam(value="updateIdx",required=false)String updateIdx, HttpServletRequest request, Model model, HttpSession session) {
+		
+		if(updateIdx != null && !updateIdx.equals("")) { //update
+			ManagerVO managerVO = managerService.getManagerByIdx(updateIdx);
+			model.addAttribute("updateMode", true);
+			model.addAttribute("managerVO", managerVO);
+		}
+		else {//insertMode
+			model.addAttribute("updateMode", false);
+			model.addAttribute("managerVO", new ManagerVO());
+		}
+		
+		setBaseModel(session, model);
+	}
+		
+	
+	private void setBaseModel(HttpSession session , Model model) {
 		//현장 리스트 출력 (registerManager에서 사용)
 		List<SiteVO> siteList = siteService.getSiteList();
 		model.addAttribute("siteList" , siteList);
@@ -151,8 +173,14 @@ public class ManagerController {
 		List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
 		model.addAttribute("contList", contList);
 		
+		//소장 이미등록되었는지 여부 파악
+		boolean isRegisteredChief = false;
+		ManagerVO chiefVO = managerService.getChiefBySiteIdx(siteVO.getSite_idx());
+		if(chiefVO != null) isRegisteredChief = true;
+		model.addAttribute("isRegisteredChief" , isRegisteredChief);
+		
 	}
-	
+
 	@RequestMapping(value = {"insertManager","insertSiteUser"}, method = RequestMethod.POST)
 	public String insertManager(HttpSession session, @ModelAttribute @Valid ManagerVO managerVO, BindingResult bindingResult, Model model, HttpServletRequest request) {
 		
@@ -160,11 +188,7 @@ public class ManagerController {
 		boolean isManager = request.getServletPath().equals("/insertManager");
 		boolean hasError = false;
 		
-		//업체리스트 출력 (siteUser에서 사용)	
-		SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");	
-		List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
-		model.addAttribute("contList", contList);
-		
+		setBaseModel(session, model);
 		
 		if(bindingResult.hasErrors())
 			hasError = true;		
@@ -203,11 +227,7 @@ public class ManagerController {
 		boolean isManager = request.getServletPath().equals("/updateManager"); 		
 		boolean hasError = false;
 		
-		//업체리스트 출력 (siteUser에서 사용)	
-		SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");	
-		List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
-		model.addAttribute("contList", contList);
-		
+		setBaseModel(session, model);
 		
 		if(bindingResult.hasErrors())
 			hasError = true;

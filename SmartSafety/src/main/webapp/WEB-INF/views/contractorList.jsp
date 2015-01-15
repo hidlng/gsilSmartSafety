@@ -41,7 +41,7 @@ function goPage(val) {
 		<tr>
 			<th scope="col">업체명</th>
 			<th scope="col">업체연락처</th>
-			<th scope="col">대표<br>관리자</th>
+			<th scope="col">협력사소장</th>
 			<th scope="col">ID</th>
 		</tr>
 	<thead>

@@ -7,6 +7,7 @@ import java.util.*;
 import javax.annotation.*;
 import javax.servlet.http.*;
 
+import org.json.*;
 import org.slf4j.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import com.smart.safety.domain.*;
 import com.smart.safety.services.*;
+import com.smart.safety.util.*;
 
 
 @Controller(value="PrintController")
@@ -85,7 +87,8 @@ public class PrintController {
 	public void tbm(Model model, String work_idx) {
 		WorkVO workVO = workService.getWorkByIdx(work_idx);
 		
-		/**작업시작 이후 출력을 한 경우에만 printVO insert**/		
+		/** PUSH 알림을 위한 INSERT 수행
+		 * 작업시작 이후 출력을 한 경우에만 printVO insert**/		
 		try {
 			printService.insertPrintVO(workVO.getWork_idx(), workVO.getStartdate(), PrintType.TBM);
 		} catch (ParseException e) {e.printStackTrace();}	
@@ -138,21 +141,14 @@ public class PrintController {
 
 	private TBMVO makeTBM(WorkVO workVO) {		
 		ObjectMapper objectMapper = new ObjectMapper();		
-		TBMVO tbmVO = new TBMVO();	
-
-		String site_idx = workVO.getSite_idx();
-
+		TBMVO tbmVO = new TBMVO();
 		tbmVO.setWork_idx(workVO.getWork_idx());//		 work_idx	
 		
-		
-		
+		try {
 		//기본정보 setting
 		makeBaseInfo(tbmVO, workVO);
 	
 		tbmVO.setToollist(makeToolString(workVO.getToollist()));	//		 toollist
-		
-		//		 weather
-		
 		tbmVO.setWorkname(workVO.getWorkname());//		 workname
 		tbmVO.setPlacename(workVO.getPlacename());//	 placename
 		
@@ -160,10 +156,8 @@ public class PrintController {
 		tbmVO.setRisk_grade(workVO.getRisk_grade());//		 risk_grade
 		tbmVO.setRisk_warn(workVO.getRisk_warn());//		 risk_warn
 		tbmVO.setWorkpermit(workVO.getWorkpermit());//		 workpermit
-		
-		
-		try {
-//			 mainrisk, measure, equip, guide , checklist
+	
+		//mainrisk, measure, equip, guide , checklist
 			setWorkTBM(workVO, tbmVO);		
 			setToolTBM(workVO, tbmVO);
 			setPlaceTBM(workVO, tbmVO);
@@ -172,8 +166,10 @@ public class PrintController {
 		} catch (IOException e) {e.printStackTrace();}
 		
 		
-		
+
 		tbmVO.setRemark(workVO.getRemark().replace("\r\n", "<br>"));//		 remark
+		tbmVO.setRemark_leader(workVO.getRemark_leader().replace("\r\n", "<br>"));//		 remark
+		tbmVO.setRemark_chief(workVO.getRemark_chief().replace("\r\n", "<br>"));//		 remark
 		tbmVO.setSitename(workVO.getSitename());
 
 		
@@ -183,16 +179,19 @@ public class PrintController {
 
 	}
 	
-	private void makeBaseInfo(BaseInfoVO targetVO, WorkVO workVO) {
+	private void makeBaseInfo(BaseInfoVO targetVO, WorkVO workVO) throws JSONException, IOException {
 		String cont_idx = workVO.getCont_idx();
 		ContractorVO contVO = contractorService.getContractorByIdx(cont_idx);
-		ManagerVO chiefVO = managerSerivce.getChiefByContIdx(cont_idx);
-		//현장관련
-		
+		ManagerVO chiefVO = managerSerivce.getChiefBySiteIdx(workVO.getSite_idx());
+		ManagerVO inspectorVO = managerSerivce.getManagerByIdx(workVO.getInspec_mgr_idx());
 		SiteVO siteVO = siteService.getSiteByIdx(workVO.getSite_idx());
+		
 		targetVO.setSitename(siteVO.getSitename());//		 sitename
-		targetVO.setSite_rep_phone(siteVO.getRep_phone());
-		targetVO.setSite_rep_name(siteVO.getRep_name());
+		targetVO.setChief_phone(chiefVO.getPhone());
+		targetVO.setChief_name(chiefVO.getName());
+		
+		//날씨
+		targetVO.setWeather(WeatherUtil.getWeatherText(siteVO.getLat(), siteVO.getLng()));
 		
 		SimpleDateFormat formatter = new SimpleDateFormat  ("yyyy.MM.dd hh:mm");// ("yyyy.MM.dd G 'at' hh:mm:ss a zzz");
 		Date cur_date= new Date();	
@@ -204,9 +203,9 @@ public class PrintController {
 		targetVO.setCont_rep_phone(contVO.getRep_phone());
 		targetVO.setCont_emg_phone(contVO.getCont_emg_phone());
 		
-		if(chiefVO != null){
-			targetVO.setInspector(chiefVO.getName());
-			targetVO.setInspector_phone(chiefVO.getPhone());
+		if(inspectorVO != null){
+			targetVO.setInspector(inspectorVO.getName());
+			targetVO.setInspector_phone(inspectorVO.getPhone());
 		}
 		
 		targetVO.setWorktitle(workVO.getWorktitle());//		 worktitle
@@ -218,6 +217,8 @@ public class PrintController {
 		targetVO.setStarttime(workVO.getStarttime());//		 starttime
 		targetVO.setEnddate(workVO.getEnddate());//		 enddate
 		targetVO.setEndtime(workVO.getEndtime());//		 endtime
+		
+		
 		
 	}
 
@@ -283,10 +284,10 @@ public class PrintController {
 				Map<String,String>tool = (Map<String, String>) jsonMap.get("toolVO");
 				if(tool != null) {
 					//기존에 추가된 내용에 더함
-					//tbmVO.setMainrisk(tbmVO.getMainrisk() + "<br>" + (String) tool.get("mainRisk").replace("\r\n", "<br>"));
+					tbmVO.setMainrisk(tbmVO.getMainrisk() + "<br>" + (String) tool.get("mainRisk").replace("\r\n", "<br>"));
 					tbmVO.setEquip(tbmVO.getEquip() + "<br>" + (String) tool.get("equip").replace("\r\n", "<br>"));
-					tbmVO.setGuide(tbmVO.getGuide() + "<br>" + (String) tool.get("guide").replace("\r\n", "<br>"));
-					//System.out.println(tool.get("equip"));
+					//tbmVO.setGuide(tbmVO.getGuide() + "<br>" + (String) tool.get("guide").replace("\r\n", "<br>"));//PUI로 이동시킴 150112
+					
 				}
 			}
 		}
@@ -345,8 +346,9 @@ public class PrintController {
 				PUIVO puiVO = new PUIVO();//장비 별 PUI 1장
 				
 				//기본정보 setting
-				makeBaseInfo(puiVO, workVO);
+				
 				try{
+					makeBaseInfo(puiVO, workVO);
 					String json_result = getDetailByJSON(toolVO.getToolcode(), 2);
 					if(json_result != null) {
 						Map<String, Object> jsonMap = null;
@@ -361,6 +363,7 @@ public class PrintController {
 								puiVO.setToolname(toolVO.getToolname());
 								//PUIVO.setToolurl();
 								puiVO.setMainrisk(puiVO.getMainrisk() + "<br>" + (String) tool.get("mainRisk").replace("\r\n", "<br>"));
+								puiVO.setGuide(puiVO.getGuide() + "<br>" + (String) tool.get("guide").replace("\r\n", "<br>"));
 								puiVO.setToolurl(TOOL_IMG_URL + tool.get("imgVirtName"));
 								
 								//set Checklist
@@ -399,7 +402,14 @@ public class PrintController {
 	private PTWVO makePTW(WorkVO workVO) {
 		PTWVO ptwVO = new PTWVO();
 		//기본정보 setting
-		makeBaseInfo(ptwVO, workVO);
+		try {
+			makeBaseInfo(ptwVO, workVO);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return ptwVO;
 	}
 

@@ -45,9 +45,9 @@
 			<th class="bold"><span class="bull_dot">&middot;&nbsp;</span>협&nbsp;력&nbsp;업&nbsp;체</th>
 			<th> : </th>
 			<td class="bold">${puiVO.cont_name}</td>
-			<th><span class="bull_dot">&middot;&nbsp;</span>소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장 </th>
+			<th><span class="bull_dot">&middot;&nbsp;</span>협력사소장</th>
 			<th> : </th>
-			<td>${puiVO.inspector}(${puiVO.inspector_phone})</td>
+			<td>${puiVO.cont_rep_name}(${puiVO.cont_rep_phone})</td>
 		 </tr>
 		 <tr>
 			<th><span class="bull_dot">&middot;&nbsp;</span>작&nbsp;&nbsp;&nbsp;업&nbsp;&nbsp;&nbsp;명 </th>
@@ -55,7 +55,7 @@
 			<td>${puiVO.worktitle}</td>
 			<th><span class="bull_dot">&middot;&nbsp;</span>공사감독자 </th>
 			<th> : </th>
-			<td>${puiVO.cont_rep_name}(${puiVO.cont_rep_phone})</td>
+			<td>${puiVO.inspector}(${puiVO.inspector_phone})</td>
 		 </tr>
 		 <tr>
 			<th><span class="bull_dot">&middot;&nbsp;</span>작업책임자 </th>
@@ -63,12 +63,15 @@
 			<td>${puiVO.pic_name} (${puiVO.pic_phone})</td>
 			<th><span class="bull_dot">&middot;&nbsp;</span>작업자&nbsp; 수 </th>
 			<th> : </th>
-			<td>${puiVO.pic_num_worker}</td>
+			<td>
+				<c:if test="${puiVO.pic_num_worker >= 999 }">30+</c:if>
+				<c:if test="${puiVO.pic_num_worker < 999 }">${puiVO.pic_num_worker}</c:if>
+			</td>
 		 </tr>
 		 <tr>
 			<th><span class="bull_dot">&middot;&nbsp;</span>날&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;씨 </th>
 			<th> : </th>
-			<td colspan="3">맑음${puiVO.weather}</td>
+			<td colspan="3">${puiVO.weather}</td>
 			
 		 </tr>
 	 </table><!-- //typ02 -->
@@ -77,49 +80,57 @@
 	 <table>
 	 <caption>주요위험</caption>
 		<colgroup>		
-			<col style="width: 20%">
-			<col style="width: 20%">
-			<col style="/">		
+			<col style="width: 10%">
+			<col style="width: 15%">
+			<col style="/">
+			<col style="width:50%">				
 		</colgroup>
 		 <tr>
 			<th>장비명</th>
 			<td>${puiVO.toolname}</td>
 			<th>주요 위험</th>		
+			<th>장비사용가이드</th>		
 		 </tr>
 		 <tr>
-		 <td colspan="2">
-		 <c:if test="${puiVO.toolurl == null}"></c:if>
-		 <c:if test="${puiVO.toolurl != null}"><img src="${puiVO.toolurl}" width="150" height="150" alt=""></c:if>
-		 </td>
+			 <td colspan="2">
+			 	<c:if test="${puiVO.toolurl == null}"></c:if>
+			 	<c:if test="${puiVO.toolurl != null}"><img src="${puiVO.toolurl}" width="150" height="150" alt=""></c:if>
+			 </td>
 			<td>${puiVO.mainrisk}</td>
+			<td>${puiVO.guide}</td>
 		 </tr>
 	 </table><!-- //table -->
 
 	 <table>
 	 <caption>사용 전 점검 사항</caption>
 		<colgroup>		
-			<col style="width: 30%">
-			<col style="/">
 			<col style="width: 10%">
-					
+			<col style="width: 33%">
+			<col>
+			<col style="width: 10%">
+			<col style="width: 33%">
+			<col>		
 		</colgroup>
 		<tr>
-			<th colspan="3">사용 전 점검 사항</th>		
+			<th colspan="6">사용 전 점검 사항</th>		
 		</tr>
 		<tr>
-			<th>사진</th>
+			<th>사  진</th>
 			<th>체크사항</th>
-			<th>확인란</th>
+			<th>확 인 란</th>
+			<th>사  진</th>
+			<th>체크사항</th>
+			<th>확  인</th>
 		</tr>
 		<c:forEach var="check" items="${puiVO.checklist}" varStatus="index">
-			<tr>
+			<c:if test="${index.count % 2 == 1}"><tr></c:if>
 				<td><img src="${check.url}" width="55" height="55" alt=""></td>
 				<td style="text-align:left; padding-left:20px"> ${check.check}</td>
 				<td></td>
-			</tr>
+			<c:if test="${index.count % 2 == 0}"></tr></c:if>
 		</c:forEach>
 	 </table><!-- //table -->
-	 <div class="signBox">
+	 <div class="signBox" style="margin-top: ${ (4 - puiVO.checklist.size()/2) * 55 }px">
 		<p>성명</p><span>(서명)</span>	
 	 </div>
   </div>

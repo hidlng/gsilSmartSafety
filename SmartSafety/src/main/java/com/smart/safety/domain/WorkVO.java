@@ -12,75 +12,83 @@ public class WorkVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	String work_idx;//자동부여
+	private String work_idx;//자동부여
 	
-	String site_idx;//id 정보를 통해 가져옴
-	String sitename;//조인 정보
-	String write_user_idx;//user_list에서 가져옴
+	private String site_idx;//id 정보를 통해 가져옴
+	private String sitename;//조인 정보
+	private String write_user_idx;//user_list에서 가져옴
 	private String cont_idx; 
-	String cont_name; 
+	private String cont_name; //view 용도
 	
 	@NotEmpty(message="입력 필요")
-	String ischarge = "N"; //돌관작업 여부
-	
-	@NotEmpty(message="선택 필요")
-	String worktype;
-	int workstatus;
+	private String ischarge = "N"; //돌관작업 여부
 	
 	@NotEmpty(message="선택 필요")
-	String category1;
-	@NotEmpty(message="선택 필요")
-	String category2;	
-	String category3;
+	private String worktype;
+	private int workstatus;
 	
 	@NotEmpty(message="선택 필요")
-	String workcode;
+	private String category1;
 	@NotEmpty(message="선택 필요")
-	String workname;
-	String worktitle;
+	private String category2;	
+	private String category3;
+	
+	@NotEmpty(message="선택 필요")
+	private String workcode;
+	@NotEmpty(message="선택 필요")
+	private String workname;
+	private String worktitle;
 	
 	@NotEmpty(message="입력 필요")
-	String startdate;
+	private String startdate;
 	@NotEmpty(message="입력 필요")
-	String enddate;
+	private String enddate;
 	@NotEmpty(message="입력 필요")
-	String starttime;
+	private String starttime;
 	@NotEmpty(message="입력 필요")
-	String endtime;
+	private String endtime;
 	
-	String placecode;
-	String placename;
+	private String placecode;
+	private String placename;
 	
 	@NotEmpty(message="입력 필요")
-	String addr_detail;
+	private String addr_detail;
 	@NotEmpty(message="입력 필요")
-	String indoor ="N";
+	private String indoor ="N";
 	@NotEmpty(message="입력 필요")
-	String pic_name;
+	private String pic_name;
 	@NotEmpty(message="입력 필요")
-	String pic_birth;
+	private String pic_birth;
 	@NotEmpty(message="입력 필요")
-	String pic_phone;
-	@NotEmpty(message="입력 필요")
-	String pic_position;
-	@NotEmpty(message="입력 필요")
-	String pic_num_worker;
-	@NotEmpty(message="입력 필요")
-	String worklevel;
-	String remark;
+	private String pic_phone;
+	@NotEmpty(message="선택 필요")
+	private String pic_position;
 	
-	int risk_level;
-	String risk_grade;
-	String risk_warn;
-	String workpermit;
+	private String pic_pos_detail;
+	@NotEmpty(message="입력 필요")
+	private String pic_num_worker;
+	@NotEmpty(message="입력 필요")
+	private String worklevel;
+	private String remark;
+	private String remark_leader;
+	private String remark_chief;
 	
-	String print_tbm;
-	String print_pui;
-	String print_ptw;
+	@NotEmpty(message="선택 필요")
+	private String inspec_mgr_idx;
+	private String inspec_mgr_name;//view 용도
 	
-	String writetime;
-	String updatetime;
-	String delyn;
+	private int risk_level;
+	private String risk_grade;
+	private String risk_warn;
+	private String workpermit;
+	
+	private String print_tbm;
+	private String print_pui;
+	private String print_ptw;
+	
+	private String writetime;
+	private String updatetime;
+	private String delyn;
 	
 	/**Tool**/
 	private List<ToolVO> toollist;
@@ -362,6 +370,36 @@ public class WorkVO implements Serializable{
 	}
 	public void setCont_name(String cont_name) {
 		this.cont_name = cont_name;
+	}
+	public String getInspec_mgr_idx() {
+		return inspec_mgr_idx;
+	}
+	public void setInspec_mgr_idx(String inspec_mgr_idx) {
+		this.inspec_mgr_idx = inspec_mgr_idx;
+	}
+	public String getInspec_mgr_name() {
+		return inspec_mgr_name;
+	}
+	public void setInspec_mgr_name(String inspec_mgr_name) {
+		this.inspec_mgr_name = inspec_mgr_name;
+	}
+	public String getPic_pos_detail() {
+		return pic_pos_detail;
+	}
+	public void setPic_pos_detail(String pic_pos_detail) {
+		this.pic_pos_detail = pic_pos_detail;
+	}
+	public String getRemark_chief() {
+		return remark_chief;
+	}
+	public void setRemark_chief(String remark_chief) {
+		this.remark_chief = remark_chief;
+	}
+	public String getRemark_leader() {
+		return remark_leader;
+	}
+	public void setRemark_leader(String remark_leader) {
+		this.remark_leader = remark_leader;
 	}
 
 	

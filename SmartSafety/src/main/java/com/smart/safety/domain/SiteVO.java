@@ -7,21 +7,29 @@ import org.hibernate.validator.constraints.*;
 public class SiteVO implements Serializable{
 	private static final long serialVersionUID = 3913612834491910434L;
 	
-	String site_idx;
+	private String site_idx;
 	@NotEmpty(message="입력 필요")
-	String sitename;
+	private String sitename;
+	
+	
+	private int type;
+	
 	@NotEmpty(message="입력 필요")
-	String addr_detail;
+	private String addr_detail;
+	
+	private String lat;
+	private String lng;
+	
+	/*@NotEmpty(message="입력 필요")
+	private String rep_name;
 	@NotEmpty(message="입력 필요")
-	String rep_name;
+	private String rep_phone;*/
 	@NotEmpty(message="입력 필요")
-	String rep_phone;
+	private String starttime;
 	@NotEmpty(message="입력 필요")
-	String starttime;
-	@NotEmpty(message="입력 필요")
-	String endtime;
-	String writetime;
-	String delyn;
+	private String endtime;
+	private String writetime;
+	private String delyn;
 	
 	
 	/**paging**/
@@ -47,18 +55,7 @@ public class SiteVO implements Serializable{
 	public void setAddr_detail(String addr_detail) {
 		this.addr_detail = addr_detail;
 	}
-	public String getRep_name() {
-		return rep_name;
-	}
-	public void setRep_name(String rep_name) {
-		this.rep_name = rep_name;
-	}
-	public String getRep_phone() {
-		return rep_phone;
-	}
-	public void setRep_phone(String rep_phone) {
-		this.rep_phone = rep_phone;
-	}
+
 	
 
 	public String getWritetime() {
@@ -96,6 +93,25 @@ public class SiteVO implements Serializable{
 	}
 	public void setEndtime(String endtime) {
 		this.endtime = endtime;
+	}
+	public String getLng() {
+		return lng;
+	}
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
 	}
 
 }

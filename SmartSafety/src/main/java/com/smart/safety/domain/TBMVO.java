@@ -17,11 +17,13 @@ public class TBMVO extends BaseInfoVO implements Serializable{
 	private String risk_warn;
 	private String workpermit;
 	private String toollist ="";
-	//private String mainrisk ="";
+	private String mainrisk ="";
 	private String measure ="";
 	private String equip ="";
 	private String guide ="";
 	private String remark ="";
+	private String remark_leader="";
+	private String remark_chief="";
 	private String safety ="";
 	
 	
@@ -112,6 +114,24 @@ public class TBMVO extends BaseInfoVO implements Serializable{
 	}
 	public void setSafety(String safety) {
 		this.safety = safety;
+	}
+	public String getMainrisk() {
+		return mainrisk;
+	}
+	public void setMainrisk(String mainrisk) {
+		this.mainrisk = mainrisk;
+	}
+	public String getRemark_leader() {
+		return remark_leader;
+	}
+	public void setRemark_leader(String remark_leader) {
+		this.remark_leader = remark_leader;
+	}
+	public String getRemark_chief() {
+		return remark_chief;
+	}
+	public void setRemark_chief(String remark_chief) {
+		this.remark_chief = remark_chief;
 	}
 
 	

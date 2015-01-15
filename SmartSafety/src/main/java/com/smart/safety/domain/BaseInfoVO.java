@@ -3,27 +3,27 @@ package com.smart.safety.domain;
 import java.io.*;
 
 public class BaseInfoVO implements Serializable{
-	String sitename;
-	String printtime;
-	String cont_name;
-	String cont_rep_name;
-	String cont_phone;	
-	String cont_rep_phone;
-	String cont_emg_phone;
-	String worktitle;
-	String weather;
-	String site_rep_name;
-	String site_rep_phone;
+	private String sitename;
+	private String printtime;
+	private String cont_name;
+	private String cont_rep_name;
+	private String cont_phone;	
+	private String cont_rep_phone;
+	private String cont_emg_phone;
+	private String worktitle;
+	private String weather;
+	private String chief_name;
+	private String chief_phone;
 	
-	String inspector;
-	String inspector_phone;
-	String pic_name;
-	String pic_phone;
-	String pic_num_worker;
-	String startdate;
-	String starttime;
-	String enddate;
-	String endtime;
+	private String inspector;
+	private String inspector_phone;
+	private String pic_name;
+	private String pic_phone;
+	private String pic_num_worker;
+	private String startdate;
+	private String starttime;
+	private String enddate;
+	private String endtime;
 
 	
 	
@@ -136,17 +136,17 @@ public class BaseInfoVO implements Serializable{
 	public void setWeather(String weather) {
 		this.weather = weather;
 	}
-	public String getSite_rep_name() {
-		return site_rep_name;
+	public String getChief_name() {
+		return chief_name;
 	}
-	public void setSite_rep_name(String site_rep_name) {
-		this.site_rep_name = site_rep_name;
+	public void setChief_name(String chief_name) {
+		this.chief_name = chief_name;
 	}
-	public String getSite_rep_phone() {
-		return site_rep_phone;
+	public String getChief_phone() {
+		return chief_phone;
 	}
-	public void setSite_rep_phone(String site_rep_phone) {
-		this.site_rep_phone = site_rep_phone;
+	public void setChief_phone(String chief_phone) {
+		this.chief_phone = chief_phone;
 	}
-	
+
 }

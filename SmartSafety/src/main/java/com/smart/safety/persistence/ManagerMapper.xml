@@ -24,7 +24,12 @@
 			OR M.POSITION like #{position}
 			OR M.GRADE like #{grade}
 			OR M.PHONE like #{phone}
-			)AND U.LEVEL like #{level}
+			)
+			<if test="searchlevel.length  != 0">
+           		AND U.LEVEL in (
+              	<foreach collection="searchlevel" item="level" separator=",">#{level}</foreach>
+              	)
+        	</if>			
 			AND M.ISMANAGER = #{ismanager}
 			AND M.SITE_IDX like #{site_idx}
 		ORDER BY M.WRITETIME
@@ -45,7 +50,12 @@
 			OR M.POSITION like #{position}
 			OR M.GRADE like #{grade}			
 			OR M.PHONE like #{phone}
-			)AND U.LEVEL like #{level}
+			)
+			<if test="searchlevel.length  != 0">
+           		AND U.LEVEL in (
+              	<foreach collection="searchlevel" item="level" separator=",">#{level}</foreach>
+              	)
+        	</if>
 			AND M.ISMANAGER = #{ismanager}
 			AND M.SITE_IDX like #{site_idx}
     </select>
@@ -76,22 +86,18 @@
 		
 	</select>
 	
-	<select id="getChiefByContIdx" resultType="ManagerVO" parameterType="hashmap">
+	<select id="getChiefBySiteIdx" resultType="ManagerVO" parameterType="hashmap">
 		SELECT M.*, U.LEVEL
-		FROM CONTRACTOR_LIST C
-		JOIN MANAGER_LIST M
+		FROM MANAGER_LIST M
 		JOIN USER_LIST U
-		ON C.CONT_IDX = M.CONT_IDX
-		AND M.USER_IDX = U.USER_IDX
-		WHERE
-		C.DELYN='N'
-		AND M.DELYN='N'
+		ON M.USER_IDX = U.USER_IDX
+		WHERE M.DELYN='N'
 		AND U.DELYN='N'
-		AND C.CONT_IDX = #{cont_idx}
+		AND M.SITE_IDX = #{site_idx}
 		AND U.LEVEL = #{level}
-		
 		LIMIT 0,1
 	</select>
+	
  	<select id="getManagerListBySiteIdx" resultType="ManagerVO"	parameterType="String">
  		SELECT *
  		FROM MANAGER_LIST M

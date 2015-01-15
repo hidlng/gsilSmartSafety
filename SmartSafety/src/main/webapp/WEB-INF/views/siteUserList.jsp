@@ -49,9 +49,9 @@
 		<c:forEach var="manager" items="${managerList}" varStatus="idx">
 			<tr class="listTR"  onclick="updateSubmit('${idx.index}')">
 				<td>
-					<c:if test ="${manager.level == 4}">소장</c:if>
-					<c:if test ="${manager.level == 5}">작업팀장</c:if>
-					<c:if test ="${manager.level == 6}">일반 작업자</c:if>
+					<c:if test ="${manager.level == 4}">현장소장</c:if>
+					<c:if test ="${manager.level == 5}">팀장</c:if>
+					<c:if test ="${manager.level == 6}">감독자</c:if>
 				</td>
 				<td>${manager.name}</td>				
 				<td>${manager.phone}</td>

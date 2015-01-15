@@ -68,7 +68,7 @@ h1 img{width:120px;}
 .aside_list{margin-bottom:20px;}
 .aside_list li{color:#98b4e0; font-size:30px; line-height:40px; font-weight:bold;}
 .aside_list li.on{color:#d70e0a;}
-.aside_ident {position:absolute; left:35px; bottom:55px; width:200px;  }
+.aside_ident { left:35px; bottom:55px; width:200px;  }
 .aside_ident li{color:#efefef; font-size:23px; line-height:30px; border-bottom:1px dotted #8c97a9; margin-bottom:15px;}
 .aside_ident li.last{ border-bottom:0px; text-align:center; float: right;margin-top: 5px;}
 .aside_ident li span.identContent{width:50px; text-align:right;}
@@ -78,8 +78,9 @@ h1 img{width:120px;}
 /* search */
 .content{float:right; width:920px; min-height:500px; padding:55px 55px; background:url("../images/bg_box.png") repeat 0 0;}
 .content .srchbox{overflow:hidden;height:36px;padding-bottom:20px;}
-.content .srchbox p{float:right;overflow:hidden;  height:36px; border:1px solid #152133;background-color:#fff; }
-.content .srchbox .search_input{width:207px; height:36px; padding:3px 10px;font-size:20px; line-height:20px;background-color:#fff; color:#333; border:none;}
+.content .srchbox .searchReq{vertical-align: middle;height:36px;}
+.content .srchbox p{float:right;overflow:hidden;  height:36px; border:1px solid #152133; }
+.content .srchbox .search_input{ background-color:#fff;width:207px; height:36px; padding:3px 10px;font-size:20px; line-height:20px;background-color:#fff; color:#333; border:none;}
 .content .srchbox .btn_search{float:right;width:35px;height:36px;text-indent: -9999px; border-left:1px solid #141e2d;background:url("../images/icon_search.png") no-repeat 10px 12px #fff;}
 /* content */
 .content table{clear: both;width:100%; font-size:30px;line-height:35px; background-color:#1d2b43;border-collapse: collapse;border-spacing: 0;}
@@ -87,6 +88,7 @@ h1 img{width:120px;}
 .content table tr th{padding:14px 0; color:#98b4e0; font-size:33px;}
 .content table tr td{padding:10px 0;}
 .content table tr td a{cursor:pointer;}
+.content table td.radi_td label{cursor:pointer;}
 .content table.user_signup td {text-align:left; padding-left: 18px;}
 .content table.user_signup td input{width:80%; font-size:30px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 2px solid #1D4F99;}
 .content table.user_signup td input[readonly='true'] {border:0px solid blue;}
@@ -115,6 +117,7 @@ span.equipment{background:url("../images/icon_equipment.png") no-repeat 0 0;}
 span.side{margin-right:30px;}
 span.side{font-size:25px;}
 .content.work table td input.radi {width:20px; background-color:none;}
+.content.work table td.radi_td label{cursor:pointer;}
 .content.work table td textarea{width:90%;height:200px;background:none;color:#fff;font-size:35px;padding:10px;margin:15px 0;border:1px dotted #ddd; border-right:0;overflow-y:scroll;overflow-x:hidden;}
 .goTop{position:absolute; left:50%; bottom:175px; margin-left:475px;}
 span.iconImg{margin:0 auto; width:110px;height:auto;}

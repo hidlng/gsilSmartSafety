@@ -31,6 +31,13 @@
 		    }).attr('readonly','readonly');     
 	});
 		 
+	 
+	 //현장소장이 이미 등록되어있는지에 따른 처리
+	 var isRegisteredChief = ${isRegisteredChief};
+	 if(isRegisteredChief) {
+		 $('#chief_opt').hide();
+		 $("#level_select_box option[value='4']").remove(); //4 - level 의미 달라질 경우 수정
+	 }
  });
  
 
@@ -63,6 +70,7 @@
 }
  </script>
 
+* 현장 소장은 현장 별 1명만 설정 가능합니다.
 
 <form:form id="siteUserForm" method="POST" modelAttribute="managerVO"
 	autocomplete="off">
@@ -119,16 +127,26 @@
 				<form:errors cssClass="formError" path="phone" />
 			</td>
 			<th>권한	</th>
+			<c:if test="${!updateMode}"> 
 			<td>
-				<form:select class="selectBox"  path="level">
-						<form:option value="4" selected="selected">소장</form:option>
-						<form:option value="5">작업 팀장</form:option>
-						<form:option value="6">일반 작업자</form:option>
+				<form:select id="level_select_box" class="selectBox"  path="level">
+						<form:option value="4" >현장소장</form:option>
+						<form:option value="5" >팀장</form:option>
+						<form:option value="6" selected="selected">감독자</form:option>
 				</form:select>
 			</td>
+			</c:if>
+			<c:if test="${updateMode}">
+				<td>
+					<form:hidden path="level" value="${managerVO.level}"/>
+					<c:if test="${managerVO.level == 4}">현장소장</c:if>
+					<c:if test="${managerVO.level == 5}">팀장</c:if>
+					<c:if test="${managerVO.level == 6}">감독자</c:if>
+				</td>
+			</c:if>
 		</tr>
 		<tr>
-			<th>소속업체</th>
+			<th>소속사</th>
 			<td colspan="3">
 			<form:select id="cont_select_box" path="cont_idx" class="siteSelectBox colspanInput"  style="width:95%">
 					<c:forEach var="cont" items="${contList}" >

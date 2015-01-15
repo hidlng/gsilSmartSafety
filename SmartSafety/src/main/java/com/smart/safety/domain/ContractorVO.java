@@ -10,28 +10,28 @@ public class ContractorVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	String cont_idx;
-	String user_idx;
-	String site_idx;
+	private String cont_idx;
+	private String user_idx;
+	private String site_idx;
 	
 	
 	@NotEmpty(message="입력 필요")
-	String cont_name;
+	private String cont_name;
 	
 	@NotEmpty(message="입력 필요")
-	String cont_phone;	
+	private String cont_phone;	
 	
 	@NotEmpty(message="입력 필요")
-	String cont_emg_phone;	
+	private String cont_emg_phone;	
 	
 	
 	@NotEmpty(message="입력 필요")
-	String rep_name;
+	private String rep_name;
 	@NotEmpty(message="입력 필요")
-	String rep_phone;
+	private String rep_phone;
 	
-	String writetime;
-	String delyn;
+	private String writetime;
+	private String delyn;
 	
 	/**User Data**/
 	@NotEmpty(message="입력 필요")
@@ -40,6 +40,8 @@ public class ContractorVO implements Serializable{
 	private String password;
 	private String isPWChanged;	
 	private int level;	
+	
+	private String pid;
 	
 	/**paging**/
 	private int start=0;
@@ -145,6 +147,12 @@ public class ContractorVO implements Serializable{
 	}
 	public void setCont_emg_phone(String cont_emg_phone) {
 		this.cont_emg_phone = cont_emg_phone;
+	}
+	public String getPid() {
+		return pid;
+	}
+	public void setPid(String pid) {
+		this.pid = pid;
 	}
 
 	

@@ -70,6 +70,8 @@ function updateSubmit(){
 		$('#updateForm').submit();
 }
 
+
+
  </script>
  
 
@@ -80,17 +82,17 @@ function updateSubmit(){
 <div class="overlayContent"><div id="viewContent"></div></div>
 </div>
 <!-- 임시. ceo화면에서 상세보기 했을때 back -->
-<c:if test = "${userLoginInfo.level == 3 }">
+<c:if test = "${fromCEO == true}">
 <div onclick="history.back(-1)" style="cursor:pointer"><img src="images/back_btn.png" width="30px" height="30px"> back</div>
 <br>
 </c:if>
 
-<!--  ceo 출력 숨김 -->
-<c:if test = "${userLoginInfo.level != 3 }">
+<!--  ceo화면에서 상세보기한경우  출력 숨김 -->
+<c:if test = "${fromCEO == false }">
 <div class="printSelect">	
 	<span class="printSetting"><img src="images/icon_print.png"  alt="인쇄하기" />Print Select :</span>
 	<span class="btn_txtPrint" onclick="openTBM('${workVO.work_idx}')" >TBM</span>
-	<span class="btn_txtPrint" onclick="openPUI('${workVO.work_idx}')">PUI</span>
+	<c:if test="${workVO.toollist.size() > 0}"><span class="btn_txtPrint" onclick="openPUI('${workVO.work_idx}')">PUI</span></c:if>
 	<span class="btn_txtPrint" onclick="openPTW('${workVO.work_idx}')">PTW</span>		
 </div><!-- //printSelect -->
 </c:if>
@@ -109,7 +111,11 @@ function updateSubmit(){
 		</colgroup>
 		<tr>
 			<th>관련업체</th>
-			<td colspan="2">${cont_name}</td>
+			<td colspan="2">${workVO.cont_name}</td>
+		</tr>
+		<tr>
+			<th>감독자</th>
+			<td colspan="2">${workVO.inspec_mgr_name}</td>
 		</tr>
 		<!-- work start -->
 		<tr>
@@ -247,14 +253,23 @@ function updateSubmit(){
 			</tr>
 			<tr>
 				<th>연락처</th>
-				<td>${workVO.pic_phone}</td>
-				<th>소속</th>
-				<td>${workVO.pic_position}</td>
+				<td>${workVO.pic_phone}</td>				
+				<th>작업자 수</th>
+				<td>
+					<c:if test="${workVO.pic_num_worker >= 999 }">31+ 명</c:if>
+					<c:if test="${workVO.pic_num_worker < 999 }">${workVO.pic_num_worker} 명</c:if>
+					
+				</td>
 			</tr>
 			<tr>
-				<th>작업자 수</th>
-				<td colspan="3">${workVO.pic_num_worker} 명</td>
-			</tr>
+				<th>소속</th>
+				<td colspan="3">${workVO.pic_position}
+				<c:if test='${workVO.pic_position.equals("기타업체") && !workVO.pic_pos_detail.equals("")}'>
+					(${workVO.pic_pos_detail}) 
+				</c:if>
+				</td>
+			</tr>			
+			
 			<tr>
 				<th rowspan="2">작업상황<br />난이도
 				</th>
@@ -278,25 +293,44 @@ function updateSubmit(){
 
 	<p class="red">특이사항<br>
 	<table>
+		<colgroup>
+			<col style="width: 20%">
+			<col>
+		</colgroup>
 		<tr>
+			<th>작성자<br>	특이사항</th>
 			<td id="remark">${workVO.remark}</td>
 		</tr>
+		<tr>
+			<th>팀장/<br>안전관리자<br>특이사항</th>
+			<td id="remark">${workVO.remark_leader}</td>
+		</tr>
+		<tr>
+			<th>현장소장<br> 특이사항</th>
+			<td id="remark">${workVO.remark_chief}</td>
+		</tr>
 	</table>
-<c:if test = "${userLoginInfo.level != 3 }">
-	<div class="paging">
-		<span class="btn_typ02 toHomePage">목록</span>&nbsp;
-		
-		<c:if test="${canModify == true}">
-			<span class="btn_typ02" onclick="updateSubmit();">수정</span>
-		</c:if>
-	</div>
-</c:if>
+	
+	
+	<c:if test = "${fromCEO == false}">
+		<div class="paging">
+			<span class="btn_typ02 toHomePage">목록</span>&nbsp;
+			
+			<c:if test="${canModify == true}">
+				<span class="btn_typ02" onclick="updateSubmit();">수정</span>
+			</c:if>
+		</div>
+	</c:if>
 	<!-- class="goTop">
 		<a href="#"><img src="images/icon_top.png" alt="top으로 가기">&nbsp;</a-->
 	<br>
 	</form:form>
 	
-	
+<!-- 임시. ceo화면에서 상세보기 했을때 back -->
+<c:if test = "${fromCEO == true}">
+	<div onclick="history.back(-1)" style="cursor:pointer"><img src="images/back_btn.png" width="30px" height="30px"> back</div>
+	<br>
+</c:if>
 <div id="form_group">
 	<form id="updateForm" action="registerWork" method="POST" >
 		<input id="updateIdx" type="hidden" name="updateIdx" value="${workVO.work_idx}"/>

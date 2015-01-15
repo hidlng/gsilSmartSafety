@@ -32,7 +32,7 @@
 		//document.body.style.zoom =1.4;
 		
 		//CEO일경우 class="aside" 숨김 ,  .content widht 속성 제거
-		<c:if test ="${sessionScope.userLoginInfo.level == 3}">
+		<c:if test ="${sessionScope.userLoginInfo.level == 3 || fromCEO == true}">
 		//alert('ceo');
 		$('.aside').hide();
 		$('.content').css('width', 'auto');
@@ -46,7 +46,7 @@
    $(document).on("click", "#workList", function(e) { $('#workList_form').submit(); });
    $(document).on("click", "#homeLogo", function(e) { $('#workList_form').submit(); });
    $(document).on("click", ".toHomePage", function(e) { $('#workList_form').submit(); });
-   
+   $(document).on("click", "#report", function(e) { $('#report_form').submit(); });
    $(document).on("click", "#contractorList", function(e) { $('#contractorList_form').submit(); });
    $(document).on("click", "#siteList", function(e) { $('#siteList_form').submit(); });
    $(document).on("click", "#logout", function(e) { $('#logout_form').submit(); });
@@ -71,8 +71,6 @@ $(document).on("keydown", disableF5);
 	   document.body.style.zoom -=0.1;
    }
    
-   alert(1);
-   test();
   </script>
 <meta http-equiv="Cache-Control" content="max-age=0" />
 <meta http-equiv="Cache-Control" content="no-cache" />
@@ -92,9 +90,12 @@ $(document).on("keydown", disableF5);
 	<form id="siteUserList_form" action="siteUserList" method="GET">
 		<input type="hidden" name="listLevel" value="3">
 	</form>
+	<form id="report_form" action="ceolist" method="POST"></form>
 	<form id="workList_form" action="workList" method="POST"></form>
 	<form id="contractorList_form" action="contractorList" method="POST"></form>
-	<form id="siteList_form" action="siteList" method="POST"></form>
+	<form id="siteList_form" action="siteList" method="POST">
+	<input type="hidden" name="type" value="0">
+	</form>
 	<form id="logout_form" action="logout" method="POST"></form>
 </div>
 
@@ -117,34 +118,40 @@ $(document).on("keydown", disableF5);
 						<li id="siteUserList" style="cursor:pointer" >사용자 관리</li> <!-- 현장 사용자 -->
 						<li id="contractorList" style="cursor:pointer" >업체 관리</li> <!--  업체 관리 -->
 					</c:if>
-					<c:if test= "${sessionScope.userLoginInfo.level == 0 || sessionScope.userLoginInfo.level == 1 ||
-									 sessionScope.userLoginInfo.level == 3}">
-						<!--li id="report" style="cursor:pointer" >CEO 리포트</li-->
+					<c:if test= "${sessionScope.userLoginInfo.level <= 4}">
+						<li id="report" style="cursor:pointer" >CEO 리포트</li>
 					</c:if>
 					<li id="workList" style="cursor:pointer" >작업 관리</li><!--   -->
 					
 				</ul><!-- //aside_list -->		
 								
-			
+				<br>
 				
 				<ul class="aside_ident">
-					<li><span class="identTitle"> <span class="head">I D  : </span><br><span class="identContent">${sessionScope.userLoginInfo.id}</span></span></li>
+					<li><span class="identTitle"><span class="head">I D  : </span><br>
+						<span class="identContent">${sessionScope.userLoginInfo.id}</span>
+						</span>
+					</li>
 					<li><span class="identTitle"> <span class="head"> 이름 : <br></span>
 						<c:if test ="${sessionScope.userLoginInfo.level == 0}"> 관리자</c:if> 
 						<c:if test ="${sessionScope.userLoginInfo.level != 0}">${sessionScope.userName}</c:if>
-						</span></li>
-					<li><span class="identTitle"> <span class="head">권한 : </span>
+						</span>
+					</li>
+					<li><span class="identTitle"> <span class="head">권한 : <br></span>
 						<c:if test ="${sessionScope.userLoginInfo.level == 0}">SS 관리자</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 1}">본사 관리자(EHS팀)</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 2}">현장 안전 관리자</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 3}">CEO</c:if>
-						<c:if test ="${sessionScope.userLoginInfo.level == 4}">현장 사용자(소장)</c:if>
-						<c:if test ="${sessionScope.userLoginInfo.level == 5}">작업팀장</c:if>
-						<c:if test ="${sessionScope.userLoginInfo.level == 6}">일반 작업자</c:if>
+						<c:if test ="${sessionScope.userLoginInfo.level == 4}">현장 소장</c:if>
+						<c:if test ="${sessionScope.userLoginInfo.level == 5}">팀장</c:if>
+						<c:if test ="${sessionScope.userLoginInfo.level == 6}">감독자</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 7}">현장 업체</c:if>
-					</span></li>
+						</span>
+					</li>
 					<c:if test ="${sessionScope.userLoginInfo.level >= 2}"> 
-						<li><span class="identTitle"><span class="head">소속 현장 : <br></span>${sessionScope.siteVO.sitename}</span></li>
+						<li><span class="identTitle"><span class="head">소속 현장 : <br></span>
+							${sessionScope.siteVO.sitename}</span>
+						</li>
 					</c:if>
 					<li  class="last"><span id="logout" class="btn_typ01">로그아웃&nbsp;></span></li>
 				</ul><!-- //aside_ident -->

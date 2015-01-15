@@ -1,5 +1,6 @@
 <!doctype html>
 <%@ page pageEncoding="utf-8" contentType="text/html;charset=UTF-8"	language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
  <head>
   <meta charset="UTF-8">
@@ -39,7 +40,7 @@
 			<td class="bold">${tbmVO.cont_name}</td>
 			<th><span class="bull_dot">&middot;&nbsp;</span>협력사소장</th>
 			<th> : </th>
-			<td>${tbmVO.inspector}(${tbmVO.inspector_phone})</td>
+			<td>${tbmVO.cont_rep_name}(${tbmVO.cont_rep_phone})</td>
 		 </tr>
 		 <tr>
 			<th><span class="bull_dot">&middot;&nbsp;</span>작&nbsp;&nbsp;&nbsp;업&nbsp;&nbsp;&nbsp;명 </th>
@@ -47,7 +48,7 @@
 			<td>${tbmVO.worktitle}</td>
 			<th><span class="bull_dot">&middot;&nbsp;</span>공사감독자 </th>
 			<th> : </th>
-			<td>${tbmVO.cont_rep_name}(${tbmVO.cont_rep_phone})</td>
+			<td>${tbmVO.inspector}(${tbmVO.inspector_phone})</td>
 		 </tr>
 		 <tr>
 			<th><span class="bull_dot">&middot;&nbsp;</span>작업책임자 </th>
@@ -55,12 +56,14 @@
 			<td>${tbmVO.pic_name} (${tbmVO.pic_phone})</td>
 			<th><span class="bull_dot">&middot;&nbsp;</span>작업자&nbsp; 수 </th>
 			<th> : </th>
-			<td>${tbmVO.pic_num_worker}</td>
+			<td><c:if test="${tbmVO.pic_num_worker >= 999 }">31+</c:if>
+				<c:if test="${tbmVO.pic_num_worker < 999 }">${tbmVO.pic_num_worker}</c:if>
+			</td>
 		 </tr>
 		 <tr>
 			<th><span class="bull_dot">&middot;&nbsp;</span>날&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;씨 </th>
 			<th> : </th>
-			<td colspan="3">맑음 ${tbmVO.weather} </td>
+			<td colspan="3">${tbmVO.weather} </td>
 			
 		 </tr>
 	 </table><!-- //typ02 -->
@@ -79,6 +82,11 @@
 		 <tr>
 			<th>장비명<br>(사용전점검)</th>
 			<td colspan="5"> ${tbmVO.toollist}</td>
+		 </tr>
+		 <tr>
+			<th>주요 위험정보</th>
+			<td colspan="5">${tbmVO.mainrisk}</td>
+			
 		 </tr>
 		 <tr>
 		 	<th>작업장소</th>
@@ -121,13 +129,23 @@
 	 </table><!-- //table -->
 
 	 <table>
+		 <colgroup>		
+				<col style="width: 33%">
+				<col style="width: 33%">
+				<col style="width: 33%">
+			</colgroup>
 		<caption>안&nbsp;전&nbsp;구&nbsp;호</caption>	
 		 <tr>
-			<th>안&nbsp;전&nbsp;구&nbsp;호</th>
+			<th colspan="3">안&nbsp;전&nbsp;구&nbsp;호</th>
 		 </tr>
 		 <tr>
 			<td class="lft"><b>작업 전 지시사항</b><br><br>
-			${tbmVO.remark}</td>
+			${tbmVO.remark}
+			</td>
+			<td class="lft"><b>작업 전 지시사항</b><br><br>
+			${tbmVO.remark_leader}</td>
+			<td class="lft"><b>작업 전 지시사항</b><br><br>
+			${tbmVO.remark_chief}</td>
 		 </tr>
 	 </table><!-- //table -->
 
@@ -141,7 +159,7 @@
 		</colgroup>
 		 <tr>
 			<th>두산건설<br/>공사담당자</th>
-			<td>${tbmVO.site_rep_name}<br>(${tbmVO.site_rep_phone})</td>
+			<td>${tbmVO.chief_name}<br>(${tbmVO.chief_phone})</td>
 			<th>긴급연락처</th>
 			<td>${tbmVO.cont_phone}<br>(${tbmVO.cont_emg_phone})</td>
 		 </tr>

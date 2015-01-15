@@ -107,7 +107,7 @@
 			<c:if test="${updateMode}">
 				<input type="hidden" name="level" value="${managerVO.level}"/>
 				<c:if test="${managerVO.level == 1}">
-					본사 관리자(EHS팀)
+					본사 관리자<br>(EHS팀)
 				</c:if>
 				<c:if test="${managerVO.level == 2}">
 					현장 안전관리자
@@ -174,9 +174,9 @@
 	</tr>
 	<tr>
 		<th>PW</th>
-		<td colspan="3">					
-			<form:password id="input_password" path="password" class="colspanInput" maxlength="45"/><br><form:errors cssClass="formError" path="password" />
-			<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01 btnNewPasswd" >신규 비밀번호 발급</div> 							
+		<td colspan="3">
+			<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01 btnNewPasswd" >신규 비밀번호 발급</div>
+			<form:password id="input_password" path="password" class="colspanInput" maxlength="45"/><br><form:errors cssClass="formError" path="password" /> 							
 		</td>
 											
 	</tr>

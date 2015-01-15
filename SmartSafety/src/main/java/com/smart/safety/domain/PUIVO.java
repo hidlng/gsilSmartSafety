@@ -9,10 +9,11 @@ public class PUIVO extends BaseInfoVO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String toolname;	
-	String toolurl;	
-	String mainrisk="";
-	List<CheckVO> checklist = new ArrayList<CheckVO>();
+	private String toolname;	
+	private String toolurl;	
+	private String mainrisk="";
+	private String guide="";
+	private List<CheckVO> checklist = new ArrayList<CheckVO>();
 	
 	public String getToolname() {
 		return toolname;
@@ -37,5 +38,11 @@ public class PUIVO extends BaseInfoVO implements Serializable {
 	}
 	public void setChecklist(List<CheckVO> checklist) {
 		this.checklist = checklist;
+	}
+	public String getGuide() {
+		return guide;
+	}
+	public void setGuide(String guide) {
+		this.guide = guide;
 	}
 }

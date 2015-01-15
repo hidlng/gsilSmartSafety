@@ -43,6 +43,10 @@
 				    lng=location.lng(); 
 				 } 
 			 })
+			 
+			 <c:if test="${sessionScope.userLoginInfo.level != 3}">
+			 	$(document).on("click", "#homeLogo", function(e) { $('#workList_form').submit(); });
+			 </c:if>
 					   
 		}); 
 		
@@ -102,7 +106,7 @@
 
 	<body onload="starttimer();">
 		<div id="wrap" class="sub ">
-			<h1><img src="images/logo_ds.png" alt="두산그룹로고" /></h1>
+			<h1><img id="homeLogo" src="images/logo_ds.png" style="cursor:pointer"/></h1><!-- //1204 추가 -->
 			<div class="back_bg sub">
 				<div class="wrapBox ceo">		
 
@@ -212,7 +216,9 @@
 			
 			<form id="viewForm" action="viewWork" action="POST" >
 				<input id="viewIdx" type="hidden" name="viewIdx"/>
+				<input id="fromCEO" type="hidden" name="fromCEO" value="true"/>
 			</form>
+			<form id="workList_form" action="workList" method="POST"></form>
 		</div>
 	</body>
 </html>

@@ -20,10 +20,11 @@
 		FROM SITE_LIST 
 		WHERE 
 			DELYN='N'  
-			AND (REP_NAME like #{rep_name}
-			OR SITENAME like #{sitename}
-			OR REP_PHONE like #{rep_phone}
+			AND (
+				SITENAME like #{sitename}			
 			)
+			AND TYPE = #{type}
+			
 		ORDER BY WRITETIME
 		LIMIT #{start}, #{size}
     </select>
@@ -34,10 +35,12 @@
 		FROM SITE_LIST 
 		WHERE 
 			DELYN='N'  
-			AND (REP_NAME like #{rep_name}
-			OR SITENAME like #{sitename}
-			OR REP_PHONE like #{rep_phone}
-			)	   
+			AND (
+				SITENAME like #{sitename}
+			)
+			AND TYPE = #{type}
+				   
+			
     </select>
 	
     
@@ -51,15 +54,14 @@
 	
 	<insert id="insert" parameterType="SiteVO">		
      INSERT INTO
-	 SITE_LIST( SITE_IDX, SITENAME, ADDR_DETAIL, REP_NAME, REP_PHONE,STARTTIME,ENDTIME,
+	 SITE_LIST( SITE_IDX, SITENAME, TYPE, ADDR_DETAIL, LAT, LNG, STARTTIME,ENDTIME,
 	 	WRITETIME, DELYN)
-	 VALUES( #{site_idx}, #{sitename}, #{addr_detail},#{rep_name},#{rep_phone},#{starttime} , #{endtime}, sysdate() , 'N')
+	 VALUES( #{site_idx}, #{sitename}, #{type}, #{addr_detail}, #{lat}, #{lng}, #{starttime} , #{endtime}, sysdate() , 'N')
 	</insert>
 	
  	<update id="update" parameterType="SiteVO">
  	    UPDATE SITE_LIST
-		SET SITENAME=#{sitename}, ADDR_DETAIL=#{addr_detail} , REP_NAME=#{rep_name}, REP_PHONE=#{rep_phone}
-		,STARTTIME=#{starttime}, ENDTIME=#{endtime}
+		SET SITENAME=#{sitename}, TYPE=#{type}, ADDR_DETAIL=#{addr_detail} , LAT=#{lat}, LNG=#{lng},STARTTIME=#{starttime}, ENDTIME=#{endtime}
 		WHERE SITE_IDX=#{site_idx}
     </update>
 	

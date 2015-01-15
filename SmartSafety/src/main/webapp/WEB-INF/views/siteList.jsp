@@ -1,6 +1,12 @@
 <%@ include file="IncludeTop.jsp"%>
 <%@ page pageEncoding="utf-8"%>
 <script>
+$(document).ready(function() {
+	var mType = ${type} ;
+	$("#mSelectBox").val(mType).attr("selected", "selected");
+	
+});
+
 function updateSubmit(val) {
 	var idx = $("#updateIdx_"+val).val();	
 	$("#updateIdx").val(idx);
@@ -16,6 +22,11 @@ function goPage(val) {
 	$('#pageNum').val(val);
 	$('#searchForm').submit();
 }
+
+function chgLevel(val) {
+	$('#type').val(val);
+	$('#changetypeForm').submit();
+}
 /* 
 $(document).on("click", ".detailLink", function(e) {
 	e.preventDefault();
@@ -30,8 +41,17 @@ $(document).on("click", ".detailLink", function(e) {
 
 
 </script>
+<div id="listLevelBox">
+<select id="mSelectBox" class="selectBox" onchange="chgLevel(this.value)">
+		<option value="0" >건축</option>
+		<option value="1" >인프라</option>
+</select>
+</div>
+<div>
+
 <div class="srchbox">
-	<p>
+
+	<p><span class="searchReq">현장명 : </span> 
 		<input id="searchInput" type="search" title="검색창" class="search_input"
 			autocomplete="off" value="${searchWord}"
 			onkeypress="if(event.keyCode=='13') goPage(1)"> <a href="#"><span
@@ -39,15 +59,15 @@ $(document).on("click", ".detailLink", function(e) {
 
 	</p>
 </div>
+</div>
 
 
 <!-- //srchbox -->
 <table>
 	<colgroup>
 		<col style="width: 8%">
-		<col style="width: 25%">
-		<col style="width: 17%">
-		<col style="width: 20%">
+		<col style="width: 12%">
+		<col style="width: 55%">
 		<col>
 		
 	</colgroup>
@@ -55,10 +75,9 @@ $(document).on("click", ".detailLink", function(e) {
 		<tr>
 			<th scope="col">NO.
 			</th>
+			<th scope="col">종류</th>
 			<th scope="col">현장명</th>
-			<th scope="col">대표<br>관리자</th>
-			<th scope="col">연락처</th>
-			<th scope="col">작업기간</th>
+			<th scope="col">공사기간</th>
 		</tr>
 	<thead>
 	<tbody>
@@ -66,9 +85,11 @@ $(document).on("click", ".detailLink", function(e) {
 			<tr onclick="updateSubmit('${idx.index}')" class="listTR">
 				<!-- <td>${site.sitename}</td>-->
 				<td>${idx.index + 1} </td>
+				<td>
+					<c:if test="${site.type == 0}">건설</c:if>
+					<c:if test="${site.type == 1}">인프라</c:if>
+				</td>
 				<td>${site.sitename}</td>
-				<td>${site.rep_name}</td>
-				<td>${site.rep_phone}</td>
 				<td>${site.starttime}~
 					<p>${site.endtime}
 				</td>
@@ -105,14 +126,19 @@ $(document).on("click", ".detailLink", function(e) {
 
 <div id="form_group">
 	<form id="searchForm" action="siteList" action="GET">
-		<input id="searchWord" name="searchWord" type="hidden"> <input
-			id="pageNum" name="pageNum" type="hidden">
+		<input id="searchWord" name="searchWord" type="hidden">
+		<input id="pageNum" name="pageNum" type="hidden">
+		<input name="type" value="${type}" type="hidden">
 	</form>
 	<form id="updateForm" action="registerSite" method="POST">
 		<input id="updateIdx" type="hidden" name="updateIdx" />
 	</form>
 
 	<form id="registerForm" action="registerSite" action="POST"></form>
+	<form id="changetypeForm" action="siteList" action="POST">
+		<input id="type" name="type" type="hidden">
+	</form>
+	
 </div>
 
 <%@ include file="IncludeBottom.jsp"%>
