@@ -11,6 +11,7 @@ public class CeoVO implements Serializable {
 	private String worktitle;
 	private String startdate;
 	private String enddate;
+	private String type;
 	private String site_idx;
 	private String checkyn;
 	private String chk_user_idx;
@@ -155,6 +156,12 @@ public class CeoVO implements Serializable {
 	}
 	public void setSize(int size) {
 		this.size = size;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	

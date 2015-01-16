@@ -30,20 +30,6 @@
 			if(document.getElementById( 'siteindex' ).value != '' ) {
 				document.getElementById( 'siteSearch' ).selectedIndex = document.getElementById( 'siteindex' ).value;
 			}
-			
-			 var geocoder = new google.maps.Geocoder();
-			 var addr="서울시 영등포구 신길7동 1147";
-			 var lat="";
-			 var lng="";
-			 geocoder.geocode({'address':addr},
-			 function(results, status){
-				 if(results!=""){
-				    var location=results[0].geometry.location;
-				    lat=location.lat();
-				    lng=location.lng(); 
-				 } 
-			 })
-			 
 			 <c:if test="${sessionScope.userLoginInfo.level != 3}">
 			 	$(document).on("click", "#homeLogo", function(e) { $('#workList_form').submit(); });
 			 </c:if>
@@ -146,16 +132,16 @@
 
 						<table>
 						<colgroup>
+								<col style="width:10%">
 								<col style="width:25%">
 								<col style="width:25%">
 								<col style="width:10%">
 								<col style="width:10%">
 								<col style="width:10%">								
-								<col>					
-
 						</colgroup>
 							
 							<tr>
+								<th>구&nbsp;&nbsp;분</th>
 								<th>현&nbsp;&nbsp;장</th>
 								<th>작&nbsp;&nbsp;업</th>
 								<th>위험도</th>
@@ -166,10 +152,12 @@
 							
 							<c:forEach var="ceo" items="${ceoList}" varStatus="idx">
 								<tr class="listTR" onclick="viewSubmit('${idx.index}')">
+									<td><c:if test="${ceo.type == '0'}">건설</c:if><c:if test="${ceo.type == '1'}">인프라</c:if>
+									</td>
 									<td>${ceo.sitename}</td>
 									<td>${ceo.worktitle}</td>
 									<td>${ceo.risk_grade}</td>
-									<td><c:if test="${ceo.checkyn == 'Y'}"><img src="images/check-blue.png" /></c:if><c:if test="${ceo.checkyn == 'N'}"><img src="images/check-red.png" /></c:if>
+									<td><c:if test="${ceo.checkyn == 'Y'}"><img src="images/check-blue.png" width="30px" /></c:if><c:if test="${ceo.checkyn == 'N'}"><img src="images/check-red.png"  width="30px"/></c:if>
 									</td>
 									<td>${ceo.name}</td>
 									<td>${ceo.startdate} ~ ${ceo.enddate}<input id="updateIdx_${idx.index}" type="hidden" value="${ceo.work_idx}" /></td>
