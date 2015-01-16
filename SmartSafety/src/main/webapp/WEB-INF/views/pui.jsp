@@ -17,7 +17,7 @@
      <link rel="stylesheet" href="css/print.css" type="text/css" media="print"/>   
  </head>
  <body>
- 
+  <img src="images/print2.png" class="printIcon" width="100" alt="출력하기" onclick="window.print();" >
  <c:forEach var="puiVO" items="${puiList}" varStatus="index">
  <div id="wrap" class="a4"> 
  	 <div class="box_top">
@@ -64,7 +64,7 @@
 			<th><span class="bull_dot">&middot;&nbsp;</span>작업자&nbsp; 수 </th>
 			<th> : </th>
 			<td>
-				<c:if test="${puiVO.pic_num_worker >= 999 }">30+</c:if>
+				<c:if test="${puiVO.pic_num_worker >= 999 }">31+</c:if>
 				<c:if test="${puiVO.pic_num_worker < 999 }">${puiVO.pic_num_worker}</c:if>
 			</td>
 		 </tr>
@@ -72,7 +72,8 @@
 			<th><span class="bull_dot">&middot;&nbsp;</span>날&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;씨 </th>
 			<th> : </th>
 			<td colspan="3">${puiVO.weather}</td>
-			
+			<th></th>
+			<td colspan="3"></td>
 		 </tr>
 	 </table><!-- //typ02 -->
 	 </div>

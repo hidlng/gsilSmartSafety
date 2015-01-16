@@ -2,9 +2,9 @@
 
 	<table class="work_signup">
 	<tr>
-		<th>공종</th>
-		<th>대분류</th>
-		<th>소분류</th>	
+		<th>공&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종</th>
+		<th>대&nbsp;&nbsp;&nbsp;분&nbsp;&nbsp;&nbsp;류</th>
+		<th>소&nbsp;&nbsp;&nbsp;분&nbsp;&nbsp;&nbsp;류</th>	
 	</tr>
 	<tr>
 		<th>	
@@ -18,7 +18,7 @@
 		</th>
 	</tr>
 	<tr>
-		<th>작업명</th>
+		<th>작&nbsp;&nbsp;&nbsp;업&nbsp;&nbsp;&nbsp;명</th>
 		<td colspan="2"><select id="workname_pop" class="siteSelectBox" onchange="$('#popupOKBtn').show();" style="width:85%;">
 			<option value="" selected="selected" >작업명 선택</option>					
 		</select>			

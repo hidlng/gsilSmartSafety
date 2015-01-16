@@ -64,7 +64,7 @@
 	  if(idNotDuplicate){
 			$('#managerForm').submit();
 	 }else {
-		  alert('ID중복체크를 해주시기 바랍니다(ID Check)');
+		  alert('아이디 중복체크를 해주시기 바랍니다');
 		  }  
 	}else
 		return;
@@ -95,10 +95,10 @@
 	</colgroup>
 
 	<tr>
-		<th>권한</th>
+		<th>권&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;한</th>
 		<td colspan="3">
 			<c:if test="${!updateMode}">
-				<form:select class="selectBox"  path="level" onchange="chgMLevel(this.value)">
+				<form:select class="selectBox"  path="level" onchange="chgMLevel(this.value)" style="width:94%;">
 						<form:option value="1" selected="selected">본사 관리자(EHS팀)</form:option>
 						<form:option value="2">현장 안전관리자</form:option>
 						<form:option value="3">CEO</form:option>
@@ -107,7 +107,7 @@
 			<c:if test="${updateMode}">
 				<input type="hidden" name="level" value="${managerVO.level}"/>
 				<c:if test="${managerVO.level == 1}">
-					본사 관리자<br>(EHS팀)
+					본사 관리자(EHS팀)
 				</c:if>
 				<c:if test="${managerVO.level == 2}">
 					현장 안전관리자
@@ -121,7 +121,7 @@
 	</tr>
 	
 	<tr id="siteTR">
-		<th>현장</th>
+		<th>현&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장</th>
 		<td colspan="3">
 		<form:select id="site_selectBox" path="site_idx" class="siteSelectBox" style="width:94%" >
 			<c:forEach var="site" items="${siteList}" varStatus="idx">
@@ -133,9 +133,9 @@
 	</tr>
 	
 	<tr>
-		<th>직급</th>
+		<th>직&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;급</th>
 		<td><form:input path="grade" maxlength="45"/><br><form:errors cssClass="formError" path="grade" /></td>
-		<th>성명</th>
+		<th>성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명</th>
 		<td><form:input path="name" maxlength="45"/><br><form:errors cssClass="formError" path="name" />
 		</td>
 		
@@ -143,19 +143,19 @@
 	<tr>
 		<th>생년월일</th>
 		<td><form:input id="birthInput" path="birth" maxlength="10" /><br><form:errors cssClass="formError" path="birth" /></td>
-		<th>연락처<br><span style="font-size:17px">(010-1234-5678)</span></th>
+		<th>연&nbsp;락&nbsp;처<br><span style="font-size:17px">(010-1234-5678)</span></th>
 		<td><form:input path="phone" maxlength="13" onblur="checkPhone(this, this.value)"/><br><form:errors cssClass="formError" path="phone" /></td>
 	</tr>
 	<tr>
-		<th>소속</th>
+		<th>소&nbsp;속&nbsp;사</th>
 		<td colspan="3"><form:input path="position" class="colspanInput" maxlength="45"/><br><form:errors cssClass="formError" path="position" /></td>
 	</tr>
 	<tr>
-		<th>ID</th>
+		<th>아&nbsp;이&nbsp;디</th>
 		<!-- insert -->
 		<c:if test="${!updateMode}">
 			<td colspan="2">
-			<form:input id="input_id" path="id"  maxlength="45" />
+			<form:input id="input_id" path="id"  maxlength="45" style="width:88%" />
 				<br><form:errors id="idError" cssClass="formError" path="id" />
 			</td>
 			<td><span class="btn_typ01 duplCheck"  onclick="duplicateIdCheck()">중복체크</span>
@@ -166,19 +166,19 @@
 		<!--  update -->
 		<c:if test="${updateMode}">
 			<td colspan="3">
-			<form:input id="input_id" path="id" class="colspanInput" maxlength="45" readonly="true" />
+			<form:hidden path="id" value="${managerVO.id}"/>
+			${managerVO.id}
 			</td>
 		</c:if>
 			
 		
 	</tr>
 	<tr>
-		<th>PW</th>
+		<th>비밀번호</th>
 		<td colspan="3">
+			<form:password id="input_password" path="password"  maxlength="45" style="width:93%;"/><p><form:errors cssClass="formError" path="password" />
 			<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01 btnNewPasswd" >신규 비밀번호 발급</div>
-			<form:password id="input_password" path="password" class="colspanInput" maxlength="45"/><br><form:errors cssClass="formError" path="password" /> 							
-		</td>
-											
+		</td>					
 	</tr>
 		
 	

@@ -102,26 +102,36 @@ function updateSubmit(){
 		autocomplete="off">
 	<!--다른사용자의update동작을 고려하여 자동으로 입력되는 부분 추가시 주의-->
 
+	<table class="work_signup">
+		<colgroup>
+			<col style="width: 33%">
+			<col>		
+			<col style="width: 33%">
+		</colgroup>
+		<tr>
+			<th>관&nbsp;련&nbsp;업&nbsp;체</th>
+			<td colspan="2">${workVO.cont_name}</td>
+		</tr>
+		<tr>
+			<th>감&nbsp;&nbsp;&nbsp;독&nbsp;&nbsp;&nbsp;자</th>
+			<td colspan="2">${workVO.inspec_mgr_name}</td>
+		</tr>
+	</table>
 
+	<!-- work start -->
+	<p class="red">작업선택<br>
 	<table class="work_signup">
 		<colgroup>
 			<col>
 			<col style="width: 33%">
 			<col style="width: 33%">
 		</colgroup>
+		
+		
 		<tr>
-			<th>관련업체</th>
-			<td colspan="2">${workVO.cont_name}</td>
-		</tr>
-		<tr>
-			<th>감독자</th>
-			<td colspan="2">${workVO.inspec_mgr_name}</td>
-		</tr>
-		<!-- work start -->
-		<tr>
-			<th>공종</th>
-			<th>대분류
-			<th>소분류</th>
+			<th>공&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종</th>
+			<th>대&nbsp;&nbsp;&nbsp;분&nbsp;&nbsp;&nbsp;류
+			<th>소&nbsp;&nbsp;&nbsp;분&nbsp;&nbsp;&nbsp;류</th>
 		</tr>
 		<tr>
 			<td>${workVO.worktype}</td>
@@ -129,7 +139,7 @@ function updateSubmit(){
 			<td>${workVO.category2}</td>
 		</tr>
 		<tr>
-			<th>작업종류</th>
+			<th>작&nbsp;업&nbsp;종&nbsp;류</th>
 			<td colspan="2">${workVO.workname}</td>
 		</tr>
 
@@ -138,7 +148,7 @@ function updateSubmit(){
 			<td colspan="2">${workVO.worktitle}</td>
 		</tr>
 		<tr>
-			<th>작업 유형</th>
+			<th>작&nbsp;업&nbsp;유&nbsp;형</th>
 			<td colspan="2">
 			<c:if test='${workVO.ischarge.equals("Y")}'><div style="color:red">돌관작업</div></c:if>
 			<c:if test='${workVO.ischarge.equals("N")}'>신규작업</c:if>
@@ -146,37 +156,37 @@ function updateSubmit(){
 			</td>
 		</tr>
 		<tr>
-			<th>작업기간</th>
-			<td>시작 : ${workVO.startdate}</td>
-			<td>마감 : ${workVO.enddate}</td>
+			<th>작&nbsp;업&nbsp;시&nbsp;작</th>
+			<td>${workVO.startdate}</td>
+			<td>${workVO.starttime}</td>
 		</tr>
 
 		<tr>
-			<th>작업시간</th>
-			<td>시작 : ${workVO.starttime}</td>
-			<td>마감 : ${workVO.endtime}</td>
+			<th>작&nbsp;업&nbsp;마&nbsp;감</th>
+			<td>${workVO.enddate}</td>
+			<td>${workVO.endtime}</td>
 		</tr>
 
 	</table>
 
 
 	<!--  start -->
-	<p class="red">장비<br>
+	<p class="red">장&nbsp;비<br>
 	<table class="work_signup">
 		<colgroup>
 			<col style="width: 33%">
 			<col>
 		</colgroup>
 		<tr id ="test">
-			<th><span class="iconImg"><img src="images/icon_equipment02.png" alt="건설장비"><br />건설장비</span></th>
+			<th><span class="iconImg"><img src="images/icon_equipment02.png" alt="건설장비"><br />건&nbsp;설&nbsp;장&nbsp;비</span></th>
 			<td id="cons_machine"></td>
 		</tr>
 		<tr>
-			<th><span class="iconImg"><img src="images/icon_equipment01.png" alt="운반장비"><br />운반장비</span></th>
+			<th><span class="iconImg"><img src="images/icon_equipment01.png" alt="운반장비"><br />운&nbsp;반&nbsp;장&nbsp;비</span></th>
 			<td id="trans_machine"></td>
 		</tr>
 		<tr>
-			<th><span class="iconImg"><img src="images/icon_equipment03.png" alt="기타장비"><br />기타장비</span></th>
+			<th><span class="iconImg"><img src="images/icon_equipment03.png" alt="기타장비"><br />기&nbsp;타&nbsp;장&nbsp;비</span></th>
 			<td id="etc_machine"></td>
 		</tr>
 	</table>
@@ -189,11 +199,11 @@ function updateSubmit(){
 			<col>	
 		</colgroup>
 		<tr>
-			<th><span class="iconImg"><img src="images/icon_tool01.png" alt="용접기"></span><br />용접기</th>
+			<th><span class="iconImg"><img src="images/icon_tool01.png" alt="용접기"></span><br />용&nbsp;&nbsp;&nbsp;접&nbsp;&nbsp;&nbsp;기</th>
 			<td id="weld_tool"></td>
 		</tr>
 		<tr>
-			<th><span class="iconImg"><img src="images/icon_tool02.png" alt="전동도구"></span><br />전동도구</th>
+			<th><span class="iconImg"><img src="images/icon_tool02.png" alt="전동도구"></span><br />전&nbsp;동&nbsp;도&nbsp;구</th>
 			<td id="elec_tool"></td>
 		</tr>
 		<tr>
@@ -201,7 +211,7 @@ function updateSubmit(){
 			<td id="nelec_tool"></td>
 		</tr>
 		<tr>
-			<th><span class="iconImg"><img src="images/icon_tool04.png" alt="용접기"></span><br />기타도구</th>
+			<th><span class="iconImg"><img src="images/icon_tool04.png" alt="용접기"></span><br />기&nbsp;타&nbsp;도&nbsp;구</th>
 			<td id="etc_tool" ></td>
 		</tr>
 	</table>
@@ -210,26 +220,24 @@ function updateSubmit(){
 	<p class="red">작업장소<br>
 	<table class="work_signup">
 		<colgroup>
-			<col style="width: 25%">
-			<col style="width: 25%">
-			<col style="width: 25%">
+			<col style="width: 33%">			
 			<col>
 		</colgroup>
 
 		<!-- start -->
 		<tr>
-			<th>장소유형</th>
-			<td colspan="3">${workVO.placename}</td>
+			<th>장&nbsp;소&nbsp;유&nbsp;형</th>
+			<td>${workVO.placename}</td>
 		</tr>
 		<!--  end -->
 
 		<tr>
-			<th>세부장소</th>
-			<td colspan="3">${workVO.addr_detail}</td>
+			<th>세&nbsp;부&nbsp;장&nbsp;소</th>
+			<td>${workVO.addr_detail}</td>
 		</tr>
 		<tr>
-			<th>실내/외 여부</th>
-			<td colspan="3">
+			<th>실내외여부</th>
+			<td>
 				<c:if test='${workVO.indoor.equals("Y")}'>실내</c:if>
 				<c:if test='${workVO.indoor.equals("N")}'>실외</c:if>
 			</td>
@@ -240,19 +248,19 @@ function updateSubmit(){
 		<p class="red">작업책임자<br>
 		<table class="work_cap">
 			<colgroup>
-				<col style="width: 25%">
-				<col style="width: 25%">
-				<col style="width: 25%">
+				<col style="width: 20%">
+				<col style="width: 30%">
+				<col style="width: 20%">
 				<col>
 			</colgroup>
 			<tr>
-				<th>성명</th>
+				<th>성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명</th>
 				<td>${workVO.pic_name}</td>
 				<th>생년월일</th>
 				<td>${workVO.pic_birth}</td>
 			</tr>
 			<tr>
-				<th>연락처</th>
+				<th>연&nbsp;락&nbsp;처</th>
 				<td>${workVO.pic_phone}</td>				
 				<th>작업자 수</th>
 				<td>
@@ -262,7 +270,7 @@ function updateSubmit(){
 				</td>
 			</tr>
 			<tr>
-				<th>소속</th>
+				<th>소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;속</th>
 				<td colspan="3">${workVO.pic_position}
 				<c:if test='${workVO.pic_position.equals("기타업체") && !workVO.pic_pos_detail.equals("")}'>
 					(${workVO.pic_pos_detail}) 
@@ -271,7 +279,7 @@ function updateSubmit(){
 			</tr>			
 			
 			<tr>
-				<th rowspan="2">작업상황<br />난이도
+				<th rowspan="2">작업상황<br><br>난&nbsp;이&nbsp;도
 				</th>
 				<td colspan="3">
 					<c:if test="${workVO.worklevel == 0}"><b style="color: limegreen">평범한 상황</b></c:if>
@@ -298,15 +306,15 @@ function updateSubmit(){
 			<col>
 		</colgroup>
 		<tr>
-			<th>작성자<br>	특이사항</th>
+			<th>작&nbsp;성&nbsp;자</th>
 			<td id="remark">${workVO.remark}</td>
 		</tr>
 		<tr>
-			<th>팀장/<br>안전관리자<br>특이사항</th>
+			<th>팀&nbsp;&nbsp;&nbsp;&nbsp;장/<br><br>안전관리자</th>
 			<td id="remark">${workVO.remark_leader}</td>
 		</tr>
 		<tr>
-			<th>현장소장<br> 특이사항</th>
+			<th>현장소장</th>
 			<td id="remark">${workVO.remark_chief}</td>
 		</tr>
 	</table>

@@ -75,8 +75,8 @@ $(document).on("click", ".detailLink", function(e) {
 		<tr>
 			<th scope="col">NO.
 			</th>
-			<th scope="col">종류</th>
-			<th scope="col">현장명</th>
+			<th scope="col">종&nbsp;류</th>
+			<th scope="col">현&nbsp;장&nbsp;명</th>
 			<th scope="col">공사기간</th>
 		</tr>
 	<thead>
@@ -84,7 +84,7 @@ $(document).on("click", ".detailLink", function(e) {
 		<c:forEach var="site" items="${siteList}" varStatus="idx">
 			<tr onclick="updateSubmit('${idx.index}')" class="listTR">
 				<!-- <td>${site.sitename}</td>-->
-				<td>${idx.index + 1} </td>
+				<td>${((paging.pageNo - 1) * paging.pageSize) + (idx.index + 1) } </td>
 				<td>
 					<c:if test="${site.type == 0}">건설</c:if>
 					<c:if test="${site.type == 1}">인프라</c:if>

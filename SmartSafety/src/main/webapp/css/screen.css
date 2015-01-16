@@ -4,7 +4,7 @@
   *{margin:0;padding:0;}
   
   @page a4sheet {size: 21.0cm 29.7cm}
-  .a4 {page : a4sheet; page-break-after :always}
+  .a4 {page : a4sheet; page-break-after :always; }
   
   img{border:0 none;}
   a{text-decoration:none;}
@@ -34,6 +34,7 @@
  table.lastsign{margin-top:200px;}
  .bold{font-weight:bold;}
  .bull_dot{font-weight:bold;font-size:18px;}
+  .printIcon{position:fixed;_position:absolute;z-index:99; border:1px solid black; top:50px;right:0px;cursor:pointer;}
 
 /* intro 추가 */
 .box_intro{margin:100px auto; }

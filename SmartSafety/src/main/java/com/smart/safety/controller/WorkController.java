@@ -386,11 +386,12 @@ public class WorkController {
 			case SITE_MANAGER ://자신의 현장의 모든 작업 수정 가능
 				canModify = true;
 				break;
-			case CONT_CHEIF: case CONT_LEADER : case CONT_INSPECTOR ://자신업체에 대해 수정가능
-				ManagerVO managerVO = (ManagerVO)session.getAttribute("managerVO");
-				if(managerVO != null && workVO.getCont_idx().equals(managerVO.getCont_idx()))
-					canModify = true;
+			case CONT_CHEIF: case CONT_LEADER : //자신현장에 대해 모두 수정가능
+				//ManagerVO managerVO = (ManagerVO)session.getAttribute("managerVO");
+				//if(managerVO != null && workVO.getCont_idx().equals(managerVO.getCont_idx()))
+				canModify = true;
 				break;
+			case CONT_INSPECTOR : break;
 			case CONTRACTOR://자신업체에 대해 수정가능
 				ContractorVO contractorVO = (ContractorVO)session.getAttribute("contractorVO");
 				if(contractorVO != null && workVO.getCont_idx().equals(contractorVO.getCont_idx()))

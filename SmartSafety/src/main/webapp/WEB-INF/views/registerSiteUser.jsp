@@ -55,7 +55,7 @@
 			  if(idNotDuplicate){
 				$('#siteUserForm').submit();
 			  }else {
-				  alert('ID중복체크를 해주시기 바랍니다(ID Check)');
+				  alert('아이디 중복체크를 해주시기 바랍니다');
 			  }  
 		}else
 			return;
@@ -108,7 +108,7 @@
 			<td colspan="3">${sessionScope.siteVO.sitename}</td>
 		</tr>
 		<tr>
-			<th>성명</th>
+			<th>성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명</th>
 			<td><form:input path="name" maxlength="45" />
 				<p />
 				<form:errors cssClass="formError" path="name" /></td>
@@ -118,7 +118,7 @@
 				<span id="birthError" class="formError"></span></td>
 		</tr>
 		<tr>
-			<th>연락처
+			<th>연&nbsp;락&nbsp;처
 				<p />
 				<span style="font-size: 20px">(010-1234-5678)</span>
 			</th>
@@ -126,10 +126,10 @@
 				<p />
 				<form:errors cssClass="formError" path="phone" />
 			</td>
-			<th>권한	</th>
+			<th>권&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;한	</th>
 			<c:if test="${!updateMode}"> 
 			<td>
-				<form:select id="level_select_box" class="selectBox"  path="level">
+				<form:select id="level_select_box" class="selectBox"  path="level" style="width:84%">
 						<form:option value="4" >현장소장</form:option>
 						<form:option value="5" >팀장</form:option>
 						<form:option value="6" selected="selected">감독자</form:option>
@@ -146,9 +146,9 @@
 			</c:if>
 		</tr>
 		<tr>
-			<th>소속사</th>
+			<th>소&nbsp;속&nbsp;사</th>
 			<td colspan="3">
-			<form:select id="cont_select_box" path="cont_idx" class="siteSelectBox colspanInput"  style="width:95%">
+			<form:select id="cont_select_box" path="cont_idx" class="siteSelectBox colspanInput"  style="width:94%">
 					<c:forEach var="cont" items="${contList}" >
 						<form:option value="${cont.cont_idx}">${cont.cont_name}</form:option>
 					</c:forEach>
@@ -157,11 +157,10 @@
 		</tr>
 		
 		<tr>
-			<th>ID</th>
+			<th>아&nbsp;이&nbsp;디</th>
 			<!-- insert -->
 			<c:if test="${!updateMode}">
-				<td colspan="2"><form:input id="input_id" path="id" 
-						maxlength="45" />
+				<td colspan="2"><form:input id="input_id" path="id" maxlength="45" style="width:88%"/>
 					<p />
 					<form:errors id="idError" cssClass="formError" path="id" /></td>
 				<td><span class="btn_typ01 duplCheck"  onclick="duplicateIdCheck()">중복체크</span>
@@ -170,15 +169,17 @@
 
 			<!--  update -->
 			<c:if test="${updateMode}">
-				<td colspan="3"><form:input id="input_id" path="id" class="colspanInput" maxlength="45" readonly="true" style="width:93.5%;"/></td>
+				<td colspan="3">
+					<form:hidden path="id" value="${managerVO.id}"/>
+					${managerVO.id}	
+				</td>
 			</c:if>
 
 
 		</tr>
 		<tr>
-			<th>PW</th>
-			<td colspan="3"><form:password id="input_password" class="colspanInput"
-					path="password" maxlength="45" />
+			<th>비밀번호</th>
+			<td colspan="3"><form:password id="input_password" path="password" maxlength="45" style="width:93%;"/>
 				<p />
 				<form:errors cssClass="formError" path="password" /> 
 				<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01 btnNewPasswd" >신규 비밀번호 발급</div> 

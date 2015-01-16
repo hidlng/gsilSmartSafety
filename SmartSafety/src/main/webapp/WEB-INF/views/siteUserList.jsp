@@ -38,10 +38,10 @@
 	</colgroup>
 	<thead>
 		<tr>
-			<th scope="col">권한</th>
-			<th scope="col">이름</th>			
-			<th scope="col">연락처</th>
-			<th scope="col">ID</th>
+			<th scope="col">권&nbsp;&nbsp;한</th>
+			<th scope="col">이&nbsp;&nbsp;름</th>			
+			<th scope="col">연&nbsp;락&nbsp;처</th>
+			<th scope="col">아&nbsp;이&nbsp;디</th>
 			
 		</tr>
 	<thead>

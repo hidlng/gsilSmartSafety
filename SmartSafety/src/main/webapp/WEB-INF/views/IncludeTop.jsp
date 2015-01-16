@@ -115,8 +115,8 @@ $(document).on("keydown", disableF5);
 					</c:if>
 					
 					<c:if test= "${sessionScope.userLoginInfo.level == 2}">
-						<li id="siteUserList" style="cursor:pointer" >사용자 관리</li> <!-- 현장 사용자 -->
 						<li id="contractorList" style="cursor:pointer" >업체 관리</li> <!--  업체 관리 -->
+						<li id="siteUserList" style="cursor:pointer" >사용자 관리</li> <!-- 현장 사용자 -->
 					</c:if>
 					<c:if test= "${sessionScope.userLoginInfo.level <= 4}">
 						<li id="report" style="cursor:pointer" >CEO 리포트</li>
@@ -128,16 +128,16 @@ $(document).on("keydown", disableF5);
 				<br>
 				
 				<ul class="aside_ident">
-					<li><span class="identTitle"><span class="head">I D  : </span><br>
+					<li><span class="identTitle"><span class="head">아이디  : </span><br>
 						<span class="identContent">${sessionScope.userLoginInfo.id}</span>
 						</span>
 					</li>
-					<li><span class="identTitle"> <span class="head"> 이름 : <br></span>
+					<li><span class="identTitle"> <span class="head"> 이&nbsp;&nbsp;&nbsp;름 : <br></span>
 						<c:if test ="${sessionScope.userLoginInfo.level == 0}"> 관리자</c:if> 
 						<c:if test ="${sessionScope.userLoginInfo.level != 0}">${sessionScope.userName}</c:if>
 						</span>
 					</li>
-					<li><span class="identTitle"> <span class="head">권한 : <br></span>
+					<li><span class="identTitle"> <span class="head">권&nbsp;&nbsp;&nbsp;한 : <br></span>
 						<c:if test ="${sessionScope.userLoginInfo.level == 0}">SS 관리자</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 1}">본사 관리자(EHS팀)</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 2}">현장 안전 관리자</c:if>

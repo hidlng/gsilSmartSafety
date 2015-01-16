@@ -34,15 +34,15 @@ function goPage(val) {
 	<colgroup>
 		<col style="width: 37%">
 		<col style="width: 30%">
-		<col style="width: 20%">
+		<col style="width: 17%">
 		<col>
 	</colgroup>
 	<thead>
 		<tr>
-			<th scope="col">업체명</th>
-			<th scope="col">업체연락처</th>
-			<th scope="col">협력사소장</th>
-			<th scope="col">ID</th>
+			<th scope="col">업&nbsp;체&nbsp;명</th>
+			<th scope="col">연&nbsp;락&nbsp;처</th>
+			<th scope="col">소&nbsp;장</th>
+			<th scope="col">아&nbsp;이&nbsp;디</th>
 		</tr>
 	<thead>
 	<tbody>

@@ -58,11 +58,11 @@ function chgLevel(val) {
 		</colgroup>
 		<thead>
 			<tr>				
-				<th scope="col">소속</th>
-				<th scope="col">직급</th>
-				<th scope="col">이름</th>
-				<th scope="col">연락처</th>
-				<th scope="col">ID</th>
+				<th scope="col">소&nbsp;속&nbsp;사</th>
+				<th scope="col">직&nbsp;급</th>
+				<th scope="col">이&nbsp;름</th>
+				<th scope="col">연&nbsp;락&nbsp;처</th>
+				<th scope="col">아&nbsp;이&nbsp;디</th>
 			</tr>
 		<thead>
 		<tbody>

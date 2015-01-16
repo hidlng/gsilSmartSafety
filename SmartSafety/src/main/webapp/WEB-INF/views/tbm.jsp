@@ -11,9 +11,12 @@
   <title>두산건설-작업전 위험 예지 조회(TBM)</title>
   <link rel="stylesheet" href="css/screen.css" type="text/css">
   <link rel="stylesheet" href="css/print.css" type="text/css">
- </head>
- <body>
-
+   <script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
+  <script type="text/javascript" src="js/jquery.plugin.js"></script>
+ </head>	
+ 
+ <body id="body">
+ <img src="images/print2.png" class="printIcon" width="100" alt="출력하기" onclick="window.print();" >
  <div id="wrap"> 
 	 <div class="box_top">
 		<h1><img src="images/logo_ds.png" width="100" alt="두산로고"></h1>
@@ -64,7 +67,8 @@
 			<th><span class="bull_dot">&middot;&nbsp;</span>날&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;씨 </th>
 			<th> : </th>
 			<td colspan="3">${tbmVO.weather} </td>
-			
+			<th></th>
+			<td colspan="3"></td>
 		 </tr>
 	 </table><!-- //typ02 -->
 	 </div>
@@ -85,7 +89,8 @@
 		 </tr>
 		 <tr>
 			<th>주요 위험정보</th>
-			<td colspan="5">${tbmVO.mainrisk}</td>
+			<td class="lft" colspan="5" style="padding-top:-10px">
+			${tbmVO.mainrisk}</td>
 			
 		 </tr>
 		 <tr>
@@ -136,15 +141,15 @@
 			</colgroup>
 		<caption>안&nbsp;전&nbsp;구&nbsp;호</caption>	
 		 <tr>
-			<th colspan="3">안&nbsp;전&nbsp;구&nbsp;호</th>
+			<th colspan="3">안&nbsp;전&nbsp;구&nbsp;호(작업 전 지시사항)</th>
 		 </tr>
 		 <tr>
-			<td class="lft"><b>작업 전 지시사항</b><br><br>
+			<td class="lft"><b>작성자</b><br><br>
 			${tbmVO.remark}
 			</td>
-			<td class="lft"><b>작업 전 지시사항</b><br><br>
+			<td class="lft"><b>팀장/안전관리자</b><br><br>
 			${tbmVO.remark_leader}</td>
-			<td class="lft"><b>작업 전 지시사항</b><br><br>
+			<td class="lft"><b>현장소장</b><br><br>
 			${tbmVO.remark_chief}</td>
 		 </tr>
 	 </table><!-- //table -->

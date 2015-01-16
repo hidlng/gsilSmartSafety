@@ -130,13 +130,13 @@ if(input) { //yes
 		<col style="width: 33%">
 	</colgroup>
 	<tr>
-		<th>업체</th>
+		<th>관&nbsp;련&nbsp;업&nbsp;체</th>
 		<td colspan="2">
 			<form:input id="cont_name"  path="cont_name"  readonly="true" style="border: 0px solid;"/>		
 		</td>		
 	</tr>
 	<tr>
-		<th>감독자</th>
+		<th>감&nbsp;&nbsp;&nbsp;독&nbsp;&nbsp;&nbsp;자</th>
 		<td><form:select path="inspec_mgr_idx" class="siteSelectBox colspanInput"  style="width:95%">
 				<c:forEach var="manager" items="${managerList}" >
 					<form:option value="${manager.manager_idx}">${manager.name}</form:option>
@@ -158,12 +158,12 @@ if(input) { //yes
 	
 	<tr>
 		<th>						
-			공종
+			공&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종
 		</th>
 		<th>				
-			대분류
+			대&nbsp;&nbsp;&nbsp;분&nbsp;&nbsp;&nbsp;류
 		<th>				
-			소분류
+			소&nbsp;&nbsp;&nbsp;분&nbsp;&nbsp;&nbsp;류
 		</th>
 	</tr>
 	<tr class="listTR">
@@ -180,7 +180,7 @@ if(input) { //yes
 		</td>
 	</tr>
 	<tr>
-		<th>작업종류</th>
+		<th>작&nbsp;업&nbsp;종&nbsp;류</th>
 		<td colspan="2"  onclick="goPopup()"  class="listTR categoryInput ">			
 			<form:input id="workname"  path="workname"  readonly="true" class="colspanInput" style="cursor:pointer;border:2px solid #1D4F99"/>
 			<br><form:errors path="workname" cssClass="formError"/>
@@ -195,7 +195,7 @@ if(input) { //yes
 						<br> <form:errors path="worktitle" cssClass="formError"  /></td>
 	</tr>
 	<tr>
-		<th>작업 유형</th>
+		<th>작&nbsp;업&nbsp;유&nbsp;형</th>
 		<td colspan="2">
 			<span>
 			<form:radiobutton path="ischarge" class="radi"  value="N" id="ischarge1"/><label for="ischarge1" style="cursor:pointer">신규작업</label>			
@@ -205,14 +205,14 @@ if(input) { //yes
 		</td>
 	</tr>
 	<tr>
-		<th>작업시작</th>	
+		<th>작&nbsp;업&nbsp;시&nbsp;작</th>	
 		<td><form:input id="startDateInput" path="startdate" 	maxlength="10" readonly="true"/>
 			<br> <form:errors cssClass="formError" path="startdate" /></td>
 		<td><form:input path="starttime" id="starttimeInput" class="selectBox" autocomplete="off" readonly="true" ></form:input> </td>
 	</tr>
 
 	<tr>
-		<th>작업마감</th>
+		<th>작&nbsp;업&nbsp;마&nbsp;감</th>
 		<td><form:input id="endDateInput" path="enddate" maxlength="10" readonly="true"/>
 			<br><form:errors cssClass="formError" path="enddate" /></td>
 		<td><form:input path="endtime" id="endtimeInput" class="time ui-timepicker-input" autocomplete="off" readonly="true" ></form:input> </td>
@@ -222,26 +222,26 @@ if(input) { //yes
 
 
 <!--  start -->
-	<p class="red">장비선택<br>				
+	<p class="red">장&nbsp;비&nbsp;선&nbsp;택<br>				
 	<table class="work_signup">		
 	<colgroup>	
 		<col style="width:33%">
 		<col>					
 	</colgroup>
 	<tr>
-		<th><span class="iconImg"><img src="images/icon_equipment02.png" alt="건설장비"><br/>건설장비</span></th>
+		<th><span class="iconImg"><img src="images/icon_equipment02.png" alt="건설장비"><br/>건&nbsp;설&nbsp;장&nbsp;비</span></th>
 		<td id="cons_machine"></td>
 		<td>
 			<span class="btn_typ01"  onclick="addTool('cons_machine', 0);">추가</span>
 		</td>
 	</tr>
 	<tr>
-		<th><span class="iconImg"><img src="images/icon_equipment01.png" alt="운반장비"><br/>운반장비</span></th>
+		<th><span class="iconImg"><img src="images/icon_equipment01.png" alt="운반장비"><br/>운&nbsp;반&nbsp;장&nbsp;비</span></th>
 		<td id="trans_machine"></td>
 		<td><span class="btn_typ01"  onclick="addTool('trans_machine', 0);">추가</span></td>
 	</tr>
 	<tr>
-		<th><span class="iconImg"><img src="images/icon_equipment03.png" alt="기타장비"><br/>기타장비</span></th>
+		<th><span class="iconImg"><img src="images/icon_equipment03.png" alt="기타장비"><br/>기&nbsp;타&nbsp;장&nbsp;비</span></th>
 		<td id="etc_machine"></td>
 		<td><span class="btn_typ01"  onclick="addTool('etc_machine', 0);">추가</span>
 		<br>
@@ -258,12 +258,12 @@ if(input) { //yes
 		<col>					
 	</colgroup>
 	<tr>
-		<th><span class="iconImg"><img src="images/icon_tool01.png" alt="용접기"></span><br />용접기</th>
+		<th><span class="iconImg"><img src="images/icon_tool01.png" alt="용접기"></span><br />용&nbsp;&nbsp;&nbsp;접&nbsp;&nbsp;&nbsp;기</th>
 		<td id="weld_tool"></td>
 		<td><span class="btn_typ01"  onclick="addTool('weld_tool', 0);">추가</span></td>
 	</tr>
 	<tr>
-		<th><span class="iconImg"><img src="images/icon_tool02.png" alt="전동도구"></span><br />전동도구</th>
+		<th><span class="iconImg"><img src="images/icon_tool02.png" alt="전동도구"></span><br />전&nbsp;동&nbsp;도&nbsp;구</th>
 		<td id="elec_tool"></td>
 		<td><span class="btn_typ01"  onclick="addTool('elec_tool', 0);">추가</span></td>
 	</tr>
@@ -273,7 +273,7 @@ if(input) { //yes
 		<td><span class="btn_typ01"  onclick="addTool('nelec_tool', 0);">추가</span></td>
 	</tr>
 	<tr>
-		<th><span class="iconImg"><img src="images/icon_tool04.png" alt="기타도구"></span><br />기타도구</th>
+		<th><span class="iconImg"><img src="images/icon_tool04.png" alt="기타도구"></span><br />기&nbsp;타&nbsp;도&nbsp;구</th>
 		<td id="etc_tool"></td>
 		<td>
 			<span class="btn_typ01"  onclick="addTool('etc_tool', 0);">추가</span>
@@ -287,16 +287,14 @@ if(input) { //yes
 <p class="red">작업장소등록<br>
 <table class="work_signup">
 	<colgroup>
-		<col style="width: 25%">
-		<col style="width: 25%">
-		<col style="width: 25%">
+		<col style="width: 33%">
 		<col>
 	</colgroup>
 	
 	<!-- start -->
 	<tr>
-		<th>장소유형</th>
-		<td colspan="3">
+		<th>장&nbsp;소&nbsp;유&nbsp;형</th>
+		<td>
 		<form:select path="placename" class="siteSelectBox" id="placename" style="width:92%">
 			<form:option value="">:::선택:::</form:option>
 			<form:option value="" selected="true">2</form:option>
@@ -305,15 +303,15 @@ if(input) { //yes
 	<!--  end -->
 	
 	<tr>
-		<th>세부장소</th>
-		<td colspan="3">
+		<th>세&nbsp;부&nbsp;장&nbsp;소</th>
+		<td>
 			<form:input path="addr_detail" class="colspanInput" 	maxlength="255" />
 			<br> <form:errors path="addr_detail" cssClass="formError"  />
 		</td>
 	</tr>
 	<tr>
-		<th>실내/외 여부</th>
-		<td colspan="3" class="radi_td">
+		<th>실내외여부</th>
+		<td class="radi_td">
 		<span class="side">
 			<form:radiobutton path="indoor" class="radi" value="Y" label="실내"/>				
 			<form:radiobutton path="indoor" class="radi" value="N" label="실외"/>
@@ -332,16 +330,16 @@ if(input) { //yes
 			<col>
 		</colgroup>
 		<tr>
-			<th>성명</th>
+			<th>성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명</th>
 			<td><form:input path="pic_name" 	maxlength="45" />
 				<br> <form:errors path="pic_name" cssClass="formError"  /></td>
-			<th>생년<br>월일</th>
+			<th>생년&nbsp;월일</th>
 			<td><form:input id="birthInput" path="pic_birth" 	maxlength="10" readonly="true" />
 				<br> <form:errors path="pic_birth" cssClass="formError"  />
 			</td>
 		</tr>
 		<tr>
-			<th>연락처</th>
+			<th>연&nbsp;락&nbsp;처</th>
 			<td><form:input class="phone" path="pic_phone" 	maxlength="13" onblur="checkPhone(this, this.value)"/>
 			<br> <form:errors path="pic_phone" cssClass="formError"  /></td>
 			
@@ -356,7 +354,7 @@ if(input) { //yes
 			</td>
 		</tr>
 		<tr>
-			<th  rowspan="2">소속</th>
+			<th  rowspan="2">소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;속</th>
 			<td colspan="3">
 				<form:select id="pic_position" path="pic_position" class="siteSelectBox"  style="width:94%;">
 					
@@ -371,12 +369,12 @@ if(input) { //yes
 		<tr>
 		<td id="td_pic_pos_detail_1">기타업체명</td>
 		<td id="td_pic_pos_detail_2" colspan="2">
-			<form:input path="pic_pos_detail"/>
+			<form:input path="pic_pos_detail" style="width:88%"/>
 		</td>
 		</tr>
 	
 		<tr>
-			<th rowspan="2">작&nbsp;&nbsp;&nbsp;업<br>상&nbsp;&nbsp;&nbsp;황<br />난이도
+			<th rowspan="2">작업상황<br><br>난&nbsp;이&nbsp;도
 			</th>
 			<td colspan="3">
 			<form:select path="worklevel" class="selectBox" >
@@ -406,20 +404,20 @@ if(input) { //yes
 		<col>
 	</colgroup>
 	<tr>
-		<th>작성자<br>	특이사항</th>
-		<td><form:textarea path="remark" 	maxlength="100" />
+		<th>작&nbsp;성&nbsp;자</th>
+		<td><form:textarea  class="remark" path="remark" 	maxlength="100" />
 			<br> <form:errors path="remark" cssClass="formError"  />
 		</td>
 	</tr>
 	<tr>
-		<th>팀장/<br>안전관리자<br>특이사항</th>
-			<td><form:textarea path="remark_leader" 	maxlength="100" />
+		<th>팀&nbsp;&nbsp;&nbsp;&nbsp;장/<br><br>안전관리자</th>
+			<td><form:textarea  class="remark"  path="remark_leader" 	maxlength="100" />
 			<br> <form:errors path="remark_leader" cssClass="formError"  />
 		</td>
 	</tr>
 	<tr>
-		<th>현장소장<br> 특이사항</th>
-				<td><form:textarea path="remark_chief" 	maxlength="100" />
+		<th>현장소장</th>
+				<td><form:textarea  class="remark"  path="remark_chief" 	maxlength="100" />
 		<br> <form:errors path="remark_chief" cssClass="formError"  />
 		</td>
 	</tr>

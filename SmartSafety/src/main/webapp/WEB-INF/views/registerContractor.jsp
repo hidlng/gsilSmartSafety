@@ -40,7 +40,7 @@
 				$('#contractorForm').submit();
 		  }else {
 			  //$('#idError').text('중복 체크');
-			  alert('ID중복체크를 해주시기 바랍니다(ID Check)');
+			  alert('아이디 중복체크를 해주시기 바랍니다');
 		  }
 	}else
 		return;
@@ -83,36 +83,36 @@
 	</colgroup>
 
 	<tr>
-		<th>현장</th>
+		<th>현&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장</th>
 		<td colspan="3">
 			${sessionScope.siteVO.sitename}
 		</td>
 	</tr>
 	<tr>
-		<th>업체명</th>
-		<td colspan="3"><form:input path="cont_name" class="colspanInput" maxlength="45"/><p/><form:errors cssClass="formError" path="cont_name" /></td>
+		<th>업&nbsp;체&nbsp;명</th>
+		<td colspan="3"><form:input path="cont_name" maxlength="45" style="width:93%;"/><p/><form:errors cssClass="formError" path="cont_name" /></td>
 	</tr>
 	<tr>
-		<th>업체 연락처<p><span style="font-size:20px">(010-1234-5678)</span></th>
+		<th>업&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;체<br>연&nbsp;락&nbsp;처</th>
 		<td><form:input path="cont_phone" maxlength="13" onblur="checkPhone(this, this.value)"/><p/><form:errors cssClass="formError" path="cont_phone" /></td>
 		
-		<th>긴급연락처<p><span style="font-size:20px">(010-1234-5678)</span></th>
+		<th>긴&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;급<br>연&nbsp;락&nbsp;처</th>
 		<td><form:input path="cont_emg_phone" maxlength="13" onblur="checkPhone(this, this.value)"/><p/><form:errors cssClass="formError" path="cont_emg_phone" /></td>
 	</tr>
 	<tr>
-		<th>협력사소장</th>
+		<th>소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장</th>
 		<td><form:input path="rep_name" maxlength="45"/><p/><form:errors cssClass="formError" path="rep_name" />
 		</td>
-		<th>연락처<p><span style="font-size:20px">(010-1234-5678)</span></th>
+		<th>소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장<br>연&nbsp;락&nbsp;처</th>
 		<td><form:input path="rep_phone" maxlength="13" onblur="checkPhone(this, this.value)"/><p/><form:errors cssClass="formError" path="rep_phone" />
 	</tr>
 	
 	<tr>
-		<th>ID</th>
+		<th>아&nbsp;이&nbsp;디</th>
 		<!-- insert -->
 		<c:if test="${!updateMode}">
 			<td colspan="2">
-			<form:input id="input_id" path="id" maxlength="45" />
+			<form:input id="input_id" path="id" maxlength="45" style="width:88%"/>
 				<p/><form:errors id="idError" cssClass="formError" path="id" />
 			</td>
 			<td><span class="btn_typ01 duplCheck"  onclick="duplicateIdCheck()">중복체크</span>
@@ -123,16 +123,17 @@
 		<!--  update -->
 		<c:if test="${updateMode}">
 			<td colspan="3">
-			<form:input id="input_id" path="id" class="colspanInput" maxlength="45" readonly="true" />
+			<form:hidden path="id" value="${contractorVO.id}"/>
+			${contractorVO.id}
 			</td>
 		</c:if>
 			
 		
 	</tr>
 	<tr>
-		<th>PW</th>
+		<th>비밀번호</th>
 		<td colspan="3">					
-			<form:password id="input_password" path="password" class="colspanInput" maxlength="45"/><p/><form:errors cssClass="formError" path="password" />
+			<form:password id="input_password" path="password" maxlength="45" style="width:93%;"/><p><form:errors cssClass="formError" path="password" />
 			<div id="btnNewPasswd" onclick="newPassword()" class="btn_typ01 btnNewPasswd" >신규 비밀번호 발급</div> 						
 		</td>
 	</tr>

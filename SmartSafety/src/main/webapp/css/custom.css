@@ -1,5 +1,4 @@
 
-
 .listTR {
 	cursor:pointer;
 	
@@ -51,7 +50,7 @@
 	font-size: 25px;
 }
 
-#remark {
+.remark {
 	text-align:left;
 	padding-left:20px;
 	font-size:25px;
@@ -87,7 +86,7 @@ a:hover.infoBtn {
 	padding: 5px;
 	background-color: #1d2b43;
 	color: #fff;
-	font-size: 35px;
+	font-size: 30px;
 	line-height: 36px;
 	border: 1px solid #1D4F99;
 	text-align: center;
@@ -104,7 +103,7 @@ a:hover.infoBtn {
 	padding: 5px;
 	background-color: #1d2b43;
 	color: #fff;
-	font-size: 35px;
+	font-size: 30px;
 	line-height: 36px;
 	border: 2px solid #1D4F99;
 	text-align: center;

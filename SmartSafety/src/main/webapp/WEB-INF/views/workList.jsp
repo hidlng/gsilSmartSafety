@@ -55,10 +55,10 @@ function goPage(val) {
 	<thead>
 		<tr>
 			<th scope="col">NO.</th>
-			<th scope="col">공종</th>
+			<th scope="col">공&nbsp;종</th>
 			<th scope="col">작업타이틀</th>
 			<th scope="col">작업기간</th>
-			<th scope="col">작성자</th>
+			<th scope="col">작&nbsp;성&nbsp;자</th>
 		</tr>
 	<thead>
 	<tbody>

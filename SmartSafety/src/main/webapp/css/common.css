@@ -89,10 +89,10 @@ h1 img{width:120px;}
 .content table tr td{padding:10px 0;}
 .content table tr td a{cursor:pointer;}
 .content table td.radi_td label{cursor:pointer;}
-.content table.user_signup td {text-align:left; padding-left: 18px;}
+.content table.user_signup td {text-align:center;}
 .content table.user_signup td input{width:80%; font-size:30px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 2px solid #1D4F99;}
 .content table.user_signup td input[readonly='true'] {border:0px solid blue;}
-.content table.user_signup td .colspanInput{width:93%;}
+.content table.user_signup td .colspanInput{width:92.5%;}
 
 /* paging */
 .content .paging{text-align:center; padding: 40px 0 0 0; }
@@ -118,7 +118,7 @@ span.side{margin-right:30px;}
 span.side{font-size:25px;}
 .content.work table td input.radi {width:20px; background-color:none;}
 .content.work table td.radi_td label{cursor:pointer;}
-.content.work table td textarea{width:90%;height:200px;background:none;color:#fff;font-size:35px;padding:10px;margin:15px 0;border:1px dotted #ddd; border-right:0;overflow-y:scroll;overflow-x:hidden;}
+.content.work table td textarea{font-family:inherit; width:90%;height:200px;background:none;color:#fff;font-size:30px;padding:10px;margin:15px 0;border:1px dotted #ddd; border-right:0;overflow-y:scroll;overflow-x:hidden;}
 .goTop{position:absolute; left:50%; bottom:175px; margin-left:475px;}
 span.iconImg{margin:0 auto; width:110px;height:auto;}
 span.iconImg img{width:90px;height:auto;}
@@ -130,7 +130,7 @@ ul.equipment_typ li.on{border:1px dashed #8c97a9;border-bottom:0px;background: n
 table.work_signup.equipment{border:2px dashed #8c97a9;}
 span.explain{display:block;width:92%;font-weight:normal;font-size:25px;line-height:35px;text-align:justify; padding-left:30px;}
 .content table.work_signup td {}
-.content table.work_signup td input{width:80%; font-size:35px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 2px solid #1D4F99;}
+.content table.work_signup td input{width:80%; font-size:30px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 2px solid #1D4F99;}
 .content table.work_signup td input[readonly='true'] {border:0px solid blue;}
 .content table.work_signup td .colspanInput{width:90%;}
 

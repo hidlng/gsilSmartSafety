@@ -92,32 +92,32 @@
 		</colgroup>
 
 		<tr>
-			<th>종류</th>
+			<th>구&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;분</th>
 			<td colspan="3" style="text-align:center">
 			<form:radiobutton id="type_1" path="type" class="radi"  value="0" style="cursor:pointer"/> <label for="type_1" style="cursor:pointer">건축</label>		
 			<form:radiobutton id="type_2" path="type" class="radi" value="1" style="cursor:pointer"/><label for="type_2" style="cursor:pointer">인프라</label>		
 			</td>
 		</tr>
 		<tr>
-			<th>현장명</th>
+			<th>현&nbsp;&nbsp;장&nbsp;&nbsp;명</th>
 			<td colspan="3"><form:input path="sitename" class="colspanInput" maxlength="45" />
 				<br>
 				<form:errors cssClass="formError" path="sitename" /></td>
 		</tr>
 		<tr>
-			<th>주소</th>
-			<td colspan="3"><form:input id="addr_detail" path="addr_detail" class="colspanInput" maxlength="255"  readonly="true" style="font-size:25px;cursor:pointer;height:30px" onclick="goPopup()" />
+			<th>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</th>
+			<td class="listTR" colspan="3"><form:textarea id="addr_detail" path="addr_detail" class="colspanInput" maxlength="255"  readonly="true" rows="2" style="font-family:inherit;border:1px;border: 2px solid #1D4F99;width:90%;cursor:pointer;height:60px;overflow:hidden;" onclick="goPopup()" />
 				<br>
 				<form:errors cssClass="formError" path="addr_detail" /></td>
 		</tr>
 	
 		<tr>
-			<th>공사 기간<br>(시작)</th>
+			<th>공사 기간<br>(시&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작)</th>
 			<td><form:input id="startDateInput" path="starttime"
 					maxlength="10" />
 				<br>
 				<form:errors cssClass="formError" path="starttime" /></td>
-			<th>공사 기간<br>(종료)</th>
+			<th>공사 기간<br>(종&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;료)</th>
 			<td><form:input id="endDateInput" path="endtime" maxlength="10" />
 				<br>
 				<form:errors cssClass="formError" path="endtime" /></td>

@@ -3,7 +3,7 @@
 @media print{
  @page a4sheet {size: 21.0cm 29.7cm}
  .a4 {page : a4sheet; page-break-after :always}
-  html{background:#fff;width:100%;height:100%; padding}
+  html{background:#fff;width:100%;height:100%; padding: 0px;}
   body{background:#fff;;font-family: Dotum,돋움,Helvetica,AppleSDGothicNeo,sans-serif; font-size:11pt; color:#222;margin:0 4%;}
   hr {display:none}
   hr.blkie8 {display:block;;border:none} /* ie8 block display */
@@ -28,4 +28,5 @@
  .signBox span{float:right;width:50px;} 
  table.lastsign{margin-top:200px;}
  .bold{font-weight:bold;}
+ .printIcon{display:none;}
   }  
