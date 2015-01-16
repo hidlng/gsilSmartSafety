@@ -79,6 +79,7 @@ public class ManagerController {
 		List<ManagerVO> list = managerService.getManagerListByVO(managerVO);
 		
 		/** model setting **/
+
 		model.addAttribute("listLevel", listLevel);
 		model.addAttribute("searchWord",searchWord);
 	    model.addAttribute("paging",paging);
@@ -112,6 +113,8 @@ public class ManagerController {
 		String site_idx = ((SiteVO)session.getAttribute("siteVO")).getSite_idx();
 		managerVO.setSite_idx(site_idx);
 		
+
+		
 		/**paging**/
 		int rowCnt = managerService.getRowCount(managerVO);
 	    Paging paging = new Paging(pageNum, rowCnt, MAX_ROW_NUM, MAX_PAGE_NUM);
@@ -121,7 +124,14 @@ public class ManagerController {
 		
 		List<ManagerVO> list = managerService.getManagerListByVO(managerVO);
 		
+		/**업체 1건이라도 등록되어있는지 체크하여 등록버튼 show여부 결정**/
+		SiteVO siteVO = (SiteVO) session.getAttribute("siteVO");
+		List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx());
+		boolean canRegister = false;
+		if(contList.size() > 0) canRegister = true;
+		
 		/** model setting **/
+		model.addAttribute("canRegister" , canRegister);
 		model.addAttribute("searchWord",searchWord);
 	    model.addAttribute("paging",paging);
 		model.addAttribute("managerList", list);

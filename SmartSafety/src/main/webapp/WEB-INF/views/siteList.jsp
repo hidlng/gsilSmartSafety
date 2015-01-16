@@ -86,7 +86,7 @@ $(document).on("click", ".detailLink", function(e) {
 				<!-- <td>${site.sitename}</td>-->
 				<td>${((paging.pageNo - 1) * paging.pageSize) + (idx.index + 1) } </td>
 				<td>
-					<c:if test="${site.type == 0}">건설</c:if>
+					<c:if test="${site.type == 0}">건축</c:if>
 					<c:if test="${site.type == 1}">인프라</c:if>
 				</td>
 				<td>${site.sitename}</td>

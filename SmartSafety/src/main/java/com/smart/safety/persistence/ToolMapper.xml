@@ -8,7 +8,8 @@
    	SELECT *
 	FROM Tool_LIST
 	WHERE WORK_IDX = #{work_idx}
-	AND DELYN='N';
+	AND DELYN='N'
+	ORDER BY TOOLTYPE;
   </select>
        
   <insert id="insert" parameterType="ToolVO">

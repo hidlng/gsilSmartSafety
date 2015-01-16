@@ -8,7 +8,11 @@
 	}
 
 	function registerSubmit() {
-		$('#registerForm').submit();
+		var canRegister = ${canRegister};
+		if(canRegister){
+			$('#registerForm').submit();
+		}else
+			alert('업체를 먼저 등록하시기 바랍니다.');
 	}
 
 	function goPage(val) {

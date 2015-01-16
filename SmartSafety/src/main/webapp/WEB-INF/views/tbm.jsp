@@ -16,6 +16,7 @@
  </head>	
  
  <body id="body">
+
  <img src="images/print2.png" class="printIcon" width="100" alt="출력하기" onclick="window.print();" >
  <div id="wrap"> 
 	 <div class="box_top">

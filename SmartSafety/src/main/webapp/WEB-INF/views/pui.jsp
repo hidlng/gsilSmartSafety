@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/screen.css" type="text/css">
      <link rel="stylesheet" href="css/print.css" type="text/css" media="print"/>   
  </head>
- <body>
+ <body >
   <img src="images/print2.png" class="printIcon" width="100" alt="출력하기" onclick="window.print();" >
  <c:forEach var="puiVO" items="${puiList}" varStatus="index">
  <div id="wrap" class="a4"> 
@@ -87,10 +87,10 @@
 			<col style="width:50%">				
 		</colgroup>
 		 <tr>
-			<th>장비명</th>
+			<th>장 비 명</th>
 			<td>${puiVO.toolname}</td>
 			<th>주요 위험</th>		
-			<th>장비사용가이드</th>		
+			<th>장비 사용 가이드</th>		
 		 </tr>
 		 <tr>
 			 <td colspan="2">
@@ -113,14 +113,14 @@
 			<col>		
 		</colgroup>
 		<tr>
-			<th colspan="6">사용 전 점검 사항</th>		
+			<th colspan="6">사용 전 점검사항</th>		
 		</tr>
 		<tr>
 			<th>사  진</th>
-			<th>체크사항</th>
-			<th>확 인 란</th>
+			<th>체 크 사 항</th>
+			<th>확 인</th>
 			<th>사  진</th>
-			<th>체크사항</th>
+			<th>체 크 사 항</th>
 			<th>확  인</th>
 		</tr>
 		<c:forEach var="check" items="${puiVO.checklist}" varStatus="index">

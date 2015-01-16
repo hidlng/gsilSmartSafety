@@ -139,7 +139,7 @@ $(document).on("keydown", disableF5);
 					</li>
 					<li><span class="identTitle"> <span class="head">권&nbsp;&nbsp;&nbsp;한 : <br></span>
 						<c:if test ="${sessionScope.userLoginInfo.level == 0}">SS 관리자</c:if>
-						<c:if test ="${sessionScope.userLoginInfo.level == 1}">본사 관리자(EHS팀)</c:if>
+						<c:if test ="${sessionScope.userLoginInfo.level == 1}">본사 관리자<br>(EHS팀)</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 2}">현장 안전 관리자</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 3}">CEO</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 4}">현장 소장</c:if>
