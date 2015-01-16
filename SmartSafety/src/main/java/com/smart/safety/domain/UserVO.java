@@ -17,7 +17,14 @@ public class UserVO implements Serializable {
 	private int level;
 	String pid;
 	private String site_idx;
+	private String sitename;
 	
+	public String getSitename() {
+		return sitename;
+	}
+	public void setSitename(String sitename) {
+		this.sitename = sitename;
+	}
 	public String getSite_idx() {
 		return site_idx;
 	}

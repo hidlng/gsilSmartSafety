@@ -6,10 +6,24 @@
 <mapper namespace="com.smart.safety.persistence.MobileMapper">
 	  
 	  <select id="getMobileLogin" resultType="UserVO"  parameterType="UserVO" >
-	    select a.USER_IDX, a.ID, a.PASSWORD, a.LEVEL,a.WRITETIME, a.DELYN, a.PID, b.site_idx from user_list a, manager_list b
-		where a.USER_IDX = b.USER_IDX
-  		and id=#{id} AND password=#{password} AND a.DELYN='N'
+	    select a.USER_IDX, a.ID, a.PASSWORD, a.LEVEL,a.WRITETIME, a.DELYN, a.PID from user_list a
+		where id=#{id} AND password=#{password} AND a.DELYN='N'
 	  </select>
+	  
+	  <select id="getMobileContractorInfo" resultType="UserVO"  parameterType="String" >
+		SELECT a.site_idx, a.sitename FROM safety.site_list a 
+		join safety.contractor_list b
+		on a.site_idx = b.SITE_IDX
+  		where b.USER_IDX = #{id}
+	  </select>
+	  
+	  <select id="getMobileManagerInfo" resultType="UserVO"  parameterType="String" >
+		SELECT a.site_idx, a.sitename FROM safety.site_list a 
+		join safety.manager_list b
+		on a.site_idx = b.SITE_IDX
+  		where b.USER_IDX =#{id}
+	  </select>
+	  
 
       <update id="updateRegId" parameterType="UserVO">
          UPDATE USER_LIST

@@ -12,6 +12,8 @@ import com.smart.safety.domain.UserVO;
 @Repository(value="MobileMapper")
 public interface MobileMapper {
 	public UserVO getMobileLogin(UserVO userVO);
+	public UserVO getMobileContractorInfo(String userIdx);
+	public UserVO getMobileManagerInfo(String userIdx);
 	public void updateRegId( UserVO userVO );
 	public List<MobileVO> getMobileWorkList(@Param("siteidx") String siteidx, @Param("searchdate") String searchdate);
 	public int updateCheckYn(MobileVO mobileVO);

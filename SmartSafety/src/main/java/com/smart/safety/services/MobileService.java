@@ -32,8 +32,16 @@ public class MobileService {
 			jo.put("useridx", returnVO.getUser_idx());
 			jo.put("authority", returnVO.getAuthority());
 			jo.put("level", returnVO.getLevel());
-			jo.put("siteidx", returnVO.getSite_idx());
 			
+			if( returnVO.getLevel() == 7 ) {
+				UserVO contInfo = mobileMapper.getMobileContractorInfo(returnVO.getUser_idx());
+				jo.put("siteidx", contInfo.getSite_idx());
+				jo.put("sitename", contInfo.getSitename());
+			} else {
+				UserVO managerInfo = mobileMapper.getMobileManagerInfo(returnVO.getUser_idx());
+				jo.put("siteidx", managerInfo.getSite_idx());
+				jo.put("sitename", managerInfo.getSitename());
+			}
 			returnVO.setPid(regId);
 			mobileMapper.updateRegId(returnVO);
 		
