@@ -177,10 +177,10 @@
 						            </c:choose>
 						        </c:forEach> 
 						    </span>
-						    <!-- 
+						     
 						    <a href="javascript:goPage(${paging.nextPageNo})" class="next"><span> &gt; </span></a>
 						    <a href="javascript:goPage(${paging.finalPageNo})" class="last"><span> &gt;&gt; </span></a>
-							 --> 
+							 
 						</div>
 
 					</div><!-- //content -->
@@ -188,11 +188,11 @@
 				</div><!-- //wrapBox -->
 			</div><!-- //back_bg -->
 		</div><!-- //wrap -->
-
+<!-- 
 		<div class="pageClosing">
 		 <span class="renew"><img src="images/renew.png" width="35px" alt="새로고침"></span>
 		 <span class="closing"><img src="images/closing.png" width="35px" alt="닫기"></span>
-		</div><!-- //pageClosing  -->
+		</div> --><!-- //pageClosing  -->
 		
 		<div id="form_group" style="display:none">
 			<form id="searchForm" action="ceolist" action="GET" >
