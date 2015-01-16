@@ -137,7 +137,8 @@
 								<col style="width:25%">
 								<col style="width:10%">
 								<col style="width:10%">
-								<col style="width:10%">								
+								<col style="width:10%">
+								<col>								
 						</colgroup>
 							
 							<tr>
@@ -174,11 +175,12 @@
 						                <c:when test="${i eq paging.pageNo}"><a href="javascript:goPage(${i})" class="now"><span>${i}</span></a></c:when>
 						                <c:otherwise><a href="javascript:goPage(${i})"><span>${i}</span></a></c:otherwise>
 						            </c:choose>
-						        </c:forEach>
+						        </c:forEach> 
 						    </span>
+						    <!-- 
 						    <a href="javascript:goPage(${paging.nextPageNo})" class="next"><span> &gt; </span></a>
 						    <a href="javascript:goPage(${paging.finalPageNo})" class="last"><span> &gt;&gt; </span></a>
-							
+							 --> 
 						</div>
 
 					</div><!-- //content -->
