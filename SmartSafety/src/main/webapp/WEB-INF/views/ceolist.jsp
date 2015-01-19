@@ -78,7 +78,7 @@
  			var timer = $.timer(function(){ 
 				window.location.reload();
  			});
-			timer.set({ time :300000 , autostart :true});
+			timer.set({ time :60000 , autostart :true});
 		}
 
 		function viewSubmit(val) {
