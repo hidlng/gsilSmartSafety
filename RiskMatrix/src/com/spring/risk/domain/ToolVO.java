@@ -1,8 +1,7 @@
 package com.spring.risk.domain;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 import net.sourceforge.stripes.action.*;
 

@@ -218,7 +218,8 @@ public class WorkController {
 			while(it_man.hasNext()) {
 				ManagerVO manVO = it_man.next();
 				int level = manVO.getLevel();
-				if(level == USERLEVEL.SITE_MANAGER.idx || level == USERLEVEL.CONT_CHEIF.idx || level == USERLEVEL.CONT_LEADER.idx) 
+				if(level == USERLEVEL.SITE_MANAGER.idx || level == USERLEVEL.CONT_CHEIF.idx || level == USERLEVEL.CONT_LEADER.idx
+						|| level == USERLEVEL.CONTRACTOR.idx) 
 					if(manVO.getPid() != null && !manVO.getPid().equals("")){
 						sendMessage(manVO.getPid());	
 						System.out.println("push 알림 전달 [ " + manVO.getId() +"]");
@@ -336,7 +337,7 @@ public class WorkController {
 			workVO.setRisk_level(risklevel);//RiskGrade 
 		}
 		
-		workVO.setRisk_warn("1");//RiskWarn
+		workVO.setRisk_warn("해당없음");//RiskWarn
 		workVO.setWorkpermit("N");//WorkPermit
 		
 	}

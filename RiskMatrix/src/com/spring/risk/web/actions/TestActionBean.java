@@ -1,14 +1,12 @@
 package com.spring.risk.web.actions;
 
-import java.util.List;
+import java.util.*;
 
-import net.sourceforge.stripes.action.DefaultHandler;
-import net.sourceforge.stripes.action.ForwardResolution;
-import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.action.*;
+import net.sourceforge.stripes.integration.spring.*;
 
-import com.spring.risk.domain.TestVO;
-import com.spring.risk.service.TestService;
+import com.spring.risk.domain.*;
+import com.spring.risk.service.*;
 
 public class TestActionBean extends AbstractActionBean {
 	

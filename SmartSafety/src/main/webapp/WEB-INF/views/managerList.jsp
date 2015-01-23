@@ -33,7 +33,7 @@ function chgLevel(val) {
 </script>
 <div id="listLevelBox">
 <select id="mSelectBox" class="selectBox" onchange="chgLevel(this.value)">
-		<option value="1" >본사 관리자(EHS팀)</option>
+		<option value="1" >본사 관리자</option>
 		<option value="2" >현장 안전관리자</option>
 		<option value="3" >CEO</option>
 </select>

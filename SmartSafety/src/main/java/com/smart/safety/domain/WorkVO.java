@@ -51,10 +51,13 @@ public class WorkVO implements Serializable{
 	private String placecode;
 	private String placename;
 	
+	private String place_airtight="N";
+	private String place_acro="N";
+	private String place_indoor="N";
+	
 	@NotEmpty(message="입력 필요")
 	private String addr_detail;
-	@NotEmpty(message="입력 필요")
-	private String indoor ="N";
+
 	@NotEmpty(message="입력 필요")
 	private String pic_name;
 	@NotEmpty(message="입력 필요")
@@ -286,12 +289,7 @@ public class WorkVO implements Serializable{
 		this.sitename = sitename;
 	}
 	
-	public String getIndoor() {
-		return indoor;
-	}
-	public void setIndoor(String indoor) {
-		this.indoor = indoor;
-	}
+
 	public String getIscharge() {
 		return ischarge;
 	}
@@ -400,6 +398,24 @@ public class WorkVO implements Serializable{
 	}
 	public void setRemark_leader(String remark_leader) {
 		this.remark_leader = remark_leader;
+	}
+	public String getPlace_airtight() {
+		return place_airtight;
+	}
+	public void setPlace_airtight(String place_airtight) {
+		this.place_airtight = place_airtight;
+	}
+	public String getPlace_acro() {
+		return place_acro;
+	}
+	public void setPlace_acro(String place_acro) {
+		this.place_acro = place_acro;
+	}
+	public String getPlace_indoor() {
+		return place_indoor;
+	}
+	public void setPlace_indoor(String place_indoor) {
+		this.place_indoor = place_indoor;
 	}
 
 	

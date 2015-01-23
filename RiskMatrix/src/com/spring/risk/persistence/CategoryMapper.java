@@ -1,9 +1,8 @@
 package com.spring.risk.persistence;
 
-import java.util.List;
+import java.util.*;
 
-import com.spring.risk.domain.CategoryVO;
-import com.spring.risk.domain.CodeVO;
+import com.spring.risk.domain.*;
 
 
 public interface CategoryMapper {
@@ -16,6 +15,7 @@ public interface CategoryMapper {
   List<CategoryVO> getAncestorCategory(int idx);
   List<CategoryVO> getSiblingCategory(int idx);
   List<CodeVO> 	   getCodeListByCategory(int idx);
+  List<CodeVO> 	   getCodeListByType(int idx);
   List<CodeVO>	   getDescendantCodes(int idx);
   
   CodeVO getCodeVO(String code);

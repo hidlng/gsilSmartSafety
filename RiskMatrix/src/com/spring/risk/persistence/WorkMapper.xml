@@ -23,7 +23,7 @@
 	<insert id="insertWorkVO" parameterType="WorkVO">
 		INSERT INTO WORK_LIST(WORKCODE, GUIDE, EQUIP, MEASURE,SAFETY)
 		VALUES
-		(#{workCode}, #{guide},  #{equip},   #{measure} )
+		(#{workCode}, #{guide},  #{equip},   #{measure} , #{safety})
 	</insert>
 
 	<update id="updateWorkVO" parameterType="WorkVO">

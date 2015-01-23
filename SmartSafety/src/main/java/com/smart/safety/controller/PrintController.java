@@ -31,7 +31,7 @@ public class PrintController {
 	public static final String CODE_DETAIL_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getDetailByJSON=";
 	public static final String TOOL_IMG_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getToolImage=&filename=";
 	public static final String CHECK_IMG_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getChekcListImage=&filename=";
-		
+	public static final String FILE_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Category.action?getFile=&fileIdx=";
 	@Resource(name="WorkService")
 	WorkService workService;
 		
@@ -54,6 +54,10 @@ public class PrintController {
 		public int idx;	 PrintType(int val){this.idx = val;}
 	};
 
+	public enum CODETYPE { WORK(1), TOOL(2), PLACE(3)	;	
+		public int idx;	 CODETYPE(int val){this.idx = val;}
+	};
+		
 	
 	
 	/**
@@ -130,9 +134,104 @@ public class PrintController {
 	}
 
 
-	public String getDetailByJSON(String code, int type) {
+	/**pui이 호출 된 순간 출력이 되었다고 판단하기로함**/
+	@RequestMapping(value = "accident")
+	public void accident(Model model, String work_idx) {
+		WorkVO workVO = workService.getWorkByIdx(work_idx);		
+		
+		
+		//Work, Toollist, place에서 사고사례 링크주소를 가져온다
+		try {
+			ArrayList<FileVO> workFileList = new ArrayList<FileVO>();
+			Map<String, Object> jsonMap_work = getJsonMap(workVO.getWorkcode(), CODETYPE.WORK);		
+			if(jsonMap_work != null) {
+				@SuppressWarnings("unchecked")
+				ArrayList<Map<String,String>>fileList_work = (ArrayList<Map<String,String>>)jsonMap_work.get("fileList");
+				if(fileList_work != null) {
+					Iterator<Map<String,String>> it = fileList_work.iterator();
+					while(it.hasNext()){
+						Map<String,String> filemap = (Map<String,String>)it.next();
+						FileVO fileVO = new FileVO();
+						fileVO.setName(workVO.getWorkname());
+						fileVO.setUrl(FILE_URL + filemap.get("file_idx"));
+						fileVO.setFileName(filemap.get("fileName"));
+						workFileList.add(fileVO);
+					}
+						
+				}
+			}
+			
+			model.addAttribute("workFileList", workFileList);
+			
+			/**tool**/
+			ArrayList<FileVO> toolFileList = new ArrayList<FileVO>();
+			List<ToolVO> toollist = workVO.getToollist();
+			if(toollist != null) {//등록된 장비가 존재하면 각 장비의 PUI 정보를 가져옴
+				for(ToolVO toolVO : toollist){
+					if(toolVO.getTooltype() == 98 || toolVO.getTooltype() == 99 ) continue; //98, 99의 경우 수기입력이므로 RiskMatrix에는 내용이없음
+					Map<String, Object> jsonMap_tool = getJsonMap(toolVO.getToolcode(), CODETYPE.TOOL);
+					if(jsonMap_tool != null) {
+						@SuppressWarnings("unchecked")
+						ArrayList<Map<String,String>>fileList_tool = (ArrayList<Map<String,String>>)jsonMap_tool.get("fileList");
+						
+						if(fileList_tool != null) {
+							Iterator<Map<String,String>> it = fileList_tool.iterator();
+							while(it.hasNext()){
+								Map<String,String> filemap = (Map<String,String>)it.next();
+								FileVO fileVO = new FileVO();
+								fileVO.setName(toolVO.getToolname());
+								fileVO.setUrl(FILE_URL + filemap.get("file_idx"));
+								fileVO.setFileName(filemap.get("fileName"));
+								toolFileList.add(fileVO);
+							}
+								
+						}
+					}
+				}
+			}
+			
+			model.addAttribute("toolFileList", toolFileList);
+			
+			
+			/**Place**/
+			ArrayList<FileVO> placeFileList = new ArrayList<FileVO>();
+			model.addAttribute("placeFileList", placeFileList);
+//			Map<String, Object> jsonMap_work = getJsonMap(workVO.getWorkcode(), CODETYPE.WORK);
+//			Map<String,String>work = (Map<String, String>) jsonMap_work.get("placeVO");
+					
+		} catch (JsonParseException e) {e.printStackTrace();
+		} catch (JsonMappingException e) {e.printStackTrace();
+		} catch (IOException e) {e.printStackTrace();}
+		
+		
+		
+	
+		
+		
+		
+	}
+	
+	
+
+
+	public Map<String, Object> getJsonMap(String code, CODETYPE type) throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		String json_result = getDetailByJSON(code, type);
+		if(json_result != null) {
+			Map<String, Object> jsonMap = null;
+			
+			//수기입력 체크 제외
+			System.out.println(json_result.toString());
+			
+			return objectMapper.readValue(json_result, Map.class);
+		}
+		return null;
+			
+	}
+
+	public String getDetailByJSON(String code, CODETYPE type) {
 		RestTemplate restTemplate = new RestTemplate();
-		String url = CODE_DETAIL_URL + "&code="+code+"&type="+type;
+		String url = CODE_DETAIL_URL + "&code="+code+"&type="+type.idx;
 		String result = restTemplate.getForObject(url, String.class);
 		String json_result = result.substring(result.indexOf('(') + 1, result.length() - 1);
 		return json_result;
@@ -160,7 +259,15 @@ public class PrintController {
 		//mainrisk, measure, equip, guide , checklist
 			setWorkTBM(workVO, tbmVO);		
 			setToolTBM(workVO, tbmVO);
-			setPlaceTBM(workVO, tbmVO);
+			//setPlaceTBM(workVO, tbmVO);
+			
+			//작업장소 출력
+			StringBuffer pl_str = new StringBuffer();
+			if(workVO.getPlace_indoor().equals("Y"))pl_str.append(" 실내 ");
+			else pl_str.append(" 실외 ");
+			if(workVO.getPlace_airtight().equals("Y"))pl_str.append(" 밀폐 ");
+			if(workVO.getPlace_acro().equals("Y"))pl_str.append(" 고소 ");
+			tbmVO.setPlace_state(pl_str.toString());
 		} catch (JsonParseException e) {e.printStackTrace();
 		} catch (JsonMappingException e) {e.printStackTrace();
 		} catch (IOException e) {e.printStackTrace();}
@@ -187,8 +294,11 @@ public class PrintController {
 		SiteVO siteVO = siteService.getSiteByIdx(workVO.getSite_idx());
 		
 		targetVO.setSitename(siteVO.getSitename());//		 sitename
-		targetVO.setChief_phone(chiefVO.getPhone());
-		targetVO.setChief_name(chiefVO.getName());
+		
+		if(chiefVO != null){
+			targetVO.setChief_phone(chiefVO.getPhone());
+			targetVO.setChief_name(chiefVO.getName());
+		}
 		
 		//날씨
 		targetVO.setWeather(WeatherUtil.getWeatherText(siteVO.getLat(), siteVO.getLng()));
@@ -208,7 +318,7 @@ public class PrintController {
 			targetVO.setInspector_phone(inspectorVO.getPhone());
 		}
 		
-		targetVO.setWorktitle(workVO.getWorktitle());//		 worktitle
+		targetVO.setWorktitle(workVO.getWorktitle() + "("+ workVO.getAddr_detail() +")");//		 worktitle(addr_detail)
 		targetVO.setPic_name(workVO.getPic_name());//		 pic_name
 		targetVO.setPic_phone(workVO.getPic_phone());//		 pic_phone
 		targetVO.setPic_num_worker(workVO.getPic_num_worker());//		 pic_num_worker
@@ -250,47 +360,60 @@ public class PrintController {
 
 	
 	private void setWorkTBM(WorkVO workVO, TBMVO tbmVO) throws JsonParseException, JsonMappingException, IOException {
-		ObjectMapper objectMapper = new ObjectMapper();
-		String json_result = getDetailByJSON(workVO.getWorkcode(), 1);
-		if(json_result != null) {
-			Map<String, Object> jsonMap = null;
-			System.out.println(json_result.toString());
-			jsonMap = objectMapper.readValue(json_result, Map.class);
-			Map<String,String>work = (Map<String, String>) jsonMap.get("workVO");
+		Map<String, Object> jsonMap = getJsonMap(workVO.getWorkcode(), CODETYPE.WORK);
+		Map<String, String>work = (Map<String, String>) jsonMap.get("workVO");
 			if(work != null) {
-				tbmVO.setMeasure(tbmVO.getMeasure() + "<br>" + (String) work.get("measure").replace("\r\n", "<br>"));
-				tbmVO.setEquip(tbmVO.getEquip() + "<br>" + (String) work.get("equip").replace("\r\n", "<br>"));
-				tbmVO.setGuide(tbmVO.getGuide() + "<br>" + (String) work.get("guide").replace("\r\n", "<br>"));
-				tbmVO.setSafety(tbmVO.getSafety() + "<br>" + (String) work.get("safety").replace("\r\n", "<br>"));
+				if(tbmVO.getMeasure().equals(""))
+					tbmVO.setMeasure((String) work.get("measure").replace("\r\n", "<br>"));
+				else
+					tbmVO.setMeasure(tbmVO.getMeasure() + "<br>" + (String) work.get("measure").replace("\r\n", "<br>"));
+				
+				if(tbmVO.getEquip().equals(""))
+					tbmVO.setEquip((String) work.get("equip").replace("\r\n", "<br>"));
+				else 
+					tbmVO.setEquip(tbmVO.getEquip() + "<br>" + (String) work.get("equip").replace("\r\n", "<br>"));
+				
+				if(tbmVO.getSafety().equals(""))
+					tbmVO.setGuide((String) work.get("guide").replace("\r\n", "<br>"));
+				else 
+					tbmVO.setGuide(tbmVO.getGuide() + "<br>" + (String) work.get("guide").replace("\r\n", "<br>"));
+				
+				if(tbmVO.getSafety().equals(""))
+					tbmVO.setSafety((String) work.get("safety").replace("\r\n", "<br>"));
+				else 
+					tbmVO.setSafety(tbmVO.getSafety() + "<br>" + (String) work.get("safety").replace("\r\n", "<br>"));
 			}
+	
 		
-		}
 		
 	}
 	
 	private void setToolTBM(WorkVO workVO, TBMVO tbmVO) throws JsonParseException, JsonMappingException, IOException {
-		ObjectMapper objectMapper = new ObjectMapper();
+		
 		List<ToolVO> toollist = workVO.getToollist();
 		if(toollist != null) {
 		for(ToolVO vo : toollist) {
 			if(vo.getTooltype() == 99) continue;
 			
-			String json_result = getDetailByJSON(vo.getToolcode(), 2);
-			if(json_result != null) {
-			Map<String, Object> jsonMap = null;
-			
-				System.out.println(json_result.toString());
-				jsonMap = objectMapper.readValue(json_result, Map.class);
-				Map<String,String>tool = (Map<String, String>) jsonMap.get("toolVO");
-				if(tool != null) {
-					//기존에 추가된 내용에 더함
+			Map<String, Object> jsonMap = getJsonMap(vo.getToolcode(), CODETYPE.TOOL);
+			Map<String,String>tool = (Map<String, String>) jsonMap.get("toolVO");
+			if(tool != null) {
+				//기존에 추가된 내용에 더함
+				if(tbmVO.getMainrisk().equals(""))
+					tbmVO.setMainrisk((String) tool.get("mainRisk").replace("\r\n", "<br>"));
+				else
 					tbmVO.setMainrisk(tbmVO.getMainrisk() + "<br>" + (String) tool.get("mainRisk").replace("\r\n", "<br>"));
+				
+				if(tbmVO.getEquip().equals(""))
+					tbmVO.setEquip((String) tool.get("equip").replace("\r\n", "<br>"));
+				else
 					tbmVO.setEquip(tbmVO.getEquip() + "<br>" + (String) tool.get("equip").replace("\r\n", "<br>"));
-					//tbmVO.setGuide(tbmVO.getGuide() + "<br>" + (String) tool.get("guide").replace("\r\n", "<br>"));//PUI로 이동시킴 150112
-					
-				}
+				
+				//tbmVO.setGuide(tbmVO.getGuide() + "<br>" + (String) tool.get("guide").replace("\r\n", "<br>"));//PUI로 이동시킴 150112
+				
 			}
-		}
+			
+			}
 		}
 	}
 	
@@ -311,32 +434,8 @@ public class PrintController {
 //		}
 	}
 	
-//	private void setToolPUI(WorkVO workVO, TBMVO tbmVO) throws JsonParseException, JsonMappingException, IOException {
-//		List<ToolVO> toollist = workVO.getToollist();
-//		for(ToolVO vo : toollist) {
-//			if(vo.getTooltype() == 99) continue;
-//			
-//			String json_result = getDetailByJSON(vo.getToolcode(), 2);
-//			if(json_result != null) {
-//			Map<String, Object> jsonMap = null;
-//			
-//				System.out.println(json_result.toString());
-//				jsonMap = objectMapper.readValue(json_result, Map.class);
-//				List<Map<String, Object>> checkList = (List<Map<String, Object>>) jsonMap.get("checkList");
-//					for (int i = 0; i < checkList.size(); i++) {
-//						Map<String, Object> checkVO = (Map<String, Object>) checkList
-//								.get(i);
-//						String test = (String) (checkVO.get("check_idx") + "");// integer
-//						
-//						System.out.println(test);
-//					}
-//			}
-//		}
-//	}
 	
 	private List<PUIVO> makePUI(WorkVO workVO) {
-		ObjectMapper objectMapper = new ObjectMapper();
-		
 		ArrayList<PUIVO> puilist = new ArrayList<PUIVO>();
 		List<ToolVO> toollist = workVO.getToollist();
 		if(toollist != null) {//등록된 장비가 존재하면 각 장비의 PUI 정보를 가져옴
@@ -349,48 +448,39 @@ public class PrintController {
 				
 				try{
 					makeBaseInfo(puiVO, workVO);
-					String json_result = getDetailByJSON(toolVO.getToolcode(), 2);
-					if(json_result != null) {
-						Map<String, Object> jsonMap = null;
+					Map<String, Object> jsonMap = getJsonMap(toolVO.getToolcode(), CODETYPE.TOOL);
+					Map<String,String>tool = ((Map<String, String>) jsonMap.get("toolVO"));
+					if(tool != null) {							
+						puiVO.setToolname(toolVO.getToolname());
+						//PUIVO.setToolurl();
+						puiVO.setMainrisk(puiVO.getMainrisk() + "<br>" + (String) tool.get("mainRisk").replace("\r\n", "<br>"));
+						puiVO.setGuide(puiVO.getGuide() + "<br>" + (String) tool.get("guide").replace("\r\n", "<br>"));
+						puiVO.setToolurl(TOOL_IMG_URL + tool.get("imgVirtName"));
 						
-						//수기입력 체크 제외
-						System.out.println(json_result.toString());
-						jsonMap = objectMapper.readValue(json_result, Map.class);
+						//set Checklist
+						ArrayList<Map<String,String>>checklist = (ArrayList<Map<String,String>>)jsonMap.get("checkList");
+						Iterator<Map<String,String>> it = checklist.iterator();
 						
-						//set ToolVO 
-						Map<String,String>tool = (Map<String, String>) jsonMap.get("toolVO");					
-							if(tool != null) {							
-								puiVO.setToolname(toolVO.getToolname());
-								//PUIVO.setToolurl();
-								puiVO.setMainrisk(puiVO.getMainrisk() + "<br>" + (String) tool.get("mainRisk").replace("\r\n", "<br>"));
-								puiVO.setGuide(puiVO.getGuide() + "<br>" + (String) tool.get("guide").replace("\r\n", "<br>"));
-								puiVO.setToolurl(TOOL_IMG_URL + tool.get("imgVirtName"));
-								
-								//set Checklist
-								ArrayList<Map<String,String>>checklist = (ArrayList<Map<String,String>>)jsonMap.get("checkList");
+						ArrayList<CheckVO> input_checklist = new ArrayList<CheckVO>();
+						while(it.hasNext()){
+							Map<String,String> check = (Map<String,String>)it.next();
 							
-								ArrayList<CheckVO> input_checklist = new ArrayList<CheckVO>();
-								Iterator<Map<String,String>> it = checklist.iterator();
-								while(it.hasNext()){
-									Map<String,String> check = (Map<String,String>)it.next();
-									
-									CheckVO checkVO = new CheckVO();
-									checkVO.setCheck(check.get("checklist"));
-									
-									if(check.get("virtName") != null && !check.get("virtName").equals(""))
-										checkVO.setUrl(CHECK_IMG_URL + check.get("virtName"));
-									else {//null일 경우 그냥둠 (jsp에서 null check하여 img src를 아예 사용안하도록))
-									}
-									input_checklist.add(checkVO);
-								}
-		
-								
-								puiVO.setChecklist(input_checklist);
-								
-								puilist.add(puiVO);
+							CheckVO checkVO = new CheckVO();
+							checkVO.setCheck(check.get("checklist"));
+							
+							if(check.get("virtName") != null && !check.get("virtName").equals(""))
+								checkVO.setUrl(CHECK_IMG_URL + check.get("virtName"));
+							else {//null일 경우 그냥둠 (jsp에서 null check하여 img src를 아예 사용안하도록))
 							}
+							input_checklist.add(checkVO);
+						}
+
 						
-					}
+						puiVO.setChecklist(input_checklist);
+						
+						puilist.add(puiVO);
+					}				
+				
 				}catch(Exception e ){
 					e.printStackTrace();
 				}
@@ -399,6 +489,7 @@ public class PrintController {
 		
 		return puilist;
 	}
+	
 	private PTWVO makePTW(WorkVO workVO) {
 		PTWVO ptwVO = new PTWVO();
 		//기본정보 setting

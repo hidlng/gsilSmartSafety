@@ -91,9 +91,10 @@ function updateSubmit(){
 <c:if test = "${fromCEO == false }">
 <div class="printSelect">	
 	<span class="printSetting"><img src="images/icon_print.png"  alt="인쇄하기" />Print Select :</span>
-	<span class="btn_txtPrint" onclick="openTBM('${workVO.work_idx}')" >TBM</span>
-	<c:if test="${workVO.toollist.size() > 0}"><span class="btn_txtPrint" onclick="openPUI('${workVO.work_idx}')">PUI</span></c:if>
-	<span class="btn_txtPrint" onclick="openPTW('${workVO.work_idx}')">PTW</span>		
+	<span class="btn_txtPrint" onclick="openTBM('${workVO.work_idx}')" >안전조회</span>
+	<c:if test="${workVO.toollist.size() > 0}"><span class="btn_txtPrint" onclick="openPUI('${workVO.work_idx}')">사용전점검</span></c:if>
+	<span class="btn_txtPrint" onclick="openPTW('${workVO.work_idx}')">작업허가</span>
+	<span class="btn_txtPrint" onclick="openACC('${workVO.work_idx}')">사고사례</span>		
 </div><!-- //printSelect -->
 </c:if>
 
@@ -226,8 +227,25 @@ function updateSubmit(){
 
 		<!-- start -->
 		<tr>
-			<th>장&nbsp;소&nbsp;유&nbsp;형</th>
-			<td>${workVO.placename}</td>
+			<th>실내외여부</th>
+			<td>
+				<c:if test='${workVO.place_indoor.equals("Y")}'>실내</c:if>
+				<c:if test='${workVO.place_indoor.equals("N")}'>실외</c:if>
+			</td>
+		</tr>
+		<tr>
+			<th>밀&nbsp;폐&nbsp;여&nbsp;부</th>
+			<td>
+				<c:if test='${workVO.place_airtight.equals("Y")}'>해당</c:if>
+				<c:if test='${workVO.place_airtight.equals("N")}'>해당없음</c:if>
+			</td>
+		</tr>
+		<tr>
+			<th>고&nbsp;소&nbsp;여&nbsp;부</th>
+			<td>
+				<c:if test='${workVO.place_acro.equals("Y")}'>해당</c:if>
+				<c:if test='${workVO.place_acro.equals("N")}'>해당없음</c:if>
+			</td>
 		</tr>
 		<!--  end -->
 
@@ -235,13 +253,7 @@ function updateSubmit(){
 			<th>세&nbsp;부&nbsp;장&nbsp;소</th>
 			<td>${workVO.addr_detail}</td>
 		</tr>
-		<tr>
-			<th>실내외여부</th>
-			<td>
-				<c:if test='${workVO.indoor.equals("Y")}'>실내</c:if>
-				<c:if test='${workVO.indoor.equals("N")}'>실외</c:if>
-			</td>
-		</tr>
+		
 	</table>
 
 	<div class="work_cap">
@@ -310,7 +322,7 @@ function updateSubmit(){
 			<td id="remark">${workVO.remark}</td>
 		</tr>
 		<tr>
-			<th>팀&nbsp;&nbsp;&nbsp;&nbsp;장/<br><br>안전관리자</th>
+			<th>팀장/안전<br>관&nbsp;리&nbsp;자</th>
 			<td id="remark">${workVO.remark_leader}</td>
 		</tr>
 		<tr>

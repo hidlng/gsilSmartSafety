@@ -1,15 +1,13 @@
 package com.spring.risk.service;
 
-import java.util.List;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
-import com.spring.risk.domain.AccDetailVO;
-import com.spring.risk.domain.WorkVO;
-import com.spring.risk.persistence.AccDetailMapper;
-import com.spring.risk.persistence.WorkMapper;
+import com.spring.risk.domain.*;
+import com.spring.risk.persistence.*;
 
 @Service
 public class WorkListService {

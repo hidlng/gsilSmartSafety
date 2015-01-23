@@ -1,18 +1,17 @@
 package com.spring.risk.service;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
-import net.sourceforge.stripes.action.FileBean;
+import net.sourceforge.stripes.action.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
-import com.spring.risk.domain.FileVO;
-import com.spring.risk.persistence.FileMapper;
-import com.spring.risk.web.actions.CategoryActionBean;
+import com.spring.risk.domain.*;
+import com.spring.risk.persistence.*;
+import com.spring.risk.web.actions.*;
 
 
 @Service

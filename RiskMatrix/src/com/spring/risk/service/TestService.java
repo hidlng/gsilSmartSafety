@@ -1,12 +1,12 @@
 package com.spring.risk.service;
 
-import java.util.List;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 
-import com.spring.risk.domain.TestVO;
-import com.spring.risk.persistence.TestMapper;
+import com.spring.risk.domain.*;
+import com.spring.risk.persistence.*;
 
 @Service
 public class TestService {

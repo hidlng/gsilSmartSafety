@@ -1,6 +1,6 @@
 package com.spring.risk.domain;
 
-import java.io.Serializable;
+import java.io.*;
 
 public class WorkVO implements Serializable {
 	private static final long serialVersionUID = 1L;

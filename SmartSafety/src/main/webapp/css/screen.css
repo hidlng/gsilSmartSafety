@@ -3,8 +3,7 @@
  @media screen{
   *{margin:0;padding:0;}
   
-  @page a4sheet {size: 21.0cm 29.7cm}
-  .a4 {page : a4sheet; page-break-after :always; }
+  @page { size: 21.0cm 29.7cm; margin-left : 0mm; margin-right:0mm; margin-top:15mm; margin-bottom:15mm; page-break-after :always;  } 
   
   img{border:0 none;}
   a{text-decoration:none;}
@@ -13,7 +12,7 @@
   body{background:#fff;font-family: Dotum,돋움,Helvetica,AppleSDGothicNeo,sans-serif; font-size:14px; color:#333;}
   hr {display:none}
   hr.blkie8 {display:block;;border:none} /* ie8 block display */
-  #wrap{position:relative;margin:0 auto; width:900px; padding:10px;clear:both; }
+  #wrap{position:relative;margin:0 auto; width:850px; padding:10px;clear:both;  }
   .top {width:100%;margin-bottom:20px;margin-top:-38px;}
   .top p.title01{text-align:center;font-size:18px;color:#1367b6;font-weight:bold;}
   .date{position:absolute;right:0; top:27px;font-size:12px;}
@@ -28,16 +27,24 @@
   table.typ02 th, table.typ02 td{border:0;text-align:left;padding:0px; border-bottom:1px dotted #ddd;}
   table.typ02 th{text-align:justify; background:none;} 
   p.textBox{display:block; width:99%; margin:10px auto 10px; border:1px solid #222; padding:5px 0; text-align:center;font-weight:bold;}
- .signBox{float:right;overflow:hidden;width:400px;height:30px;border-bottom:2px solid #000;margin:20px 0;}
+ .signBox{float:right;overflow:hidden;width:400px;height:30px;border-bottom:2px solid #000;margin:40px 0;}
  .signBox p{float:left;width:300px; font-weight:bold;} 
  .signBox span{float:right;width:50px;} 
  table.lastsign{margin-top:200px;}
  .bold{font-weight:bold;}
  .bull_dot{font-weight:bold;font-size:18px;}
-  .printIcon{position:fixed;_position:absolute;z-index:99; border:1px solid black; top:50px;right:0px;cursor:pointer;}
+  .printIcon{
+  	position: fixed;
+	_position: absolute;
+	z-index: 99;
+	border: 1px solid black;
+	top: 50px;
+	right: 0px;
+	cursor: pointer;
+}
 
-/* intro 추가 */
-.box_intro{margin:100px auto; }
+	/* intro 추가 */
+	.box_intro{margin:100px auto; }
 .box_intro a p{margin:10px auto; width:450px; border:1px solid #343434; color:#343434;padding:15px; font-size:20px; font-weight: bold; text-align:center;}
 .box_intro a p:hover{margin:10px auto; width:450px; border:1px solid #343434; padding:15px; font-size:20px; text-align:center;background-color:#343434;color:#fff;}
 

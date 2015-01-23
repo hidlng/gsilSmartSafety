@@ -293,7 +293,7 @@
 </c:if>
 <br>
 <div class="updateBtnDiv">
-<!-- insert 모드 --> <c:if test="${!actionBean.isModify}"><stripes:submit name="insertDetail" class="button" value="등록" onclick="checkSubmit('insertDetailSubmit')"/>
+<!-- insert 모드 --> <c:if test="${!actionBean.isModify}"><stripes:button name="insertDetail" class="button" value="등록" onclick="checkSubmit('insertDetailSubmit')"/>
 <stripes:submit id="insertDetailSubmit" name="insertDetail" class="button" style="display:none"/></c:if>
 <!-- update 모드 --> <c:if test="${actionBean.isModify}"><stripes:button name="updateDetail" class="button" value="수정" onclick="checkSubmit('updateDetailSubmit')"/>
 <stripes:submit id="updateDetailSubmit" name="updateDetail" class="button" style="display:none"/>	</c:if>

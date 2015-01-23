@@ -9,6 +9,8 @@
 		<link rel="stylesheet" href="css/ceocommon.css" type="text/css"> 
   		<link rel="stylesheet" href="css/jquery.datepick.css" type="text/css" >
   		<link rel="stylesheet" href="css/jquery.timepicker.css" type="text/css" >  
+  	    <link href="/sss.ico" rel="icon" type="image/x-icon" />
+ 		<link href="/sss.ico" rel="shortcut icon" type="image/x-icon" />
   	    <script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
 		<script type="text/javascript" src="js/jquery.plugin.js"></script>
 		<script type="text/javascript" src="js/jquery.datepick.js"></script> 
@@ -30,9 +32,9 @@
 			if(document.getElementById( 'siteindex' ).value != '' ) {
 				document.getElementById( 'siteSearch' ).selectedIndex = document.getElementById( 'siteindex' ).value;
 			}
-			 <c:if test="${sessionScope.userLoginInfo.level != 3}">
-			 	$(document).on("click", "#homeLogo", function(e) { $('#workList_form').submit(); });
-			 </c:if>
+			
+			$(document).on("click", "#homeLogo", function(e) { $('#workList_form').submit(); });
+			
 					   
 		}); 
 		
@@ -78,7 +80,7 @@
  			var timer = $.timer(function(){ 
 				window.location.reload();
  			});
-			timer.set({ time :300000 , autostart :true});
+			timer.set({ time :60000 , autostart :true});
 		}
 
 		function viewSubmit(val) {
@@ -92,7 +94,7 @@
 
 	<body onload="starttimer();">
 		<div id="wrap" class="sub ">
-			<h1><img id="homeLogo" src="images/logo_ds.png" style="cursor:pointer"/></h1><!-- //1204 추가 -->
+			<!--h1><img id="homeLogo" src="images/logo_ds.png" style="cursor:pointer"/></h1>--><!-- //1204 추가 -->
 			<div class="back_bg sub">
 				<div class="wrapBox ceo">		
 
@@ -208,7 +210,9 @@
 				<input id="viewIdx" type="hidden" name="viewIdx"/>
 				<input id="fromCEO" type="hidden" name="fromCEO" value="true"/>
 			</form>
-			<form id="workList_form" action="workList" method="POST"></form>
+			<c:if test="${sessionScope.userLoginInfo.level != 3}">
+				<form id="workList_form" action="workList" method="POST"></form>
+			</c:if>
 		</div>
 	</body>
 </html>

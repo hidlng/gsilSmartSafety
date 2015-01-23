@@ -6,35 +6,15 @@ import java.util.*;
 
 import javax.servlet.http.*;
 
-import net.sf.json.JSONObject;
-import net.sourceforge.stripes.action.DefaultHandler;
-import net.sourceforge.stripes.action.ErrorResolution;
-import net.sourceforge.stripes.action.FileBean;
-import net.sourceforge.stripes.action.ForwardResolution;
-import net.sourceforge.stripes.action.RedirectResolution;
-import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.SessionScope;
-import net.sourceforge.stripes.action.StreamingResolution;
-import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.action.*;
+import net.sourceforge.stripes.integration.spring.*;
 
-import org.springframework.core.io.*;
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.web.context.support.*;
+import org.springframework.dao.*;
 
-import com.spring.risk.domain.AccDetailVO;
-import com.spring.risk.domain.CategoryType;
-import com.spring.risk.domain.CategoryVO;
-import com.spring.risk.domain.CheckVO;
-import com.spring.risk.domain.CodeVO;
-import com.spring.risk.domain.FileVO;
-import com.spring.risk.domain.PlaceVO;
-import com.spring.risk.domain.ToolVO;
-import com.spring.risk.domain.WorkVO;
-import com.spring.risk.service.CategoryService;
-import com.spring.risk.service.FileListService;
-import com.spring.risk.service.PlaceListService;
-import com.spring.risk.service.ToolListService;
-import com.spring.risk.service.WorkListService;
+import util.*;
+
+import com.spring.risk.domain.*;
+import com.spring.risk.service.*;
 
 @SessionScope
 public class CategoryActionBean extends AbstractActionBean {
@@ -44,17 +24,7 @@ public class CategoryActionBean extends AbstractActionBean {
 	private static final long serialVersionUID = 1L;
 
 	
-	private static final String CATEGORYLIST = "/WEB-INF/views/admin/CategoryList.jsp";
-//	private static final String WORKLIST = "/WEB-INF/views/admin/WorkList.jsp";
-//	private static final String TOOLLIST = "/WEB-INF/views/admin/ToolList.jsp";
-//	private static final String PLACELIST = "/WEB-INF/views/admin/PlaceList.jsp";
-	private static final String TOTALINSERT = "/WEB-INF/views/admin/DetailInsert.jsp";
-	private static final String TOTALLIST = "/WEB-INF/views/admin/DetailList.jsp";
-	
-	private static final String REDIRECT_LOGINPAGE = "/actions/Login.action";
-	private static final String LOGOUT = "/WEB-INF/views/admin/Logout.jsp";
-	private static final String ERROR = "/WEB-INF/views/error/error.jsp";
-	private static final String TEST = "/WEB-INF/views/admin/test.jsp";
+
 //
 //	private static final int WORK = 1;
 //	private static final int TOOL = 2;
@@ -153,13 +123,13 @@ public class CategoryActionBean extends AbstractActionBean {
 	
 	/**search**/
 	private String searchString;
-	private String SearchType;
+	
 	
 	private boolean isModify=false;
 
 	
 	/**paging**/
-	private static final int MAX_SIZE = 100;
+	//private static final int MAX_SIZE = 100;
 	private static final int PAGE_SIZE = 10;
 
 
@@ -195,19 +165,19 @@ public class CategoryActionBean extends AbstractActionBean {
 	@DefaultHandler
 	public Resolution viewMain() {	
 		if(!isAuthenticated()) 
-			return new RedirectResolution(REDIRECT_LOGINPAGE);
+			return new RedirectResolution(RISKURL.REDIRECT_LOGINPAGE);
 		
-		HttpSession session = context.getRequest().getSession();
-	    boolean isLogin = (boolean)session.getAttribute("init");
-		if(isLogin) {//로그인 한 경우 파라메터 초기화
-			initParameter();
-			session.setAttribute("init", false);
-		}
+//		HttpSession session = context.getRequest().getSession();
+//	    boolean isLogin = (boolean)session.getAttribute("init");
+//		if(isLogin) {//로그인 한 경우 파라메터 초기화
+//			initParameter();
+//			session.setAttribute("init", false);
+//		}
 	    
 		searchString=null;//링크선택, category변경시에는 검색어를 초기화함
 		pageNum = 1;
 		refresh();
-		return new ForwardResolution(CATEGORYLIST);
+		return new ForwardResolution(RISKURL.CATEGORYLIST);
 
 	}
 
@@ -236,7 +206,7 @@ public class CategoryActionBean extends AbstractActionBean {
 	/**parameter로 넘어오므로별도 처리 하지 않음**/
 	public Resolution paging(){
 		makeCodeList();
-		return new ForwardResolution(CATEGORYLIST);
+		return new ForwardResolution(RISKURL.CATEGORYLIST);
 	}
 
 
@@ -246,7 +216,7 @@ public class CategoryActionBean extends AbstractActionBean {
 		int count = makeCodeList();
 		resultMsg = "(" + count + ") 건 검색";
 		
-		return new ForwardResolution(CATEGORYLIST);
+		return new ForwardResolution(RISKURL.CATEGORYLIST);
 	}
 
 	private int makeCodeList() {
@@ -293,10 +263,9 @@ public class CategoryActionBean extends AbstractActionBean {
 				break;
 		}
 		
-		//if(isAuthenticated())
-			return new ForwardResolution(TOTALLIST);
-//		else 
-//			return new ForwardResolution(LOGOUT);
+		
+		return new ForwardResolution(RISKURL.TOTALLIST);
+
 	}
 	
 
@@ -342,12 +311,13 @@ public class CategoryActionBean extends AbstractActionBean {
 			
 			refresh();
 		}
-		return new ForwardResolution(CATEGORYLIST);
+		return new ForwardResolution(RISKURL.CATEGORYLIST);
 	}
 
 	public Resolution deleteCategory() {
 		categoryService.deleteCategory(deleteCategoryIdx);
 		refresh();
+		
 		return new RedirectResolution(CategoryActionBean.class);
 	}
 
@@ -361,24 +331,11 @@ public class CategoryActionBean extends AbstractActionBean {
 		setResultMsg("MSG : DELETE CODE " + contentCode);
 		
 		refresh();
-		return new ForwardResolution(CATEGORYLIST);
+		return new ForwardResolution(RISKURL.CATEGORYLIST);
 		
 	}
 
-	public FileSystemResource getTest(HttpServletResponse response){
-		System.out.println(response.getHeaderNames());
-
-        InputStream is = null;		
-		FileVO fileVO = fileListService.getFileVOByIdx(fileIdx);		
-		String fileType = fileVO.getFileType();
-        try { 
-            is = new FileInputStream(new File(UPLOAD_PATH + File.separator +  fileVO.getVirtName()));
-        } catch (FileNotFoundException ex) {
-        	ex.printStackTrace();
-        } 
-        
-		return new FileSystemResource(new File(UPLOAD_PATH + File.separator +  fileVO.getVirtName()));
-	}
+	
 	
 	/**File Read**/
 	/**file load는 virtname으로 반환은 원 filename으로
@@ -387,7 +344,7 @@ public class CategoryActionBean extends AbstractActionBean {
 
         InputStream is = null;		
 		FileVO fileVO = fileListService.getFileVOByIdx(fileIdx);		
-		String fileType = fileVO.getFileType();
+	
         try { 
             is = new FileInputStream(new File(UPLOAD_PATH + File.separator +  fileVO.getVirtName()));
         } catch (FileNotFoundException ex) {
@@ -437,7 +394,7 @@ public class CategoryActionBean extends AbstractActionBean {
 			break;
 		}
 	
-		return new ForwardResolution(TOTALINSERT);
+		return new ForwardResolution(RISKURL.TOTALINSERT);
 		
 	}
 	
@@ -498,14 +455,14 @@ public class CategoryActionBean extends AbstractActionBean {
 			insertFormClear();
 			refresh();
 		}
-		return new ForwardResolution(CATEGORYLIST);
+		return new ForwardResolution(RISKURL.CATEGORYLIST);
 	}
 	
 	public Resolution updateDetailForm() {
 		isModify=true;
 		fileBeanList = new ArrayList<FileBean>();
 		modifyCheckList = new ArrayList<CheckVO>();
-		return new ForwardResolution(TOTALINSERT);
+		return new ForwardResolution(RISKURL.TOTALINSERT);
 	}
 
 	
@@ -552,7 +509,7 @@ public class CategoryActionBean extends AbstractActionBean {
 		
 		
 		/** input File **/
-		deleteFile();//fileList에서 deleteFileList에 해당하는 내용을 제거(수정화면에서 파일 x 버튼누른것들)
+		if(delFileList != null)deleteFile();//fileList에서 deleteFileList에 해당하는 내용을 제거(수정화면에서 파일 x 버튼누른것들)
 		fileListService.updateFileListVO(fileCode, fileList, fileBeanList);
 		
 		} catch (IOException e) {
@@ -568,7 +525,7 @@ public class CategoryActionBean extends AbstractActionBean {
 			insertFormClear();
 			refresh();
 		}	
-		return new ForwardResolution(CATEGORYLIST); 
+		return new ForwardResolution(RISKURL.CATEGORYLIST); 
 	}
 	
 	public void deleteFile() {
@@ -613,7 +570,7 @@ public class CategoryActionBean extends AbstractActionBean {
 		}
 		insertFormClear();
 		refresh();		
-		return new ForwardResolution(CATEGORYLIST); 
+		return new ForwardResolution(RISKURL.CATEGORYLIST); 
 	}
 	
 

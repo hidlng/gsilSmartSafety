@@ -3,10 +3,44 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="stripes"	uri="http://stripes.sourceforge.net/stripes.tld"%>
 <script>
+
+$(document).ready(function (){
+	$('.deleteCategory').click(function(event){
+	
+	 var input = confirm('정말 삭제 하시겠습니까? [test]');
+ 		if(input) {
+ 			alert('카테고리가 제거되었습니다.');
+ 		}else{
+			event.preventDefault();
+ 		}
+	
+	});
+	});
+	
       function chgValue(val) {
    	   $('#lastIdx').val(val);    	
    	   $('#getCategory').submit();   
    	}
+      
+      function deleteCategory(chkIdx){
+   		var input = confirm('정말 삭제 하시겠습니까? [CATEGORY_IDX : ' + chkIdx + ']');
+   		if(input) {			
+    	  $('#deleteCateogry_' + chkIdx).click();
+    	
+   		}
+    	  
+      }
+      
+      function test(){
+    	 /*  alert(11);
+    	  var input = confirm('정말 삭제 하시겠습니까? [test]');
+     		if(input) {	
+     			alert(aa);
+     		}else{
+     			e.preventDefault();
+     		} */
+    	  
+      }
  	 
  </script>
  
@@ -45,10 +79,13 @@
 		</c:if>			
 		<ul class="childWrapUL">
 				<c:forEach var="child" items="${actionBean.childList}" >
-					<li class="childWrap" onclick="chgValue('${child.idx}')"> ${child.name}
-					<!--
-					<stripes:link  class="deleteCategory" beanclass="com.spring.risk.web.actions.CategoryActionBean" 	event="deleteCategory"> <stripes:param name="deleteCategoryIdx">${child.idx}</stripes:param>X</stripes:link>
-					-->
+					<li class="childWrap"><span onclick="chgValue('${child.idx}')"> ${child.name}</span>
+					
+					<stripes:link  id="deleteCateogry_${child.idx}" class="deleteCategory" beanclass="com.spring.risk.web.actions.CategoryActionBean" 	
+					event="deleteCategory" onclick="test();"> 
+						<stripes:param name="deleteCategoryIdx">${child.idx}</stripes:param>
+						X
+					</stripes:link>
 					</li>
 					<li style="float:left">  | &nbsp;&nbsp;</li>				
 				</c:forEach>

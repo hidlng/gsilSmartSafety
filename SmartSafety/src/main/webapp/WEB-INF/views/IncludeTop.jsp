@@ -15,7 +15,8 @@
   <link rel="stylesheet" href="css/jquery.datepick.css" type="text/css" >
   <link rel="stylesheet" href="css/jquery.timepicker.css" type="text/css" > 
   <link rel="stylesheet" href="css/custom.css" type="text/css">    
-  
+  <link href="/sss.ico" rel="icon" type="image/x-icon" />
+  <link href="/sss.ico" rel="shortcut icon" type="image/x-icon" />
   
   <script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
   <script type="text/javascript" src="js/jquery.plugin.js"></script>
@@ -100,7 +101,15 @@ $(document).on("keydown", disableF5);
 </div>
 
 <div id="wrap" class="sub"><!-- //1202 수정 -->
-	<h1><img id="homeLogo" src="images/logo_ds.png" alt="두산그룹로고"   style="cursor:pointer"/></h1><!-- //1204 추가 -->
+	<!-- ceo화면에서 viewlist 넘어온후 logo 클릭하여 가는것 방지 -->
+	<c:if test="${sessionScope.userLoginInfo.level != 3}">
+		<h1><!--img id="homeLogo" src="images/logo_ds.png" alt="두산그룹로고"   style="cursor:pointer"/--></h1>
+	</c:if>
+	<!-- ceo화면에서 viewlist 넘어온후 logo 클릭하여 가는것 방지 -->
+	<c:if test="${sessionScope.userLoginInfo.level == 3}">
+		<h1><!--img src="images/logo_ds.png" alt="두산그룹로고"   style="cursor:pointer"/--></h1>
+	</c:if>
+	
 	<div class="back_bg sub"><!-- //1202 수정 -->
 		<div class="wrapBox">
 
@@ -139,7 +148,7 @@ $(document).on("keydown", disableF5);
 					</li>
 					<li><span class="identTitle"> <span class="head">권&nbsp;&nbsp;&nbsp;한 : <br></span>
 						<c:if test ="${sessionScope.userLoginInfo.level == 0}">SS 관리자</c:if>
-						<c:if test ="${sessionScope.userLoginInfo.level == 1}">본사 관리자<br>(EHS팀)</c:if>
+						<c:if test ="${sessionScope.userLoginInfo.level == 1}">본사 관리자</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 2}">현장 안전 관리자</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 3}">CEO</c:if>
 						<c:if test ="${sessionScope.userLoginInfo.level == 4}">현장 소장</c:if>

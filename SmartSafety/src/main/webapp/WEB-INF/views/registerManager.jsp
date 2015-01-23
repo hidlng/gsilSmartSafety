@@ -99,7 +99,7 @@
 		<td colspan="3">
 			<c:if test="${!updateMode}">
 				<form:select class="selectBox"  path="level" onchange="chgMLevel(this.value)" style="width:94%;">
-						<form:option value="1" selected="selected">본사 관리자(EHS팀)</form:option>
+						<form:option value="1" selected="selected">본사 관리자</form:option>
 						<form:option value="2">현장 안전관리자</form:option>
 						<form:option value="3">CEO</form:option>
 				</form:select>
@@ -107,7 +107,7 @@
 			<c:if test="${updateMode}">
 				<input type="hidden" name="level" value="${managerVO.level}"/>
 				<c:if test="${managerVO.level == 1}">
-					본사 관리자(EHS팀)
+					본사 관리자
 				</c:if>
 				<c:if test="${managerVO.level == 2}">
 					현장 안전관리자
@@ -143,7 +143,7 @@
 	<tr>
 		<th>생년월일</th>
 		<td><form:input id="birthInput" path="birth" maxlength="10" /><br><form:errors cssClass="formError" path="birth" /></td>
-		<th>연&nbsp;락&nbsp;처<br><span style="font-size:17px">(010-1234-5678)</span></th>
+		<th>연&nbsp;락&nbsp;처<br><span style="font-size:20px">(010-1234-5678)</span></th>
 		<td><form:input path="phone" maxlength="13" onblur="checkPhone(this, this.value)"/><br><form:errors cssClass="formError" path="phone" /></td>
 	</tr>
 	<tr>

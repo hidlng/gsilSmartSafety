@@ -137,7 +137,7 @@ if(input) { //yes
 	</tr>
 	<tr>
 		<th>감&nbsp;&nbsp;&nbsp;독&nbsp;&nbsp;&nbsp;자</th>
-		<td><form:select path="inspec_mgr_idx" class="siteSelectBox colspanInput"  style="width:95%">
+		<td colspan="2"><form:select path="inspec_mgr_idx" class="siteSelectBox colspanInput"  style="width:95%">
 				<c:forEach var="manager" items="${managerList}" >
 					<form:option value="${manager.manager_idx}">${manager.name}</form:option>
 				</c:forEach>
@@ -293,15 +293,32 @@ if(input) { //yes
 	
 	<!-- start -->
 	<tr>
-		<th>장&nbsp;소&nbsp;유&nbsp;형</th>
-		<td>
-		<form:select path="placename" class="siteSelectBox" id="placename" style="width:92%">
-			<form:option value="">:::선택:::</form:option>
-			<form:option value="" selected="true">2</form:option>
-		</form:select></td>
+		<th>실내외여부</th>
+		<td class="radi_td">
+		<span class="side">
+			<form:radiobutton path="place_indoor" class="radi" value="Y" label="해당"/>				
+			<form:radiobutton path="place_indoor" class="radi" value="N" label="해당없음"/>
+			</span>
+		</td>
 	</tr>
-	<!--  end -->
-	
+	<tr>
+		<th>밀&nbsp;폐&nbsp;여&nbsp;부</th>
+		<td class="radi_td">
+		<span class="side">
+			<form:radiobutton path="place_airtight" class="radi" value="Y" label="해당"/>				
+			<form:radiobutton path="place_airtight" class="radi" value="N" label="해당없음"/>
+			</span>
+		</td>
+	</tr>
+	<tr>
+		<th>고&nbsp;소&nbsp;여&nbsp;부</th>
+		<td class="radi_td">
+		<span class="side">
+			<form:radiobutton path="place_acro" class="radi" value="Y" label="해당"/>				
+			<form:radiobutton path="place_acro" class="radi" value="N" label="해당없음"/>
+			</span>
+		</td>
+	</tr>
 	<tr>
 		<th>세&nbsp;부&nbsp;장&nbsp;소</th>
 		<td>
@@ -309,15 +326,7 @@ if(input) { //yes
 			<br> <form:errors path="addr_detail" cssClass="formError"  />
 		</td>
 	</tr>
-	<tr>
-		<th>실내외여부</th>
-		<td class="radi_td">
-		<span class="side">
-			<form:radiobutton path="indoor" class="radi" value="Y" label="실내"/>				
-			<form:radiobutton path="indoor" class="radi" value="N" label="실외"/>
-			</span>
-		</td>
-	</tr>
+	
 </table>
 
 <div class="work_cap">
@@ -410,7 +419,7 @@ if(input) { //yes
 		</td>
 	</tr>
 	<tr>
-		<th>팀&nbsp;&nbsp;&nbsp;&nbsp;장/<br><br>안전관리자</th>
+		<th>팀장/안전<br>관&nbsp;리&nbsp;자</th>
 			<td><form:textarea  class="remark"  path="remark_leader" 	maxlength="100" />
 			<br> <form:errors path="remark_leader" cssClass="formError"  />
 		</td>

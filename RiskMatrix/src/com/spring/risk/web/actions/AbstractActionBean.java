@@ -1,10 +1,8 @@
 package com.spring.risk.web.actions;
 
-import java.io.Serializable;
+import java.io.*;
 
-import net.sourceforge.stripes.action.ActionBean;
-import net.sourceforge.stripes.action.ActionBeanContext;
-import net.sourceforge.stripes.action.SimpleMessage;
+import net.sourceforge.stripes.action.*;
 
 abstract class AbstractActionBean implements ActionBean, Serializable {
 

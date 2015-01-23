@@ -25,8 +25,8 @@
 	function checkDelete(contentCode) {
 		var input = confirm('정말 삭제 하시겠습니까? [CODE : ' + contentCode + ']');
 		if(input) {				
-			$('#contentCodeHid').val(contentCode);
-			$('#deleteCodeBtn').click();
+			$('#contentCodeHid_' + contentCode).val(contentCode);
+			$('#deleteCodeBtn_' + contentCode).click();
 		}else 
 			return;
 	}
@@ -68,7 +68,12 @@
 		alert("error : " + status);
 	}
 	
-
+	function closeViewContent() {
+		$('#viewContent').html('');
+		doOverlayClose();
+		
+	}
+	
 
 	
 	function showInputCode(bool) {
@@ -95,26 +100,9 @@
 				$('#categorySubmit').click();
 		}
 			
-			
 	}
 	
-	
-	function closeViewContent() {
-		$('#viewContent').html('');
-		doOverlayClose();
-		
-	}
-	
-	function insertOverlap() {
-		
-	/* 	if($("#insertCategoryDiv").css("display") == "none"){
-			$('#insertCategoryDiv').show();
-		} else {
-			$('#insertCategoryDiv').hide();
-		} */
-	}
-	
-	
+
 
 </script>
 <!-- The dark background -->
@@ -220,8 +208,8 @@
 				</td>
 				<td><stripes:form id="deleteForm" method="POST"
 							beanclass="com.spring.risk.web.actions.CategoryActionBean">
-							<stripes:hidden id="contentCodeHid" name="contentCode"/>
-							<stripes:submit  class="button" id="deleteCodeBtn" name="deleteCode" value="삭제" style="display:none"/>
+							<stripes:hidden id="contentCodeHid_${row.code}" name="contentCode"/>
+							<stripes:submit  class="button" id="deleteCodeBtn_${row.code}" name="deleteCode" value="삭제" style="display:none"/>
 							<stripes:button  class="button" name="deleteBtn" value="삭제" onclick="checkDelete('${row.code}')"></stripes:button>
 							</stripes:form>
 				</td>
