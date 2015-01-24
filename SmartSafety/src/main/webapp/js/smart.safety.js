@@ -83,7 +83,9 @@ function setCodeBySelect(optId, targetId) {
 
 }
 
-//var existList = new Array('건설1'); 
+
+
+
 
 /**
  * 
@@ -108,23 +110,10 @@ function setCode(categoryIdx , targetId, existList) {
 	  			for(var prop in codeList){//size 파악
 	 			    if(codeList.hasOwnProperty(prop))
 	 			        length++;
-	 			}
-	 			
-	  			
+	 			}		
 	  			
 	  			for(var i = 0 ; i < length; i ++) {
-//	  				var isExist = false;
-//	  				//현재 존재하는 list와 비교하여 존재시 체크 
-//	  				if(existList != undefined && existList != null) {
-//		  				for(i = 0 ; existList.length;i++) 
-//		  					if(codeList[i].code == existList[i])
-//		  						isExist = true;
-//	  				}	
-//	  			
-//		  			if(!isExist)
-		  				$('#' + targetId).append('<option id="'+ codeList[i].code + '" value="' + codeList[i].name + '">' + codeList[i].name  + '</option>');
-		  				//$('#' + codeId +"_" + i).val(codeList[i].code);
-	  				
+	  				$('#' + targetId).append('<option id="'+ codeList[i].code + '" value="' + codeList[i].name + '">' + codeList[i].name  + '</option>');
 	  			} 
 				
 	  		},

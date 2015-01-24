@@ -81,7 +81,7 @@
 
 
 
-	 <table>
+	 <table class="ptw_table">
 	 <caption>작업허가서</caption>
 		<colgroup>		
 			<col style="width: 15%">
@@ -107,24 +107,11 @@
 			<th>승&nbsp;인</th>
 		</tr>
 		<tr>
-			<td rowspan="4">화기작업</td>
-			<td class="lft">작업 장 불꽃 비산 방지조치가 이루어졌는가?</td>
+			<td>${ptwVO.work.name}</td>
+			<td class="lft">${ptwVO.work.content}</td>
 			<td>Y / N</td>
 			<td>Y / N</td>
 			<td>Y / N</td>
-		</tr>
-		<tr>
-			<td class="lft"></td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-			
-		</tr>
-		<tr>
-			<td class="lft"></td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-			<td>Y / N</td>			
 		</tr>
 	 </table><!-- //table -->
 
@@ -144,19 +131,16 @@
 			<th>안&nbsp;전<br>확&nbsp;인</th>
 			<th>승&nbsp;인</th>
 		</tr>
+		
+		<c:forEach var="place" items="${ptwVO.placelist}" varStatus="idx">
 		<tr>
-			<td rowspan="2">고소<br>(5m 이하)</td>
-			<td class="lft">작업 장 불꽃 비산 방지조치가 이루어졌는가?</td>
+			<td>${place.name}</td>
+			<td class="lft">${place.content}</td>
 			<td>Y / N</td>
 			<td>Y / N</td>
 			<td>Y / N</td>
 		</tr>
-		<tr>
-			<td class="lft">화기작업 현장 주변 인화물질은 없는가?</td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-		</tr>
+		</c:forEach>
 	 </table><!-- //table -->
 	 <table class="lastsign">
 	 <caption>작업허가 최종 승인</caption>

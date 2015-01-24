@@ -139,6 +139,13 @@ public class DataActionBean extends AbstractActionBean {
 //            StreamingResolution resol = new StreamingResolution("application/download; charset=UTF-8", is).setFilename(URLEncoder.encode(fileVO.getFileName(), "UTF-8"));
 //
 //	}  
+	public Resolution getPlaceList() {
+		List<CodeVO> placeList = categoryService.getCodeListByType(CategoryType.PLACE.idx);	
+		jsonObj = new JSONObject();		
+		jsonObj.put("placeList", placeList);
+		
+		return new ForwardResolution(DATAPAGE);
+	}
 	
 	public Resolution getPermitVO() {
 		PermitVO permitVO = new PermitVO();
