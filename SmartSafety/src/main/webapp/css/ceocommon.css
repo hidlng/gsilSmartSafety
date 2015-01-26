@@ -63,7 +63,7 @@ h1 img{width:120px;}
 
 /* sub page 공통 */
 /* aside */
-.wrapBox{overflow:hidden; margin:0 auto; padding:50px; width:1328px; border:1px solid #38bda0;background:url("../images/bg_box.png") repeat 0 0; }
+.wrapBox{overflow:hidden; margin-left:5px; margin-right:5px; padding:0px; border:1px solid #38bda0;background:url("../images/bg_box.png") repeat 0 0; }
 .aside{position:relative;float:left;width:200px; min-height:550px; padding:55px 35px;background:url("../images/bg_box.png") repeat 0 0;}
 .aside_list{margin-bottom:20px;}
 .aside_list li{color:#98b4e0; font-size:24px; line-height:40px; font-weight:bold;}
@@ -73,8 +73,8 @@ h1 img{width:120px;}
 .aside_ident li.last{ border-bottom:0px; text-align:center; float: right;margin-top: 5px;}
 .aside_ident li span.identTitle{width:50px;}
 .aside_ident li span input{width:150px; padding:5px 15px; background:none; border:0; font-size:18px; color:#fff;}
-/* search */
-.content{float:right; width:100%; min-height:500px; padding-top:20px; padding-left:5px;padding-right:5px; background:url("../images/bg_box.png") repeat 0 0;}
+/* search */ 
+.content{float:right; width:80%; min-height:700px; padding-top:20px; margin-left: 10px; margin-right:10px;  background:url("../images/bg_box.png") repeat 0 0;}
 .content .srchbox{width:250px; float:right; overflow:hidden;height:36px;padding-bottom:20px;}
 .content .srchbox p{float:right;overflow:hidden;  height:36px; border:1px solid #152133;background-color:#fff; }
 .content .srchbox .search_input{width:207px; height:36px; padding:3px 10px;font-size:28px; line-height:14px;background-color:#fff; color:#333; border:none;}
@@ -199,8 +199,8 @@ a .btn_typ03:hover{background-color:transparent;color:#ffffff;border:1px solid #
 .content .printSelect a .btn_txtPrint{display:inline-block;padding:2px 10px;margin-right:2px;border:1px solid #38bda0;font-weight:normal;font-size:16px;color: #38bda0;}
 .content .printSelect a .btn_txtPrint:hover{border:1px solid #38bda0;background-color:#38bda0;color: #fff;}
 /* ceo */
-.wrapBox.ceo{padding:50px;}
-.wrapBox.ceo .content{float:left; width:100%;background: url("../images/bg_box.png") repeat 0 0;}
+.wrapBox.ceo{padding:0px;}
+.wrapBox.ceo .content{float:left; width:99%;background: url("../images/bg_box.png") repeat 0 0;}
 a .btn_typ05 {display: block; width: 110px;padding:7px;margin: 0 auto;background-color: #475B7C;border: 1px solid #222;border-radius: 3px;font-size: 14px;line-height: 22px;color: #fff;text-decoration: none;}
 a .btn_typ05:hover{background-color:transparent;color:#ffffff;border:1px solid #ffffff;}
 .wrapBox.ceo .content table tr th {padding: 17px 0; font-size: 28px;color: #98b4e0;}
