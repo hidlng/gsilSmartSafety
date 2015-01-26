@@ -6,7 +6,7 @@
 
 
 	<select id="getPlaceList" parameterType="string" resultType="PlaceVO">
-		SELECT PLACECODE, PLACENAME, MAINRISK, GUIDE, EQUIP
+		SELECT *
 		FROM PLACELIST_VIEW
 	</select>
 
@@ -24,7 +24,7 @@
 	</select-->
 
 	<select id="getPlaceByCode" parameterType="string" resultType="PlaceVO">
-		SELECT PLACECODE, PLACENAME, MAINRISK, GUIDE, EQUIP
+		SELECT *
 		FROM PLACELIST_VIEW
 		WHERE PLACECODE = #{placeCode}
 	</select>
@@ -35,9 +35,9 @@
 
 
 	<insert id="insertPlaceVO" parameterType="PlaceVO">
-		INSERT INTO PLACE_LIST(PLACECODE,MAINRISK,GUIDE,EQUIP)
+		INSERT INTO PLACE_LIST(PLACECODE,MAINRISK,GUIDE,EQUIP, PERMIT)
 		VALUES
-		(#{placeCode},#{mainRisk},#{guide},#{equip})
+		(#{placeCode},#{mainRisk},#{guide},#{equip},#{permit})
 	</insert>
 
 	<update id="updatePlaceVO" parameterType="PlaceVO">
@@ -45,7 +45,8 @@
 		SET
 		mainrisk=#{mainRisk},
 		guide=#{guide},
-		equip=#{equip}		
+		equip=#{equip},		
+		permit=#{permit}
 		WHERE
 		placecode=#{placeCode}
 	</update>

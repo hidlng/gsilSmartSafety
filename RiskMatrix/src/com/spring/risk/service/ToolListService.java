@@ -1,21 +1,17 @@
 package com.spring.risk.service;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
-import net.sourceforge.stripes.action.FileBean;
+import net.sourceforge.stripes.action.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
-import com.spring.risk.domain.CheckVO;
-import com.spring.risk.domain.FileVO;
-import com.spring.risk.domain.ToolVO;
-import com.spring.risk.persistence.CheckMapper;
-import com.spring.risk.persistence.ToolMapper;
-import com.spring.risk.web.actions.CategoryActionBean;
+import com.spring.risk.domain.*;
+import com.spring.risk.persistence.*;
+import com.spring.risk.web.actions.*;
 
 @Service
 public class ToolListService {
@@ -37,17 +33,18 @@ public class ToolListService {
 	public void insertToolVO(ToolVO toolVO) throws IOException {
 		
 		for(CheckVO checkVO : toolVO.getCheckList()) {
-			if(checkVO == null) continue;//입력창에서 중간에 제거되어 빠진경우
-			checkVO.setToolCode(toolVO.getToolCode());
-			FileBean bean = checkVO.getFileBean();
-			if(bean != null){
-				checkVO.setImage(bean.getFileName());
-				String virtName = UUID.randomUUID().toString() +"_" + toolVO.getToolCode() +"_";
-				checkVO.setVirtName(virtName);
-				bean.save(new File(CategoryActionBean.CHEKCLIST_PATH + File.separator + virtName));
+			if(checkVO != null) {//입력창에서 중간에 제거되어 빠진경우
+				checkVO.setToolCode(toolVO.getToolCode());
+				FileBean bean = checkVO.getFileBean();
+				if(bean != null){
+					checkVO.setImage(bean.getFileName());
+					String virtName = UUID.randomUUID().toString() +"_" + toolVO.getToolCode() +"_";
+					checkVO.setVirtName(virtName);
+					bean.save(new File(CategoryActionBean.CHEKCLIST_PATH + File.separator + virtName));
+				}
+				//file이 없더라도 checklist 내용은 삽입해야함 
+				checkMapper.insertCheckVO(checkVO);
 			}
-			//file이 없더라도 checklist 내용은 삽입해야함 
-			checkMapper.insertCheckVO(checkVO);
 		}
 		
 		/**장비이미지 insert **/
@@ -70,19 +67,20 @@ public class ToolListService {
 		checkMapper.deleteCheckVOByCode(toolVO.getToolCode());
 		
 		//checklist정보로 다시 insert
-		for(CheckVO checkVO : toolVO.getCheckList()) {	
-			FileBean bean = checkVO.getFileBean();
-			if(checkVO == null) continue;//입력창에서 중간에 제거되어 빠진경우
-			checkVO.setToolCode(toolVO.getToolCode());
-			if(bean != null){
+		for(CheckVO checkVO : toolVO.getCheckList()) {
+			if(checkVO != null) {//입력창에서 중간에 제거되어 빠진경우
 				checkVO.setToolCode(toolVO.getToolCode());
-				checkVO.setImage(bean.getFileName());
-				String virtName = UUID.randomUUID().toString() +"_" + toolVO.getToolCode() +"_";
-				checkVO.setVirtName(virtName);
-				bean.save(new File(CategoryActionBean.CHEKCLIST_PATH + File.separator + virtName));
+				FileBean bean = checkVO.getFileBean();
+				if(bean != null){
+					
+					checkVO.setImage(bean.getFileName());
+					String virtName = UUID.randomUUID().toString() +"_" + toolVO.getToolCode() +"_";
+					checkVO.setVirtName(virtName);
+					bean.save(new File(CategoryActionBean.CHEKCLIST_PATH + File.separator + virtName));
+				}
+				
+				checkMapper.insertCheckVO(checkVO);	
 			}
-			
-			checkMapper.insertCheckVO(checkVO);			
 		}
 		
 		

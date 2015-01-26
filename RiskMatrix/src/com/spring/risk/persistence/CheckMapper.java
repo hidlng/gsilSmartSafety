@@ -1,10 +1,8 @@
 package com.spring.risk.persistence;
 
-import java.util.List;
+import java.util.*;
 
-import org.apache.ibatis.annotations.Param;
-
-import com.spring.risk.domain.CheckVO;
+import com.spring.risk.domain.*;
 
 
 public interface CheckMapper {

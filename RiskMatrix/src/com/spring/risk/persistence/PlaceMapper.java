@@ -1,8 +1,8 @@
 package com.spring.risk.persistence;
 
-import java.util.List;
+import java.util.*;
 
-import com.spring.risk.domain.PlaceVO;
+import com.spring.risk.domain.*;
 
 public interface PlaceMapper {
 	List<PlaceVO> getPlaceList();	

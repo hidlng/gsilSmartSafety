@@ -4,7 +4,12 @@ import net.sourceforge.stripes.action.*;
 
 @UrlBinding("/")
 public class IndexActionBean  extends AbstractActionBean {
-  @DefaultHandler
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+@DefaultHandler
   public ForwardResolution view() {
     return new ForwardResolution(LoginActionBean.class);
   }

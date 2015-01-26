@@ -1,30 +1,15 @@
 package com.spring.risk.web.actions;
 
 import java.io.*;
+import java.lang.reflect.*;
 import java.util.*;
 
-import javax.servlet.http.HttpSession;
-
-import net.sf.json.JSONObject;
+import net.sf.json.*;
 import net.sourceforge.stripes.action.*;
-import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.integration.spring.*;
 
-import com.spring.risk.domain.AccDetailVO;
-import com.spring.risk.domain.CategoryType;
-import com.spring.risk.domain.CategoryVO;
-import com.spring.risk.domain.CheckVO;
-import com.spring.risk.domain.CodeVO;
-import com.spring.risk.domain.FileVO;
-import com.spring.risk.domain.PlaceVO;
-import com.spring.risk.domain.ToolVO;
-import com.spring.risk.domain.UserVO;
-import com.spring.risk.domain.WorkVO;
-import com.spring.risk.service.CategoryService;
-import com.spring.risk.service.FileListService;
-import com.spring.risk.service.PlaceListService;
-import com.spring.risk.service.ToolListService;
-import com.spring.risk.service.UserService;
-import com.spring.risk.service.WorkListService;
+import com.spring.risk.domain.*;
+import com.spring.risk.service.*;
 
 public class DataActionBean extends AbstractActionBean {
 	
@@ -40,6 +25,9 @@ public class DataActionBean extends AbstractActionBean {
 	
 	@SpringBean
 	private transient PlaceListService placeListService;
+
+	@SpringBean
+	private transient PermitService permitService;
 	
 
 	@SpringBean
@@ -52,6 +40,8 @@ public class DataActionBean extends AbstractActionBean {
 	private String code;//code
 	private int type;//work,tool,place
 	private String codelist;
+	private String workcode;
+	private String placecodes;
 	private String filename;
 	
 	@SpringBean
@@ -128,6 +118,114 @@ public class DataActionBean extends AbstractActionBean {
 	}
 
 	
+//	public Resolution getFile() {
+//        InputStream is = null;
+//
+//		
+//        try { 
+//            is = new FileInputStream(new File(CategoryActionBean.CHEKCLIST_PATH + File.separator + filename)); 
+//        } catch (FileNotFoundException ex) {
+//        	ex.printStackTrace();
+//        	return null;
+//        } 
+//        return new StreamingResolution("image/png", is); 
+//        
+//       		
+//            try { 
+//                is = new FileInputStream(new File(UPLOAD_PATH + File.separator +  fileVO.getVirtName()));
+//            } catch (FileNotFoundException ex) {
+//            	ex.printStackTrace();
+//            } 
+//
+//            StreamingResolution resol = new StreamingResolution("application/download; charset=UTF-8", is).setFilename(URLEncoder.encode(fileVO.getFileName(), "UTF-8"));
+//
+//	}  
+	public Resolution getPlaceList() {
+		List<CodeVO> placeList = categoryService.getCodeListByType(CategoryType.PLACE.idx);	
+		jsonObj = new JSONObject();		
+		jsonObj.put("placeList", placeList);
+		
+		return new ForwardResolution(DATAPAGE);
+	}
+	
+	public Resolution getPermitList() {
+		
+		ArrayList<PermitVO> permitList = new ArrayList<PermitVO>();
+		//1.
+		WorkVO workVO = workListService.getWorkByWorkCode(workcode);
+		if(workVO != null && workVO.getPermit() == 1 ){ //1
+			PermitVO vo = new PermitVO();
+			vo.setName(workVO.getWorkName());
+			vo.setContent(workVO.getMeasure());
+			vo.setType(CategoryType.WORK.idx);
+			permitList.add(vo);
+		}
+		
+		if(placecodes != null) {
+		//2.
+		StringTokenizer stk = new StringTokenizer(placecodes, "|");
+		while(stk.hasMoreElements()) {
+			String placecode = (String) stk.nextElement();
+			PlaceVO placeVO = placeListService.getPlaceByCode(placecode);
+		
+			if(placeVO != null &&  placeVO.getPermit() == 1) { //1
+				PermitVO vo = new PermitVO();
+				vo.setName(placeVO.getPlaceName());
+				vo.setContent(placeVO.getGuide());
+				vo.setType(CategoryType.PLACE.idx);
+				permitList.add(vo);
+			}
+			
+		}
+		}
+		
+		//3.
+		PermitVO permitVO = new PermitVO();
+		permitVO.setWorkcode(workcode);
+		permitVO.setPlacecodes(placecodes);
+		PermitVO resultVO = permitService.getPermitByCode(permitVO);
+		if(resultVO != null){
+			resultVO.setType(99);
+			
+			ArrayList<String> codelist = new ArrayList<String>();
+			codelist.add(workcode);
+			StringTokenizer stk = new StringTokenizer(placecodes , "|");
+			while(stk.hasMoreElements()) {
+				codelist.add((String) stk.nextElement());
+			}
+			
+			String[] codearray = codelist.toArray(new String[codelist.size()]);
+			System.out.println(codearray.length);
+			String comb_name = categoryService.getPermitNameByCode(codearray);
+			System.out.println(comb_name);
+			resultVO.setName(comb_name);
+			permitList.add(resultVO);
+		}	
+		
+		
+		
+		jsonObj = new JSONObject();		
+		jsonObj.put("permitList", permitList);
+		
+		return new ForwardResolution(DATAPAGE);
+	
+	}
+	
+//	public Resolution getPermitVO() {
+//		PermitVO permitVO = new PermitVO();
+//		permitVO.setWorkcode(workcode);
+//		permitVO.setPlacecodes(placecodes);
+//		PermitVO resultVO = permitService.getPermitByCode(permitVO);
+//		
+//		jsonObj = new JSONObject();		
+//		jsonObj.put("permitVO", resultVO);
+//		
+//		System.out.println(jsonObj.toString());
+//		
+//		return new ForwardResolution(DATAPAGE);
+//	
+//	}
+//	
 	public Resolution getChekcListImage() {
 	        InputStream is = null;
 	        
@@ -171,7 +269,7 @@ public class DataActionBean extends AbstractActionBean {
 			
 			
 			while(it.hasNext()) {
-				AccDetailVO vo = (AccDetailVO)it.next();
+				AccDetailVO vo = it.next();
 				riskPoint += vo.getAccPoss();
 				riskPoint += vo.getAccSerious();
 				
@@ -279,6 +377,26 @@ public class DataActionBean extends AbstractActionBean {
 
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+
+
+	public String getWorkcode() {
+		return workcode;
+	}
+
+
+	public void setWorkcode(String workcode) {
+		this.workcode = workcode;
+	}
+
+
+	public String getPlacecodes() {
+		return placecodes;
+	}
+
+
+	public void setPlacecodes(String placecodes) {
+		this.placecodes = placecodes;
 	}
 
 

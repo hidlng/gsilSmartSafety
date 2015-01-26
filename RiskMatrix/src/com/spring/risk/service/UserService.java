@@ -1,13 +1,10 @@
 package com.spring.risk.service;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.spring.risk.domain.FileVO;
-import com.spring.risk.domain.UserVO;
-import com.spring.risk.persistence.UserMapper;
+import com.spring.risk.domain.*;
+import com.spring.risk.persistence.*;
 
 
 

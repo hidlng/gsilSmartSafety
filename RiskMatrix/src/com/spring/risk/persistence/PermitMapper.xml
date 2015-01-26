@@ -2,9 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.risk.persistence.ToolMapper">
+<mapper namespace="com.spring.risk.persistence.PermitMapper">
 
 
+	<select id="getPermitList" resultType="PermitVO">
+		SELECT *
+		FROM PERMIT_LIST;
+	</select>
+
+	<select id="getPermitByCode" parameterType="PermitVO" resultType="PermitVO">
+		SELECT *
+		FROM PERMIT_LIST
+		WHERE WORKCODE = #{workcode}
+		AND PLACECODES = trim(#{placecodes})
+		
+	</select>
 	
+	<select id="getPermitByIdx" parameterType="string" resultType="PermitVO">
+		SELECT *
+		FROM PERMIT_LIST
+		WHERE PERMIT_IDX = #{permit_idx}
+	</select>
+
+	<delete id="deletePermitByIdx" parameterType="String">
+		DELETE FROM PERMIT_LIST WHERE PERMIT_IDX = #{permit_idx}
+	</delete>
+
+
+	<insert id="insertPermitVO" parameterType="PermitVO">
+		INSERT INTO PERMIT_LIST(workcode, placecodes, content)
+		VALUES
+		(#{workcode}, #{placecodes}, #{content})
+	</insert>
+
+	<update id="updatePermitVO" parameterType="PermitVO">
+		UPDATE PERMIT_LIST
+		SET
+		WORKCODE = #{workcode}
+		, PLACECODES = #{placecodes}	
+		, CONTENT = #{content}
+		WHERE PERMIT_IDX = #{permit_idx}
+	</update>
 
 </mapper>

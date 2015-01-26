@@ -1,6 +1,6 @@
 package com.spring.risk.domain;
 
-import java.io.Serializable;
+import java.io.*;
 
 public class UserVO implements Serializable{
 

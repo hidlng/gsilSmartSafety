@@ -1,8 +1,7 @@
  @charset "utf-8";
 
-@media print{
- @page a4sheet {size: 21.0cm 29.7cm}
- .a4 {page : a4sheet; page-break-after :always}
+
+  @page{  size: 21.0cm 29.7cm; margin-left : 5mm; margin-right:5mm; margin-top:15mm; margin-bottom:15mm; page-break-after :always;  } 
   html{background:#fff;width:100%;height:100%; padding: 0px;}
   body{background:#fff;;font-family: Dotum,돋움,Helvetica,AppleSDGothicNeo,sans-serif; font-size:11pt; color:#222;margin:0 4%;}
   hr {display:none}
@@ -23,10 +22,10 @@
   table.typ02 th, table.typ02 td{border:0;text-align:left;padding:0px; font-size:9pt;line-height:20px; height:20px;border-bottom:1px dotted #ddd;}
   table.typ02 th{text-align:justify;background:none;}
   p.textBox{display:block; width:99%; margin:10px auto 10px; border:1px solid #222; padding:5px 0; text-align:center;font-weight:bold;}
- .signBox{float:right;overflow:hidden;width:400px;height:30px;border-bottom:2px solid #000;margin:20px 0;}
+ .signBox{float:right;overflow:hidden;width:400px;height:30px;border-bottom:2px solid #000;margin:150px 0;}
  .signBox p{float:left;width:300px; font-weight:bold;} 
  .signBox span{float:right;width:50px;} 
  table.lastsign{margin-top:200px;}
  .bold{font-weight:bold;}
  .printIcon{display:none;}
-  }  
+  

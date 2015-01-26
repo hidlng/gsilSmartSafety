@@ -14,24 +14,27 @@
   <meta name="Description" content="">
   <title>작업 허가증(Permit to work)</title>
     <link rel="stylesheet" href="css/screen.css" type="text/css">
-  	<link rel="stylesheet" href="css/custom.css" type="text/css">
-     <link rel="stylesheet" href="css/print.css" type="text/css" media="print"/>   
+ 	<link rel="stylesheet" href="css/custom.css" type="text/css">
+  <link rel="stylesheet" href="css/print.css" type="text/css" media="print"/> 
+  <link href="/sss.ico" rel="icon" type="image/x-icon" />
+  <link href="/sss.ico" rel="shortcut icon" type="image/x-icon" />  
  </head>
  <body>
-  <img src="images/print2.png" class="printIcon" width="100" alt="출력하기" onclick="window.print();" >
+  <img src="images/print2.gif" class="printIcon" width="100" alt="출력하기" onclick="window.print();" >
  <div id="wrap"> 
 	 <div class="box_top">
-		<h1><img src="images/logo_ds.png" width="100" alt="두산로고"></h1>
+		 <h1><img></h1>
+		<!--h1><img src="images/logo_ds.png" width="100" alt="두산로고"></h1-->
 		<div class="top">
-			<p class="title01">두산건설 신사동 멋쟁이 증설 현장</p>
-			<span class="date">2014-12-09 09:00</span>
+			<p class="title01">${ptwVO.sitename}</p>
+			<span class="date">${ptwVO.printtime}</span>
 		</div><!-- //top -->
 		<h2>작업 허가증(Permit to work)</h2>
 	 </div><!-- //box_top -->
 
 	 <div class="wrap_table">
 		<table class="typ02">
-		<caption>정보</caption>
+		<caption>정&nbsp;보</caption>
 		<colgroup>
 				<col style="width: 12%">
 				<col style="width: 2%">
@@ -78,82 +81,40 @@
 
 
 
-	 <table>
+	 <table class="ptw_table">
 	 <caption>작업허가서</caption>
-		<colgroup>		
-			<col style="width: 15%">
-			<col style="/">
-			<col style="width: 10%">
-			<col style="width: 10%">
-			<col style="width: 10%">					
-		</colgroup>
-		<tr>
-			<th colspan="5">작업허가서</th>		
-		</tr>
-		<tr>
-			<td colspan="5" class="lft">본 작업은 고위험 작업이므로 반드시 안전전문가의 사전 확인을 취득한 후 작업을 시작하여야 합니다. </td>		
-		</tr>
-		<tr>
-			<th colspan="5">안전조치 및 점검 Checklist</th>
-		</tr>
-		<tr>
-			<th>작업명</th>
-			<th>내용</th>
-			<th>안전조치</th>
-			<th>안전확인</th>
-			<th>승인</th>
-		</tr>
-		<tr>
-			<td rowspan="4">화기작업</td>
-			<td class="lft">작업 장 주변 불꽃 비산 방지조치가 이루어졌는가?</td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-		</tr>
-		<tr>
-			<td class="lft"></td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-			
-		</tr>
-		<tr>
-			<td class="lft"></td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-			<td>Y / N</td>			
-		</tr>
-	 </table><!-- //table -->
-
-	 <table>
 	 <caption>작업장소내용</caption>
 		<colgroup>		
+			<col style="width: 7%">
 			<col style="width: 15%">
 			<col style="/">
-			<col style="width: 10%">
-			<col style="width: 10%">
-			<col style="width: 10%">				
+			<col style="width: 8%">
+			<col style="width: 8%">
+			<col style="width: 8%">				
 		</colgroup>
 		<tr>
-			<th>장소명</th>
-			<th>내용</th>
-			<th>안전조치</th>
-			<th>안전확인</th>
-			<th>승인</th>
+			<th>종&nbsp;&nbsp;류</th>
+			<th>명&nbsp;&nbsp;&nbsp;&nbsp;칭</th>
+			<th>내&nbsp;&nbsp;용</th>
+			<th>안&nbsp;전<br>조&nbsp;치</th>
+			<th>안&nbsp;전<br>확&nbsp;인</th>
+			<th>승&nbsp;인</th>
 		</tr>
+		
+		<c:forEach var="permit" items="${ptwVO.permitList}" varStatus="idx">
 		<tr>
-			<td rowspan="2">고소(5m 이하)</td>
-			<td class="lft">작업 장 주변 불꽃 비산 방지조치가 이루어졌는가?</td>
+			<td>
+				<c:if test="${permit.type == 1}">작&nbsp;&nbsp;업</c:if>
+				<c:if test="${permit.type == 3}">장&nbsp;&nbsp;소</c:if>
+				<c:if test="${permit.type == 99}">작업 + 장소</c:if>
+			</td>
+			<td>${permit.name}</td>
+			<td class="lft">${permit.content}</td>
 			<td>Y / N</td>
 			<td>Y / N</td>
 			<td>Y / N</td>
 		</tr>
-		<tr>
-			<td class="lft">화기작업 현장 주변 인화물질은 없는가?</td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-		</tr>
+		</c:forEach>
 	 </table><!-- //table -->
 	 <table class="lastsign">
 	 <caption>작업허가 최종 승인</caption>
@@ -170,7 +131,7 @@
 			<td class="lft">(서명)</td>
 		</tr>
 		<tr>		
-			<td>소장</td>
+			<td>소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장</td>
 			<td class="lft">성명 : </td>
 			<td class="lft">(서명)</td>
 		</tr>

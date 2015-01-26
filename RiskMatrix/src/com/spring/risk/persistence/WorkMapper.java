@@ -1,6 +1,6 @@
 package com.spring.risk.persistence;
 
-import com.spring.risk.domain.WorkVO;
+import com.spring.risk.domain.*;
 
 public interface WorkMapper {
 	WorkVO getWorkByWorkCode(String workCode);

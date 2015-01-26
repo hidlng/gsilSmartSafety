@@ -110,6 +110,8 @@ public class WorkController {
 			ContractorVO contractorVO = contractorService.getContractorByIdx(workVO.getCont_idx());
 			workVO.setCont_name(contractorVO.getCont_name());
 			
+			parse_placecodes(workVO);//workVO의 선택한 placecodes를 parse하여 array형태로 parse_placecodes에 삽입
+			
 			model.addAttribute("updateMode", true);
 			model.addAttribute("workVO", workVO);
 		}
@@ -153,6 +155,16 @@ public class WorkController {
 	
 	
 	
+	private void parse_placecodes(WorkVO workVO) {
+		//place
+		StringTokenizer stk = new StringTokenizer(workVO.getPlacecodes() , "|");
+		while(stk.hasMoreElements()) {
+			workVO.getParse_placecodes().add((String) stk.nextElement());
+		}
+			
+		
+	}
+
 	private void setBaseModel(SiteVO siteVO, Model model) {	
 		//업체리스트 호출 , 작업책임자 소속에서 사용		
 		List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
@@ -178,6 +190,9 @@ public class WorkController {
 		model.addAttribute("updateMode", false);
 		
 		if(bindingResult.hasErrors()) {
+			//장소유형 선택 리스트 보존
+			workVO.setParse_placecodes(workVO.getInput_placecodes());
+			
 			//업체리스트 호출 , 작업책임자 소속에서 사용		
 			List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
 			model.addAttribute("contList", contList);
@@ -187,6 +202,7 @@ public class WorkController {
 		
 		else {
 			try{
+				setPlaceCodeAndName(workVO);
 				setRiskData(workVO);
 				work_idx = workService.insertWork(workVO);
 				
@@ -198,17 +214,36 @@ public class WorkController {
 			//return "redirect:workList";
 			
 		pushWorkToUser(workVO);
-			
-			
-			
-			
-			//redirectAttr.addFlashAttribute("work_idx", work_idx);
-			//return "redirect:printList";
+
 			return "redirect:viewWork?viewIdx=" + workVO.getWork_idx();
 		}
 		
 	}
 	
+	private void setPlaceCodeAndName(WorkVO workVO) {
+		
+		//code : code|code|
+		StringBuffer stb_code = new StringBuffer();
+		StringBuffer stb_name = new StringBuffer();
+		List<String> inputCodeList = workVO.getInput_placecodes();
+		List<String> inputNameList = workVO.getInput_placenames();
+		
+		for (int i = 0; i < inputCodeList.size() ; i++ ) {
+			String placecode = inputCodeList.get(i);
+			if(placecode != null && !placecode.equals("") && !placecode.equals("null")) {
+				stb_code.append(placecode).append("|");
+				stb_name.append(inputNameList.get(i)).append(", ");
+			}
+		}
+		
+		workVO.setPlacecodes(stb_code.toString());
+		
+		String placename = stb_name.toString();
+		workVO.setPlacenames(placename.substring(0, placename.lastIndexOf(',')));
+		
+	}
+	
+
 	private void pushWorkToUser(WorkVO workVO) {
 		try {
 			//Manager 전달 (감독자제외 전부)
@@ -218,7 +253,8 @@ public class WorkController {
 			while(it_man.hasNext()) {
 				ManagerVO manVO = it_man.next();
 				int level = manVO.getLevel();
-				if(level == USERLEVEL.SITE_MANAGER.idx || level == USERLEVEL.CONT_CHEIF.idx || level == USERLEVEL.CONT_LEADER.idx) 
+				if(level == USERLEVEL.SITE_MANAGER.idx || level == USERLEVEL.CONT_CHEIF.idx || level == USERLEVEL.CONT_LEADER.idx
+						|| level == USERLEVEL.CONTRACTOR.idx) 
 					if(manVO.getPid() != null && !manVO.getPid().equals("")){
 						sendMessage(manVO.getPid());	
 						System.out.println("push 알림 전달 [ " + manVO.getId() +"]");
@@ -274,7 +310,10 @@ public class WorkController {
 		model.addAttribute("workVO", workVO);
 		
 		if(bindingResult.hasErrors()) { 
-						
+			//장소유형 선택 리스트 보존
+			workVO.setParse_placecodes(workVO.getInput_placecodes());
+			
+			
 			//업체리스트 호출 , 작업책임자 소속에서 사용		
 			List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
 			model.addAttribute("contList", contList);
@@ -284,6 +323,7 @@ public class WorkController {
 		
 		else {
 			try{
+				setPlaceCodeAndName(workVO);
 				setRiskData(workVO);
 				workService.updateWork(workVO);
 			}catch(Exception e) {//초기
@@ -336,7 +376,7 @@ public class WorkController {
 			workVO.setRisk_level(risklevel);//RiskGrade 
 		}
 		
-		workVO.setRisk_warn("1");//RiskWarn
+		workVO.setRisk_warn("해당없음");//RiskWarn
 		workVO.setWorkpermit("N");//WorkPermit
 		
 	}

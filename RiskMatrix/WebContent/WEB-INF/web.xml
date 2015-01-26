@@ -64,10 +64,10 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   
- 	<!-- Session Expire Time -->
-<session-config>
-   	<session-timeout>60</session-timeout> <!-- in minutes -->
-</session-config>
+ 	<!-- Session Expire Time (minute)-->
+<!--session-config>
+   	<session-timeout>60</session-timeout> 
+</session-config-->
 	
   <servlet>
     <servlet-name>StripesDispatcher</servlet-name>

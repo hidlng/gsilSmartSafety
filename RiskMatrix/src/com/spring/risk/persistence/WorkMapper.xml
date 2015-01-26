@@ -6,7 +6,8 @@
 
 
 	<select id="getWorkByWorkCode" parameterType="string" resultType="WorkVO">
-		SELECT WORKCODE,GUIDE,EQUIP,MEASURE,SAFETY,NAME AS WORKNAME
+		SELECT WORKCODE,GUIDE,EQUIP,MEASURE,SAFETY,PERMIT,
+				NAME AS WORKNAME
 		FROM WORK_LIST WORK 
 		JOIN CODE_LIST CODE
 		ON WORK.WORKCODE = CODE.CODE
@@ -21,9 +22,9 @@
 
 
 	<insert id="insertWorkVO" parameterType="WorkVO">
-		INSERT INTO WORK_LIST(WORKCODE, GUIDE, EQUIP, MEASURE,SAFETY)
+		INSERT INTO WORK_LIST(WORKCODE, GUIDE, EQUIP, MEASURE,SAFETY,PERMIT)
 		VALUES
-		(#{workCode}, #{guide},  #{equip},   #{measure} )
+		(#{workCode}, #{guide},  #{equip},   #{measure} , #{safety},#{permit})
 	</insert>
 
 	<update id="updateWorkVO" parameterType="WorkVO">
@@ -33,6 +34,7 @@
 		,equip=#{equip}
 		,measure=#{measure}		
 		,safety=#{safety}
+		,permit=#{permit}
 		WHERE
 		workcode=#{workCode}
 	</update>

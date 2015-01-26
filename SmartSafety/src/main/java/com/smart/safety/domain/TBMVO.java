@@ -12,6 +12,7 @@ public class TBMVO extends BaseInfoVO implements Serializable{
 	
 	private String workname;//작업코드관련 이름임..
 	private String placename;
+	private String place_state;
 	private int risk_level;
 	private String risk_grade;
 	private String risk_warn;
@@ -132,6 +133,12 @@ public class TBMVO extends BaseInfoVO implements Serializable{
 	}
 	public void setRemark_chief(String remark_chief) {
 		this.remark_chief = remark_chief;
+	}
+	public String getPlace_state() {
+		return place_state;
+	}
+	public void setPlace_state(String place_state) {
+		this.place_state = place_state;
 	}
 
 	

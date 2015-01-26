@@ -181,6 +181,10 @@
 		<tr><th class="detailHeader">보호구</th><td  colspan="5"><stripes:textarea  name="workVO.equip" onkeyup="checkSpeChar(2)"/></td></tr>
 		<tr><th class="detailHeader">이상징후/<br>비상시조치사항</th><td colspan="5"><stripes:textarea  name="workVO.measure" onkeyup="checkSpeChar(2)" /></td></tr>
 		<tr><th class="detailHeader">안전조치사항</th><td colspan="5"><stripes:textarea  name="workVO.safety" onkeyup="checkSpeChar(2)" /></td></tr>
+		<tr><th class="detailHeader">작업허가</th><td colspan="5">
+			<stripes:radio  name="workVO.permit" id="permit_1" value="1" /><stripes:label for="permit_1" >해당</stripes:label>
+			<stripes:radio  name="workVO.permit" id="permit_0" value="0" /><stripes:label for="permit_0" >해당없음</stripes:label>
+		 </td></tr>
 		<tr><th class="detailHeader">사고사례</th><td  colspan="5"><!--File Upload -->
 				<!-- insert -->
 				<c:if test="${!actionBean.isModify}">
@@ -268,6 +272,11 @@
 		<tr><th class="detailHeader">주요위험</th><td><stripes:textarea  name="placeVO.mainRisk" onkeyup="checkSpeChar(2)" /></td>	</tr>
 		<tr><th class="detailHeader">안전작업가이드</th><td><stripes:textarea  name="placeVO.guide" onkeyup="checkSpeChar(2)"/></td></tr>
 		<tr><th class="detailHeader">보호구</th><td><stripes:textarea  name="placeVO.equip" onkeyup="checkSpeChar(2)"/></td>			</tr>
+		<tr><th class="detailHeader">작업허가</th><td>
+			<stripes:radio  name="placeVO.permit" id="permit_1" value="1" /><stripes:label for="permit_1" >해당</stripes:label>
+			<stripes:radio  name="placeVO.permit" id="permit_0" value="0" /><stripes:label for="permit_0" >해당없음</stripes:label>
+			
+	 </td></tr>
 		<tr><th class="detailHeader">사고사례</th><td><!-- insert -->
 				<c:if test="${!actionBean.isModify}">
 					<c:forEach begin="0" end="${actionBean.uploadFileMaxIdx}" varStatus="loop">
@@ -293,7 +302,7 @@
 </c:if>
 <br>
 <div class="updateBtnDiv">
-<!-- insert 모드 --> <c:if test="${!actionBean.isModify}"><stripes:submit name="insertDetail" class="button" value="등록" onclick="checkSubmit('insertDetailSubmit')"/>
+<!-- insert 모드 --> <c:if test="${!actionBean.isModify}"><stripes:button name="insertDetail" class="button" value="등록" onclick="checkSubmit('insertDetailSubmit')"/>
 <stripes:submit id="insertDetailSubmit" name="insertDetail" class="button" style="display:none"/></c:if>
 <!-- update 모드 --> <c:if test="${actionBean.isModify}"><stripes:button name="updateDetail" class="button" value="수정" onclick="checkSubmit('updateDetailSubmit')"/>
 <stripes:submit id="updateDetailSubmit" name="updateDetail" class="button" style="display:none"/>	</c:if>

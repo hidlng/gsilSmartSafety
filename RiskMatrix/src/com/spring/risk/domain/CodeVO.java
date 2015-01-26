@@ -1,6 +1,6 @@
 package com.spring.risk.domain;
 
-import java.io.Serializable;
+import java.io.*;
 
 public class CodeVO implements Serializable {
 	/**
@@ -12,6 +12,7 @@ public class CodeVO implements Serializable {
 	private int category;
 	private boolean registered;
 	private String path;
+	private String type;
 	
 	private int start=0;
 	private int size=Integer.MAX_VALUE;
@@ -58,6 +59,12 @@ public class CodeVO implements Serializable {
 	}
 	public void setPath(String path) {
 		this.path = path;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 
 

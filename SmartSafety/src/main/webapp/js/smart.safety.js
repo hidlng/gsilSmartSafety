@@ -83,7 +83,9 @@ function setCodeBySelect(optId, targetId) {
 
 }
 
-//var existList = new Array('건설1'); 
+
+
+
 
 /**
  * 
@@ -108,23 +110,10 @@ function setCode(categoryIdx , targetId, existList) {
 	  			for(var prop in codeList){//size 파악
 	 			    if(codeList.hasOwnProperty(prop))
 	 			        length++;
-	 			}
-	 			
-	  			
+	 			}		
 	  			
 	  			for(var i = 0 ; i < length; i ++) {
-//	  				var isExist = false;
-//	  				//현재 존재하는 list와 비교하여 존재시 체크 
-//	  				if(existList != undefined && existList != null) {
-//		  				for(i = 0 ; existList.length;i++) 
-//		  					if(codeList[i].code == existList[i])
-//		  						isExist = true;
-//	  				}	
-//	  			
-//		  			if(!isExist)
-		  				$('#' + targetId).append('<option id="'+ codeList[i].code + '" value="' + codeList[i].name + '">' + codeList[i].name  + '</option>');
-		  				//$('#' + codeId +"_" + i).val(codeList[i].code);
-	  				
+	  				$('#' + targetId).append('<option id="'+ codeList[i].code + '" value="' + codeList[i].name + '">' + codeList[i].name  + '</option>');
 	  			} 
 				
 	  		},
@@ -224,9 +213,6 @@ function addTool(tarId, inputType) {
 	addedSpan.innerHTML = str;
 	$("#" + tarId).append(addedSpan);
 	
-	//test
-	
-		
 	
 	if(inputType == 0){//selectbox 항목추가
 		if(tarId == 'cons_machine') setCode(57, 'toolSelect_' + equipIdx);
@@ -496,6 +482,12 @@ function openPTW(work_idx){
 	   var title  = "ptwView";
 	   var status = "toolbar=no,directories=no,scrollbars=yes,resizable=yes,status=no,menubar=no,width=950, height=700, top=0,left=20"; 
 	   window.open("ptw?work_idx=" + work_idx, title,status);  //프로그램처럽보일떈 파업 X?   
+}
+function openACC(work_idx){
+	var url    ="accident";
+	var title  = "accidentView";
+	var status = "toolbar=no,directories=no,scrollbars=yes,resizable=yes,status=no,menubar=no,width=850, height=300, top=0,left=20"; 
+	window.open("accident?work_idx=" + work_idx, title,status);  //프로그램처럽보일떈 파업 X?   
 }
 
 function goBack() {

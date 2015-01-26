@@ -1,6 +1,6 @@
 package com.spring.risk.persistence;
 
-import com.spring.risk.domain.ToolVO;
+import com.spring.risk.domain.*;
 
 public interface ToolMapper {
 	ToolVO getToolByCode(String toolCode);

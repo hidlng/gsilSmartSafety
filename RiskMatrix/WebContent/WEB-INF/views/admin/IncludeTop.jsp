@@ -7,8 +7,7 @@
 <%@ taglib prefix="stripes"
 	uri="http://stripes.sourceforge.net/stripes.tld"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!doctype html>
 
 <head>
 <link rel="StyleSheet" href="../css/riskadmin.css" type="text/css"
@@ -46,7 +45,7 @@
 function checkSpeChar(level) {
 	var objEv = event.srcElement;
 	var regex_alphanum = /[0-9]|[a-z]|[A-Z]|[_-]/;
-	var regex_special = /[~!@\#$%<>^*\\=+{}\']/; //특수문자 정규식 변수 선언 허용
+	var regex_special = /[~!@\#$%<>^*\\=+{}\|']/; //특수문자 정규식 변수 선언 허용
 	//var num = "{}|~`!@#$%^&*+\"'\\/"; //ㅔ[],(),<>,?, _ ,-허용 -- 일반 text
 	
 		//num = "{}[]()<>?_|~`!@#$%^&*-+\"'\\/ ";
@@ -76,7 +75,7 @@ function checkSpeChar(level) {
 	if(level == 2 && !isValid) {
 		event.preventDefault();
 		alert("다음의 특수문자는 입력하실 수 없습니다.(~!@\#$%<>^*\\=+{}\)");
-		objEv.value = objEv.value.replace(/[~!@\#$%<>^*\\=+{}\']/gi, '');
+		objEv.value = objEv.value.replace(/[~!@\#$%<>^*\\=+{}\|']/gi, '');
 	}
 
 }
@@ -94,7 +93,7 @@ function checkSpeChar(level) {
 			<stripes:param name="lastIdx">1</stripes:param>	 
 						카테고리
 			</stripes:link>
-			<stripes:link	beanclass="com.spring.risk.web.actions.CategoryActionBean">
+			<stripes:link	beanclass="com.spring.risk.web.actions.PermitActionBean">
 						작업허가
 			</stripes:link>
 			

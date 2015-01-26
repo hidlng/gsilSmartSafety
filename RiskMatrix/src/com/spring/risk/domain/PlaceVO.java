@@ -1,6 +1,6 @@
 package com.spring.risk.domain;
 
-import java.io.Serializable;
+import java.io.*;
 
 public class PlaceVO  implements Serializable{
 	/**
@@ -11,12 +11,13 @@ public class PlaceVO  implements Serializable{
 	 * SELECT PLACECODE, PLACENAME, MAINRISK, GUIDE, EQUIP
 FROM PLACELIST_VIEW;
 	 */	
-	String placeCode;
-	String placeName;
-	String mainRisk;
-	String guide;
-	String equip;
-	String fileName;
+	private String placeCode;
+	private String placeName;
+	private String mainRisk;
+	private String guide;
+	private String equip;
+	private int	permit;
+	private String fileName;
 	
 	public String getPlaceCode() {
 		return placeCode;
@@ -53,6 +54,12 @@ FROM PLACELIST_VIEW;
 	}
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	public int getPermit() {
+		return permit;
+	}
+	public void setPermit(int permit) {
+		this.permit = permit;
 	}
 	
 

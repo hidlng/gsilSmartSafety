@@ -48,13 +48,15 @@ public class WorkVO implements Serializable{
 	@NotEmpty(message="입력 필요")
 	private String endtime;
 	
-	private String placecode;
-	private String placename;
+	private String placecodes;
+	private String placenames;
+	private ArrayList<String> input_placecodes = new ArrayList<String>();
+	private ArrayList<String> parse_placecodes = new ArrayList<String>();
+	private ArrayList<String> input_placenames = new ArrayList<String>();
 	
 	@NotEmpty(message="입력 필요")
 	private String addr_detail;
-	@NotEmpty(message="입력 필요")
-	private String indoor ="N";
+
 	@NotEmpty(message="입력 필요")
 	private String pic_name;
 	@NotEmpty(message="입력 필요")
@@ -182,18 +184,8 @@ public class WorkVO implements Serializable{
 	public void setEndtime(String endtime) {
 		this.endtime = endtime;
 	}
-	public String getPlacecode() {
-		return placecode;
-	}
-	public void setPlacecode(String placecode) {
-		this.placecode = placecode;
-	}
-	public String getPlacename() {
-		return placename;
-	}
-	public void setPlacename(String placename) {
-		this.placename = placename;
-	}
+
+
 	public String getAddr_detail() {
 		return addr_detail;
 	}
@@ -286,12 +278,7 @@ public class WorkVO implements Serializable{
 		this.sitename = sitename;
 	}
 	
-	public String getIndoor() {
-		return indoor;
-	}
-	public void setIndoor(String indoor) {
-		this.indoor = indoor;
-	}
+
 	public String getIscharge() {
 		return ischarge;
 	}
@@ -400,6 +387,38 @@ public class WorkVO implements Serializable{
 	}
 	public void setRemark_leader(String remark_leader) {
 		this.remark_leader = remark_leader;
+	}
+
+	public String getPlacecodes() {
+		return placecodes;
+	}
+	public void setPlacecodes(String placecodes) {
+		this.placecodes = placecodes;
+	}
+
+	public ArrayList<String> getInput_placecodes() {
+		return input_placecodes;
+	}
+	public void setInput_placecodes(ArrayList<String> input_placecodes) {
+		this.input_placecodes = input_placecodes;
+	}
+	public ArrayList<String> getInput_placenames() {
+		return input_placenames;
+	}
+	public void setInput_placenames(ArrayList<String> input_placenames) {
+		this.input_placenames = input_placenames;
+	}
+	public String getPlacenames() {
+		return placenames;
+	}
+	public void setPlacenames(String placenames) {
+		this.placenames = placenames;
+	}
+	public ArrayList<String> getParse_placecodes() {
+		return parse_placecodes;
+	}
+	public void setParse_placecodes(ArrayList<String> parse_placecodes) {
+		this.parse_placecodes = parse_placecodes;
 	}
 
 	

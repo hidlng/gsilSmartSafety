@@ -6,7 +6,7 @@
 
 
   <select id="getRootCategory" resultType="CategoryVO">
-  	SELECT IDX, NAME 
+  	SELECT *
   	FROM TREE_ROOT_VIEW
   </select>
   
@@ -26,6 +26,23 @@
   
   </select>
   
+  <!-- DataAction에서 permit name a+b+c 형태로 반환하기 위함 -->
+  <select id="getPermitNameByCode" resultType="String"  parameterType="java.util.List">		
+		SELECT GROUP_CONCAT(NAME SEPARATOR ' + ') AS NAME 
+		FROM CODE_LIST 
+		WHERE 
+		
+		<if test="codearray  != null">
+           		CODE IN
+           		<foreach item="code" index="index" collection="codearray" open="(" separator="," close=")">
+              	#{code}
+              	</foreach>
+              	
+        </if>	
+		;
+		
+</select>
+	
   <select id="getSiblingCategory" parameterType="int" resultType="CategoryVO">
 	SELECT IDX,NAME 
 	FROM CATEGORY C JOIN TREE_PATH T 
@@ -80,9 +97,17 @@
   </select>
   
    <select id="getCodeListByCategory"  parameterType="int"  resultType="CodeVO">
-  	SELECT CODE, NAME, CATEGORY, REGISTERED , PATH
+  	SELECT *
 	FROM CODE_LIST_VIEW
 	WHERE CATEGORY = #{idx}
+	ORDER BY CODE
+  </select>
+  
+    <select id="getCodeListByType"  parameterType="int"  resultType="CodeVO">
+  	SELECT *
+	FROM CODE_LIST_VIEW
+	WHERE TYPE = #{type}
+	ORDER BY CODE
   </select>
   
    <select id="getAccList"  resultType="CodeVO">

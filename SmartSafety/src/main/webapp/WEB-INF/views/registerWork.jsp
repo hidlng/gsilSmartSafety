@@ -63,13 +63,53 @@ $(document).ready(function() {
 	}else {}
 	//장비공도구 설정 END
  
-
+	//placeList 출력
+	setPlaceList('placeList');
+	
 	/**updateMode일 경우 pic_pos_detail 설정**/
 	if($('#pic_position').val() == '기타업체') {
 		 showPicDetail();
 	}else
 		 hidePicDetail();
 });
+
+function setPlaceList(targetId) {
+	 $.ajax({
+	  		type : "POST",
+	  		url : "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getPlaceList=",
+	  		data : {},
+	  		dataType : "jsonp",
+	  	    jsonp : "callback",
+	  		cache : false,
+	  		success : function(json) {
+	  			$('#' + targetId).empty();
+	  			var placeList = json.placeList;
+	  			
+	  			var length = 0;
+	  			for(var prop in placeList){//size 파악
+	 			    if(placeList.hasOwnProperty(prop))
+	 			        length++;
+	 			}
+	  			for(var i = 0 ; i < length; i ++) {
+	  				var str ='<input id="place_' + placeList[i].code + '" name="input_placecodes[' + i + ']" type="checkbox" value="' + placeList[i].code +
+	  				'"></input><label for="place_' + placeList[i].code + '">' + placeList[i].name + '</label>' +
+	  				'<input type="hidden" name="input_placenames[' + i + ']" value="' + placeList[i].name +	'"/> ';
+	  				
+	  			 	$("#" + targetId).append(str);
+	  				
+	  			} 
+	  			//placeList check (update시 & insert validation 실패시 (back되었을떄))
+  				<c:forEach var="placecode" items="${workVO.parse_placecodes}">
+  					$('#place_' + '${placecode}').prop("checked", true);
+  				</c:forEach>
+	  			
+	  			
+	  		}
+	 });
+	 			
+	 
+	 
+}
 
 function showPicDetail() {
 	 $('#td_pic_pos_detail_1').show();
@@ -116,12 +156,13 @@ if(input) { //yes
 <input type="hidden" name="cont_idx" value="${workVO.cont_idx}" />
 <input type="hidden" name="write_user_idx" value="${workVO.write_user_idx}" />
 <input type="hidden" name="workcode" value="${workVO.workcode}" id="workcode" />
-<input type="hidden" name="placecode" value="${workVO.placecode}" id="placecode" />
+<input type="hidden" name="placecodes" value="${workVO.placecodes}" id="placecodes" />
 <input type="hidden" name="workstatus" value="${workVO.workstatus}" id="workcode" />
 
 <input type="hidden" name="risk_grade" value="${workVO.risk_grade}" id="risk_grade" />
 <input type="hidden" name="risk_warn" value="${workVO.risk_warn}" id="risk_warn" />
 <input type="hidden" name="workpermit" value="${workVO.workpermit}" id="workpermit" />
+
 
 <table class="work_signup">
 	<colgroup>
@@ -137,7 +178,7 @@ if(input) { //yes
 	</tr>
 	<tr>
 		<th>감&nbsp;&nbsp;&nbsp;독&nbsp;&nbsp;&nbsp;자</th>
-		<td><form:select path="inspec_mgr_idx" class="siteSelectBox colspanInput"  style="width:95%">
+		<td colspan="2"><form:select path="inspec_mgr_idx" class="siteSelectBox colspanInput"  style="width:95%">
 				<c:forEach var="manager" items="${managerList}" >
 					<form:option value="${manager.manager_idx}">${manager.name}</form:option>
 				</c:forEach>
@@ -293,14 +334,9 @@ if(input) { //yes
 	
 	<!-- start -->
 	<tr>
-		<th>장&nbsp;소&nbsp;유&nbsp;형</th>
-		<td>
-		<form:select path="placename" class="siteSelectBox" id="placename" style="width:92%">
-			<form:option value="">:::선택:::</form:option>
-			<form:option value="" selected="true">2</form:option>
-		</form:select></td>
+		<th>작&nbsp;업&nbsp;유&nbsp;형</th>
+		<td id="placeList"></td>
 	</tr>
-	<!--  end -->
 	
 	<tr>
 		<th>세&nbsp;부&nbsp;장&nbsp;소</th>
@@ -309,15 +345,7 @@ if(input) { //yes
 			<br> <form:errors path="addr_detail" cssClass="formError"  />
 		</td>
 	</tr>
-	<tr>
-		<th>실내외여부</th>
-		<td class="radi_td">
-		<span class="side">
-			<form:radiobutton path="indoor" class="radi" value="Y" label="실내"/>				
-			<form:radiobutton path="indoor" class="radi" value="N" label="실외"/>
-			</span>
-		</td>
-	</tr>
+	
 </table>
 
 <div class="work_cap">
@@ -410,7 +438,7 @@ if(input) { //yes
 		</td>
 	</tr>
 	<tr>
-		<th>팀&nbsp;&nbsp;&nbsp;&nbsp;장/<br><br>안전관리자</th>
+		<th>팀장/안전<br>관&nbsp;리&nbsp;자</th>
 			<td><form:textarea  class="remark"  path="remark_leader" 	maxlength="100" />
 			<br> <form:errors path="remark_leader" cssClass="formError"  />
 		</td>

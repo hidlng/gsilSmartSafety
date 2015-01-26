@@ -1,12 +1,12 @@
 package com.spring.risk.web.actions;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 import net.sourceforge.stripes.action.*;
-import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.integration.spring.*;
 
-import com.spring.risk.domain.UserVO;
-import com.spring.risk.service.UserService;
+import com.spring.risk.domain.*;
+import com.spring.risk.service.*;
 
 
 
@@ -41,7 +41,7 @@ public class LoginActionBean extends AbstractActionBean {
 			isAuthenticated = true;
 	        HttpSession s = context.getRequest().getSession();		    
 		    s.setAttribute("userBean", this);
-		    s.setAttribute("init", true);
+		//    s.setAttribute("init", true);
 		    return new RedirectResolution(CategoryActionBean.class);
 		}
 		

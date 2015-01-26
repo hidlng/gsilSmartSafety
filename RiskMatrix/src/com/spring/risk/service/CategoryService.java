@@ -1,15 +1,13 @@
 package com.spring.risk.service;
 
-import java.util.List;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
-import com.spring.risk.domain.CategoryType;
-import com.spring.risk.domain.CategoryVO;
-import com.spring.risk.domain.CodeVO;
-import com.spring.risk.persistence.CategoryMapper;
+import com.spring.risk.domain.*;
+import com.spring.risk.persistence.*;
 
 @Service
 public class CategoryService {
@@ -46,12 +44,20 @@ public class CategoryService {
 		return categoryMapper.getCodeListByCategory(idx);
 	}
 	
+	public List<CodeVO> getCodeListByType(int type) {
+		return categoryMapper.getCodeListByType(type);
+	}
+	
 	public int getMaxCategoryIdx() {
 		return categoryMapper.getMaxCategoryIdx();
 	}
 
 	public int getCountByCode(CodeVO vo) {
 		return categoryMapper.getCountByCode(vo);
+	}
+	
+	public String getPermitNameByCode(List<String>  codearray) {
+		return categoryMapper.getPermitNameByCode(codearray);
 	}
 
 	

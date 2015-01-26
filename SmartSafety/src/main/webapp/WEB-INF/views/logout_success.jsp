@@ -6,7 +6,9 @@
 <html>
 <head>
   <title>GSIL</title>
-  <link rel="stylesheet" href="css/common.css" type="text/css">  
+  <link rel="stylesheet" href="css/common.css" type="text/css">
+  <link href="/sss.ico" rel="icon" type="image/x-icon" />
+  <link href="/sss.ico" rel="shortcut icon" type="image/x-icon" />  
   <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
   
   <script>

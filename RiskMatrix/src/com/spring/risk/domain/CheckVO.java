@@ -1,8 +1,8 @@
 package com.spring.risk.domain;
 
-import java.io.Serializable;
+import java.io.*;
 
-import net.sourceforge.stripes.action.FileBean;
+import net.sourceforge.stripes.action.*;
 
 public class CheckVO implements Serializable{
 	/**
