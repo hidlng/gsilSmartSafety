@@ -102,14 +102,15 @@
 		</tr>
 		
 		<c:forEach var="permit" items="${ptwVO.permitList}" varStatus="idx">
-		<tr>
+		<c:if test="${permit.type==99}"><tr style="font-weight: bold;"></c:if>
+		<c:if test="${permit.type!=99}"><tr></c:if>
 			<td>
 				<c:if test="${permit.type == 1}">작&nbsp;&nbsp;업</c:if>
 				<c:if test="${permit.type == 3}">장&nbsp;&nbsp;소</c:if>
-				<c:if test="${permit.type == 99}">작업 + 장소</c:if>
+				<c:if test="${permit.type == 99}">특&nbsp;&nbsp;수</c:if>
 			</td>
 			<td>${permit.name}</td>
-			<td class="lft">${permit.content}</td>
+			<td class="lft_mid">${permit.content}</td>
 			<td>Y / N</td>
 			<td>Y / N</td>
 			<td>Y / N</td>

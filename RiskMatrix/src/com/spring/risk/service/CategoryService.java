@@ -57,7 +57,9 @@ public class CategoryService {
 	}
 	
 	public String getPermitNameByCode(List<String>  codearray) {
-		return categoryMapper.getPermitNameByCode(codearray);
+		CategoryVO vo = new CategoryVO();
+		vo.setCodearray(codearray);
+		return categoryMapper.getPermitNameByCode(vo);
 	}
 
 	

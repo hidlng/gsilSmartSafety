@@ -188,21 +188,17 @@ public class DataActionBean extends AbstractActionBean {
 			resultVO.setType(99);
 			
 			ArrayList<String> codelist = new ArrayList<String>();
-			codelist.add(workcode);
+			
 			StringTokenizer stk = new StringTokenizer(placecodes , "|");
 			while(stk.hasMoreElements()) {
 				codelist.add((String) stk.nextElement());
 			}
+			codelist.add(workcode);
 			
-			String[] codearray = codelist.toArray(new String[codelist.size()]);
-			System.out.println(codearray.length);
-			String comb_name = categoryService.getPermitNameByCode(codearray);
-			System.out.println(comb_name);
+			String comb_name = categoryService.getPermitNameByCode(codelist);			
 			resultVO.setName(comb_name);
 			permitList.add(resultVO);
 		}	
-		
-		
 		
 		jsonObj = new JSONObject();		
 		jsonObj.put("permitList", permitList);
@@ -211,21 +207,6 @@ public class DataActionBean extends AbstractActionBean {
 	
 	}
 	
-//	public Resolution getPermitVO() {
-//		PermitVO permitVO = new PermitVO();
-//		permitVO.setWorkcode(workcode);
-//		permitVO.setPlacecodes(placecodes);
-//		PermitVO resultVO = permitService.getPermitByCode(permitVO);
-//		
-//		jsonObj = new JSONObject();		
-//		jsonObj.put("permitVO", resultVO);
-//		
-//		System.out.println(jsonObj.toString());
-//		
-//		return new ForwardResolution(DATAPAGE);
-//	
-//	}
-//	
 	public Resolution getChekcListImage() {
 	        InputStream is = null;
 	        
