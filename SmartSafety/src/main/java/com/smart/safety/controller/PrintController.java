@@ -546,7 +546,7 @@ public class PrintController {
 			while(it.hasNext()){
 				Map<String,String>elem = it.next();
 				PermitVO permitVO = new PermitVO();				
-				permitVO.setName(elem.get("name"));
+				permitVO.setName(elem.get("name").replace("+", "<br>"));
 				permitVO.setContent(elem.get("content"));
 				permitVO.setType(String.valueOf(elem.get("type")));
 				

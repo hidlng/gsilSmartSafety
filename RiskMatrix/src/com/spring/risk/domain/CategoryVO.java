@@ -1,6 +1,7 @@
 package com.spring.risk.domain;
 
 import java.io.*;
+import java.util.*;
 
 public class CategoryVO implements Serializable{
 	/**
@@ -10,6 +11,7 @@ public class CategoryVO implements Serializable{
 	int idx;
 	String name;
 	private int parent;
+	List<String> codearray;
 	
 	public int getIdx() {
 		return idx;
@@ -28,6 +30,12 @@ public class CategoryVO implements Serializable{
 	}
 	public void setParent(int parent) {
 		this.parent = parent;
+	}
+	public List<String> getCodearray() {
+		return codearray;
+	}
+	public void setCodearray(List<String> codearray) {
+		this.codearray = codearray;
 	}
 	
 }
