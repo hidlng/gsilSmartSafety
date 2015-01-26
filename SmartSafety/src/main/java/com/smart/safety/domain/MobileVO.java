@@ -17,6 +17,49 @@ public class MobileVO implements Serializable {
 	private String workdate;
 	private String user_idx;
 	
+	private String worktype;
+	private String placenames;
+	private String ptw_exist;
+	private String pui_exist;
+	private String pic_num_worker;
+	private String toolname;
+	
+	public String getToolname() {
+		return toolname;
+	}
+	public void setToolname(String toolname) {
+		this.toolname = toolname;
+	}
+	public String getWorktype() {
+		return worktype;
+	}
+	public void setWorktype(String worktype) {
+		this.worktype = worktype;
+	}
+	public String getPlacenames() {
+		return placenames;
+	}
+	public void setPlacenames(String placenames) {
+		this.placenames = placenames;
+	}
+	public String getPtw_exist() {
+		return ptw_exist;
+	}
+	public void setPtw_exist(String ptw_exist) {
+		this.ptw_exist = ptw_exist;
+	}
+	public String getPui_exist() {
+		return pui_exist;
+	}
+	public void setPui_exist(String pui_exist) {
+		this.pui_exist = pui_exist;
+	}
+	public String getPic_num_worker() {
+		return pic_num_worker;
+	}
+	public void setPic_num_worker(String pic_num_worker) {
+		this.pic_num_worker = pic_num_worker;
+	}
 	public String getWorkdate() {
 		return workdate;
 	}

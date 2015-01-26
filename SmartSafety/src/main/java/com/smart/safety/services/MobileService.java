@@ -52,6 +52,45 @@ public class MobileService {
 		return jo.toString();
 	}
 	
+	public String getMobileWorkInfomation(String workIdx) {		
+
+		
+		MobileVO returnVO = mobileMapper.getWorkInfomation(workIdx);
+		
+		JSONObject jo = new JSONObject();
+		if( returnVO != null ) {
+			jo.put("result", "true");
+			jo.put("workIdx", returnVO.getWork_idx());
+			jo.put("worktype", returnVO.getWorktype());
+			jo.put("placenames", returnVO.getPlacenames());
+			jo.put("ptwExist", returnVO.getPtw_exist());
+			jo.put("puiExist", returnVO.getPui_exist());
+			jo.put("picNumWorker", returnVO.getPic_num_worker());
+			jo.put("picName", returnVO.getPic_name());
+
+			List<MobileVO> toolList = mobileMapper.getWorkToolInfomation(workIdx);
+			
+			String toolName = "";
+			if( toolList != null && toolList.size() > 0 ) {
+				for( int i = 0; i < toolList.size(); i++ ) {
+					MobileVO tool = (MobileVO)toolList.get(i);
+					if( i == 0 ) {
+						toolName = tool.getToolname();
+					} else {
+						toolName += "," + tool.getToolname();
+					}
+				}
+			}
+			jo.put("toolName", toolName);
+			
+			
+		} else {
+			jo.put("result", "false");
+		}
+		
+		return jo.toString();
+	}
+	
 	public String getMobileWorkList(String siteidx, String searchdate) {
 		
 		JSONObject jo = new JSONObject();
@@ -87,7 +126,7 @@ public class MobileService {
 		return jo.toString();
 	}
 	
-	public String updatCheckYn( String workdate, String useridx, String checkyn, String workidx ) {
+	public String updatCheckYn( String workdate, String useridx, String checkyn, String workidx, String userlevel ) {
 		
 		JSONObject jo = new JSONObject();
 		
@@ -97,7 +136,15 @@ public class MobileService {
 		mobileVO.setWork_idx(workidx);
 		mobileVO.setWorkdate(workdate);
 		
-		int resultInt = mobileMapper.updateCheckYn(mobileVO);
+		int resultInt = 0;
+		
+		if( userlevel.equals("2") ) {
+			resultInt = mobileMapper.updateCheckYn(mobileVO);
+		} else if( userlevel.equals("4") ) {
+			resultInt = mobileMapper.updateChifCheckYn(mobileVO);
+		} else if( userlevel.equals("5") ) {
+			resultInt = mobileMapper.updateLeadCheckYn(mobileVO);
+		}
 		
 		if( resultInt > 0  ) {
 			jo.put("result", "true");

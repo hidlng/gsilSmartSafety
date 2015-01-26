@@ -156,8 +156,8 @@
 								<th>작&nbsp;&nbsp;업</th>
 								<th>위험도</th>
 								<th >안전<BR>관리자</th>	
-								<th >소&nbsp;장</th>	
 								<th >팀&nbsp;장</th>						
+								<th >소&nbsp;장</th>	
 							</tr>
 							
 							<c:forEach var="ceo" items="${ceoList}" varStatus="idx">
@@ -169,9 +169,9 @@
 									<td>${ceo.risk_grade}</td>
 									<td><c:if test="${ceo.checkyn == 'Y'}"><img src="images/check-blue.png" width="30px" /></c:if><c:if test="${ceo.checkyn == 'N'}"><img src="images/check-red.png"  width="30px"/></c:if>
 									</td>
-									<td><c:if test="${ceo.checkyn == 'Y'}"><img src="images/check-blue.png" width="30px" /></c:if><c:if test="${ceo.checkyn == 'N'}"><img src="images/check-red.png"  width="30px"/></c:if>
+									<td><c:if test="${ceo.leadcheckyn == 'Y'}"><img src="images/check-blue.png" width="30px" /></c:if><c:if test="${ceo.leadcheckyn == 'N'}"><img src="images/check-red.png"  width="30px"/></c:if>
 									</td>
-									<td><c:if test="${ceo.checkyn == 'Y'}"><img src="images/check-blue.png" width="30px" /></c:if><c:if test="${ceo.checkyn == 'N'}"><img src="images/check-red.png"  width="30px"/></c:if>
+									<td><c:if test="${ceo.chifcheckyn == 'Y'}"><img src="images/check-blue.png" width="30px" /></c:if><c:if test="${ceo.chifcheckyn == 'N'}"><img src="images/check-red.png"  width="30px"/></c:if>
 									</td>
 									<td>${ceo.startdate} ~ ${ceo.enddate}<input id="updateIdx_${idx.index}" type="hidden" value="${ceo.work_idx}" /></td>
 								</tr>		

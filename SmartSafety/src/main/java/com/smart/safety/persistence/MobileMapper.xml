@@ -58,7 +58,40 @@
 		WHERE WORK_IDX = #{work_idx}
 		  AND WORKDATE = #{workdate}
     </update>
+    
+    <update id="updateChifCheckYn" parameterType="MobileVO">
+		UPDATE PRINT_LIST
+		SET CHIFCHKYN = #{checkyn} , CHIF_CHK_USER_IDX = #{user_idx}
+		WHERE WORK_IDX = #{work_idx}
+		  AND WORKDATE = #{workdate}
+    </update>
+    
+    
+    <update id="updateLeadCheckYn" parameterType="MobileVO">
+		UPDATE PRINT_LIST
+		SET LEADCHKYN = #{checkyn} , LEAD_CHK_USER_IDX = #{user_idx}
+		WHERE WORK_IDX = #{work_idx}
+		  AND WORKDATE = #{workdate}
+    </update>
 
+	  <select id="getWorkInfomation" resultType="MobileVO"  parameterType="String" >
+		SELECT 
+			WORK_IDX,
+			WORKTYPE,
+			PLACENAMES,
+			PTW_EXIST,
+			PUI_EXIST,
+			PIC_NUM_WORKER,
+			PIC_NAME
+		FROM WORK_LIST
+  		WHERE WORK_IDX = #{id}
+	  </select>
+
+	  <select id="getWorkToolInfomation" resultType="MobileVO"  parameterType="String" >
+		SELECT WORK_IDX, TOOLNAME
+		FROM SAFETY.TOOL_LIST
+  		WHERE WORK_IDX = #{id}
+	  </select>
     
 </mapper>
 

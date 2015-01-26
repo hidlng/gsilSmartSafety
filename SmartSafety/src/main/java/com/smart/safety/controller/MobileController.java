@@ -44,13 +44,23 @@ public class MobileController {
 			, @RequestParam(value="workdate", defaultValue="")String workdate
 			, @RequestParam(value="useridx", defaultValue="")String useridx
 			, @RequestParam(value="checkyn", defaultValue="")String checkyn
-			, @RequestParam(value="workidx", defaultValue="")String workidx ) {
+			, @RequestParam(value="workidx", defaultValue="")String workidx
+			, @RequestParam(value="userlevel", defaultValue="")String userlevel) {
 		
 		useridx = URLDecoder.decode(useridx);
 		
-		String resultJson = mobileServie.updatCheckYn(workdate, useridx, checkyn, workidx);
+		String resultJson = mobileServie.updatCheckYn(workdate, useridx, checkyn, workidx,userlevel);
 		model.addAttribute("jsonResult", resultJson);
 	}
 	
+	@RequestMapping( value = "mobileworkinfo" )
+	public void mobileWorkInfo(Model model
+			, @RequestParam(value="workIdx", defaultValue="")String workIdx) {
+		
+		workIdx = URLDecoder.decode(workIdx);
+		
+		String resultJson = mobileServie.getMobileWorkInfomation(workIdx);
+		model.addAttribute("jsonResult", resultJson);
+	}
 	
 }

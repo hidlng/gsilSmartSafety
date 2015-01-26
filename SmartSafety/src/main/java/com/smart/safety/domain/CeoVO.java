@@ -14,6 +14,8 @@ public class CeoVO implements Serializable {
 	private String type;
 	private String site_idx;
 	private String checkyn;
+	private String chifcheckyn;
+	private String leadcheckyn;
 	private String chk_user_idx;
 	private String risk_grade;
 	private String user_idx;
@@ -28,6 +30,18 @@ public class CeoVO implements Serializable {
 	private int start=0;
 	private int size=10;
 	
+	public String getChifcheckyn() {
+		return chifcheckyn;
+	}
+	public void setChifcheckyn(String chifcheckyn) {
+		this.chifcheckyn = chifcheckyn;
+	}
+	public String getLeadcheckyn() {
+		return leadcheckyn;
+	}
+	public void setLeadcheckyn(String leadcheckyn) {
+		this.leadcheckyn = leadcheckyn;
+	}
 	public String getRiskSearchValue() {
 		return riskSearchValue;
 	}
