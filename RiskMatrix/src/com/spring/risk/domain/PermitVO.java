@@ -13,7 +13,9 @@ public class PermitVO implements Serializable  {
 	private String placecodes;
 	private ArrayList<String> parse_codeList = new ArrayList<String>();//parse저장용
 	private ArrayList<String> parse_nameList = new ArrayList<String>();//parse저장용
+	private String name; //출력물에 사용될 name
 	private String content;
+	private int type;
 	
 	public String getPermit_idx() {
 		return permit_idx;
@@ -50,6 +52,18 @@ public class PermitVO implements Serializable  {
 	}
 	public void setParse_nameList(ArrayList<String> parse_nameList) {
 		this.parse_nameList = parse_nameList;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
 	}
 
 

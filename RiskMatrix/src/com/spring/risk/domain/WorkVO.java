@@ -11,6 +11,7 @@ public class WorkVO implements Serializable {
 	private String equip;
 	private String measure;
 	private String safety;
+	private int permit;
 	
 	private String accName;
 	private String accCode;
@@ -90,6 +91,12 @@ public class WorkVO implements Serializable {
 	}
 	public void setSafety(String safety) {
 		this.safety = safety;
+	}
+	public int getPermit() {
+		return permit;
+	}
+	public void setPermit(int permit) {
+		this.permit = permit;
 	}
 
 	

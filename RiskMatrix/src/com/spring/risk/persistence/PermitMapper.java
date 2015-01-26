@@ -8,6 +8,7 @@ public interface PermitMapper {
 	List<PermitVO> getPermitList();	
 	
 	PermitVO getPermitByCode(PermitVO permitVO);
+	
 	PermitVO getPermitByIdx(String permit_idx);
 	void insertPermitVO(PermitVO permitVO);
 	void deletePermitByIdx(String permit_idx);	

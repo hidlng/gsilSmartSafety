@@ -23,6 +23,8 @@ public class PermitService {
 		return permitMapper.getPermitByCode(permitVO);
 	}
 	
+	
+	
 	public PermitVO getPermitByIdx(String permit_idx){
 		return permitMapper.getPermitByIdx(permit_idx);
 	}

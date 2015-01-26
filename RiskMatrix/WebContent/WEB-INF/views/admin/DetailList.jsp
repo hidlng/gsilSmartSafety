@@ -60,6 +60,12 @@
 					<th class="detailHeader">안전 조치 사항</th>
 					<td class="wordBreak" colspan="${actionBean.inputAccList.size()}">${actionBean.workVO.safety}</td>
 				</tr>
+				<tr>
+					<th class="detailHeader">작업허가</th><td  colspan="${actionBean.inputAccList.size()}">
+					<c:if test="${actionBean.workVO.permit == 1}">해당</c:if>
+					<c:if test="${actionBean.workVO.permit == 0}">해당없음</c:if>
+					</td>
+				</tr>
 				<tr><th class="detailHeader">사고사례</th>					
 					<td colspan="${actionBean.inputAccList.size()}"><c:forEach var="file" items="${actionBean.fileList}" varStatus="fileIdx">
 							<stripes:link	beanclass="com.spring.risk.web.actions.CategoryActionBean"	event="getFile">
@@ -123,6 +129,11 @@
 		<tr><th class="detailHeader">주요위험</th><td class="wordBreak">${actionBean.placeVO.mainRisk}</td></tr>
 		<tr><th class="detailHeader">안전작업가이드</th><td class="wordBreak">${actionBean.placeVO.guide}</td></tr>
 		<tr><th class="detailHeader">보호구</th><td class="wordBreak">${actionBean.placeVO.equip}</td></tr>
+		<tr><th class="detailHeader"  colspan="${actionBean.inputAccList.size()}">작업허가</th>
+			<td><c:if test="${actionBean.placeVO.permit == 1}">해당</c:if>
+				<c:if test="${actionBean.placeVO.permit == 0}">해당없음</c:if>
+			</td>
+		</tr>
 		<tr><th class="detailHeader">사고사례</th><td><c:forEach var="file" items="${actionBean.fileList}"
 					varStatus="fileIdx">
 					<stripes:link
@@ -131,7 +142,8 @@
 						<stripes:param name="fileIdx" value="${file.file_idx}" />
 					${file.fileName}
 				</stripes:link>
-				</c:forEach></td></tr>
+				</c:forEach></td>
+		</tr>
 	</table>
 
 	</c:if>

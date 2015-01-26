@@ -1,6 +1,7 @@
 package com.spring.risk.web.actions;
 
 import java.io.*;
+import java.lang.reflect.*;
 import java.util.*;
 
 import net.sf.json.*;
@@ -147,21 +148,84 @@ public class DataActionBean extends AbstractActionBean {
 		return new ForwardResolution(DATAPAGE);
 	}
 	
-	public Resolution getPermitVO() {
+	public Resolution getPermitList() {
+		
+		ArrayList<PermitVO> permitList = new ArrayList<PermitVO>();
+		//1.
+		WorkVO workVO = workListService.getWorkByWorkCode(workcode);
+		if(workVO != null && workVO.getPermit() == 1 ){ //1
+			PermitVO vo = new PermitVO();
+			vo.setName(workVO.getWorkName());
+			vo.setContent(workVO.getMeasure());
+			vo.setType(CategoryType.WORK.idx);
+			permitList.add(vo);
+		}
+		
+		if(placecodes != null) {
+		//2.
+		StringTokenizer stk = new StringTokenizer(placecodes, "|");
+		while(stk.hasMoreElements()) {
+			String placecode = (String) stk.nextElement();
+			PlaceVO placeVO = placeListService.getPlaceByCode(placecode);
+		
+			if(placeVO != null &&  placeVO.getPermit() == 1) { //1
+				PermitVO vo = new PermitVO();
+				vo.setName(placeVO.getPlaceName());
+				vo.setContent(placeVO.getGuide());
+				vo.setType(CategoryType.PLACE.idx);
+				permitList.add(vo);
+			}
+			
+		}
+		}
+		
+		//3.
 		PermitVO permitVO = new PermitVO();
 		permitVO.setWorkcode(workcode);
 		permitVO.setPlacecodes(placecodes);
 		PermitVO resultVO = permitService.getPermitByCode(permitVO);
+		if(resultVO != null){
+			resultVO.setType(99);
+			
+			ArrayList<String> codelist = new ArrayList<String>();
+			codelist.add(workcode);
+			StringTokenizer stk = new StringTokenizer(placecodes , "|");
+			while(stk.hasMoreElements()) {
+				codelist.add((String) stk.nextElement());
+			}
+			
+			String[] codearray = codelist.toArray(new String[codelist.size()]);
+			System.out.println(codearray.length);
+			String comb_name = categoryService.getPermitNameByCode(codearray);
+			System.out.println(comb_name);
+			resultVO.setName(comb_name);
+			permitList.add(resultVO);
+		}	
+		
+		
 		
 		jsonObj = new JSONObject();		
-		jsonObj.put("permitVO", resultVO);
-		
-		System.out.println(jsonObj.toString());
+		jsonObj.put("permitList", permitList);
 		
 		return new ForwardResolution(DATAPAGE);
 	
 	}
 	
+//	public Resolution getPermitVO() {
+//		PermitVO permitVO = new PermitVO();
+//		permitVO.setWorkcode(workcode);
+//		permitVO.setPlacecodes(placecodes);
+//		PermitVO resultVO = permitService.getPermitByCode(permitVO);
+//		
+//		jsonObj = new JSONObject();		
+//		jsonObj.put("permitVO", resultVO);
+//		
+//		System.out.println(jsonObj.toString());
+//		
+//		return new ForwardResolution(DATAPAGE);
+//	
+//	}
+//	
 	public Resolution getChekcListImage() {
 	        InputStream is = null;
 	        

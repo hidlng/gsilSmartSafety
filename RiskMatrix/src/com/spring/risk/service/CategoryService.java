@@ -55,6 +55,10 @@ public class CategoryService {
 	public int getCountByCode(CodeVO vo) {
 		return categoryMapper.getCountByCode(vo);
 	}
+	
+	public String getPermitNameByCode(String[] codearray) {
+		return categoryMapper.getPermitNameByCode(codearray);
+	}
 
 	
 	/**CodeList는 이함수를 통해서 **/
