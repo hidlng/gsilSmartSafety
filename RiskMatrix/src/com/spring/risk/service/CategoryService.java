@@ -56,7 +56,7 @@ public class CategoryService {
 		return categoryMapper.getCountByCode(vo);
 	}
 	
-	public String getPermitNameByCode(String[] codearray) {
+	public String getPermitNameByCode(List<String>  codearray) {
 		return categoryMapper.getPermitNameByCode(codearray);
 	}
 

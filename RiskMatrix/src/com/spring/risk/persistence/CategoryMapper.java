@@ -18,7 +18,7 @@ public interface CategoryMapper {
   List<CodeVO> 	   getCodeListByType(int idx);
   List<CodeVO>	   getDescendantCodes(int idx);
   
-  String		   getPermitNameByCode(String[] codearray);
+  String		   getPermitNameByCode(List<String> codearray);
   
   CodeVO getCodeVO(String code);
   List<CodeVO> getDescendantCodeVOList(CodeVO codeVO);
