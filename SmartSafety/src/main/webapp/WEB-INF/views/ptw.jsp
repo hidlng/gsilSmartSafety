@@ -83,59 +83,33 @@
 
 	 <table class="ptw_table">
 	 <caption>작업허가서</caption>
-		<colgroup>		
-			<col style="width: 15%">
-			<col style="/">
-			<col style="width: 10%">
-			<col style="width: 10%">
-			<col style="width: 10%">					
-		</colgroup>
-		<tr>
-			<th colspan="5">작&nbsp;업&nbsp;허&nbsp;가&nbsp;서</th>		
-		</tr>
-		<tr>
-			<td colspan="5" class="lft">본 작업은 고위험 작업이므로 반드시 안전전문가의 사전 확인을 취득한 후 작업을 시작하여야 합니다. </td>		
-		</tr>
-		<tr>
-			<th colspan="5">안전조치 및 점검 Checklist</th>
-		</tr>
-		<tr>
-			<th>작&nbsp;업&nbsp;명</th>
-			<th>내&nbsp;&nbsp;용</th>
-			<th>안&nbsp;전<br>조&nbsp;치</th>
-			<th>안&nbsp;전<br>확&nbsp;인</th>
-			<th>승&nbsp;인</th>
-		</tr>
-		<tr>
-			<td>${ptwVO.work.name}</td>
-			<td class="lft">${ptwVO.work.content}</td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-			<td>Y / N</td>
-		</tr>
-	 </table><!-- //table -->
-
-	 <table>
 	 <caption>작업장소내용</caption>
 		<colgroup>		
+			<col style="width: 7%">
 			<col style="width: 15%">
 			<col style="/">
-			<col style="width: 10%">
-			<col style="width: 10%">
-			<col style="width: 10%">				
+			<col style="width: 8%">
+			<col style="width: 8%">
+			<col style="width: 8%">				
 		</colgroup>
 		<tr>
-			<th>장&nbsp;소&nbsp;명</th>
+			<th>종&nbsp;&nbsp;류</th>
+			<th>명&nbsp;&nbsp;&nbsp;&nbsp;칭</th>
 			<th>내&nbsp;&nbsp;용</th>
 			<th>안&nbsp;전<br>조&nbsp;치</th>
 			<th>안&nbsp;전<br>확&nbsp;인</th>
 			<th>승&nbsp;인</th>
 		</tr>
 		
-		<c:forEach var="place" items="${ptwVO.placelist}" varStatus="idx">
+		<c:forEach var="permit" items="${ptwVO.permitList}" varStatus="idx">
 		<tr>
-			<td>${place.name}</td>
-			<td class="lft">${place.content}</td>
+			<td>
+				<c:if test="${permit.type == 1}">작&nbsp;&nbsp;업</c:if>
+				<c:if test="${permit.type == 3}">장&nbsp;&nbsp;소</c:if>
+				<c:if test="${permit.type == 99}">작업 + 장소</c:if>
+			</td>
+			<td>${permit.name}</td>
+			<td class="lft">${permit.content}</td>
 			<td>Y / N</td>
 			<td>Y / N</td>
 			<td>Y / N</td>

@@ -190,6 +190,9 @@ public class WorkController {
 		model.addAttribute("updateMode", false);
 		
 		if(bindingResult.hasErrors()) {
+			//장소유형 선택 리스트 보존
+			workVO.setParse_placecodes(workVO.getInput_placecodes());
+			
 			//업체리스트 호출 , 작업책임자 소속에서 사용		
 			List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
 			model.addAttribute("contList", contList);
@@ -307,7 +310,10 @@ public class WorkController {
 		model.addAttribute("workVO", workVO);
 		
 		if(bindingResult.hasErrors()) { 
-						
+			//장소유형 선택 리스트 보존
+			workVO.setParse_placecodes(workVO.getInput_placecodes());
+			
+			
 			//업체리스트 호출 , 작업책임자 소속에서 사용		
 			List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
 			model.addAttribute("contList", contList);

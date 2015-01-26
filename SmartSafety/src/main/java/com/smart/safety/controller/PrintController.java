@@ -26,7 +26,7 @@ public class PrintController {
 	
 	public static final String RISK_DATA_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getRiskData=&codelist=";
 	public static final String CODE_DETAIL_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getDetailByJSON=";
-	public static final String GET_PERMIT_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getPermitVO=";
+	public static final String GET_PERMIT_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getPermitList=";
 	public static final String TOOL_IMG_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getToolImage=&filename=";
 	public static final String CHECK_IMG_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Data.action?getChekcListImage=&filename=";
 	public static final String FILE_URL = "http://54.64.28.175:8080/RiskMatrix/actions/Category.action?getFile=&fileIdx=";
@@ -228,7 +228,7 @@ public class PrintController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> getPermitVO(String workcode, String placecodes) throws JsonParseException, JsonMappingException, IOException {
+	public Map<String, Object> getPermitList(String workcode, String placecodes) throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper();		
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -500,37 +500,37 @@ public class PrintController {
 		try {
 			makeBaseInfo(ptwVO, workVO);
 			
-			//work
-			Map<String, Object> jsonMap_work = getDetailByJSON(workVO.getWorkcode(), CODETYPE.WORK);
-			Map<String, String>work = (Map<String, String>) jsonMap_work.get("workVO");
-			if(work != null) {
-				PTWCheckVO pVO = new PTWCheckVO();
-				pVO.setName((String) work.get("workName"));
-				pVO.setContent((String) work.get("measure").replace("\r\n", "<br>"));
-				
-				ptwVO.setWork(pVO);
-			}
-			
-				
-			//place
-			StringTokenizer stk = new StringTokenizer(workVO.getPlacecodes() , "|");
-			List<PTWCheckVO> placelist = ptwVO.getPlacelist();//여기에 데이터 input
-			
-			while(stk.hasMoreElements()) {
-				String placecode = (String)stk.nextElement();
-				Map<String, Object> jsonMap_place = getDetailByJSON(placecode, CODETYPE.PLACE);
-				Map<String, String>place = (Map<String, String>) jsonMap_place.get("placeVO");
-				
-				if(place != null) {
-					PTWCheckVO pVO = new PTWCheckVO();
-					pVO.setName(place.get("placeName"));
-					pVO.setContent(place.get("guide"));
-					
-					ptwVO.getPlacelist().add(pVO);
-				}
-					
-					
-			}
+//			//work
+//			Map<String, Object> jsonMap_work = getDetailByJSON(workVO.getWorkcode(), CODETYPE.WORK);
+//			Map<String, String>work = (Map<String, String>) jsonMap_work.get("workVO");
+//			if(work != null) {
+//				PTWCheckVO pVO = new PTWCheckVO();
+//				pVO.setName((String) work.get("workName"));
+//				pVO.setContent((String) work.get("measure").replace("\r\n", "<br>"));
+//				
+//				ptwVO.setWork(pVO);
+//			}
+//			
+//				
+//			//place
+//			StringTokenizer stk = new StringTokenizer(workVO.getPlacecodes() , "|");
+//			List<PTWCheckVO> placelist = ptwVO.getPlacelist();//여기에 데이터 input
+//			
+//			while(stk.hasMoreElements()) {
+//				String placecode = (String)stk.nextElement();
+//				Map<String, Object> jsonMap_place = getDetailByJSON(placecode, CODETYPE.PLACE);
+//				Map<String, String>place = (Map<String, String>) jsonMap_place.get("placeVO");
+//				
+//				if(place != null) {
+//					PTWCheckVO pVO = new PTWCheckVO();
+//					pVO.setName(place.get("placeName"));
+//					pVO.setContent(place.get("guide"));
+//					
+//					ptwVO.getPlacelist().add(pVO);
+//				}
+//					
+//					
+//			}
 			
 			/**특수한 작업+장소의 경우 별도의 체크사항이 필요함**/			
 //			Map<String, Object> jsonMap = getPermitVO(workVO.getWorkcode(), workVO.getPlacecodes()) ;
@@ -538,6 +538,22 @@ public class PrintController {
 //			if(permit != null) {							
 //				permitVO의 content가져오면됨
 //			}
+			
+			Map<String, Object> jsonMap = getPermitList(workVO.getWorkcode(), workVO.getPlacecodes()) ;
+			ArrayList<Map<String,String>>permitList = (ArrayList<Map<String,String>>) jsonMap.get("permitList");
+			Iterator<Map<String,String>> it = permitList.iterator();
+			
+			while(it.hasNext()){
+				Map<String,String>elem = it.next();
+				PermitVO permitVO = new PermitVO();				
+				permitVO.setName(elem.get("name"));
+				permitVO.setContent(elem.get("content"));
+				permitVO.setType(String.valueOf(elem.get("type")));
+				
+				ptwVO.getPermitList().add(permitVO);
+			}
+			
+			
 				
 		} catch (JSONException e) {
 			e.printStackTrace();

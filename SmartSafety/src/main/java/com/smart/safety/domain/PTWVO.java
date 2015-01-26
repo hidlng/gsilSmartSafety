@@ -6,20 +6,20 @@ import java.util.*;
 public class PTWVO extends BaseInfoVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private PTWCheckVO work;
-	private List<PTWCheckVO> placelist = new ArrayList<PTWCheckVO>();
-	public PTWCheckVO getWork() {
-		return work;
+	
+	private List<PermitVO> permitList = new ArrayList<PermitVO>();
+
+
+	public List<PermitVO> getPermitList() {
+		return permitList;
 	}
-	public void setWork(PTWCheckVO work) {
-		this.work = work;
+
+
+	public void setPermitList(List<PermitVO> permitList) {
+		this.permitList = permitList;
 	}
-	public List<PTWCheckVO> getPlacelist() {
-		return placelist;
-	}
-	public void setPlacelist(List<PTWCheckVO> placelist) {
-		this.placelist = placelist;
-	}
+	
+
 	
 	
 }

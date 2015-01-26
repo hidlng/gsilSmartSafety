@@ -2,14 +2,17 @@ package com.smart.safety.domain;
 
 import java.io.*;
 
-public class PTWCheckVO implements Serializable{
+public class PermitVO implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String name;
-	String content;
+
+	
+	private String name;
+	private String content;
+	private String type;
 	public String getName() {
 		return name;
 	}
@@ -22,5 +25,10 @@ public class PTWCheckVO implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 }

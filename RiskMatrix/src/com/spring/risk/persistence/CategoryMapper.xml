@@ -27,14 +27,17 @@
   </select>
   
   <!-- DataAction에서 permit name a+b+c 형태로 반환하기 위함 -->
-  <select id="getPermitNameByCode" resultType="String">		
+  <select id="getPermitNameByCode" resultType="String"  parameterType="java.util.List">		
 		SELECT GROUP_CONCAT(NAME SEPARATOR ' + ') AS NAME 
 		FROM CODE_LIST 
 		WHERE 
-		<if test="codearray.length  != 0">
-           		CODE IN (
-              	<foreach collection="codearray" item="code" separator=",">#{code}</foreach>
-              	)
+		
+		<if test="codearray  != null">
+           		CODE IN
+           		<foreach item="code" index="index" collection="codearray" open="(" separator="," close=")">
+              	#{code}
+              	</foreach>
+              	
         </if>	
 		;
 		

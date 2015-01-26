@@ -98,12 +98,11 @@ function setPlaceList(targetId) {
 	  			 	$("#" + targetId).append(str);
 	  				
 	  			} 
-	  			//placeList check (update시)
-	  			if(${updateMode} == true) {
-	  				<c:forEach var="placecode" items="${workVO.parse_placecodes}">
-	  					$('#place_' + '${placecode}').prop("checked", true);
-	  				</c:forEach>
-	  			}
+	  			//placeList check (update시 & insert validation 실패시 (back되었을떄))
+  				<c:forEach var="placecode" items="${workVO.parse_placecodes}">
+  					$('#place_' + '${placecode}').prop("checked", true);
+  				</c:forEach>
+	  			
 	  			
 	  		}
 	 });
@@ -163,6 +162,7 @@ if(input) { //yes
 <input type="hidden" name="risk_grade" value="${workVO.risk_grade}" id="risk_grade" />
 <input type="hidden" name="risk_warn" value="${workVO.risk_warn}" id="risk_warn" />
 <input type="hidden" name="workpermit" value="${workVO.workpermit}" id="workpermit" />
+
 
 <table class="work_signup">
 	<colgroup>
