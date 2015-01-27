@@ -24,6 +24,49 @@ public class MobileVO implements Serializable {
 	private String pic_num_worker;
 	private String toolname;
 	
+	private String name;
+	private String notice_idx;
+	private String site_idx;
+	private String title;
+	private String content;
+	private String writetime;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getNotice_idx() {
+		return notice_idx;
+	}
+	public void setNotice_idx(String notice_idx) {
+		this.notice_idx = notice_idx;
+	}
+	public String getSite_idx() {
+		return site_idx;
+	}
+	public void setSite_idx(String site_idx) {
+		this.site_idx = site_idx;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getWritetime() {
+		return writetime;
+	}
+	public void setWritetime(String writetime) {
+		this.writetime = writetime;
+	}
 	public String getToolname() {
 		return toolname;
 	}

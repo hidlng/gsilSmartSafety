@@ -91,6 +91,8 @@ public class MobileService {
 		return jo.toString();
 	}
 	
+
+	
 	public String getMobileWorkList(String siteidx, String searchdate) {
 		
 		JSONObject jo = new JSONObject();
@@ -152,6 +154,62 @@ public class MobileService {
 			jo.put("result", "false");
 		}
 		
+		
+		return jo.toString();
+	}
+	
+	
+	//notice
+	public String getMobileNoticeList(String siteidx) {
+		
+		JSONObject jo = new JSONObject();
+		
+		List<MobileVO> mlist = mobileMapper.getMobileNoticeList(siteidx);
+		
+		
+		if( mlist != null && mlist.size() > 0 ) {
+			jo.put("result", "true");
+			
+			JSONArray ja = new JSONArray();
+			
+			for (MobileVO mobileVO : mlist) {
+				JSONObject jo2 = new JSONObject();
+				jo2.put("name", mobileVO.getName() );
+				jo2.put("noticeIdx", mobileVO.getNotice_idx() );
+				jo2.put("siteIdx", mobileVO.getSite_idx() );
+				jo2.put("title", mobileVO.getTitle() );
+				jo2.put("content", mobileVO.getContent() );
+				jo2.put("writetime", mobileVO.getWritetime() );
+				
+				ja.put(jo2);
+			}
+			jo.put("item", ja);
+			
+		} else {
+			jo.put("result", "false");
+		}
+		
+		
+		return jo.toString();
+	}
+	
+	public String getMobileNoticeInfo(String noticeIdx) {		
+
+		
+		MobileVO returnVO = mobileMapper.getMobileNoticeInfo(noticeIdx);
+		
+		JSONObject jo = new JSONObject();
+		if( returnVO != null ) {
+			jo.put("result", "true");
+			jo.put("name", returnVO.getName() );
+			jo.put("noticeIdx", returnVO.getNotice_idx() );
+			jo.put("siteIdx", returnVO.getSite_idx() );
+			jo.put("title", returnVO.getTitle() );
+			jo.put("content", returnVO.getContent() );
+			jo.put("writetime", returnVO.getWritetime() );
+		} else {
+			jo.put("result", "false");
+		}
 		
 		return jo.toString();
 	}

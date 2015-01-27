@@ -21,5 +21,9 @@ public interface MobileMapper {
 	public int updateCheckYn(MobileVO mobileVO);
 	public int updateChifCheckYn(MobileVO mobileVO);
 	public int updateLeadCheckYn(MobileVO mobileVO);
+	
+	//notice
+	public List<MobileVO> getMobileNoticeList( String siteIdx );
+	public MobileVO getMobileNoticeInfo( String noticeIdx );
 
 }

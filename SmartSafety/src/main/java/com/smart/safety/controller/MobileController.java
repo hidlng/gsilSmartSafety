@@ -63,4 +63,24 @@ public class MobileController {
 		model.addAttribute("jsonResult", resultJson);
 	}
 	
+	@RequestMapping( value = "mobilenoticelist" )
+	public void mobileNoticeList(Model model
+			, @RequestParam(value="siteidx", defaultValue="")String siteidx) {
+		
+		siteidx = URLDecoder.decode(siteidx);
+		
+		String resultJson = mobileServie.getMobileNoticeList(siteidx);
+		model.addAttribute("jsonResult", resultJson);
+	}
+	
+	@RequestMapping( value = "mobilenoticeinfo" )
+	public void mobileNoticeInfo(Model model
+			, @RequestParam(value="noticeIdx", defaultValue="")String noticeIdx) {
+		
+		noticeIdx = URLDecoder.decode(noticeIdx);
+		
+		String resultJson = mobileServie.getMobileNoticeInfo(noticeIdx);
+		model.addAttribute("jsonResult", resultJson);
+	}	
+	
 }

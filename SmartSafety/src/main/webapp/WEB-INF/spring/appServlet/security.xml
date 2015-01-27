@@ -23,6 +23,8 @@
         <intercept-url pattern="/mobileworklist" access="permitAll" />
         <intercept-url pattern="/mobileupdateresult" access="permitAll" />
         <intercept-url pattern="/mobileworkinfo" access="permitAll" />
+        <intercept-url pattern="/mobilenoticelist" access="permitAll" />
+        <intercept-url pattern="/mobilenoticeinfo" access="permitAll" />
         
         <intercept-url pattern="/**" access="isAuthenticated()" />
 	

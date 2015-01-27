@@ -92,6 +92,34 @@
 		FROM SAFETY.TOOL_LIST
   		WHERE WORK_IDX = #{id}
 	  </select>
+	  
+	  <select id="getMobileNoticeList" resultType="MobileVO"  parameterType="String" >
+		SELECT B.NAME, A.NOTICE_IDX, A.SITE_IDX, A.TITLE, A.CONTENT, A.WRITETIME
+		FROM safety.NOTICE_LIST A
+		JOIN SAFETY.MANAGER_LIST B
+		ON A.WRITE_IDX = B.USER_IDX
+		WHERE A.DELYN = 'N'
+  		  AND SITE_IDX = #{id}
+	  </select>
+	  
+	  <select id="getMobileNoticeList" resultType="MobileVO"  parameterType="String" >
+		SELECT B.NAME, A.NOTICE_IDX, A.SITE_IDX, A.TITLE, A.CONTENT, A.WRITETIME
+		FROM NOTICE_LIST A
+		JOIN MANAGER_LIST B
+		ON A.WRITE_IDX = B.USER_IDX
+		WHERE A.DELYN = 'N'
+  		  AND A.SITE_IDX = #{id}
+	  </select> 
+	  
+	  <select id="getMobileNoticeInfo" resultType="MobileVO"  parameterType="String" >
+		SELECT B.NAME, A.NOTICE_IDX, A.SITE_IDX, A.TITLE, A.CONTENT, A.WRITETIME
+		FROM NOTICE_LIST A
+		JOIN MANAGER_LIST B
+		ON A.WRITE_IDX = B.USER_IDX
+		WHERE A.DELYN = 'N'
+  		  AND A.NOTICE_IDX = #{id}
+  		  
+	  </select> 
     
 </mapper>
 
