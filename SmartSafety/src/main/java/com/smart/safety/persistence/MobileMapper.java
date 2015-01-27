@@ -16,7 +16,11 @@ public interface MobileMapper {
 	public MobileVO getWorkInfomation( String workIdx );
 	public List<MobileVO> getWorkToolInfomation( String workIdx );
 	public void updateRegId( UserVO userVO );
+	
 	public List<MobileVO> getMobileWorkList(@Param("siteidx") String siteidx, @Param("searchdate") String searchdate);
+	public List<MobileVO> getMobileChifWorkList(@Param("siteidx") String siteidx, @Param("searchdate") String searchdate);
+	public List<MobileVO> getMobileLeadWorkList(@Param("siteidx") String siteidx, @Param("searchdate") String searchdate);
+	
 	public int updateCheckYn(MobileVO mobileVO);
 	public int updateChifCheckYn(MobileVO mobileVO);
 	public int updateLeadCheckYn(MobileVO mobileVO);

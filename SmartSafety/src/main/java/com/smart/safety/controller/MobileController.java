@@ -29,11 +29,12 @@ public class MobileController {
 	@RequestMapping( value = "mobileworklist" )
 	public void mobileWorkList(Model model
 			, @RequestParam(value="searchdate", defaultValue="")String searchdate
-			, @RequestParam(value="siteidx", defaultValue="")String siteidx) {
+			, @RequestParam(value="siteidx", defaultValue="")String siteidx
+			, @RequestParam(value="userlevel", defaultValue="")String userlevel) {
 		
 		siteidx = URLDecoder.decode(siteidx);
 		
-		String resultJson = mobileServie.getMobileWorkList(siteidx,searchdate);
+		String resultJson = mobileServie.getMobileWorkList(siteidx,searchdate,userlevel);
 		model.addAttribute("jsonResult", resultJson);
 	}
 

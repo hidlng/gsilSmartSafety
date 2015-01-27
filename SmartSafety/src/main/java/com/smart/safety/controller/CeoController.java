@@ -6,6 +6,7 @@ import java.util.*;
 import javax.annotation.*;
 import javax.servlet.http.*;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -73,5 +74,8 @@ public class CeoController {
 		model.addAttribute("siteList", sitelist);	
 	}
 	
-	
+//    @Scheduled(cron = "0 30 17 * * *")
+//    public void cronTest1(){
+//            System.out.println("value:1");
+//    }
 }

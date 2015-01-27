@@ -51,6 +51,48 @@
 		AND DATE_FORMAT( W.ENDDATE , '%Y%m%d' )  >= #{searchdate}
 		]]>
 	</select>
+	
+	<select id="getMobileChifWorkList" resultType="MobileVO"  >
+		SELECT DISTINCT W.RISK_GRADE, W.WORK_IDX, W.WORKLEVEL,
+		W.PIC_NAME, W.WORKTITLE, 
+		DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) STARTDATE 
+		,DATE_FORMAT( W.ENDDATE , '%Y%m%d' ) ENDDATE  
+		, IFNULL( P.CHIFCHKYN, 'N' ) CHECKYN
+		FROM WORK_LIST W 
+		LEFT OUTER JOIN ( SELECT WORK_IDX, WORKDATE, CHIFCHKYN, CHK_USER_IDX FROM PRINT_LIST WHERE WORKDATE = #{searchdate} ) P
+		ON
+			W.WORK_IDX = P.WORK_IDX 
+		WHERE
+		W.SITE_IDX = #{siteidx}
+		<![CDATA[
+		AND DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) <= #{searchdate}
+		]]>
+		
+		<![CDATA[
+		AND DATE_FORMAT( W.ENDDATE , '%Y%m%d' )  >= #{searchdate}
+		]]>
+	</select>
+	
+	<select id="getMobileLeadWorkList" resultType="MobileVO"  >
+		SELECT DISTINCT W.RISK_GRADE, W.WORK_IDX, W.WORKLEVEL,
+		W.PIC_NAME, W.WORKTITLE, 
+		DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) STARTDATE 
+		,DATE_FORMAT( W.ENDDATE , '%Y%m%d' ) ENDDATE  
+		, IFNULL( P.LEADCHKYN, 'N' ) CHECKYN
+		FROM WORK_LIST W 
+		LEFT OUTER JOIN ( SELECT WORK_IDX, WORKDATE, LEADCHKYN, CHK_USER_IDX FROM PRINT_LIST WHERE WORKDATE = #{searchdate} ) P
+		ON
+			W.WORK_IDX = P.WORK_IDX 
+		WHERE
+		W.SITE_IDX = #{siteidx}
+		<![CDATA[
+		AND DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) <= #{searchdate}
+		]]>
+		
+		<![CDATA[
+		AND DATE_FORMAT( W.ENDDATE , '%Y%m%d' )  >= #{searchdate}
+		]]>
+	</select>
  
     <update id="updateCheckYn" parameterType="MobileVO">
 		UPDATE PRINT_LIST

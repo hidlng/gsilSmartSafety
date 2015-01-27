@@ -93,12 +93,19 @@ public class MobileService {
 	
 
 	
-	public String getMobileWorkList(String siteidx, String searchdate) {
+	public String getMobileWorkList(String siteidx, String searchdate, String userlevel) {
 		
 		JSONObject jo = new JSONObject();
 		
-		List<MobileVO> mlist = mobileMapper.getMobileWorkList(siteidx, searchdate);
+		List<MobileVO> mlist = null;
 		
+		if( userlevel.equals("2") ) {
+			mlist = mobileMapper.getMobileWorkList(siteidx, searchdate);
+		} else if( userlevel.equals("4") ) {
+			mlist = mobileMapper.getMobileChifWorkList(siteidx, searchdate);
+		} else if( userlevel.equals("5") ) {
+			mlist = mobileMapper.getMobileLeadWorkList(siteidx, searchdate);
+		}
 		
 		if( mlist != null && mlist.size() > 0 ) {
 			jo.put("result", "true");
