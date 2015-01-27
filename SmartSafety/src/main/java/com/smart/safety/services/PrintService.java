@@ -53,7 +53,7 @@ public class PrintService{
 	}
 	
 
-	/**작업시작 시간이 현재시간 이후면 insert수행
+	/**작업시작 시간이 현재시간 이후면 insert수행(작업종료는 상관없음 어차피 모바일에서는 현재 날짜에 해당하는 리스트만 보여주기 때문)
 	 * @param ptype **/
 	public void insertPrintVO(String work_idx, String startDate, PrintType ptype) throws ParseException {
 		Date d = new Date();

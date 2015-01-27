@@ -92,8 +92,8 @@ function updateSubmit(){
 <div class="printSelect">	
 	<span class="printSetting"><img src="images/icon_print.png"  alt="인쇄하기" />Print Select :</span>
 	<span class="btn_txtPrint" onclick="openTBM('${workVO.work_idx}')" >안전조회</span>
-	<c:if test="${workVO.toollist.size() > 0}"><span class="btn_txtPrint" onclick="openPUI('${workVO.work_idx}')">사용전점검</span></c:if>
-	<span class="btn_txtPrint" onclick="openPTW('${workVO.work_idx}')">작업허가</span>
+	<c:if test='${workVO.pui_exist.equals("Y")}'><span class="btn_txtPrint" onclick="openPUI('${workVO.work_idx}')">사용전점검</span></c:if>
+	<c:if test='${workVO.ptw_exist.equals("Y")}'><span class="btn_txtPrint" onclick="openPTW('${workVO.work_idx}')">작업허가</span></c:if>
 	<span class="btn_txtPrint" onclick="openACC('${workVO.work_idx}')">사고사례</span>		
 </div><!-- //printSelect -->
 </c:if>
@@ -228,7 +228,11 @@ function updateSubmit(){
 		<!-- start -->
 		<tr>
 			<th>장&nbsp;소&nbsp;유&nbsp;형</th>			
-			<td>${workVO.placenames}</td>
+			<td>
+				<c:if test="${ workVO.placenames != null && workVO.placenames.length() > 0 }">	${workVO.placenames} </c:if>
+				<c:if test="${ workVO.placenames == null || workVO.placenames.length() <= 0}"> 해당없음 </c:if>
+				
+			</td>
 		</tr>
 		<tr>
 			<th>세&nbsp;부&nbsp;장&nbsp;소</th>

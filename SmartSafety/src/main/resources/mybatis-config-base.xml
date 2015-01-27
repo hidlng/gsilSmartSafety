@@ -27,6 +27,7 @@
        <typeAlias type="com.smart.safety.domain.PUIVO" alias="PUIVO"/>
        <typeAlias type="com.smart.safety.domain.PTWVO" alias="PTWVO"/>
        <typeAlias type="com.smart.safety.domain.PrintVO" alias="PrintVO"/>
+       <typeAlias type="com.smart.safety.domain.NoticeVO" alias="NoticeVO"/>
        <typeAlias type="com.smart.safety.domain.MobileVO" alias="MobileVO"/>
        <typeAlias type="com.smart.safety.domain.CeoVO" alias="CeoVO"/>
     </typeAliases>

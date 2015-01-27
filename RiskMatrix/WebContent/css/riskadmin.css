@@ -42,6 +42,7 @@ input[type="file"] {
 	line-height: normal;
 }
 
+
 p {
 	font-family: helvetica, tahoma, arial, verdana, sans-serif;
 	margin: 0ex 0ex 0ex 0ex;
@@ -377,3 +378,4 @@ li.childWrap:hover{
 #toolInsertTable td{
 	text-align:left;
 }
+

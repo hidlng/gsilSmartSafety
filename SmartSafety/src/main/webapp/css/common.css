@@ -95,7 +95,7 @@ h1 img{width:120px;}
 /* paging */
 .content .paging{text-align:center; padding: 40px 0 0 0; }
 .content .paging span{font-size:22px; color:#fff; padding:5px;}
-.content .paging span.now{color:#38bda0; font-weight:bold;}
+.content .paging span.now{color:#38bda0; font-weight:bold; font-color:black;}
 .content .paging .signup{display:inline-block; width:100px; vertical-align:center; }
 
 /* sub page - smart safe */

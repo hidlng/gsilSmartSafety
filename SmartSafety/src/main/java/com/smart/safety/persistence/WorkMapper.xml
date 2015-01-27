@@ -92,7 +92,7 @@ WHERE
 	WORK_LIST(WORK_IDX,	SITE_IDX, WRITE_USER_IDX, CONT_IDX, ISCHARGE, WORKTYPE, WORKSTATUS,	CATEGORY1,	CATEGORY2,	CATEGORY3,	WORKCODE,	WORKNAME,	WORKTITLE,
 	STARTDATE,	STARTTIME,	ENDDATE,	ENDTIME,	PLACECODES,	PLACENAMES, ADDR_DETAIL,	PIC_NAME,	PIC_BIRTH	,PIC_PHONE,	
 	PIC_POSITION,	PIC_POS_DETAIL,	PIC_NUM_WORKER,	WORKLEVEL,	REMARK, REMARK_LEADER, REMARK_CHIEF,
-	INSPEC_MGR_IDX, RISK_LEVEL, RISK_GRADE,	RISK_WARN, WORKPERMIT, WRITETIME, UPDATETIME, DELYN )
+	INSPEC_MGR_IDX, RISK_LEVEL, RISK_GRADE,	RISK_WARN, PTW_EXIST, PUI_EXIST, WRITETIME, UPDATETIME, DELYN )
 	SELECT
 		#{work_idx},
 		#{site_idx},		#{write_user_idx},		#{cont_idx},		#{ischarge},		#{worktype},	#{workstatus},	#{category1},
@@ -100,7 +100,7 @@ WHERE
 		#{startdate},		#{starttime},		#{enddate},		#{endtime},		#{placecodes},		#{placenames}, 
 		#{addr_detail},		#{pic_name},		#{pic_birth},		#{pic_phone},	#{pic_position},	#{pic_pos_detail},		#{pic_num_worker},		#{worklevel},	
 		#{remark},			#{remark_leader},	#{remark_chief},
-		#{inspec_mgr_idx},	#{risk_level}, 	#{risk_grade}, 		#{risk_warn},		#{workpermit},	sysdate(),	sysdate(),	'N'		
+		#{inspec_mgr_idx},	#{risk_level}, 	#{risk_grade}, 		#{risk_warn},	#{ptw_exist}, #{pui_exist}, sysdate(),	sysdate(),	'N'		
 	FROM DUAL
   </insert>
   <update id="update" parameterType="ManagerVO">
@@ -135,8 +135,9 @@ WHERE
 		,WORKLEVEL = #{worklevel}
 		,RISK_LEVEL = #{risk_level}
 		,RISK_GRADE = #{risk_grade}		
-		,RISK_WARN = #{risk_warn}	
-		,WORKPERMIT = #{workpermit}		
+		,RISK_WARN = #{risk_warn}
+		,PTW_EXIST = #{ptw_exist}
+		,PUI_EXIST = #{pui_exist}
 		,REMARK = #{remark}		
 		,REMARK_LEADER = #{remark_leader}
 		,REMARK_CHIEF = #{remark_chief}

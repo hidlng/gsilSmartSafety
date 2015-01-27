@@ -66,12 +66,8 @@
 	<input type="hidden" id="isPWChanged" name="isPWChanged" value="false" />
 	<input type="hidden" name="level" value="7" /><!-- 업체 level = 7 -->
 	<!-- 다른 site_idx 가진 유저가 접근하여 수정시 해당 유저의 site_idx로 수정되는 경우 방지 -->
-	<c:if test="${!updateMode}">
-		<input type="hidden" name="site_idx" value="${sessionScope.siteVO.site_idx}">
-	</c:if>
-	<c:if test="${updateMode}">
-		<form:input type="hidden" path="site_idx"/>
-	</c:if>
+	<c:if test="${!updateMode}"><input type="hidden" name="site_idx" value="${sessionScope.siteVO.site_idx}"></c:if>
+	<c:if test="${updateMode}"><input type="hidden" name="site_idx"/></c:if>
 		
 <!-- //srchbox -->
 <table class="user_signup">

@@ -15,8 +15,8 @@
   <link rel="stylesheet" href="css/jquery.datepick.css" type="text/css" >
   <link rel="stylesheet" href="css/jquery.timepicker.css" type="text/css" > 
   <link rel="stylesheet" href="css/custom.css" type="text/css">    
-  <link href="/sss.ico" rel="icon" type="image/x-icon" />
-  <link href="/sss.ico" rel="shortcut icon" type="image/x-icon" />
+  <link href="../images/sss.ico" rel="icon" type="image/x-icon" />
+  <link href="../images/sss.ico" rel="shortcut icon" type="image/x-icon" />
   
   <script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
   <script type="text/javascript" src="js/jquery.plugin.js"></script>
@@ -49,6 +49,7 @@
    $(document).on("click", ".toHomePage", function(e) { $('#workList_form').submit(); });
    $(document).on("click", "#report", function(e) { $('#report_form').submit(); });
    $(document).on("click", "#contractorList", function(e) { $('#contractorList_form').submit(); });
+   $(document).on("click", "#noticeList", function(e) { $('#noticeList_form').submit(); });
    $(document).on("click", "#siteList", function(e) { $('#siteList_form').submit(); });
    $(document).on("click", "#logout", function(e) { $('#logout_form').submit(); });
 	
@@ -94,6 +95,7 @@ $(document).on("keydown", disableF5);
 	<form id="report_form" action="ceolist" method="POST"></form>
 	<form id="workList_form" action="workList" method="POST"></form>
 	<form id="contractorList_form" action="contractorList" method="POST"></form>
+	<form id="noticeList_form" action="noticeList" method="POST"></form>
 	<form id="siteList_form" action="siteList" method="POST">
 	<input type="hidden" name="type" value="0">
 	</form>
@@ -129,6 +131,13 @@ $(document).on("keydown", disableF5);
 					</c:if>
 					<c:if test= "${sessionScope.userLoginInfo.level <= 4}">
 						<li id="report" style="cursor:pointer" >CEO 리포트</li>
+					</c:if>
+					<c:if test= "${sessionScope.userLoginInfo.level == 2 ||
+								 sessionScope.userLoginInfo.level == 4 || 
+								 sessionScope.userLoginInfo.level == 5 ||
+								 sessionScope.userLoginInfo.level == 6 ||
+								 sessionScope.userLoginInfo.level == 7 }">
+						<li id="noticeList" style="cursor:pointer" >공지사항</li> 
 					</c:if>
 					<li id="workList" style="cursor:pointer" >작업 관리</li><!--   -->
 					

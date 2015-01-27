@@ -161,8 +161,8 @@ if(input) { //yes
 
 <input type="hidden" name="risk_grade" value="${workVO.risk_grade}" id="risk_grade" />
 <input type="hidden" name="risk_warn" value="${workVO.risk_warn}" id="risk_warn" />
-<input type="hidden" name="workpermit" value="${workVO.workpermit}" id="workpermit" />
-
+<input type="hidden" name="ptw_exist" value="${workVO.ptw_exist}" />
+<input type="hidden" name="pui_exist" value="${workVO.pui_exist}" />
 
 <table class="work_signup">
 	<colgroup>

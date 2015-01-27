@@ -1,7 +1,6 @@
 package com.smart.safety.controller;
 
 import java.io.*;
-import java.net.*;
 import java.util.*;
 
 import javax.annotation.*;
@@ -13,12 +12,10 @@ import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.*;
 import org.springframework.web.servlet.mvc.support.*;
 
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
-import com.google.android.gcm.server.*;
 import com.smart.safety.domain.*;
 import com.smart.safety.services.*;
 import com.smart.safety.util.*;
@@ -204,6 +201,7 @@ public class WorkController {
 			try{
 				setPlaceCodeAndName(workVO);
 				setRiskData(workVO);
+				checkPrintExist(workVO); //PTW, PUI가 존재하는지 여부 판단
 				work_idx = workService.insertWork(workVO);
 				
 			}catch(Exception e) {//초기화
@@ -213,90 +211,15 @@ public class WorkController {
 			
 			//return "redirect:workList";
 			
-		pushWorkToUser(workVO);
+			pushWorkToSiteUser(workVO);
 
 			return "redirect:viewWork?viewIdx=" + workVO.getWork_idx();
 		}
 		
 	}
 	
-	private void setPlaceCodeAndName(WorkVO workVO) {
-		
-		//code : code|code|
-		StringBuffer stb_code = new StringBuffer();
-		StringBuffer stb_name = new StringBuffer();
-		List<String> inputCodeList = workVO.getInput_placecodes();
-		List<String> inputNameList = workVO.getInput_placenames();
-		
-		for (int i = 0; i < inputCodeList.size() ; i++ ) {
-			String placecode = inputCodeList.get(i);
-			if(placecode != null && !placecode.equals("") && !placecode.equals("null")) {
-				stb_code.append(placecode).append("|");
-				stb_name.append(inputNameList.get(i)).append(", ");
-			}
-		}
-		
-		workVO.setPlacecodes(stb_code.toString());
-		
-		String placename = stb_name.toString();
-		workVO.setPlacenames(placename.substring(0, placename.lastIndexOf(',')));
-		
-	}
-	
 
-	private void pushWorkToUser(WorkVO workVO) {
-		try {
-			//Manager 전달 (감독자제외 전부)
-			List<ManagerVO> manList = managerSerivce.getManagerListBySiteIdx(workVO.getSite_idx());
-			
-			Iterator<ManagerVO> it_man = manList.iterator();			
-			while(it_man.hasNext()) {
-				ManagerVO manVO = it_man.next();
-				int level = manVO.getLevel();
-				if(level == USERLEVEL.SITE_MANAGER.idx || level == USERLEVEL.CONT_CHEIF.idx || level == USERLEVEL.CONT_LEADER.idx) 
-					if(manVO.getPid() != null && !manVO.getPid().equals("")){
-						sendMessage(manVO.getPid());	
-						System.out.println("push 알림 전달 [ " + manVO.getId() +"]");
-				}
-			}
-			
-			//Contractor 전달
-			List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(workVO.getSite_idx());
-			
-			Iterator<ContractorVO> it_cont = contList.iterator();			
-			while(it_cont.hasNext()) {
-				ContractorVO contVO = it_cont.next();
-				sendMessage(contVO.getPid());	
-				System.out.println("push 알림 전달 [ " + contVO.getId() +"]");
-			}
-			
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
 
-	/**push**/
-	public void sendMessage(String regId) throws IOException {
-		Sender sender = new Sender("AIzaSyBQNLUyd80UKgvloLjeUg3FUYRHNCRKtjU");
-		//String regId = "APA91bHKzAacDO86UqeCntFzUck6bf8RcVyiDDJo4uvcYSJzErpGkLWNBKAZLArm3G0lpLllxp1mHfK4__SKytzqLtXh9sRkH66tmI9Fs5h1JO_eIP8qaVryYsSeCY3TRdleBgbSn9G06_625NAiDdVrDKbkVU_HEaSkyca01lSUt3ts4dz_Dwg";
-		Message message = new Message.Builder().addData("msg", URLEncoder.encode("점검해야할 작업이 있습니다","UTF-8")).build();
-		List<String> list = new ArrayList<String>();
-		list.add(regId);
-		
-		MulticastResult multiResult = sender.send(message, list, 5);
-		if (multiResult != null) {
-			List<Result> resultList = multiResult.getResults();
-			for (Result result : resultList) {
-				System.out.println(result.getMessageId());
-			}
-		}
-		
-		
-	}
-	
-	
 	@RequestMapping(value = "updateWork", method = RequestMethod.POST)
 	public String updateWork(HttpSession session, @ModelAttribute @Valid WorkVO workVO, BindingResult bindingResult,
 		Model model, RedirectAttributes redirectAttr) {
@@ -324,6 +247,7 @@ public class WorkController {
 			try{
 				setPlaceCodeAndName(workVO);
 				setRiskData(workVO);
+				checkPrintExist(workVO); //PTW, PUI가 존재하는지 여부 판단
 				workService.updateWork(workVO);
 			}catch(Exception e) {//초기
 				e.printStackTrace();
@@ -337,14 +261,66 @@ public class WorkController {
 		
 	}
 	
-	public String getRiskData(String list) {
-		RestTemplate restTemplate = new RestTemplate();
-		String url = PrintController.RISK_DATA_URL + list;
-		String result = restTemplate.getForObject(url, String.class);
-		String json_result = result.substring(result.indexOf('(') + 1, result.length() - 1);
-		return json_result;
-				
+	private void checkPrintExist(WorkVO workVO) {
+		//PTW체크
+		/**특수한 작업+장소의 경우 별도의 체크사항이 필요함**/		
+		
+		try {
+			Map<String, Object> jsonMap = RequestRiskMatrix.INSTANCE.getPermitList(workVO.getWorkcode(), workVO.getPlacecodes());
+			@SuppressWarnings("unchecked")
+			ArrayList<Map<String,String>>permitList = (ArrayList<Map<String,String>>) jsonMap.get("permitList");
+			if(permitList.size() > 0 )workVO.setPtw_exist("Y");
+			else workVO.setPtw_exist("N");
+		} catch (JsonParseException e) {e.printStackTrace();} catch (JsonMappingException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();	}
+		
+		
+		//PUI체크
+		boolean hasValidTool = false; 
+		if(workVO.getToollist() != null) {
+			for(ToolVO vo : workVO.getToollist()) {
+				int type = vo.getTooltype();
+				if( type != 98 && type != 99) {//수기 입력아닌것만 체크하여 하나라도 있으면 PUI 존재. RiskMatrix에 코드등록후 내용 등록안된경우 PUI안나타날수있으니 참고
+					hasValidTool = true;
+				}
+			}
+		}
+		if(hasValidTool) workVO.setPui_exist("Y");
+		else workVO.setPui_exist("N");
 	}
+	
+	private void setPlaceCodeAndName(WorkVO workVO) {
+		
+		//code : code|code|
+		StringBuffer stb_code = new StringBuffer();
+		StringBuffer stb_name = new StringBuffer();
+		List<String> inputCodeList = workVO.getInput_placecodes();
+		List<String> inputNameList = workVO.getInput_placenames();
+		
+		for (int i = 0; i < inputCodeList.size() ; i++ ) {
+			String placecode = inputCodeList.get(i);
+			if(placecode != null && !placecode.equals("") && !placecode.equals("null")) {
+				stb_code.append(placecode).append("|");
+				stb_name.append(inputNameList.get(i)).append(", ");
+			}
+		}
+		
+		workVO.setPlacecodes(stb_code.toString());
+		
+		String placename = stb_name.toString();
+		if(placename.lastIndexOf(',') != -1)
+			workVO.setPlacenames(placename.substring(0, placename.lastIndexOf(',')));
+		
+	}
+	
+
+	
+
+	
+	
+	
+
+	
+
 	
 	
 	/**작업코드(심각성,위험도) + 작업자수 + 난이도(소장판단) 전달 
@@ -362,7 +338,7 @@ public class WorkController {
 		buf.append(workVO.getWorklevel());
 		buf.append('!');
 
-		String json_result = getRiskData(buf.toString());
+		String json_result = RequestRiskMatrix.INSTANCE.getRiskData(buf.toString());
 		System.out.println(json_result);
 		
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -376,7 +352,6 @@ public class WorkController {
 		}
 		
 		workVO.setRisk_warn("해당없음");//RiskWarn
-		workVO.setWorkpermit("N");//WorkPermit
 		
 	}
 
@@ -448,6 +423,37 @@ public class WorkController {
 		
 	}
 
+	public void pushWorkToSiteUser(WorkVO workVO) {
+		String message = "신규 작업 등록 : " + workVO.getWorktitle();
+		try {
+			List<ManagerVO> manList = managerSerivce.getManagerListBySiteIdx(workVO.getSite_idx());
+			
+			Iterator<ManagerVO> it_man = manList.iterator();			
+			while(it_man.hasNext()) {
+				ManagerVO manVO = it_man.next();
+				int level = manVO.getLevel();
+				if(level == USERLEVEL.SITE_MANAGER.idx || level == USERLEVEL.CONT_CHEIF.idx || level == USERLEVEL.CONT_LEADER.idx) 
+					if(manVO.getPid() != null && !manVO.getPid().equals("")){
+						GCMPusher.INSTANCE.sendMessage(manVO.getPid(), message);
+				}
+			}
+			
+			//Contractor 전달
+			/*List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(workVO.getSite_idx());
+			
+			Iterator<ContractorVO> it_cont = contList.iterator();			
+			while(it_cont.hasNext()) {
+				ContractorVO contVO = it_cont.next();
+				GCMPusher.INSTANCE.sendMessage(contVO.getPid(), message);	
+				System.out.println("push 알림 전달 [ " + contVO.getId() +"]");
+			}*/
+			
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 }

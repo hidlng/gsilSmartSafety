@@ -28,7 +28,8 @@
 	
   </update>
   <update id="deleteByWorkIdx" parameterType="String">
-		DELETE FROM TOOl_LIST
+		UPDATE TOOl_LIST
+		SET DELYN='Y'		
 		WHERE WORK_IDX = #{work_idx}
   </update>
 </mapper>

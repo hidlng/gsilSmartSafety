@@ -9,8 +9,8 @@
 		<link rel="stylesheet" href="css/ceocommon.css" type="text/css"> 
   		<link rel="stylesheet" href="css/jquery.datepick.css" type="text/css" >
   		<link rel="stylesheet" href="css/jquery.timepicker.css" type="text/css" >  
-  	    <link href="/sss.ico" rel="icon" type="image/x-icon" />
- 		<link href="/sss.ico" rel="shortcut icon" type="image/x-icon" />
+  	    <link href="../images/sss.ico" rel="icon" type="image/x-icon" />
+  		<link href="../images/sss.ico" rel="shortcut icon" type="image/x-icon" />
   	    <script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
 		<script type="text/javascript" src="js/jquery.plugin.js"></script>
 		<script type="text/javascript" src="js/jquery.datepick.js"></script> 

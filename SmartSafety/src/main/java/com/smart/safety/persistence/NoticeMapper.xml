@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.smart.safety.persistence.NoticeMapper">
+  
+    <select id="getNoticeListByVO" resultType="NoticeVO" parameterType="NoticeVO">
+	   	SELECT N.*, M.NAME AS WRITER_NAME
+		FROM NOTICE_LIST N
+		JOIN MANAGER_LIST M
+		ON N.WRITER_IDX = M.USER_IDX
+		WHERE 
+			N.SITE_IDX = #{site_idx}
+		AND N.DELYN = 'N'
+		AND M.DELYN = 'N'
+		ORDER BY N.WRITETIME
+		LIMIT #{start}, #{size}
+ 	</select>
+    <select id="getRowCount" resultType="Integer" parameterType="NoticeVO">
+	    SELECT
+	    	COUNT(*)
+		FROM NOTICE_LIST N
+		JOIN MANAGER_LIST M
+		ON N.WRITER_IDX = M.USER_IDX
+		WHERE 
+			N.SITE_IDX = #{site_idx}
+		AND N.DELYN = 'N'
+		AND M.DELYN = 'N'
+   	</select> 
+      
+    <select id="getNoticeVO" resultType="NoticeVO" parameterType="String">
+	   	SELECT N.*, M.NAME AS WRITER_NAME
+		FROM NOTICE_LIST N
+		JOIN MANAGER_LIST M
+		ON N.WRITER_IDX = M.USER_IDX
+		WHERE 
+			N.NOTICE_IDX = #{notice_idx}
+		AND N.DELYN = 'N'
+		AND M.DELYN = 'N'
+ 	</select>
+ 	
+	
+
+  <insert id="insert" parameterType="NoticeVO">
+   INSERT INTO NOTICE_LIST(NOTICE_IDX, SITE_IDX, TITLE, CONTENT, WRITER_IDX, WRITETIME, LASTUPT_TIME, DELYN)
+	VALUES(#{notice_idx}, #{site_idx}, #{title}, #{content}, #{writer_idx}, sysdate(), sysdate(), 'N' )
+  </insert>
+ 
+   <update id="update" parameterType="NoticeVO">
+   UPDATE 
+     	NOTICE_LIST
+     SET
+		TITLE = #{title}, 
+		CONTENT = #{content},
+		LASTUPT_TIME = sysdate()
+	WHERE
+		NOTICE_IDX = #{notice_idx}
+  </update>
+  
+  
+  <update id="deleteByIdx" parameterType="String">
+		UPDATE NOTICE_LIST
+		SET DELYN='Y'
+		WHERE NOTICE_IDX = #{notice_idx}
+  </update>
+</mapper>
+

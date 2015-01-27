@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="css/print.css" type="text/css" media="print">
    <script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
   <script type="text/javascript" src="js/jquery.plugin.js"></script>
+  <link href="../images/sss.ico" rel="icon" type="image/x-icon" />
+  <link href="../images/sss.ico" rel="shortcut icon" type="image/x-icon" />
  </head>	
  
  <body id="body">
@@ -97,7 +99,10 @@
 		 </tr>
 		 <tr>
 		 	<th>작업장소</th>
-			<td colspan="5">${tbmVO.place_state}</td>		
+			<td colspan="5">
+				<c:if test="${ tbmVO.place_state != null && tbmVO.place_state.length() > 0 }">	${tbmVO.place_state} </c:if>
+				<c:if test="${ tbmVO.place_state == null || tbmVO.place_state.length() <= 0}"> 해당없음 </c:if>
+			</td>		
 		 </tr>
 		 <tr>
 			

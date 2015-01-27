@@ -87,13 +87,8 @@
 	<input type="hidden" name="position" value="_">
 
 	<!-- siteIdx 관리  -->
-	<c:if test="${!updateMode}">
-		<input type="hidden" name="site_idx"
-			value="${sessionScope.siteVO.site_idx}">
-	</c:if>
-	<c:if test="${updateMode}">
-		<form:input type="hidden" path="site_idx" />
-	</c:if>
+	<c:if test="${!updateMode}"><input type="hidden" name="site_idx" value="${sessionScope.siteVO.site_idx}"></c:if>
+	<c:if test="${updateMode}"><input type="hidden" name="site_idx" /></c:if>
 
 	<!-- //srchbox -->
 	<table class="user_signup">

@@ -10,8 +10,9 @@
 <!doctype html>
 
 <head>
-<link rel="StyleSheet" href="../css/riskadmin.css" type="text/css"
-	media="screen" />
+<link rel="StyleSheet" href="../css/riskadmin.css" type="text/css" media="screen" />
+<link href="../images/sss.ico" rel="icon" type="image/x-icon" />
+<link href="../images/sss.ico" rel="shortcut icon" type="image/x-icon" />
 <script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script src="../js/select.js" type="text/javascript"></script>
 <script src="../js/simple_overlay.js" type="text/javascript" ></script>

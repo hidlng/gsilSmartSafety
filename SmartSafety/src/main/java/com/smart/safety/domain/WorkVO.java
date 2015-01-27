@@ -82,7 +82,9 @@ public class WorkVO implements Serializable{
 	private int risk_level;
 	private String risk_grade;
 	private String risk_warn;
-	private String workpermit;
+		
+	private String ptw_exist;
+	private String pui_exist;
 	
 	private String print_tbm;
 	private String print_pui;
@@ -316,12 +318,7 @@ public class WorkVO implements Serializable{
 	public void setRisk_warn(String risk_warn) {
 		this.risk_warn = risk_warn;
 	}
-	public String getWorkpermit() {
-		return workpermit;
-	}
-	public void setWorkpermit(String workpermit) {
-		this.workpermit = workpermit;
-	}
+
 	public String getCont_idx() {
 		return cont_idx;
 	}
@@ -419,6 +416,18 @@ public class WorkVO implements Serializable{
 	}
 	public void setParse_placecodes(ArrayList<String> parse_placecodes) {
 		this.parse_placecodes = parse_placecodes;
+	}
+	public String getPtw_exist() {
+		return ptw_exist;
+	}
+	public void setPtw_exist(String ptw_exist) {
+		this.ptw_exist = ptw_exist;
+	}
+	public String getPui_exist() {
+		return pui_exist;
+	}
+	public void setPui_exist(String pui_exist) {
+		this.pui_exist = pui_exist;
 	}
 
 	

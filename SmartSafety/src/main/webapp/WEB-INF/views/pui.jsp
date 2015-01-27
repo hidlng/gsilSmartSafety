@@ -15,8 +15,8 @@
   <title>사용전 점검(Pre Use Inspection)</title>
    <link rel="stylesheet" href="css/screen.css" type="text/css">
    <link rel="stylesheet" href="css/print.css" type="text/css" media="print"/>
-  <link href="/sss.ico" rel="icon" type="image/x-icon" />
-  <link href="/sss.ico" rel="shortcut icon" type="image/x-icon" />     
+  <link href="../images/sss.ico" rel="icon" type="image/x-icon" />
+  <link href="../images/sss.ico" rel="shortcut icon" type="image/x-icon" />   
  </head>
  <body >
  <img src="images/print2.gif" class="printIcon" width="100" alt="출력하기" onclick="window.print();" > 
@@ -134,7 +134,7 @@
 			<c:if test="${index.count % 2 == 0}"></tr></c:if>
 		</c:forEach>
 	 </table><!-- //table -->
-	 <div class="signBox" style="margin-top: ${ (4 - puiVO.checklist.size()/2) * 65 }px">
+	 <div class="signBox" style="margin-top: ${ (4 - puiSize/2) * 65 }px">
 		<p>성명</p><span>(서명)</span>	
 	 </div>
   </div>

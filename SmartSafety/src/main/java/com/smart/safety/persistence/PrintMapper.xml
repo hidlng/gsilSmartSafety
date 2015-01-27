@@ -18,7 +18,7 @@
 	VALUES(#{work_idx}, #{workdate})
   </insert>
  
-   <insert id="update" parameterType="PrintVO">
+   <update id="update" parameterType="PrintVO">
    UPDATE 
      	PRINT_LIST
      SET
@@ -31,7 +31,7 @@
 	WHERE
 		WORK_IDX = #{work_idx}
 		AND WORKDATE = #{workdate}
-  </insert>
+  </update>
   
   
   <update id="deleteByWorkIdx" parameterType="String">
