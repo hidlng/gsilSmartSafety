@@ -90,6 +90,11 @@
 			$('#viewForm').submit();
 		 	
 		}
+		
+		function backgo() {
+			
+			 $('#workList_form').submit();
+		}
 		</script>
 	</head>
 
@@ -101,7 +106,7 @@
 
 					<div class="content ">
 					<c:if test = "${sessionScope.userLoginInfo.level != 3}">
-						<div onclick="history.back(-1)" style="cursor:pointer"><img src="images/back_btn.png" width="30px" height="30px"> back</div>
+						<div onclick="backgo()" style="cursor:pointer"><img src="images/back_btn.png" width="30px" height="30px"> back</div>
 						<br>
 					</c:if>
 					<div class="searchboxdata" >
