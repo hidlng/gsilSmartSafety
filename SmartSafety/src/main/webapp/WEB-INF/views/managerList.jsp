@@ -88,7 +88,7 @@ function chgLevel(val) {
     <span>
         <c:forEach var="i" begin="${paging.startPageNo}" end="${paging.endPageNo}" step="1">
             <c:choose>
-                <c:when test="${i eq paging.pageNo}"><a href="javascript:goPage(${i})" class="now"><span>${i}</span></a></c:when>
+                 <c:when test="${i == paging.pageNo}"><a href="javascript:goPage(${i})" ><span class="now">${i}</span></a></c:when>
                 <c:otherwise><a href="javascript:goPage(${i})"><span>${i}</span></a></c:otherwise>
             </c:choose>
         </c:forEach>

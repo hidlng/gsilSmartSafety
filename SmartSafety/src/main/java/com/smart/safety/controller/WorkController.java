@@ -1,6 +1,7 @@
 package com.smart.safety.controller;
 
 import java.io.*;
+import java.text.*;
 import java.util.*;
 
 import javax.annotation.*;
@@ -8,6 +9,7 @@ import javax.servlet.http.*;
 import javax.validation.*;
 
 import org.slf4j.*;
+import org.springframework.scheduling.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.validation.*;
@@ -211,7 +213,7 @@ public class WorkController {
 			
 			//return "redirect:workList";
 			
-			pushWorkToSiteUser(workVO);
+			//pushWorkToSiteUser(workVO.getSite_idx()); -스케쥴러에서해결
 
 			return "redirect:viewWork?viewIdx=" + workVO.getWork_idx();
 		}
@@ -425,10 +427,10 @@ public class WorkController {
 		
 	}
 
-	public void pushWorkToSiteUser(WorkVO workVO) {
-		String message = "신규 작업 등록 : " + workVO.getWorktitle();
+	public void pushWorkToSiteUser(String site_idx) {
+		String message = "신규 작업 등록 ";
 		try {
-			List<ManagerVO> manList = managerSerivce.getManagerListBySiteIdx(workVO.getSite_idx());
+			List<ManagerVO> manList = managerSerivce.getManagerListBySiteIdx(site_idx);
 			
 			Iterator<ManagerVO> it_man = manList.iterator();			
 			while(it_man.hasNext()) {
@@ -441,7 +443,7 @@ public class WorkController {
 			}
 			
 			//Contractor 전달
-			/*List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(workVO.getSite_idx());
+			/*List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(site_idx);
 			
 			Iterator<ContractorVO> it_cont = contList.iterator();			
 			while(it_cont.hasNext()) {
@@ -456,6 +458,21 @@ public class WorkController {
 		}
 		
 	}
+	
+	  @Scheduled(cron = "0 20 18 * * *")
+	  public void cronTest(){
+		  Date d = new Date();
+		  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		  String curdate = sdf.format(d); //현재날짜 string으로 
+		  List<String> siteIdxList = workService.getSiteIdxListByDate(curdate);
+		  
+		  for(String site_idx : siteIdxList) {
+			 pushWorkToSiteUser(site_idx);
+		  }
+		  
+		  
+		  
+	  }
 	
 	
 }

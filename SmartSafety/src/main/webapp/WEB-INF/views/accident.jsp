@@ -14,7 +14,13 @@
 
 
 	<div id="wrap_pop">
+		
+			
 		<table class="pop">
+			<colgroup>
+				<col style="width: 25%">
+				<col>
+			</colgroup>
 			<tr>
 				<th>작업</th>
 				<td><c:forEach var="fileVO" items="${workFileList}" varStatus="idx">

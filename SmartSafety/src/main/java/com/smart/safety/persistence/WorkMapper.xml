@@ -71,6 +71,22 @@ WHERE
 		FROM WORK_LIST;
   </select>
   
+  <select id="getSiteIdxListByDate" resultType="String" parameterType="String">
+  	SELECT DISTINCT W.SITE_IDX
+		FROM WORK_LIST W 
+		LEFT OUTER JOIN ( SELECT WORK_IDX, WORKDATE, CHECKYN, CHK_USER_IDX FROM PRINT_LIST WHERE WORKDATE = #{searchdate} ) P
+		ON
+			W.WORK_IDX = P.WORK_IDX 
+		WHERE
+		<![CDATA[
+		AND DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) <= #{searchdate}
+		]]>
+		
+		<![CDATA[
+		AND DATE_FORMAT( W.ENDDATE , '%Y%m%d' )  >= #{searchdate}
+		]]>
+  </select>
+  
   <select id="getWorkByIdx" resultType="WorkVO" parameterType="String">
    	SELECT W.*,S.*,C.CONT_NAME AS CONT_NAME, M.NAME AS INSPEC_MGR_NAME
 	FROM WORK_LIST W
