@@ -44,7 +44,7 @@ function deleteNotice() {
 		</tr>
 		<tr>
 			<th>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</th>
-			<td>${noticeVO.content}</td>
+			<td style="text-align:left;">${noticeVO.content}</td>
 		</tr>
 	</table>
 	

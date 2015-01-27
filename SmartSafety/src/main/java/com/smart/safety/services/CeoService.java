@@ -1,13 +1,13 @@
 package com.smart.safety.services;
 
-import java.util.List;
+import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.*;
 
-import com.smart.safety.domain.CeoVO;
-import com.smart.safety.persistence.CeoMapper;
+import com.smart.safety.domain.*;
+import com.smart.safety.persistence.*;
 
 @Service(value="CeoService")
 public class CeoService {

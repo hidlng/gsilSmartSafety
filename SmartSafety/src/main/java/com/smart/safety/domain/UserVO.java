@@ -1,9 +1,6 @@
 package com.smart.safety.domain;
 
-import java.io.Serializable;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.io.*;
 
 public class UserVO implements Serializable {
 	/**

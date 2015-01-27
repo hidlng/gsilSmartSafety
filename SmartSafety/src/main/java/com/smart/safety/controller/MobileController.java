@@ -1,16 +1,14 @@
 package com.smart.safety.controller;
 
-import java.net.URLDecoder;
-import java.net.URLEncoder;
+import java.net.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.web.bind.annotation.*;
 
-import com.smart.safety.services.MobileService;
+import com.smart.safety.services.*;
 
 @Controller(value="MobileController")
 public class MobileController {

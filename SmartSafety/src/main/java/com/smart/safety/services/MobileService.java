@@ -1,16 +1,14 @@
 package com.smart.safety.services;
 
-import java.util.List;
+import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.stereotype.Service;
+import org.json.*;
+import org.springframework.stereotype.*;
 
-import com.smart.safety.domain.MobileVO;
-import com.smart.safety.domain.UserVO;
-import com.smart.safety.persistence.MobileMapper;
+import com.smart.safety.domain.*;
+import com.smart.safety.persistence.*;
 
 @Service(value="MobileService")
 public class MobileService {

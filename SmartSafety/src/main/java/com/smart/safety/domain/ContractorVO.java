@@ -1,8 +1,8 @@
 package com.smart.safety.domain;
 
-import java.io.Serializable;
+import java.io.*;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.*;
 
 public class ContractorVO implements Serializable{
 	/**

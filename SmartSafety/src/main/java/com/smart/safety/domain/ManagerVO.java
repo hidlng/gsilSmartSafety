@@ -1,12 +1,10 @@
 package com.smart.safety.domain;
 
-import java.io.Serializable;
+import java.io.*;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.validator.constraints.*;
 
 public class ManagerVO implements Serializable {
 	/**

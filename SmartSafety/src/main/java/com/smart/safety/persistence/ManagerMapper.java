@@ -2,9 +2,9 @@ package com.smart.safety.persistence;
 
 import java.util.*;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.*;
 
-import com.smart.safety.domain.ManagerVO;
+import com.smart.safety.domain.*;
 
 @Repository(value="ManagerMapper")
 public interface ManagerMapper {

@@ -1,23 +1,18 @@
 package com.smart.safety.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.text.*;
+import java.util.*;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
+import javax.annotation.*;
+import javax.servlet.http.*;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.web.bind.annotation.*;
 
-import com.smart.safety.domain.CeoVO;
-import com.smart.safety.domain.SiteVO;
-import com.smart.safety.services.CeoService;
-import com.smart.safety.services.SiteService;
-import com.smart.safety.util.Paging;
+import com.smart.safety.domain.*;
+import com.smart.safety.services.*;
+import com.smart.safety.util.*;
 
 @Controller(value="CeoController")
 public class CeoController {

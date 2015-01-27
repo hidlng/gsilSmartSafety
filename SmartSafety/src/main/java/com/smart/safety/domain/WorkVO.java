@@ -1,9 +1,9 @@
 package com.smart.safety.domain;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.*;
 
 public class WorkVO implements Serializable{
 

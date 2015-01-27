@@ -1,8 +1,8 @@
 package com.smart.safety.persistence;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.*;
 
-import com.smart.safety.domain.UserVO;
+import com.smart.safety.domain.*;
 
 @Repository(value="UserMapper")
 public interface UserMapper {

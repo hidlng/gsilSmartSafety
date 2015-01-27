@@ -1,7 +1,6 @@
 package com.smart.safety.domain;
 
 import java.io.*;
-import java.sql.*;
 
 public class PrintVO implements Serializable{
 	/**

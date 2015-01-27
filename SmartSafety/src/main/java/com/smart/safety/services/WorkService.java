@@ -1,12 +1,11 @@
 package com.smart.safety.services;
 
-import java.sql.*;
 import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 import com.smart.safety.domain.*;
 import com.smart.safety.persistence.*;

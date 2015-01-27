@@ -1,17 +1,14 @@
 package com.smart.safety.services;
 
-import java.util.List;
+import java.util.*;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
-import com.smart.safety.domain.ManagerVO;
-import com.smart.safety.domain.SiteVO;
-import com.smart.safety.persistence.ManagerMapper;
-import com.smart.safety.persistence.SiteMapper;
-import com.smart.safety.persistence.UserMapper;
+import com.smart.safety.domain.*;
+import com.smart.safety.persistence.*;
 import com.smart.safety.util.*;
 
 @Service(value="SiteService")

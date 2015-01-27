@@ -1,14 +1,11 @@
 package com.smart.safety.services;
 
-import javax.annotation.Resource;
+import javax.annotation.*;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.*;
 
-import com.smart.safety.domain.UserVO;
-import com.smart.safety.persistence.UserMapper;
+import com.smart.safety.domain.*;
+import com.smart.safety.persistence.*;
 
 @Service(value="LoginService")
 public class LoginService {

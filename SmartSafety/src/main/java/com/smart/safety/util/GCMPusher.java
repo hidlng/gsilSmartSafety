@@ -1,16 +1,9 @@
 package com.smart.safety.util;
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
 import java.util.*;
 
-import javax.annotation.*;
-
-import com.google.android.gcm.server.Message;
-import com.google.android.gcm.server.MulticastResult;
-import com.google.android.gcm.server.Result;
-import com.google.android.gcm.server.Sender;
-import com.smart.safety.domain.*;
-import com.smart.safety.services.*;
+import com.google.android.gcm.server.*;
 
 public class GCMPusher {
 	public static GCMPusher INSTANCE = new GCMPusher();

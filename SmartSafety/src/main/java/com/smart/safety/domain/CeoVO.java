@@ -1,6 +1,6 @@
 package com.smart.safety.domain;
 
-import java.io.Serializable;
+import java.io.*;
 
 public class CeoVO implements Serializable {
 

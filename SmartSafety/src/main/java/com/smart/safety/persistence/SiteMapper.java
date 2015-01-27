@@ -1,10 +1,10 @@
 package com.smart.safety.persistence;
 
-import java.util.List;
+import java.util.*;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.*;
 
-import com.smart.safety.domain.SiteVO;
+import com.smart.safety.domain.*;
 
 @Repository(value="SiteMapper")
 public interface SiteMapper  {

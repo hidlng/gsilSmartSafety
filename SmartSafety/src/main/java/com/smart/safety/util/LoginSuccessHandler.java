@@ -1,17 +1,12 @@
 package com.smart.safety.util;
 
 import java.io.*;
-import java.security.*;
 
-import javax.annotation.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
 import org.springframework.security.core.*;
 import org.springframework.security.web.authentication.*;
-
-import com.smart.safety.domain.*;
-import com.smart.safety.services.*;
 
 public class LoginSuccessHandler implements AuthenticationSuccessHandler
 {

@@ -1,9 +1,7 @@
 package com.smart.safety.services;
 
-import java.sql.*;
 import java.text.*;
 import java.util.*;
-import java.util.Date;
 
 import javax.annotation.*;
 
@@ -11,7 +9,6 @@ import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
 import com.smart.safety.controller.PrintController.PrintType;
-import com.smart.safety.controller.PrintController.*;
 import com.smart.safety.domain.*;
 import com.smart.safety.persistence.*;
 
