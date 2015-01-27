@@ -42,17 +42,7 @@ $(document).ready(function() {
 		i++;
 		</c:forEach>
 		
-	}else {
-		/* addTool('cons_machine' , true); //건설장비 selectbox
-		addTool('trans_machine' , true);//운반장비
-		addTool('etc_machine' , true);//기타 장비 */
-	}
-
-	//setCode(3, 'placename', 'placename');//작업 형태 지정
-	
-
-//	alert($("#cons_machine").length);
-	
+	}else {}	
  });
 
 /**viewWork에서 사용된s addTool 함수 **/
