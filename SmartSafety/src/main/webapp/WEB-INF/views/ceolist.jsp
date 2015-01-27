@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>    
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page session="true"%>    
 <!doctype html>
 <html >
 	<head>
@@ -99,7 +100,10 @@
 				<div class="wrapBox ceo">		
 
 					<div class="content ">
-					
+					<c:if test = "${sessionScope.userLoginInfo.level != 3}">
+						<div onclick="history.back(-1)" style="cursor:pointer"><img src="images/back_btn.png" width="30px" height="30px"> back</div>
+						<br>
+					</c:if>
 					<div class="searchboxdata" >
 					
 						<div class="listLevelBox">
