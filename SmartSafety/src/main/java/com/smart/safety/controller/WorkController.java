@@ -375,7 +375,7 @@ public class WorkController {
 	 * @param session
 	 */
 	@RequestMapping(value = "viewWork")
-	public void viewWork(@RequestParam(value="viewIdx",required=false)String viewIdx, @RequestParam(value="fromCEO",required=false)boolean fromCEO,
+	public String viewWork(@RequestParam(value="viewIdx",required=false)String viewIdx, @RequestParam(value="fromCEO",required=false)boolean fromCEO,
 			HttpServletRequest request, Model model, HttpSession session) {
 		if(viewIdx != null && !viewIdx.equals("")) {
 			model.addAttribute("updateMode", true);//null값 방지용	
@@ -401,8 +401,6 @@ public class WorkController {
 				canModify = true;
 				break;
 			case CONT_CHEIF: case CONT_LEADER : //자신현장에 대해 모두 수정가능
-				//ManagerVO managerVO = (ManagerVO)session.getAttribute("managerVO");
-				//if(managerVO != null && workVO.getCont_idx().equals(managerVO.getCont_idx()))
 				canModify = true;
 				break;
 			case CONT_INSPECTOR : break;
@@ -415,6 +413,10 @@ public class WorkController {
 			
 			//수정권한 체크 작업의 업체idx와 UserSession의 소속현장 idx를 비교 
 			model.addAttribute("canModify", canModify);
+			
+			return "viewWork";
+		}else {
+			return "redirect:workList";
 		}
 	}
 	
