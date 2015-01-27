@@ -43,11 +43,13 @@ public class MobileController {
 			, @RequestParam(value="useridx", defaultValue="")String useridx
 			, @RequestParam(value="checkyn", defaultValue="")String checkyn
 			, @RequestParam(value="workidx", defaultValue="")String workidx
-			, @RequestParam(value="userlevel", defaultValue="")String userlevel) {
+			, @RequestParam(value="userlevel", defaultValue="")String userlevel
+			, @RequestParam(value="siteIdx", defaultValue="")String siteIdx) {
 		
 		useridx = URLDecoder.decode(useridx);
+		siteIdx = URLDecoder.decode(siteIdx);
 		
-		String resultJson = mobileServie.updatCheckYn(workdate, useridx, checkyn, workidx,userlevel);
+		String resultJson = mobileServie.updatCheckYn(workdate, useridx, checkyn, workidx,userlevel,siteIdx);
 		model.addAttribute("jsonResult", resultJson);
 	}
 	

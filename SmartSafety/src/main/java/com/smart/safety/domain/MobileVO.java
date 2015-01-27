@@ -31,6 +31,21 @@ public class MobileVO implements Serializable {
 	private String content;
 	private String writetime;
 	
+	private String pid;
+	private String level;
+	
+	public String getPid() {
+		return pid;
+	}
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
+	}
 	public String getName() {
 		return name;
 	}

@@ -110,7 +110,17 @@
 		ON A.WRITER_IDX = B.USER_IDX
 		WHERE A.DELYN = 'N'
   		  AND A.NOTICE_IDX = #{id}
-  		  
+	  </select>
+	  
+	  <select id="getSiteUserPid" resultType="MobileVO"  parameterType="String" >
+		SELECT A.PID, A.LEVEL FROM USER_LIST A
+		JOIN MANAGER_LIST B
+		ON A.USER_IDX = B.USER_IDX
+		WHERE A.DELYN = 'N'
+		  AND A.LEVEL = '5'
+		  OR A.LEVEL = '2'
+		  OR A.LEVEL = '4'
+  		  AND B.SITE_IDX = #{id}
 	  </select> 
     
 </mapper>

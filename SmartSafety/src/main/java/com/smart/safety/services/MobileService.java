@@ -1,5 +1,6 @@
 package com.smart.safety.services;
 
+import java.io.IOException;
 import java.util.*;
 
 import javax.annotation.*;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.*;
 
 import com.smart.safety.domain.*;
 import com.smart.safety.persistence.*;
+import com.smart.safety.util.GCMPusher;
 
 @Service(value="MobileService")
 public class MobileService {
@@ -126,7 +128,7 @@ public class MobileService {
 		return jo.toString();
 	}
 	
-	public String updatCheckYn( String workdate, String useridx, String checkyn, String workidx, String userlevel ) {
+	public String updatCheckYn( String workdate, String useridx, String checkyn, String workidx, String userlevel, String siteIdx ) {
 		
 		JSONObject jo = new JSONObject();
 		
@@ -148,6 +150,18 @@ public class MobileService {
 		
 		if( resultInt > 0  ) {
 			jo.put("result", "true");
+			if( checkyn.equals("N") ) {
+				GCMPusher gp = new GCMPusher();
+				List<MobileVO> pushlist = mobileMapper.getSiteUserPid(siteIdx);
+				for (MobileVO userPid : pushlist) {
+					try {
+						gp.sendMessage(userPid.getPid(), "취소된 작업이 있습니다.");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
 		} else {
 			jo.put("result", "false");
 		}

@@ -24,5 +24,9 @@ public interface MobileMapper {
 	//notice
 	public List<MobileVO> getMobileNoticeList( String siteIdx );
 	public MobileVO getMobileNoticeInfo( String noticeIdx );
+	
+	//push info
+	public List<MobileVO> getSiteUserPid( String siteIdx );
+	
 
 }
