@@ -427,8 +427,8 @@ public class WorkController {
 		
 	}
 
-	public void pushWorkToSiteUser(String site_idx) {
-		String message = "신규 작업 등록 ";
+	public void pushWorkToSiteUser(String site_idx, String message) {
+		//String message = "신규 작업 등록 ";
 		try {
 			List<ManagerVO> manList = managerSerivce.getManagerListBySiteIdx(site_idx);
 			
@@ -459,20 +459,40 @@ public class WorkController {
 		
 	}
 	
-	  @Scheduled(cron = "0 20 18 * * *")
-	  public void cronTest(){
+	/**당일 발송 , 주말 제외 **/
+	  @Scheduled(cron = "0 0 6 * * MON-FRI")
+	  public void pushWorkToday(){
 		  Date d = new Date();
-		  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		  String curdate = sdf.format(d); //현재날짜 string으로 
 		  List<String> siteIdxList = workService.getSiteIdxListByDate(curdate);
 		  
 		  for(String site_idx : siteIdxList) {
-			 pushWorkToSiteUser(site_idx);
+			 pushWorkToSiteUser(site_idx, "오늘 점검할 작업이 있습니다.");
+		  }
+		  
+	  }
+	  
+	  
+	  /**전날 발송, 주말 제외 **/	  
+	  @Scheduled(cron = "0 0 20 * * SUN-THU")
+	  public void pushWorkBefore(){
+		Date d = new Date();
+
+		long longtime = d.getTime();
+		d = new Date(longtime + 1000 * 60 * 60 * 24);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String tomdate = sdf.format(d); 
+		
+		List<String> siteIdxList = workService.getSiteIdxListByDate(tomdate);
+
+		for (String site_idx : siteIdxList) {
+			pushWorkToSiteUser(site_idx, "내일 점검할 작업이 있습니다");
 		  }
 		  
 		  
-		  
 	  }
+	
 	
 	
 }

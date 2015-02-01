@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="css/print.css" type="text/css" media="print">
    <script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
   <script type="text/javascript" src="js/jquery.plugin.js"></script>
-  <link href="../images/sss.ico" rel="icon" type="image/x-icon" />
-  <link href="../images/sss.ico" rel="shortcut icon" type="image/x-icon" />
+  <link href="../images/ss.ico" rel="icon" type="image/x-icon" />
+  <link href="../images/ss.ico" rel="shortcut icon" type="image/x-icon" />
  </head>	
  
  <body id="body">

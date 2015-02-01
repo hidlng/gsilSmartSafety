@@ -129,7 +129,7 @@
 		<tr><th class="detailHeader">주요위험</th><td class="wordBreak">${actionBean.placeVO.mainRisk}</td></tr>
 		<tr><th class="detailHeader">안전작업가이드</th><td class="wordBreak">${actionBean.placeVO.guide}</td></tr>
 		<tr><th class="detailHeader">보호구</th><td class="wordBreak">${actionBean.placeVO.equip}</td></tr>
-		<tr><th class="detailHeader"  colspan="${actionBean.inputAccList.size()}">작업허가</th>
+		<tr><th class="detailHeader">작업허가</th>
 			<td><c:if test="${actionBean.placeVO.permit == 1}">해당</c:if>
 				<c:if test="${actionBean.placeVO.permit == 0}">해당없음</c:if>
 			</td>

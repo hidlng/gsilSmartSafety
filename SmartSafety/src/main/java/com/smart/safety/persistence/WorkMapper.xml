@@ -79,7 +79,7 @@ WHERE
 			W.WORK_IDX = P.WORK_IDX 
 		WHERE
 		<![CDATA[
-		AND DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) <= #{searchdate}
+		DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) <= #{searchdate}
 		]]>
 		
 		<![CDATA[

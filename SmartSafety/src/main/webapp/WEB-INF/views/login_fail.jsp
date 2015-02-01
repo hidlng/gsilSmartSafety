@@ -8,8 +8,8 @@
   <title>GSIL</title>
   <link rel="stylesheet" href="css/common.css" type="text/css">  
   <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
-    <link href="/sss.ico" rel="icon" type="image/x-icon" />
-  <link href="/sss.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/ss.ico" rel="icon" type="image/x-icon" />
+  <link href="/ss.ico" rel="shortcut icon" type="image/x-icon" />
   <script>
  alert('id 혹은 password 정보가 잘못 입력되었습니다');
  location.href="login";
