@@ -134,7 +134,7 @@
 			<c:if test="${index.count % 2 == 0}"></tr></c:if>
 		</c:forEach>
 	 </table><!-- //table -->
-	 <div class="signBox" style="margin-top: ${ (4 - puiSize/2) * 65 }px">
+	 <div class="signBox" style="margin-top: ${ (4 - puiSize/2) * 35 }px">
 		<p>성명</p><span>(서명)</span>	
 	 </div>
   </div>

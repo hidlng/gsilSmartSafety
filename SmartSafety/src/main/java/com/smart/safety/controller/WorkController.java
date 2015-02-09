@@ -460,7 +460,7 @@ public class WorkController {
 	}
 	
 	/**당일 발송 , 주말 제외 **/
-	  @Scheduled(cron = "0 0 6 * * MON-FRI")
+	  @Scheduled(cron = "3 0 9 * * MON-FRI")
 	  public void pushWorkToday(){
 		  Date d = new Date();
 		  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -475,7 +475,7 @@ public class WorkController {
 	  
 	  
 	  /**전날 발송, 주말 제외 **/	  
-	  @Scheduled(cron = "0 0 20 * * SUN-THU")
+	  @Scheduled(cron = "4 0 9 * * SUN-THU")
 	  public void pushWorkBefore(){
 		Date d = new Date();
 
