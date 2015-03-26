@@ -105,6 +105,7 @@
 		 </tr>
 	 </table><!-- //table -->
 
+<!--div  style="border:1px solid red;height:550px"-->
 	 <table>
 	 <caption>사용 전 점검 사항</caption>
 		<colgroup>		
@@ -134,9 +135,11 @@
 			<c:if test="${index.count % 2 == 0}"></tr></c:if>
 		</c:forEach>
 	 </table><!-- //table -->
-	 <div class="signBox" style="margin-top: ${ (4 - puiSize/2) * 35 }px">
+	 <div class="signBox" style="margin-top: ${ (4 - puiVO.checklist.size()/2) * 55 }px">
 		<p>성명</p><span>(서명)</span>	
 	 </div>
+	 
+<!--/div-->
   </div>
  </c:forEach>
  </body> 

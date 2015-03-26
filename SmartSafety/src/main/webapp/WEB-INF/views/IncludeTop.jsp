@@ -10,7 +10,7 @@
 
 <html>
 <head>
-  <title>GSIL</title>
+  <title>Smart Safety</title>
   <link rel="stylesheet" href="css/common.css" type="text/css">
   <link rel="stylesheet" href="css/jquery.datepick.css" type="text/css" >
   <link rel="stylesheet" href="css/jquery.timepicker.css" type="text/css" > 
