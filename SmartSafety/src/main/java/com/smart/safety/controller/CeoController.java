@@ -24,8 +24,8 @@ public class CeoController {
 	@Resource(name="SiteService")
 	private SiteService	siteService;
 	
-	public static final int MAX_ROW_NUM=5;
-	public static final int MAX_PAGE_NUM=5;
+	public static final int MAX_ROW_NUM=10;
+	public static final int MAX_PAGE_NUM=10;
 	
 	@RequestMapping(value = "ceolist")
 	public void ceoList(Model model, @RequestParam(value="pageNum", defaultValue="1")int pageNum,

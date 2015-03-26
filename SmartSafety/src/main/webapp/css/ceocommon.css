@@ -47,10 +47,10 @@ a:hover, a:active{color:#666;text-decoration:none;}
 
 /* layout */
 body{position:relative; width:100%;background:url("../images/bg001.png") repeat-x 0 0 #000; color:#fff; font-size:28px;line-height: 34px;}
-#wrap{width:100%;min-height:1000px;background:url("../images/bg002.png") no-repeat 0 0;min-width:1400px;}
-#wrap.sub{width:100%;background:url("../images/bg002.png") no-repeat 0 0; min-height:200px;min-width:1400px;}
-.back_bg{width:100%;min-width:1400px;min-height:1000px;background:url("../images/bg003.png") no-repeat right 500px; padding:250px 0 100px;}
-.back_bg.sub{ width:100%;min-width:1400px;background:none;padding:25px 0 100px; min-height:1500px;}
+#wrap{width:100%;min-height:1000px;background:url("../images/bg002.png") no-repeat 0 0;min-width:1024px;}
+#wrap.sub{width:100%;background:url("../images/bg002.png") no-repeat 0 0; min-height:200px;min-width:1024px;}
+.back_bg{width:100%;min-width:1024px;min-height:1000px;background:url("../images/bg003.png") no-repeat right 500px; padding:250px 0 100px;}
+.back_bg.sub{ width:100%;min-width:1400px;background:none;padding:25px 0 100px; min-height:1024px;}
 .back_bg.workCh{width:100%;min-width:1400px;min-height:2000px;background:url("../images/bg003.png") no-repeat right 500px; padding:150px 0 100px;}
 h1{padding:10px 0 0 10px;}
 h1 img{width:120px;}
@@ -118,10 +118,10 @@ h1 img{width:120px;}
 /* contant */
 .content table{clear: both;width:100%; font-size:28px;line-height:30px; background-color:#1d2b43;border-collapse: collapse;border-spacing: 0;}
 .content table tr th, .content table tr td{border:1px dotted #8c97a9; text-align:center;}
-.content table tr th{padding:14px 0; color:#98b4e0; font-size:20px;}
-.content table tr td{padding:10px 0;}
+.content table tr th{padding:0px 0; color:#98b4e0; font-size:20px;}
+.content table tr td{padding:0px 0;}
 .content table tr td a{cursor:pointer;}
-.content table.user_signup td input{width:80%; font-size:18px; padding:3px;line-height:30px; color:#fff; text-align:center; background:none; border: 1px dotted #1D4F99;}
+.content table.user_signup td input{width:80%; font-size:18px; padding:0px;line-height:30px; color:#fff; text-align:center; background:none; border: 1px dotted #1D4F99;}
 
 /* paging */
 .content .paging{text-align:center; padding: 40px 0 0 0; }
@@ -203,5 +203,5 @@ a .btn_typ03:hover{background-color:transparent;color:#ffffff;border:1px solid #
 .wrapBox.ceo .content{float:left; width:99%;background: url("../images/bg_box.png") repeat 0 0;}
 a .btn_typ05 {display: block; width: 110px;padding:7px;margin: 0 auto;background-color: #475B7C;border: 1px solid #222;border-radius: 3px;font-size: 14px;line-height: 22px;color: #fff;text-decoration: none;}
 a .btn_typ05:hover{background-color:transparent;color:#ffffff;border:1px solid #ffffff;}
-.wrapBox.ceo .content table tr th {padding: 17px 0; font-size: 28px;color: #98b4e0;}
-.wrapBox.ceo .content table tr td {padding: 15px 0; }
+.wrapBox.ceo .content table tr th {background-color:#000000; padding: 5px 0; font-size: 28px;color: #98b4e0;}
+.wrapBox.ceo .content table tr td {background-color:#000000; padding: 5px 0; }

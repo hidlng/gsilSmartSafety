@@ -154,7 +154,7 @@
 						</colgroup>
 
 							<tr>
-								<th colspan="4">현&nbsp;장&nbsp;작&nbsp;업&nbsp;정&nbsp;보</th>
+							 	<th colspan="4" style="padding:15px; " >현&nbsp;장&nbsp;작&nbsp;업&nbsp;정&nbsp;보</th>
 								<th colspan="3" >점검여부</th>									
 								<th rowspan="2">작업기간</th>						
 							</tr>
