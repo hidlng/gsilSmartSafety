@@ -74,8 +74,7 @@
 
 <form:form id="siteUserForm" method="POST" modelAttribute="managerVO"
 	autocomplete="off">
-	<input type="hidden" name="manager_idx"
-		value="${managerVO.manager_idx}" />
+	<input type="hidden" name="manager_idx"	value="${managerVO.manager_idx}" />
 	<input type="hidden" name="user_idx" value="${managerVO.user_idx}" />
 	<input type="hidden" name="ismanager" value="0" />
 	<input type="hidden" id="isPWChanged" name="isPWChanged" value="false" />
@@ -88,7 +87,7 @@
 
 	<!-- siteIdx 관리  -->
 	<c:if test="${!updateMode}"><input type="hidden" name="site_idx" value="${sessionScope.siteVO.site_idx}"></c:if>
-	<c:if test="${updateMode}"><input type="hidden" name="site_idx" /></c:if>
+	<c:if test="${updateMode}"><input type="hidden" name="site_idx" value="${managerVO.site_idx}"/></c:if>
 
 	<!-- //srchbox -->
 	<table class="user_signup">

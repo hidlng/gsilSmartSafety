@@ -12,6 +12,7 @@ public interface WorkMapper {
 	public int getRowCount(WorkVO workVO);
 	public WorkVO getWorkByIdx(String work_idx);
 	public int getRowCntForInsert();
+	public List<String> getSiteIdxListByDate(String date);
 	public void insert(WorkVO workVO);
 	public void update(WorkVO workVO);
 	public void delete(String work_idx);

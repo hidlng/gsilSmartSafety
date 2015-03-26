@@ -6,12 +6,12 @@
 <!doctype html>
 <html >
 	<head>
-		<title>GSIL</title>
+		<title>Smart Safety</title>
 		<link rel="stylesheet" href="css/ceocommon.css" type="text/css"> 
   		<link rel="stylesheet" href="css/jquery.datepick.css" type="text/css" >
   		<link rel="stylesheet" href="css/jquery.timepicker.css" type="text/css" >  
-  	    <link href="../images/sss.ico" rel="icon" type="image/x-icon" />
-  		<link href="../images/sss.ico" rel="shortcut icon" type="image/x-icon" />
+  	    <link href="../images/ss.ico" rel="icon" type="image/x-icon" />
+  		<link href="../images/ss.ico" rel="shortcut icon" type="image/x-icon" />
   	    <script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
 		<script type="text/javascript" src="js/jquery.plugin.js"></script>
 		<script type="text/javascript" src="js/jquery.datepick.js"></script> 
@@ -193,7 +193,7 @@
 						    <span>
 						        <c:forEach var="i" begin="${paging.startPageNo}" end="${paging.endPageNo}" step="1">
 						            <c:choose>
-						                <c:when test="${i eq paging.pageNo}"><a href="javascript:goPage(${i})" class="now"><span>${i}</span></a></c:when>
+						                   <c:when test="${i == paging.pageNo}"><a href="javascript:goPage(${i})" ><span class="now">${i}</span></a></c:when>
 						                <c:otherwise><a href="javascript:goPage(${i})"><span>${i}</span></a></c:otherwise>
 						            </c:choose>
 						        </c:forEach> 

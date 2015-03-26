@@ -5,10 +5,11 @@
 <!doctype html>
 <html>
 <head>
-  <title>GSIL</title>
+  <title>Smart Safety</title>
   <link rel="stylesheet" href="css/common.css" type="text/css">  
   <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
-  
+  <link href="../images/ss.ico" rel="icon" type="image/x-icon" />
+  <link href="../images/ss.ico" rel="shortcut icon" type="image/x-icon" />
   <script>
   function login() {
 	$('#loginForm').submit();  

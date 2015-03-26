@@ -38,7 +38,7 @@
 <!-- //srchbox -->
 <table class="user_signup">
 	<colgroup>
-		<col style="width: 33%">
+		<col style="width: 24%">
 		<col>
 	</colgroup>
 

@@ -27,7 +27,7 @@ function deleteNotice() {
 <div class="bgCover">&nbsp;</div>
 	<table class="work_signup">
 		<colgroup>
-			<col style="width: 33%">
+			<col style="width: 24%">
 			<col>
 		</colgroup>
 		<tr>
@@ -44,7 +44,7 @@ function deleteNotice() {
 		</tr>
 		<tr>
 			<th>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</th>
-			<td style="text-align:left;">${noticeVO.content}</td>
+			<td style="text-align:left;padding-left:10px;">${noticeVO.content}</td>
 		</tr>
 	</table>
 	

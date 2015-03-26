@@ -5,7 +5,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>GSIL</title>
+  <title>Smart Safety</title>
   <link rel="stylesheet" href="css/common.css" type="text/css">
   <link href="/sss.ico" rel="icon" type="image/x-icon" />
   <link href="/sss.ico" rel="shortcut icon" type="image/x-icon" />  

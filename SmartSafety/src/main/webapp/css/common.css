@@ -94,8 +94,8 @@ h1 img{width:120px;}
 
 /* paging */
 .content .paging{text-align:center; padding: 40px 0 0 0; }
-.content .paging span{font-size:22px; color:#fff; padding:5px;}
-.content .paging span.now{color:#38bda0; font-weight:bold; font-color:black;}
+.content .paging span {font-size:24px; color:#fff; padding:5px;}
+.content .paging span .now{color:#38bda0 !important ; font-weight:bold; font-size:29px; }
 .content .paging .signup{display:inline-block; width:100px; vertical-align:center; }
 
 /* sub page - smart safe */
@@ -130,6 +130,7 @@ span.explain{display:block;width:92%;font-weight:normal;font-size:25px;line-heig
 .content table.work_signup td {}
 .content table.work_signup td input{width:80%; font-size:30px; padding:3px;line-height:35px; color:#fff; text-align:center; background:none; border: 2px solid #1D4F99;}
 .content table.work_signup td input[readonly='true'] {border:0px solid blue;}
+.content table.work_signup td input[type='checkbox'] {width:auto;}
 .content table.work_signup td .colspanInput{width:90%;}
 /**place**/
 #placeList{  }

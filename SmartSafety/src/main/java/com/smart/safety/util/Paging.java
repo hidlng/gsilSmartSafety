@@ -11,8 +11,8 @@ public class Paging {
    private int firstPageNo; // 첫 번째 페이지 번호
    private int prevPageNo; // 이전 페이지 번호
    private int startPageNo=1; // 시작 페이지 (페이징 네비 기준)
-   private int pageNo = 1; // 페이지 번호
-   private int endPageNo; // 끝 페이지 (페이징 네비 기준)
+   private int pageNo; // 페이지 번호
+   private int endPageNo=1; // 끝 페이지 (페이징 네비 기준)
    private int nextPageNo; // 다음 페이지 번호
    private int finalPageNo; // 마지막 페이지 번호
    private int totalCount; // 게시 글 전체 수
@@ -163,7 +163,7 @@ public class Paging {
     * 페이징 생성
     */
    public void makePaging() {
-       if (this.totalCount == 0) return; // 게시 글 전체 수가 없는 경우
+       if (this.totalCount == 0) {this.setPageNo(1);return; }// 게시 글 전체 수가 없는 경우
        if (this.pageNo == 0) this.setPageNo(1); // 기본 값 설정
        if (this.pageSize == 0) this.setPageSize(10); // 기본 값 설정
 

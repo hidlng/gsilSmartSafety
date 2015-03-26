@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="css/screen.css" type="text/css">
  	<link rel="stylesheet" href="css/custom.css" type="text/css">
   <link rel="stylesheet" href="css/print.css" type="text/css" media="print"/> 
-  <link href="../images/sss.ico" rel="icon" type="image/x-icon" />
-  <link href="../images/sss.ico" rel="shortcut icon" type="image/x-icon" />  
+  <link href="../images/ss.ico" rel="icon" type="image/x-icon" />
+  <link href="../images/ss.ico" rel="shortcut icon" type="image/x-icon" />  
  </head>
  <body>
   <img src="images/print2.gif" class="printIcon" width="100" alt="출력하기" onclick="window.print();" >
@@ -128,13 +128,13 @@
 		<tr>
 			<th rowspan="2">작업 허가 최종 승인</th>
 			<td>안전팀장</td>
-			<td class="lft">성명 : </td>
-			<td class="lft">(서명)</td>
+			<td class="lft" style="vertical-align:middle">성명 : </td>
+			<td class="lft" style="vertical-align:middle">(서명)</td>
 		</tr>
 		<tr>		
 			<td>소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장</td>
-			<td class="lft">성명 : </td>
-			<td class="lft">(서명)</td>
+			<td class="lft" style="vertical-align:middle">성명 : </td>
+			<td class="lft" style="vertical-align:middle">(서명)</td>
 		</tr>
 	 </table><!-- //table lastsign -->
  

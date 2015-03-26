@@ -6,9 +6,11 @@
 
 
 	<select id="getToolByCode" parameterType="string" resultType="ToolVO">
-		SELECT *
-		FROM TOOLLIST_VIEW
-		WHERE TOOLCODE = #{toolCode}		
+		SELECT A.*, B.NAME AS TOOLNAME
+ 		FROM TOOL_LIST A LEFT JOIN CODE_LIST B
+ 		ON A.TOOLCODE = B.CODE 		
+		WHERE TOOLCODE = #{toolCode}
+		ORDER BY TOOLCODE		
 	</select>
 
 	<delete id="deleteToolVOByCode" parameterType="String">

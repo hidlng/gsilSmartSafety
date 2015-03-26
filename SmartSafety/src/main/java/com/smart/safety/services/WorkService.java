@@ -27,6 +27,11 @@ public class WorkService{
 	public int getRowCntForInsert() {
 		return workMapper.getRowCntForInsert();
 	}
+	
+	public List<String> getSiteIdxListByDate(String date) {
+		return workMapper.getSiteIdxListByDate(date);
+	}
+	
 	public List<WorkVO> getWorkListByVO(WorkVO workVO) {
 		return workMapper.getWorkListByVO(workVO);
 	}

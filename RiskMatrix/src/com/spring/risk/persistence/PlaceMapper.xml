@@ -5,28 +5,12 @@
 <mapper namespace="com.spring.risk.persistence.PlaceMapper">
 
 
-	<select id="getPlaceList" parameterType="string" resultType="PlaceVO">
-		SELECT *
-		FROM PLACELIST_VIEW
-	</select>
-
-
-	<!--select id="getNotRegisteredCodeList" parameterType="string"
-		resultType="PlaceVO">
-		SELECT A.CODE AS PLACECODE, A.NAME AS PLACENAME
-		FROM
-		CATEGORY_CODE A LEFT JOIN PLACE_LIST B
-		ON A.CODE = B.PLACECODE
-		WHERE
-		A.TYPE='작업장소'
-		AND B.PLACECODE IS NULL
-		ORDER BY A.CODE
-	</select-->
-
 	<select id="getPlaceByCode" parameterType="string" resultType="PlaceVO">
-		SELECT *
-		FROM PLACELIST_VIEW
-		WHERE PLACECODE = #{placeCode}
+		 SELECT A.*, B.NAME AS PLACENAME
+		 FROM PLACE_LIST A LEFT JOIN CODE_LIST B
+		 ON A.PLACECODE = B.CODE		
+	     WHERE A.PLACECODE = #{placeCode}
+	     ORDER BY PLACECODE
 	</select>
 
 	<delete id="deletePlaceVOByCode" parameterType="PlaceVO">
