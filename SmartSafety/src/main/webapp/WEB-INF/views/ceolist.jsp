@@ -98,14 +98,14 @@
 		</script>
 	</head>
 
-	<body onload="starttimer();">
+	<body onload="starttimer();" scroll="no">
 		<div id="wrap" class="sub ">
 			<!--h1><img id="homeLogo" src="images/logo_ds.png" style="cursor:pointer"/></h1>--><!-- //1204 추가 -->
 			<div class="back_bg sub">
 				<div class="wrapBox ceo">		
 
 					<div class="content ">
-					<c:if test = "${sessionScope.userLoginInfo.level != 3}">
+					<c:if test = "${sessionScope.userLoginInfo.level != null && sessionScope.userLoginInfo.level != 3}">
 						<div onclick="backgo()" style="cursor:pointer"><img src="images/back_btn.png" width="30px" height="30px"> back</div>
 						<br>
 					</c:if>
@@ -134,10 +134,6 @@
 							</select>
 						</div>					
 						<div class="srchbox">
-							<p>
-								<input id="searchDate" type="search" name="searchWord" title="검색창" class="search_input" value="${searchWord}" autocomplete="off" >
-								<span class="btn_search" onclick="goPage(1)" ><a href="#">검색</a></span>
-							</p>
 						</div><!-- //srchbox -->
 					</div>
 
@@ -154,7 +150,7 @@
 						</colgroup>
 
 							<tr>
-							 	<th colspan="4" style="padding:15px; " >현&nbsp;장&nbsp;작&nbsp;업&nbsp;정&nbsp;보</th>
+								<th colspan="4">현&nbsp;장&nbsp;작&nbsp;업&nbsp;정&nbsp;보</th>
 								<th colspan="3" >점검여부</th>									
 								<th rowspan="2">작업기간</th>						
 							</tr>
@@ -176,13 +172,13 @@
 									<td>${ceo.sitename}</td>
 									<td>${ceo.worktitle}</td>
 									<td>${ceo.risk_grade}</td>
-									<td><c:if test="${ceo.checkyn == 'Y'}"><img src="images/check-blue.png" width="30px" /></c:if><c:if test="${ceo.checkyn == 'N'}"><img src="images/check-red.png"  width="30px"/></c:if>
+									<td><c:if test="${ceo.checkyn == 'Y'}"><img src="images/check-blue.png" width="20px" /></c:if><c:if test="${ceo.checkyn == 'N'}"><img src="images/check-red.png"  width="20px"/></c:if>
 									</td>
-									<td><c:if test="${ceo.leadcheckyn == 'Y'}"><img src="images/check-blue.png" width="30px" /></c:if><c:if test="${ceo.leadcheckyn == 'N'}"><img src="images/check-red.png"  width="30px"/></c:if>
+									<td><c:if test="${ceo.leadcheckyn == 'Y'}"><img src="images/check-blue.png" width="20px" /></c:if><c:if test="${ceo.leadcheckyn == 'N'}"><img src="images/check-red.png"  width="20px"/></c:if>
 									</td>
-									<td><c:if test="${ceo.chifcheckyn == 'Y'}"><img src="images/check-blue.png" width="30px" /></c:if><c:if test="${ceo.chifcheckyn == 'N'}"><img src="images/check-red.png"  width="30px"/></c:if>
+									<td><c:if test="${ceo.chifcheckyn == 'Y'}"><img src="images/check-blue.png" width="20px" /></c:if><c:if test="${ceo.chifcheckyn == 'N'}"><img src="images/check-red.png"  width="20px"/></c:if>
 									</td>
-									<td>${ceo.startdate} ~ ${ceo.enddate}<input id="updateIdx_${idx.index}" type="hidden" value="${ceo.work_idx}" /></td>
+									<td style="font-size:15px;" >${ceo.startdate} ~ ${ceo.enddate}<input id="updateIdx_${idx.index}" type="hidden" value="${ceo.work_idx}" /></td>
 								</tr>		
 							</c:forEach>
 						</table>					
