@@ -128,6 +128,7 @@ h1 img{width:120px;}
 .content .paging span{font-size:21px; color:#fff; padding:5px;}
 .content .paging span.now{color:#38bda0; font-weight:bold;}
 .content .paging .signup{display:inline-block; width:100px; vertical-align:center; }
+.content .paging .paginglogo{ float: right; }
 
 /* sub page - smart safe */
 .aside .aside_title{font-size:30px; font-weight:bold;height:50px; line-height:30px;color:#5891ed;}

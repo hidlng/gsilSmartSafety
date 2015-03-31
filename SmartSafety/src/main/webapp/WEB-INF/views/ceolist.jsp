@@ -197,7 +197,8 @@
 						     
 						    <a href="javascript:goPage(${paging.nextPageNo})" class="next"><span> &gt; </span></a>
 						    <a href="javascript:goPage(${paging.finalPageNo})" class="last"><span> &gt;&gt; </span></a>
-							 
+							
+							<div class="paginglogo"><img src="images/smartlogo.png" width="60px" height="60px"></div> 
 						</div>
 
 					</div><!-- //content -->
