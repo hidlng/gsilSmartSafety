@@ -28,8 +28,8 @@ input,textarea,select{*font-size:100%;color:#555}
 .blind-area{position:absolute;display:inline-block;font-size:0;height:0;line-height:0;visibility:hidden;width:0;text-indent:-9999em}
 legend{/*visibility:hidden;overflow:hidden;position:absolute;top:0;left:0;width:0px;height:0px;*/font-size:0px; line-height:0}
 
-/* Base CSS */
-html, body { overflow:hidden; height:700px;width:100%; font-family: '돋움',Dotum; /* color:#666 */}
+/* Base CSS overflow:hidden; */
+html, body {  height:700px;width:100%; font-family: '돋움',Dotum; /* color:#666 */}
 body {position:relative;font-size:14px;line-height:18px}
 img{vertical-align:middle}
 button{cursor:pointer}
@@ -75,24 +75,24 @@ h1 img{width:120px;}
 .aside_ident li span input{width:150px; padding:5px 15px; background:none; border:0; font-size:18px; color:#fff;}
 /* search */ 
 .content{float:right; width:80%; min-height:700px; padding-top:0px; margin-left: 10px; margin-right:10px; ;background-color:#000000;}
-.content .srchbox{float:right; overflow:hidden;height:36px;padding-bottom:20px;}
+.content .srchbox{float:right; overflow:hidden;height:36px;padding-bottom:10px;}
 .content .srchbox p{float:right;overflow:hidden;  height:36px; border:0px solid #152133;background-color:#fff; }
 .content .srchbox .search_input{width:207px; height:36px; padding:3px 10px;font-size:28px; line-height:14px;background-color:#fff; color:#333; border:none;}
 .content .srchbox .btn_search{float:right;width:35px;height:36px;text-indent: -9999px; border-left:1px solid #141e2d;background:url("../images/icon_search.png") no-repeat 10px 12px #fff;}
 
 .hour , .min, .second {
   font-family: "Comic Sans MS", cursive;
-	font-size:20px;
+	font-size:29px;
 	color: #FFF;
 	background-color: #000000;
 	height: 40px;
-	width: 40px;
+	width: 55px;
 	padding-left: 0px;
 	border-radius: 5px;
 	float:left;
 }
 
-.content .listLevelBox{ width:500px;float:left; }
+.content .listLevelBox{ width:800px;float:left; }
 .content .listLevelBox .selectBox{
 	height:35px;
 	padding: 5px;
@@ -104,10 +104,10 @@ h1 img{width:120px;}
 	font-size: 20px;
 }
 
-.content .searchboxdata{ height:55px; }
-.content .siteSearchBox{ margin-bottom: 10px; }
+.content .searchboxdata{ height:50px; }
+.content .siteSearchBox{ margin-bottom: 5px; }
 .content .siteSearchBox .selectBox{
-	width:200px;
+
 	height:40px;
 	padding: 5px;
 	background-color: #1d2b43;
