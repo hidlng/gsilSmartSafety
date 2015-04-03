@@ -92,7 +92,7 @@ $(document).on("keydown", disableF5);
 	<form id="siteUserList_form" action="siteUserList" method="GET">
 		<input type="hidden" name="listLevel" value="3">
 	</form>
-	<form id="report_form" action="ceolist" method="POST"></form>
+	<form id="report_form" action="ceo" method="POST"></form>
 	<form id="workList_form" action="workList" method="POST"></form>
 	<form id="contractorList_form" action="contractorList" method="POST"></form>
 	<form id="noticeList_form" action="noticeList" method="POST"></form>

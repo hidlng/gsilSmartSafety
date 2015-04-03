@@ -27,7 +27,7 @@ public class CeoController {
 	public static final int MAX_ROW_NUM=10;
 	public static final int MAX_PAGE_NUM=10;
 	
-	@RequestMapping(value = "ceolist")
+	@RequestMapping(value = "ceo")
 	public void ceoList(Model model, @RequestParam(value="pageNum", defaultValue="1")int pageNum,
 			@RequestParam(value="searchWord", defaultValue="")String searchWord ,
 			@RequestParam(value="siteValue", defaultValue="")String siteValue ,

@@ -75,12 +75,24 @@ h1 img{width:120px;}
 .aside_ident li span input{width:150px; padding:5px 15px; background:none; border:0; font-size:18px; color:#fff;}
 /* search */ 
 .content{float:right; width:80%; min-height:700px; padding-top:0px; margin-left: 10px; margin-right:10px; ;background-color:#000000;}
-.content .srchbox{width:250px; float:right; overflow:hidden;height:36px;padding-bottom:20px;}
+.content .srchbox{float:right; overflow:hidden;height:36px;padding-bottom:20px;}
 .content .srchbox p{float:right;overflow:hidden;  height:36px; border:0px solid #152133;background-color:#fff; }
 .content .srchbox .search_input{width:207px; height:36px; padding:3px 10px;font-size:28px; line-height:14px;background-color:#fff; color:#333; border:none;}
 .content .srchbox .btn_search{float:right;width:35px;height:36px;text-indent: -9999px; border-left:1px solid #141e2d;background:url("../images/icon_search.png") no-repeat 10px 12px #fff;}
 
-.content .listLevelBox{ width:900px;float:left; }
+.hour , .min, .second {
+  font-family: "Comic Sans MS", cursive;
+	font-size:20px;
+	color: #FFF;
+	background-color: #000000;
+	height: 40px;
+	width: 40px;
+	padding-left: 0px;
+	border-radius: 5px;
+	float:left;
+}
+
+.content .listLevelBox{ width:500px;float:left; }
 .content .listLevelBox .selectBox{
 	height:35px;
 	padding: 5px;
@@ -95,6 +107,7 @@ h1 img{width:120px;}
 .content .searchboxdata{ height:55px; }
 .content .siteSearchBox{ margin-bottom: 10px; }
 .content .siteSearchBox .selectBox{
+	width:200px;
 	height:40px;
 	padding: 5px;
 	background-color: #1d2b43;
@@ -124,7 +137,7 @@ h1 img{width:120px;}
 .content table.user_signup td input{width:80%; font-size:18px; padding:3px;line-height:30px; color:#fff; text-align:center; background:none; border: 1px dotted #1D4F99;}
 
 /* paging */
-.content .paging{text-align:center; padding: 10px 0 0 0; }
+.content .paging{text-align:center; padding: 2px 0 0 0; }
 .content .paging span{font-size:21px; color:#fff; padding:5px;}
 .content .paging span.now{color:#38bda0; font-weight:bold;}
 .content .paging .signup{display:inline-block; width:100px; vertical-align:center; }

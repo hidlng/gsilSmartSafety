@@ -143,7 +143,7 @@ public class LoginController {
 		
 		logger.info("Welcome login_success! {}, {}", session.getId(), userVO.getId() + "/" + userVO.getPassword());
 		
-		if(userlevel == USERLEVEL.CEO) return "redirect:ceolist";
+		if(userlevel == USERLEVEL.CEO) return "redirect:ceo";
 		else return "redirect:workList";
 
 	}

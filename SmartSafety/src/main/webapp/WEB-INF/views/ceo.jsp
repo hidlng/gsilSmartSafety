@@ -36,6 +36,17 @@
 			
 			$(document).on("click", "#homeLogo", function(e) { $('#workList_form').submit(); });
 			
+			var currentdate = new Date();
+			var l=0;
+			function callme() {
+				currentdate = new Date();
+				$('.hour').html(currentdate.getHours()+"&nbsp;:");
+				$('.min').html(currentdate.getMinutes()+"&nbsp;:");
+				$('.second').html(currentdate.getSeconds());
+				//$('.data').css({'padding-left':l+'px'}); 
+				l=l+5;
+			}
+			window.setInterval(callme,1000);
 					   
 		}); 
 		
@@ -134,6 +145,9 @@
 							</select>
 						</div>					
 						<div class="srchbox">
+							<div class="hour"></div>
+						    <div class="min"></div>
+						    <div class="second"></div>
 						</div><!-- //srchbox -->
 					</div>
 
@@ -160,8 +174,8 @@
 								<th>현&nbsp;&nbsp;장</th>
 								<th>작&nbsp;&nbsp;업</th>
 								<th>위험도</th>
+								<th >작업<BR>담당자</th>						
 								<th >안전<BR>관리자</th>	
-								<th >팀&nbsp;장</th>						
 								<th >소&nbsp;장</th>	
 							</tr>
 							
@@ -172,11 +186,11 @@
 									<td>${ceo.sitename}</td>
 									<td>${ceo.worktitle}</td>
 									<td>${ceo.risk_grade}</td>
-									<td><c:if test="${ceo.checkyn == 'Y'}"><img src="images/check-blue.png" width="20px" /></c:if><c:if test="${ceo.checkyn == 'N'}"><img src="images/check-red.png"  width="20px"/></c:if>
-									</td>
 									<td><c:if test="${ceo.leadcheckyn == 'Y'}"><img src="images/check-blue.png" width="20px" /></c:if><c:if test="${ceo.leadcheckyn == 'N'}"><img src="images/check-red.png"  width="20px"/></c:if>
 									</td>
-									<td><c:if test="${ceo.chifcheckyn == 'Y'}"><img src="images/check-blue.png" width="20px" /></c:if><c:if test="${ceo.chifcheckyn == 'N'}"><img src="images/check-red.png"  width="20px"/></c:if>
+									<td><c:if test="${ceo.checkyn == 'Y' &&  ( ceo.risk_grade == 'A'  || ceo.risk_grade == 'B' )}"><img src="images/check-blue.png" width="20px" /></c:if><c:if test="${ceo.checkyn == 'N' &&  ( ceo.risk_grade == 'A'  || ceo.risk_grade == 'B' )}"><img src="images/check-red.png"  width="20px"/></c:if>
+									</td>
+									<td><c:if test="${ceo.chifcheckyn == 'Y' && ceo.risk_grade == 'A' }"><img src="images/check-blue.png" width="20px" /></c:if><c:if test="${ceo.chifcheckyn == 'N'&& ceo.risk_grade == 'A' }"><img src="images/check-red.png"  width="20px"/></c:if>
 									</td>
 									<td style="font-size:15px;" >${ceo.startdate} ~ ${ceo.enddate}<input id="updateIdx_${idx.index}" type="hidden" value="${ceo.work_idx}" /></td>
 								</tr>		
@@ -213,7 +227,7 @@
 		</div> --><!-- //pageClosing  -->
 		
 		<div id="form_group" style="display:none">
-			<form id="searchForm" action="ceolist" action="GET" >
+			<form id="searchForm" action="ceo" action="GET" >
 				<input id="searchWord" name="searchWord" type="hidden" value="${searchWord}">
 				<input id="siteValue" name="siteValue" type="hidden" value="${siteValue}" >
 				<input id="siteindex" name="siteindex" type="hidden" value="${siteindex}" >
