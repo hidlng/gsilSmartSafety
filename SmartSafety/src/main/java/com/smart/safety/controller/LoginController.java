@@ -153,6 +153,11 @@ public class LoginController {
 		
 	}
 	
+	@RequestMapping(value ="db")
+	public void db(HttpSession session  , Principal principal) {
+		
+	}
+	
 	@RequestMapping(value ="jusoPopup")
 	public void jusoPopup(HttpSession session  , Principal principal) {
 		
