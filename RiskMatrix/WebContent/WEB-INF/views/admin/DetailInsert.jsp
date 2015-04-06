@@ -160,18 +160,23 @@
 			<th class="detailHeader">사고가능성</th>			
 			<c:forEach begin="0" end="4" step="1" varStatus="accIdx">	
 			<td>	
-				<stripes:radio name="inputAccList[${accIdx.index}].accPoss" value="-1"/>-1<stripes:radio
-				 name="inputAccList[${accIdx.index}].accPoss" value="0"/>0<stripes:radio
-				  name="inputAccList[${accIdx.index}].accPoss" value="1"/>1				
+				<stripes:radio name="inputAccList[${accIdx.index}].accPoss" value="-1"/>-1
+				<stripes:radio name="inputAccList[${accIdx.index}].accPoss" value="0"/>0
+				<stripes:radio name="inputAccList[${accIdx.index}].accPoss" value="1"/>1				
      		</td>
      		</c:forEach>
      	</tr>
 		<tr><th class="detailHeader">잠재심각성</th>		
 			<c:forEach begin="0" end="4" step="1" varStatus="accIdx">
-			<td>	
+			<td>
 				<stripes:select name="inputAccList[${accIdx.index}].accSerious">
-					<c:forEach begin="1" end="5" step="1" varStatus="seriousVal">
-						<option value ="${seriousVal.count}" label="${seriousVal.count}"/>
+					<c:forEach begin="1" end="5" step="1" varStatus="seriousVal">				
+						<c:if test="${actionBean.inputAccList[accIdx.index].accSerious == seriousVal.count}">
+							<option value ="${seriousVal.count}" label="${seriousVal.count}" selected="selected"/>
+						</c:if>
+						<c:if test="${actionBean.inputAccList[accIdx.index].accSerious != seriousVal.count}">
+							<option value ="${seriousVal.count}" label="${seriousVal.count}"/>
+						</c:if>
 				  	</c:forEach>
 			  	</stripes:select>
 			</td>
