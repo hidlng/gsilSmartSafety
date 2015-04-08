@@ -95,7 +95,7 @@
 			<th>구&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;분</th>
 			<td colspan="3" style="text-align:center">
 			<form:radiobutton id="type_1" path="type" class="radi"  value="0" style="cursor:pointer"/> <label for="type_1" style="cursor:pointer">건축</label>		
-			<form:radiobutton id="type_2" path="type" class="radi" value="1" style="cursor:pointer"/><label for="type_2" style="cursor:pointer">인프라</label>		
+			<form:radiobutton id="type_2" path="type" class="radi" value="1" style="cursor:pointer"/><label for="type_2" style="cursor:pointer">토목</label>		
 			</td>
 		</tr>
 		<tr>

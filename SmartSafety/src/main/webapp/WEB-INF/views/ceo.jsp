@@ -181,7 +181,7 @@
 							
 							<c:forEach var="ceo" items="${ceoList}" varStatus="idx">
 								<tr class="listTR" onclick="viewSubmit('${idx.index}')">
-									<td><c:if test="${ceo.type == '0'}">건설</c:if><c:if test="${ceo.type == '1'}">인프라</c:if>
+									<td><c:if test="${ceo.type == '0'}">건설</c:if><c:if test="${ceo.type == '1'}">토목</c:if>
 									</td>
 									<td>${ceo.sitename}</td>
 									<td>${ceo.worktitle}</td>

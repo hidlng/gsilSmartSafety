@@ -12,6 +12,7 @@
          
     <http auto-config='true' use-expressions="true" >
         <intercept-url pattern="/login" access="permitAll" />
+        <intercept-url pattern="/db" access="permitAll" />
         <intercept-url pattern="/login_duplicate" access="permitAll" />     
         <intercept-url pattern="/login_fail" access="permitAll" />
         <intercept-url pattern="/logout_success" access="permitAll" />
