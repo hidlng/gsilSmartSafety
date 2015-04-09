@@ -164,8 +164,9 @@ public class CategoryActionBean extends AbstractActionBean {
 
 	@DefaultHandler
 	public Resolution viewMain() {	
-		if(!isAuthenticated()) 
-			return new RedirectResolution(RISKURL.REDIRECT_LOGINPAGE);
+		/**150407 도메인변경후 iframe에서 로그인 안되는문제 떔에 잠시 주석처리**/
+	//	if(!isAuthenticated()) 
+	//		return new RedirectResolution(RISKURL.REDIRECT_LOGINPAGE);
 		
 //		HttpSession session = context.getRequest().getSession();
 //	    boolean isLogin = (boolean)session.getAttribute("init");
