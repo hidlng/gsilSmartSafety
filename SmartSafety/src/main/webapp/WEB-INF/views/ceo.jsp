@@ -40,9 +40,19 @@
 			var l=0;
 			function callme() {
 				currentdate = new Date();
-				$('.hour').html(currentdate.getHours()+"&nbsp;:");
-				$('.min').html(currentdate.getMinutes()+"&nbsp;:");
-				$('.second').html(currentdate.getSeconds());
+				
+				var hour = currentdate.getHours();
+				var min = currentdate.getMinutes();
+				var second = currentdate.getSeconds();
+				
+				if( hour < 10 ) hour = '0' + hour;
+				if( min < 10 ) min = '0' + min;
+				//if( second < 10 ) second = '0' + second;
+				
+				
+				$('.hour').html(hour+"&nbsp;:");
+				$('.min').html(min+"&nbsp;:");
+				$('.second').html(second);
 				//$('.data').css({'padding-left':l+'px'}); 
 				l=l+5;
 			}
@@ -181,7 +191,7 @@
 							
 							<c:forEach var="ceo" items="${ceoList}" varStatus="idx">
 								<tr class="listTR" onclick="viewSubmit('${idx.index}')">
-									<td><c:if test="${ceo.type == '0'}">건설</c:if><c:if test="${ceo.type == '1'}">인프라</c:if>
+									<td><c:if test="${ceo.type == '0'}">건축</c:if><c:if test="${ceo.type == '1'}">토목</c:if>
 									</td>
 									<td>${ceo.sitename}</td>
 									<td>${ceo.worktitle}</td>
