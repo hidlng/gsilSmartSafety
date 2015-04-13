@@ -43,6 +43,7 @@
 			W.WORK_IDX = P.WORK_IDX 
 		WHERE
 		W.SITE_IDX = #{siteidx}
+		
 		<![CDATA[
 		AND DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) <= #{searchdate}
 		]]>
@@ -64,6 +65,7 @@
 			W.WORK_IDX = P.WORK_IDX 
 		WHERE
 		W.SITE_IDX = #{siteidx}
+		AND ( W.RISK_GRADE = 'C' OR W.RISK_GRADE = 'B' )
 		<![CDATA[
 		AND DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) <= #{searchdate}
 		]]>
@@ -85,6 +87,7 @@
 			W.WORK_IDX = P.WORK_IDX 
 		WHERE
 		W.SITE_IDX = #{siteidx}
+		AND W.RISK_GRADE = 'A'
 		<![CDATA[
 		AND DATE_FORMAT( W.STARTDATE , '%Y%m%d' ) <= #{searchdate}
 		]]>

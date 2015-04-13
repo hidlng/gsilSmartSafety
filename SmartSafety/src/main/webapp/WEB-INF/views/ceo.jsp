@@ -48,8 +48,8 @@
 				if( min < 10 ) { "0" + min }
 				
 				$('.hour').html(hour+"&nbsp;:");
-				$('.min').html(min+"&nbsp;:");
-				$('.second').html(currentdate.getSeconds());
+				$('.min').html(min);
+				//$('.second').html(currentdate.getSeconds());
 				//$('.data').css({'padding-left':l+'px'}); 
 				l=l+5;
 			}
@@ -154,7 +154,6 @@
 						<div class="srchbox">
 							<div class="hour"></div>
 						    <div class="min"></div>
-						    <div class="second"></div>
 						</div><!-- //srchbox -->
 					</div>
 
