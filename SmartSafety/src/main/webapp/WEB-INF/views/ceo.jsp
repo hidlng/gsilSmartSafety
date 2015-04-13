@@ -40,19 +40,9 @@
 			var l=0;
 			function callme() {
 				currentdate = new Date();
-				
-				var hour = currentdate.getHours();
-				var min = currentdate.getMinutes();
-				var second = currentdate.getSeconds();
-				
-				if( hour < 10 ) hour = '0' + hour;
-				if( min < 10 ) min = '0' + min;
-				//if( second < 10 ) second = '0' + second;
-				
-				
-				$('.hour').html(hour+"&nbsp;:");
-				$('.min').html(min+"&nbsp;:");
-				$('.second').html(second);
+				$('.hour').html(currentdate.getHours()+"&nbsp;:");
+				$('.min').html(currentdate.getMinutes()+"&nbsp;:");
+				$('.second').html(currentdate.getSeconds());
 				//$('.data').css({'padding-left':l+'px'}); 
 				l=l+5;
 			}

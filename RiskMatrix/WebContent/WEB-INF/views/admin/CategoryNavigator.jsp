@@ -7,7 +7,7 @@
 $(document).ready(function (){
 	$('.deleteCategory').click(function(event){
 	
-	 var input = confirm('정말 삭제 하시겠습니까? [test]');
+	 var input = confirm('정말 삭제 하시겠습니까? ');
  		if(input) {
  			alert('카테고리가 제거되었습니다.');
  		}else{

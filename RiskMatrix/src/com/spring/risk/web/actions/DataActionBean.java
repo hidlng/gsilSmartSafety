@@ -280,8 +280,8 @@ public class DataActionBean extends AbstractActionBean {
 		
 		String riskgrade = "";
 		//등급결정
-		if(riskPoint < 3) riskgrade = "C";
-		else if(riskPoint < 6) riskgrade = "B";
+		if(riskPoint < 6) riskgrade = "C";
+		else if(riskPoint < 9) riskgrade = "B";
 		else riskgrade = "A";
 		
 		jsonObj = new JSONObject();

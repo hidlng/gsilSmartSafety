@@ -44,7 +44,7 @@ $(document).on("click", ".detailLink", function(e) {
 <div id="listLevelBox">
 <select id="mSelectBox" class="selectBox" onchange="chgLevel(this.value)">
 		<option value="0" >건축</option>
-		<option value="1" >인프라</option>
+		<option value="1" >토목</option>
 </select>
 </div>
 <div>
@@ -87,7 +87,7 @@ $(document).on("click", ".detailLink", function(e) {
 				<td>${((paging.pageNo - 1) * paging.pageSize) + (idx.index + 1) } </td>
 				<td>
 					<c:if test="${site.type == 0}">건축</c:if>
-					<c:if test="${site.type == 1}">인프라</c:if>
+					<c:if test="${site.type == 1}">토목</c:if>
 				</td>
 				<td>${site.sitename}</td>
 				<td>${site.starttime}~
