@@ -75,7 +75,7 @@ h1 img{width:120px;}
 .aside_ident li span input{width:150px; padding:5px 15px; background:none; border:0; font-size:18px; color:#fff;}
 /* search */ 
 .content{float:right; width:80%; min-height:700px; padding-top:0px; margin-left: 10px; margin-right:10px; ;background-color:#000000;}
-.content .srchbox{float:right; overflow:hidden;height:36px;padding-bottom:10px;}
+.content .srchbox{float:right; overflow:hidden;height:36px;padding-bottom:10px;padding-right:20px;}
 .content .srchbox p{float:right;overflow:hidden;  height:36px; border:0px solid #152133;background-color:#fff; }
 .content .srchbox .search_input{width:207px; height:36px; padding:3px 10px;font-size:28px; line-height:14px;background-color:#fff; color:#333; border:none;}
 .content .srchbox .btn_search{float:right;width:35px;height:36px;text-indent: -9999px; border-left:1px solid #141e2d;background:url("../images/icon_search.png") no-repeat 10px 12px #fff;}

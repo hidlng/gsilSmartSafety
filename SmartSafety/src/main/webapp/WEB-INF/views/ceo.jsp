@@ -140,9 +140,9 @@
 						
 							<select id="riskSearch" class="selectBox" onchange="chgLevel('1',this.value)">
 									<option value="0" >위험도</option>
-									<option value="1" >A</option>
-									<option value="2" >B</option>
-									<option value="3" >C</option>
+									<option value="1" >&nbsp;&nbsp;&nbsp;A</option>
+									<option value="2" >&nbsp;&nbsp;&nbsp;B</option>
+									<option value="3" >&nbsp;&nbsp;&nbsp;C</option>
 							</select>
 							
 							<select id="checkSearch" class="selectBox" onchange="chgLevel('2',this.value)">
