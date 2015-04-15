@@ -1,5 +1,6 @@
 package com.smart.safety.controller;
 
+import java.io.InputStream;
 import java.net.*;
 
 import javax.annotation.*;
@@ -8,6 +9,9 @@ import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 
+import com.notnoop.apns.APNS;
+import com.notnoop.apns.ApnsService;
+import com.notnoop.apns.PayloadBuilder;
 import com.smart.safety.services.*;
 
 @Controller(value="MobileController")
@@ -23,6 +27,7 @@ public class MobileController {
 			, @RequestParam(value="regId", defaultValue="")String regId
 			, @RequestParam(value="iphoneYn", defaultValue="")String iphoneYn) {
 		String resultJson = mobileServie.getMobileLogin(userid, password, regId,iphoneYn);
+
 		model.addAttribute("jsonResult", resultJson);
 	}
 	
@@ -83,6 +88,8 @@ public class MobileController {
 		
 		String resultJson = mobileServie.getMobileNoticeInfo(noticeIdx);
 		model.addAttribute("jsonResult", resultJson);
-	}	
+	}
+	
+
 	
 }
