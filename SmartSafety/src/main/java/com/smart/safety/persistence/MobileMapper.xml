@@ -6,7 +6,7 @@
 <mapper namespace="com.smart.safety.persistence.MobileMapper">
 	  
 	  <select id="getMobileLogin" resultType="UserVO"  parameterType="UserVO" >
-	    select a.USER_IDX, a.ID, a.PASSWORD, a.LEVEL,a.WRITETIME, a.DELYN, a.PID from user_list a
+	    select a.USER_IDX, a.ID, a.PASSWORD, a.LEVEL,a.WRITETIME, a.DELYN, a.PID, a.IPHONEYN from user_list a
 		where id=#{id} AND password=#{password} AND a.DELYN='N'
 	  </select>
 	  
@@ -27,7 +27,7 @@
 
       <update id="updateRegId" parameterType="UserVO">
          UPDATE USER_LIST
-         SET PID=#{pid}
+         SET PID=#{pid}, IPHONEYN = #{iphoneYn}
          WHERE USER_IDX=#{user_idx}
      </update>
 

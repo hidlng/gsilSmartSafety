@@ -20,8 +20,9 @@ public class MobileController {
 	public void mobileLogin(Model model
 			, @RequestParam(value="userid", defaultValue="")String userid
 			, @RequestParam(value="password", defaultValue="")String password
-			, @RequestParam(value="regId", defaultValue="")String regId) {
-		String resultJson = mobileServie.getMobileLogin(userid, password, regId);
+			, @RequestParam(value="regId", defaultValue="")String regId
+			, @RequestParam(value="iphoneYn", defaultValue="")String iphoneYn) {
+		String resultJson = mobileServie.getMobileLogin(userid, password, regId,iphoneYn);
 		model.addAttribute("jsonResult", resultJson);
 	}
 	

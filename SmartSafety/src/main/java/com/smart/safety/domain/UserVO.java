@@ -13,9 +13,16 @@ public class UserVO implements Serializable {
 	private String authority;
 	private int level;
 	String pid;
+	private String iphoneYn;
 	private String site_idx;
 	private String sitename;
 	
+	public String getIphoneYn() {
+		return iphoneYn;
+	}
+	public void setIphoneYn(String iphoneYn) {
+		this.iphoneYn = iphoneYn;
+	}
 	public String getSitename() {
 		return sitename;
 	}

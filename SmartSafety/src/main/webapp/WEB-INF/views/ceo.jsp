@@ -44,11 +44,11 @@
 				var hour = currentdate.getHours();
 				var min = currentdate.getMinutes();
 				var second = currentdate.getSeconds();
-				if( hour < 10 ) { "0" + hour }
-				if( min < 10 ) { "0" + min }
+				if( hour < 10 ) { hour =  "0" + hour }
+				if( min < 10 ) { min = "0" + min }
 				
 				$('.hour').html(hour+"&nbsp;:");
-				$('.min').html(min);
+				$('.min').html("&nbsp;"+min);
 				//$('.second').html(currentdate.getSeconds());
 				//$('.data').css({'padding-left':l+'px'}); 
 				l=l+5;
