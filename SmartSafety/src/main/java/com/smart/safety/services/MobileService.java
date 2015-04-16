@@ -17,7 +17,7 @@ public class MobileService {
 	@Resource( name="MobileMapper" )
 	private MobileMapper mobileMapper;
 	
-	public String getMobileLogin(String id, String password, String regId) {		
+	public String getMobileLogin(String id, String password, String regId, String iphoneYn) {		
 		UserVO userVO = new UserVO();
 		userVO.setId(id);
 		userVO.setPassword(password);
@@ -43,6 +43,7 @@ public class MobileService {
 				jo.put("sitename", managerInfo.getSitename());
 			}
 			returnVO.setPid(regId);
+			returnVO.setIphoneYn(iphoneYn);
 			mobileMapper.updateRegId(returnVO);
 		
 		} else {
