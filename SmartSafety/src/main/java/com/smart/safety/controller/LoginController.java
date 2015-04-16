@@ -35,9 +35,13 @@ public class LoginController {
 	@Resource(name="SiteService")
 	private SiteService siteService;
 	
-	@RequestMapping(value = {"/","/login"})
-	public void login(HttpSession session) {
-		
+	@RequestMapping(value = {"/","/home"})
+	public String home(HttpSession session) {		
+		return "home";
+	}
+	
+	@RequestMapping("/login")
+	public void login(HttpSession session) {		
 		logger.info("login! {}", session.getId() );
 	}
 	

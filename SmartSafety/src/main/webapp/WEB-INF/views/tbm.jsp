@@ -113,7 +113,9 @@
 			<th>위험경고</th>
 			<td>${tbmVO.risk_warn}</td>
 			<th>작업허가</th>
-			<td>${tbmVO.workpermit}</td>
+			<td><c:if test='${tbmVO.workpermit.equals("Y")}'>해당</c:if>
+				<c:if test='${!tbmVO.workpermit.equals("Y")}'>해당없음</c:if>		
+			</td>
 		 </tr>
 	 </table><!-- //table -->
 
