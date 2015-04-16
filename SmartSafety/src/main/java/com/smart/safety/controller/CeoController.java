@@ -85,49 +85,19 @@ public class CeoController {
 	public void pushMessage() {
 		ApnsService service =
 			    APNS.newService()
-			    .withCert("/Users/gangsegun/Desktop/serverpush.p12", "tpqmfld11!")
+			    .withCert("c:\\serverpush.p12", "tpqmfld11!")
 			    .withSandboxDestination()
 			    .build();
 		
-		String payload = APNS.newPayload().alertBody("Can't be simpler than this!").build();
+//		ApnsService service =
+//			    APNS.newService()
+//			    .withCert("/Users/gangsegun/Desktop/serverpush.p12", "tpqmfld11!")
+//			    .withSandboxDestination()
+//			    .build();
+		
+		String payload = APNS.newPayload().alertBody("금일해당하는 작업이 있습니다.").build();
 		String token = "5c03392d9817ebce8e5eeed2b5846ad29ebd09c60369b149b5459b3d8fb0ee2e";
 		service.push(token, payload);
-		
-		
-//        ApnsService service = null;
-//        try {
-//            // get the certificate
-//            InputStream certStream = this.getClass().getClassLoader().getResourceAsStream("/Users/gangsegun/Desktop/test.p12");
-//            service = APNS.newService().withCert(certStream, "tpqmfld11!").withSandboxDestination().build();
-//            service.start();
-//                try {
-//                    // we had a daily update here, so we need to know how many 
-//                    //days the user hasn't started the app
-//                    // so that we get the number of updates to display it as the badge.
-//                    int days = (int) (System.currentTimeMillis()  / 1000 / 60 / 60 / 24);
-//                    PayloadBuilder payloadBuilder = APNS.newPayload();
-//                    payloadBuilder = payloadBuilder.badge(days).alertBody("테스");
-//                    // check if the message is too long (it won't be sent if it is) 
-//                    //and trim it if it is.
-//                    if (payloadBuilder.isTooLong()) {
-//                        payloadBuilder = payloadBuilder.shrinkBody();
-//                    }
-//                    String payload = payloadBuilder.build();
-//                    String token = "5c03392d9817ebce8e5eeed2b5846ad29ebd09c60369b149b5459b3d8fb0ee2e";
-//                    service.push(token, payload);
-//                } catch (Exception ex) {
-//                    // some logging stuff
-//                }
-//            
-//        } catch (Exception ex) {
-//            // more logging
-//        } finally {
-//            // check if the service was successfull initialized and stop it here, if it was
-//            if (service != null) {
-//                service.stop();
-//            }
-// 
-//        }
     }
 	
 //    @Scheduled(cron = "0 30 17 * * *")
