@@ -68,7 +68,7 @@ public class CeoController {
 		
 		List<SiteVO> sitelist = siteService.getSiteList();
 		
-		pushMessage();
+		//pushMessage();
 		
 		/** model setting **/
 		model.addAttribute("searchWord",searchWord);
@@ -83,21 +83,29 @@ public class CeoController {
 	
 	
 	public void pushMessage() {
-		ApnsService service =
-			    APNS.newService()
-			    .withCert("c:\\serverpush.p12", "tpqmfld11!")
-			    .withSandboxDestination()
-			    .build();
-		
-//		ApnsService service =
-//			    APNS.newService()
-//			    .withCert("/Users/gangsegun/Desktop/serverpush.p12", "tpqmfld11!")
-//			    .withSandboxDestination()
-//			    .build();
-		
-		String payload = APNS.newPayload().alertBody("금일해당하는 작업이 있습니다.").build();
-		String token = "5c03392d9817ebce8e5eeed2b5846ad29ebd09c60369b149b5459b3d8fb0ee2e";
-		service.push(token, payload);
+		try {
+			ApnsService service =
+				    APNS.newService()
+				    .withCert("c:\\serverpush.p12", "tpqmfld11!")
+				    .withSandboxDestination()
+				    .build();
+
+//			ApnsService service =
+//				    APNS.newService()
+//				    .withCert("/Users/gangsegun/Desktop/serverpushr.p12", "tpqmfld11!")
+//				    .withSandboxDestination()
+//				    .build();
+//			
+//			String payload = APNS.newPayload().alertBody("금일해당하는 작업이 있습니다.").build();
+//			String token = "4de4cac2ce3ff0a0800fbd39cb31a7bdaed0452b5171df81d41689876fc41b3e";
+//		
+//			service.push(token, payload);
+			
+		} catch( Exception e ) {
+			System.out.println("Error :" + e);
+			return;
+			
+		}
     }
 	
 //    @Scheduled(cron = "0 30 17 * * *")
