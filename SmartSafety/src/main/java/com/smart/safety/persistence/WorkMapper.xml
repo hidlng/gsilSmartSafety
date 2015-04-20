@@ -46,7 +46,7 @@ WHERE
 	OR W.USERNAME like #{username}
 	)
 	AND W.SITE_IDX like #{site_idx}
-	ORDER BY W.STARTDATE, W.STARTTIME
+	ORDER BY W.STARTDATE DESC, W.STARTTIME DESC
 	LIMIT #{start}, #{size}
   </select>
   

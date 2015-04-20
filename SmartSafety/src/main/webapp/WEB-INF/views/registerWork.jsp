@@ -3,7 +3,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script>
-$(document).ready(function() {	
+$(document).ready(function() {
+	if(${hasNoContractor} == false){
+		alert("소속 업체가 없습니다. 안전관리자에게 문의하시기 바랍니다.");
+		 location.href="viewWork";
+	}
+	
 	if (${isNotValid} == true) {
 		alert("입력하지 않은 항목이 있습니다. 확인해주시기 바랍니다");
 	}
@@ -249,14 +254,40 @@ if(input) { //yes
 		<th>작&nbsp;업&nbsp;시&nbsp;작</th>	
 		<td><form:input id="startDateInput" path="startdate" 	maxlength="10" readonly="true"/>
 			<br> <form:errors cssClass="formError" path="startdate" /></td>
-		<td><form:input path="starttime" id="starttimeInput" class="selectBox" autocomplete="off" readonly="true" ></form:input> </td>
+		<td>	
+			<form:select path="starttime" class="siteSelectBox" >
+			<c:forEach begin="1" end="9" varStatus="idx">
+					<form:option value="0${idx.index}:00:00">0${idx.index}:00:00</form:option>
+					<form:option value="0${idx.index}:30:00">0${idx.index}:30:00</form:option>
+			</c:forEach>
+			<c:forEach begin="10" end="23" varStatus="idx">
+					<form:option value="${idx.index}:00:00">${idx.index}:00:00</form:option>
+					<form:option value="${idx.index}:30:00">${idx.index}:30:00</form:option>
+			</c:forEach>
+					
+			</form:select>
+			<br> <form:errors cssClass="formError" path="starttime" />
+		 </td>
 	</tr>
 
 	<tr>
 		<th>작&nbsp;업&nbsp;마&nbsp;감</th>
 		<td><form:input id="endDateInput" path="enddate" maxlength="10" readonly="true"/>
 			<br><form:errors cssClass="formError" path="enddate" /></td>
-		<td><form:input path="endtime" id="endtimeInput" class="time ui-timepicker-input" autocomplete="off" readonly="true" ></form:input> </td>
+		<td>
+			
+			<form:select path="endtime" class="siteSelectBox" >
+			<c:forEach begin="1" end="9" varStatus="idx">
+					<form:option value="0${idx.index}:00:00">0${idx.index}:00:00</form:option>
+					<form:option value="0${idx.index}:30:00">0${idx.index}:30:00</form:option>
+			</c:forEach>
+			<c:forEach begin="10" end="23" varStatus="idx">
+					<form:option value="${idx.index}:00:00">${idx.index}:00:00</form:option>
+					<form:option value="${idx.index}:30:00">${idx.index}:30:00</form:option>
+			</c:forEach>
+			</form:select>
+		<br> <form:errors cssClass="formError" path="endtime" />
+		 </td>
 	</tr>
 
 </table>
@@ -334,7 +365,7 @@ if(input) { //yes
 	
 	<!-- start -->
 	<tr>
-		<th>작&nbsp;업&nbsp;유&nbsp;형</th>
+		<th>장&nbsp;소&nbsp;유&nbsp;형</th>
 		<td id="placeList"></td>
 	</tr>
 	
