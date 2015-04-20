@@ -107,10 +107,16 @@ public class WorkController {
 			WorkVO workVO = workService.getWorkByIdx(updateIdx);
 			//contname은 따로저장하지않으므로
 			ContractorVO contractorVO = contractorService.getContractorByIdx(workVO.getCont_idx());
-			workVO.setCont_name(contractorVO.getCont_name());
+			
+			if(contractorVO == null){//업체가 없는경우 -> 삭제된 업체 소속의 사용자로 접속한 경우..
+				model.addAttribute("hasNoContractor", true);
+			}else{
+				workVO.setCont_name(contractorVO.getCont_name());
+			}
 			
 			parse_placecodes(workVO);//workVO의 선택한 placecodes를 parse하여 array형태로 parse_placecodes에 삽입
 			
+			model.addAttribute("hasNoContractor", false);
 			model.addAttribute("updateMode", true);
 			model.addAttribute("workVO", workVO);
 		}
@@ -129,7 +135,7 @@ public class WorkController {
 				workVO.setSite_idx(siteVO.getSite_idx());
 				
 				
-				//업체에 경우 현장사용자는 직접 타이핑 입력이기때문에
+				//업체의 경우 현장사용자는 직접 타이핑 입력이기때문에
 				//통일 성을 위해 둘다 이름값만 입력함(cont_idx 사용 X)
 				if(userVO.getLevel() == USERLEVEL.CONT_CHEIF.idx || userVO.getLevel() == USERLEVEL.CONT_LEADER.idx || userVO.getLevel() == USERLEVEL.CONT_INSPECTOR.idx) {//현장사용자
 					ManagerVO managerVO = (ManagerVO)session.getAttribute("managerVO");
@@ -143,9 +149,12 @@ public class WorkController {
 				}else {
 					//error 처리
 					workVO.setCont_name("소속없음");
+					model.addAttribute("hasNoContractor", true);
 				}
 				
 			}
+			
+			model.addAttribute("hasNoContractor", false);
 			model.addAttribute("updateMode", false);
 			model.addAttribute("workVO", workVO);
 		}//else

@@ -3,7 +3,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script>
-$(document).ready(function() {	
+$(document).ready(function() {
+	if(${hasNoContractor} == false){
+		alert("소속 업체가 없습니다. 안전관리자에게 문의하시기 바랍니다.");
+		 location.href="viewWork";
+	}
+	
 	if (${isNotValid} == true) {
 		alert("입력하지 않은 항목이 있습니다. 확인해주시기 바랍니다");
 	}
