@@ -86,7 +86,7 @@
 			<tr><th class="detailHeader">장비/공도구코드</th><td>${actionBean.toolVO.toolCode}</td></tr>
 			<tr><th class="detailHeader">장비/공도구명</th><td>${actionBean.toolVO.toolName}</td></tr>
 			<tr><th class="detailHeader">주요위험</th><td class="wordBreak">${actionBean.toolVO.mainRisk}</td></tr>
-			<tr><th class="detailHeader">안전작업가이드</th><td class="wordBreak">${actionBean.toolVO.guide}</td></tr>
+			<tr><th class="detailHeader">장비사용가이드</th><td class="wordBreak">${actionBean.toolVO.guide}</td></tr>
 			<tr><th class="detailHeader">보호구</th><td class="wordBreak">${actionBean.toolVO.equip}</td></tr>
 			<tr><th class="detailHeader">사용전 점검<br> 체크리스트</th><td >
 				<div class="checkListDiv">

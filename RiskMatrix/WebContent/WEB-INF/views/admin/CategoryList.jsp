@@ -126,14 +126,14 @@
 				<th>추가</th>
 			</tr>
 			<!-- 작업만 카테고리 등록 가능하도록.. 장비/공도구는 SmartSafety와 코드를 맞춰야하고, 장소 및 사고유형은 1단게만 필요함-->
-			<c:if test="${actionBean.lastIdx != 1 }">
+			<c:if test="${actionBean.lastIdx == 2 || actionBean.lastIdx == 3  || actionBean.lastIdx == 4 }">
 			<td>코드</td>
 				<td><stripes:text id="inputCode" name="inputCode" size="10" onkeyup="checkSpeChar(1)"/></td>
 				<td><stripes:text id="inputName" name="inputName" size="16" onkeyup="checkSpeChar(2)"/></td>
 				<td><stripes:submit class="button" name="insertCategory" value="추가" /></td>
 			</c:if>
-			<!-- 사공유형 이외  -->
-			<c:if test="${actionBean.lastIdx == 1 }">
+			<!-- 작업등록 -->
+			<c:if test="${actionBean.lastIdx != 2 && actionBean.lastIdx != 3 && actionBean.lastIdx != 4}">
 			<tr>
 			<td>
 				<stripes:radio id="catType1" name="catType" value="code" onclick="showInputCode(true)"	  checked="checked"/>코드
