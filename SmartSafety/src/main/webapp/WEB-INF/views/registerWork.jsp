@@ -4,7 +4,7 @@
 
 <script>
 $(document).ready(function() {
-	if(${hasNoContractor} == false){
+	if(${hasNoContractor} == true){
 		alert("소속 업체가 없습니다. 안전관리자에게 문의하시기 바랍니다.");
 		 location.href="viewWork";
 	}

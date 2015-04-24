@@ -50,6 +50,7 @@ public class WorkVO implements Serializable{
 	
 	private String placecodes;
 	private String placenames;
+	private ArrayList<String> total_placecodes = new ArrayList<String>();//에러발생시 내용 저장용
 	private ArrayList<String> input_placecodes = new ArrayList<String>();
 	private ArrayList<String> parse_placecodes = new ArrayList<String>();
 	private ArrayList<String> input_placenames = new ArrayList<String>();
@@ -428,6 +429,12 @@ public class WorkVO implements Serializable{
 	}
 	public void setPui_exist(String pui_exist) {
 		this.pui_exist = pui_exist;
+	}
+	public ArrayList<String> getTotal_placecodes() {
+		return total_placecodes;
+	}
+	public void setTotal_placecodes(ArrayList<String> total_placecodes) {
+		this.total_placecodes = total_placecodes;
 	}
 
 	

@@ -218,7 +218,7 @@
 		<tr><th class="detailHeader">장비/공도구 코드</th><td><stripes:text  name="toolVO.toolCode" readonly="true" /></td></tr>
 		<tr><th class="detailHeader">장비/공도구명</th><td><stripes:text  name="toolVO.toolName"  onkeyup="checkSpeChar(2)"/></td></tr>
 		<tr><th class="detailHeader">주요위험</th><td><stripes:textarea  name="toolVO.mainRisk" onkeyup="checkSpeChar(2)"/></td></tr>
-		<tr><th class="detailHeader">안전작업가이드</th><td><stripes:textarea  name="toolVO.guide" onkeyup="checkSpeChar(2)"/></td></tr>
+		<tr><th class="detailHeader">장비사용가이드</th><td><stripes:textarea  name="toolVO.guide" onkeyup="checkSpeChar(2)"/></td></tr>
 		<tr><th class="detailHeader">보호구</th><td><stripes:textarea  name="toolVO.equip" onkeyup="checkSpeChar(2)"/></td></tr>
 		<tr><th class="detailHeader">사용전 점검<br> 체크리스트</th>
 			<td><div id="checklistTD">

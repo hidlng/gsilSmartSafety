@@ -205,6 +205,7 @@ public class WorkController {
 			List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
 			model.addAttribute("contList", contList);
 			model.addAttribute("isNotValid", true);
+			model.addAttribute("hasNoContractor", false);
 			return "registerWork";
 		}
 		
@@ -222,7 +223,7 @@ public class WorkController {
 			
 			//return "redirect:workList";
 			
-			//pushWorkToSiteUser(workVO.getSite_idx()); -스케쥴러에서해결
+			pushWorkToSiteUser(workVO.getSite_idx(), "작업 등록 완료"); // -스케쥴러에서해결..현재는 확인용으로 풀어놓음
 
 			return "redirect:viewWork?viewIdx=" + workVO.getWork_idx();
 		}
@@ -251,6 +252,7 @@ public class WorkController {
 			List<ContractorVO> contList = contractorService.getContractorListBySiteIdx(siteVO.getSite_idx()); 		
 			model.addAttribute("contList", contList);
 			model.addAttribute("isNotValid", true);
+			model.addAttribute("hasNoContractor", false);
 			return "registerWork";
 		}
 		

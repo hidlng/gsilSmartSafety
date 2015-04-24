@@ -19,7 +19,7 @@ parent.document.getElementById("contentFrame").height = pageheight+"px";
 </script>
 </head>
 
-<body onload="init()"  scroll="no">
+<body onload="init()"  scroll="yes">
 
 	<div id="ifrm" >
 		<iframe src="http://54.64.28.175:8080/RiskMatrix/actions/Login.action" frameborder="0" style="width:100%;height:1000px;" id="contentFrame"></iframe> 
